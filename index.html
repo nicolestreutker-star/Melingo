@@ -547,7 +547,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <div class="bmode-grid">
         <label class="bmode-btn on" id="bm-row"><input type="checkbox" checked onchange="updBmode('row',this.checked)"/><div><span class="bmode-label">Horizontale rij</span><span class="bmode-sub">5 vakjes op een rij →</span></div></label>
         <label class="bmode-btn on" id="bm-col"><input type="checkbox" checked onchange="updBmode('col',this.checked)"/><div><span class="bmode-label">Verticale rij</span><span class="bmode-sub">5 vakjes in een rij ↓</span></div></label>
-        <label class="bmode-btn on" id="bm-diag"><input type="checkbox" checked onchange="updBmode('diag',this.checked)"/><div><span class="bmode-label">Diagonaal</span><span class="bmode-sub">5 vakjes diagonaal ↘</span></div></label>
+        <label class="bmode-btn on" id="bm-diag"><input type="checkbox" checked onchange="updBmode('diag',this.checked)"/><div><span class="bmode-label">Diagonale rij</span><span class="bmode-sub">5 vakjes diagonaal ↘</span></div></label>
         <label class="bmode-btn" id="bm-full"><input type="checkbox" onchange="updBmode('full',this.checked)"/><div><span class="bmode-label">Volledige kaart</span><span class="bmode-sub">Alle 25 vakjes vol</span></div></label>
       </div>
     </div>
@@ -1520,7 +1520,7 @@ function updBmode(key,val){
 function typeToKey(t){
   if(t==='rij')return'row';
   if(t==='verticale rij')return'col';
-  if(t==='diagonaal')return'diag';
+  if(t==='diagonale rij')return'diag';
   if(t==='volle kaart')return'full';
   return t;
 }
@@ -1529,7 +1529,7 @@ function allActiveCategories(){
   var a=[];
   if(ST.bmodes.row)a.push('rij');
   if(ST.bmodes.col)a.push('verticale rij');
-  if(ST.bmodes.diag)a.push('diagonaal');
+  if(ST.bmodes.diag)a.push('diagonale rij');
   if(ST.bmodes.full)a.push('volle kaart');
   return a;
 }
@@ -1575,8 +1575,8 @@ function analyseCard(cardIdx){
   }
   if(ST.bmodes.diag && !ST.wonCategories.diag){
     var d1=[0,6,12,18,24],d2=[4,8,12,16,20];
-    if(d1.every(function(i){return cp[i];})){blines=blines.concat(d1);if(wonTypes.indexOf('diagonaal')===-1)wonTypes.push('diagonaal');}
-    if(d2.every(function(i){return cp[i];})){blines=blines.concat(d2);if(wonTypes.indexOf('diagonaal')===-1)wonTypes.push('diagonaal');}
+    if(d1.every(function(i){return cp[i];})){blines=blines.concat(d1);if(wonTypes.indexOf('diagonale rij')===-1)wonTypes.push('diagonale rij');}
+    if(d2.every(function(i){return cp[i];})){blines=blines.concat(d2);if(wonTypes.indexOf('diagonale rij')===-1)wonTypes.push('diagonale rij');}
   }
   if(ST.bmodes.full && !ST.wonCategories.full){
     if(cp.every(function(v){return v;})){
