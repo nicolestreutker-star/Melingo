@@ -1688,7 +1688,8 @@ function showStartSpConnected(){
 async function loadStartPlaylists(){
   try{
     var allPlaylists=[];
-    var url='https://api.spotify.com/v1/me/playlists?limit=50';
+    // Request fields including tracks.total explicitly
+    var url='https://api.spotify.com/v1/me/playlists?limit=50&fields=next,items(id,name,images,tracks.total)';
     while(url){
       var resp=await spFetch(url);
       var data=await resp.json();
@@ -1697,6 +1698,7 @@ async function loadStartPlaylists(){
       url=data.next||null;
     }
     SP.playlists=allPlaylists;
+    console.log('Eerste playlist tracks:', SP.playlists[0]&&SP.playlists[0].tracks);
     renderStartPlaylists();
   }catch(e){console.error('loadStartPlaylists:',e);}
 }
@@ -1709,7 +1711,13 @@ function renderStartPlaylists(){
     return'<div class="sp-playlist-item" id="startpl-'+i+'" onclick="selStartPlaylist('+i+')" style="display:flex;align-items:center;gap:.65rem;padding:.45rem .65rem;border-radius:10px;cursor:pointer;transition:all .12s;margin-bottom:.25rem">'
       +img
       +'<div><div style="font-size:.8rem;font-weight:600;color:var(--tx)">'+esc(pl.name)+'</div>'
-      +'<div style="font-size:.65rem;color:var(--mt)" id="spc-'+i+'"></div></div>'
+      +'<div style="font-size:.65rem;" id="spc-'+i+'">'+(function(){
+      var t=pl.tracks&&pl.tracks.total!=null?pl.tracks.total:null;
+      if(t===null)return'';
+      var min=Math.max(25,Math.min(80,Math.ceil(24+Math.sqrt(20)*4)));
+      var ok=t>=min;
+      return'<span style="color:'+(ok?'var(--green)':'var(--s)')+'">'+(ok?'✓ ':'⚠ ')+t+' nummers</span>';
+    }())+'</div></div>'
       +'</div>';
   }).join('');
 }
