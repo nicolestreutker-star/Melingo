@@ -1501,7 +1501,23 @@ async function spPlayTrack(uri){
     console.log('Spotify speelt:', uri);
   }catch(e){console.error('Spotify play fout:',e);}
 }
-function togglePause(){ST.paused=!ST.paused;document.getElementById('bpause').textContent=ST.paused?'▶':'⏸';if(ST.paused){clearInterval(ST.tint);ST.tint=null;}else if(ST.hmode==='auto')startTimer();}
+function togglePause(){
+  ST.paused=!ST.paused;
+  document.getElementById('bpause').textContent=ST.paused?'▶':'⏸';
+  if(ST.paused){
+    clearInterval(ST.tint);ST.tint=null;
+    // Pauzeer Spotify
+    if(SP.accessToken&&SP.deviceId){
+      spFetch('https://api.spotify.com/v1/me/player/pause?device_id='+SP.deviceId,{method:'PUT'}).catch(function(){});
+    }
+  } else {
+    if(ST.hmode==='auto')startTimer();
+    // Hervat Spotify
+    if(SP.accessToken&&SP.deviceId){
+      spFetch('https://api.spotify.com/v1/me/player/play?device_id='+SP.deviceId,{method:'PUT'}).catch(function(){});
+    }
+  }
+}
 function startTimer(){document.getElementById('twrap').style.display='block';var secs=ST.speed;updTmr(secs,secs);ST.tint=setInterval(function(){secs--;updTmr(secs,ST.speed);if(secs<=0){clearInterval(ST.tint);ST.tint=null;nextSong();}},1000);}
 function updTmr(s,total){document.getElementById('tnum').textContent=s;document.getElementById('tcirc').style.strokeDashoffset=CIRC*(1-s/total);var col=s/total>.33?'#6AABF7':'#F2406A';document.getElementById('tcirc').style.stroke=col;document.getElementById('tnum').style.color=col;}
 function filterPlayed(){var q=document.getElementById('psrch').value.toLowerCase();document.querySelectorAll('#plist .prow').forEach(function(r){r.style.display=r.textContent.toLowerCase().includes(q)?'':'none';});}
