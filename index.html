@@ -1746,15 +1746,25 @@ async function loadPlaylists(){
 }
 
 function renderPlaylists(){
+  // Make sure playlist view is visible
+  var pv=document.getElementById('sp-playlist-view');
+  if(pv)pv.style.display='block';
+  var cv=document.getElementById('sp-connect-view');
+  if(cv)cv.style.display='none';
+
   var el=document.getElementById('sp-playlists');
+  if(!el){console.error('sp-playlists element niet gevonden');return;}
+  if(!SP.playlists.length){el.innerHTML='<div style="color:var(--mt);font-size:.8rem;padding:.5rem 0">Geen playlists gevonden.</div>';return;}
+
   el.innerHTML=SP.playlists.map(function(pl,i){
     var img=pl.images&&pl.images[0]?'<img src="'+pl.images[0].url+'" alt=""/>':'';
     return'<div class="sp-playlist-item" id="sppl-'+i+'" onclick="selPlaylist('+i+')">'
       +'<div class="sp-playlist-img">'+img+'</div>'
       +'<div><div class="sp-playlist-name">'+esc(pl.name)+'</div>'
-      +'<div class="sp-playlist-count">'+pl.tracks.total+' nummers</div></div>'
+      +'<div class="sp-playlist-count">'+(pl.tracks?pl.tracks.total:0)+' nummers</div></div>'
       +'</div>';
   }).join('');
+  console.log('Playlists gerenderd:', SP.playlists.length);
 }
 
 function selPlaylist(idx){
