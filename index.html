@@ -1793,8 +1793,10 @@ async function loadSelectedPlaylist(){
     while(url){
       var resp=await spFetch(url);
       var data=await resp.json();
-      var valid=(data.items||[]).filter(function(item){return item.track&&item.track.uri&&item.track.uri.startsWith('spotify:track:');});
-      tracks=tracks.concat(valid.map(function(item){return item.track;}));
+      var valid=(data.items||[]).filter(function(item){return item.track&&item.track.name&&item.track.artists&&item.track.artists.length;});
+      var mapped=valid.map(function(item){return item.track;});
+      console.log('Tracks batch geladen:', mapped.length, 'eerste URI:', mapped[0]&&mapped[0].uri);
+      tracks=tracks.concat(mapped);
       url=data.next||null;
     }
     if(!tracks.length){showSpError('Geen afspeelbare nummers gevonden in deze playlist.');return;}
