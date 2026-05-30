@@ -1415,6 +1415,24 @@ function nextSong(){
   var v=document.getElementById('hvinyl');if(v)v.classList.add('spin');
   if(ST.hmode==='auto')startTimer();
   saveSession();
+  // Sync Spotify: play the matching track if connected
+  if(SP.accessToken&&SP.tracks&&SP.tracks.length>0){
+    var spTrack=SP.tracks[ST.pidx];
+    if(spTrack&&spTrack.uri&&SP.deviceId){
+      spPlayTrack(spTrack.uri);
+    }
+  }
+}
+
+async function spPlayTrack(uri){
+  try{
+    await spFetch('https://api.spotify.com/v1/me/player/play?device_id='+SP.deviceId,{
+      method:'PUT',
+      headers:{'Authorization':'Bearer '+SP.accessToken,'Content-Type':'application/json'},
+      body:JSON.stringify({uris:[uri]})
+    });
+    console.log('Spotify speelt:', uri);
+  }catch(e){console.error('Spotify play fout:',e);}
 }
 function togglePause(){ST.paused=!ST.paused;document.getElementById('bpause').textContent=ST.paused?'▶':'⏸';if(ST.paused){clearInterval(ST.tint);ST.tint=null;}else if(ST.hmode==='auto')startTimer();}
 function startTimer(){document.getElementById('twrap').style.display='block';var secs=ST.speed;updTmr(secs,secs);ST.tint=setInterval(function(){secs--;updTmr(secs,ST.speed);if(secs<=0){clearInterval(ST.tint);ST.tint=null;nextSong();}},1000);}
