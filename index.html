@@ -1819,11 +1819,15 @@ async function loadSelectedPlaylist(){
       if(data.items&&data.items[0]){
         console.log('Volledig eerste item:', JSON.stringify(data.items[0]));
       }
+      // Spotify /items endpoint returns data under item.item (not item.track)
       var valid=(data.items||[]).filter(function(item){
-        return item&&item.track!==null&&item.track!==undefined&&item.track.name;
+        var t=item.item||item.track;
+        return t&&t.name&&t.artists&&t.artists.length;
       });
       console.log('Na filter:', valid.length, 'van', (data.items||[]).length);
-      tracks=tracks.concat(valid.map(function(item){return item.track;}));
+      tracks=tracks.concat(valid.map(function(item){
+        return item.item||item.track;
+      }));
       url=data.next||null;
     }
     console.log('Totaal tracks geladen:', tracks.length);
