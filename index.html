@@ -1739,7 +1739,14 @@ async function loadPlaylists(){
     while(url){
       var resp=await spFetch(url);
       var data=await resp.json();
-      if(data.error){showSpError('Spotify fout: '+data.error.message);break;}
+      if(data.error){
+        var msg=data.error.message||'onbekend';
+        var status=data.error.status||0;
+        if(status===403){showSpError('Geen toegang tot deze playlist. Kies een eigen playlist.');}
+        else{showSpError('Spotify fout '+status+': '+msg);}
+        console.error('Spotify API fout:', data.error);
+        break;
+      }
       var items=(data.items||[]).filter(function(p){return p&&p.id;});
       allPlaylists=allPlaylists.concat(items);
       url=data.next||null;
@@ -1792,7 +1799,7 @@ async function loadSelectedPlaylist(){
   try{
     // Load all tracks (paginated)
     var tracks=[];
-    var url='https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/tracks?limit=100';
+    var url='https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/items?limit=100&market=from_token';
     while(url){
       var resp=await spFetch(url);
       var data=await resp.json();
@@ -1809,7 +1816,7 @@ async function loadSelectedPlaylist(){
         }));
       }
       var valid=(data.items||[]).filter(function(item){
-        return item&&item.track&&item.track.name;
+        return item&&item.track&&item.track.type==='track'&&item.track.name&&item.track.artists;
       });
       console.log('Na filter:', valid.length, 'van', (data.items||[]).length);
       tracks=tracks.concat(valid.map(function(item){return item.track;}));
