@@ -1793,12 +1793,26 @@ async function loadSelectedPlaylist(){
     while(url){
       var resp=await spFetch(url);
       var data=await resp.json();
-      var valid=(data.items||[]).filter(function(item){return item.track&&item.track.name&&item.track.artists&&item.track.artists.length;});
-      var mapped=valid.map(function(item){return item.track;});
-      console.log('Tracks batch geladen:', mapped.length, 'eerste URI:', mapped[0]&&mapped[0].uri);
-      tracks=tracks.concat(mapped);
+      console.log('RAW API response items:', (data.items||[]).length, 'error:', data.error);
+      if(data.items&&data.items[0]){
+        var sample=data.items[0];
+        console.log('Sample item:', JSON.stringify({
+          track: sample.track ? {
+            name: sample.track.name,
+            uri: sample.track.uri,
+            type: sample.track.type,
+            artists: sample.track.artists ? sample.track.artists.length : 0
+          } : null
+        }));
+      }
+      var valid=(data.items||[]).filter(function(item){
+        return item&&item.track&&item.track.name;
+      });
+      console.log('Na filter:', valid.length, 'van', (data.items||[]).length);
+      tracks=tracks.concat(valid.map(function(item){return item.track;}));
       url=data.next||null;
     }
+    console.log('Totaal tracks geladen:', tracks.length);
     if(!tracks.length){showSpError('Geen afspeelbare nummers gevonden in deze playlist.');return;}
 
     // Shuffle tracks and load into ST.songs
