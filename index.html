@@ -1730,17 +1730,23 @@ async function loadPlaylists(){
   var loadEl=document.getElementById('sp-loading-playlists');
   if(loadEl)loadEl.style.display='block';
   try{
-    var resp=await spFetch('https://api.spotify.com/v1/me/playlists?limit=50');
-    var data=await resp.json();
-    if(data.error){
-      showSpError('Spotify fout: '+data.error.message);
-      if(loadEl)loadEl.style.display='none';
-      return;
+    // Load all playlists paginated
+    var allPlaylists=[];
+    var url='https://api.spotify.com/v1/me/playlists?limit=50';
+    while(url){
+      var resp=await spFetch(url);
+      var data=await resp.json();
+      if(data.error){showSpError('Spotify fout: '+data.error.message);break;}
+      var items=(data.items||[]).filter(function(p){return p&&p.id;});
+      allPlaylists=allPlaylists.concat(items);
+      url=data.next||null;
     }
-    SP.playlists=(data.items||[]).filter(function(p){return p&&p.id;});
+    SP.playlists=allPlaylists;
+    console.log('Playlists geladen:', SP.playlists.length, 'eerste tracks.total:', SP.playlists[0]&&SP.playlists[0].tracks);
     renderPlaylists();
   }catch(e){
     showSpError('Kon playlists niet laden: '+e.message);
+    console.error('loadPlaylists fout:', e);
   }
   if(loadEl)loadEl.style.display='none';
 }
@@ -1761,7 +1767,7 @@ function renderPlaylists(){
     return'<div class="sp-playlist-item" id="sppl-'+i+'" onclick="selPlaylist('+i+')">'
       +'<div class="sp-playlist-img">'+img+'</div>'
       +'<div><div class="sp-playlist-name">'+esc(pl.name)+'</div>'
-      +'<div class="sp-playlist-count">'+(pl.tracks?pl.tracks.total:0)+' nummers</div></div>'
+      +'<div class="sp-playlist-count">'+(pl.tracks&&pl.tracks.total?pl.tracks.total:'?')+' nummers</div></div>'
       +'</div>';
   }).join('');
   console.log('Playlists gerenderd:', SP.playlists.length);
@@ -1772,6 +1778,9 @@ function selPlaylist(idx){
   document.querySelectorAll('.sp-playlist-item').forEach(function(el){el.classList.remove('sel');});
   var el=document.getElementById('sppl-'+idx);if(el)el.classList.add('sel');
   document.getElementById('sp-load-btn').disabled=false;
+  var pl=SP.playlists[idx];
+  var total=pl.tracks&&pl.tracks.total?pl.tracks.total:'onbekend';
+  document.getElementById('sp-load-btn').textContent='Laad "'+pl.name+'" ('+total+' nummers)';
 }
 
 async function loadSelectedPlaylist(){
