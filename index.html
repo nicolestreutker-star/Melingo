@@ -1397,12 +1397,18 @@ function dlPDF(eco){
             if(eco){doc.setFillColor(245,245,245);doc.setDrawColor(200,200,200);doc.setLineWidth(.2);doc.roundedRect(x+.5,y+.5,cW-1,cH-1,2,2,'FD');}
             else{var cR=isAlt?c1R:c2R;doc.setFillColor(cR[0],cR[1],cR[2]);doc.roundedRect(x+.5,y+.5,cW-1,cH-1,2,2,'F');}
             if(s){
-              var mw=cW-3.5,tL=doc.splitTextToSize(s.t,mw),sh=tL.slice(0,2);
+              var mw=cW-3;
+              // Dynamische fontgrootte op basis van titellengte
+              var tLen=(s.t||'').length;
+              var tSize=tLen>30?4.5:tLen>20?5.2:6;
+              doc.setFontSize(tSize);doc.setFont('helvetica','bold');
+              var tL=doc.splitTextToSize(s.t,mw),sh=tL.slice(0,3);
               var aL=s.a?doc.splitTextToSize(s.a,mw)[0]:'';
-              var lh=4.6,tot=sh.length*lh+(aL?5:0),ty=y+cH/2-tot/2+lh;
-              doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.setTextColor(20,5,35);
+              var lh=tSize*0.75,tot=sh.length*lh+(aL?4.5:0);
+              var ty=y+cH/2-tot/2+lh;
+              doc.setTextColor(20,5,35);
               sh.forEach(function(line){doc.text(line,x+cW/2,ty,{align:'center'});ty+=lh;});
-              if(aL){ty+=.8;doc.setFontSize(4.8);doc.setFont('helvetica','italic');
+              if(aL){ty+=.5;doc.setFontSize(3.8);doc.setFont('helvetica','italic');
                 if(eco)doc.setTextColor(100,80,120);else doc.setTextColor(bR[0],bR[1],bR[2]);
                 doc.text(aL,x+cW/2,ty,{align:'center'});}
             }
