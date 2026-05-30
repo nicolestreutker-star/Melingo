@@ -1709,13 +1709,15 @@ function renderStartPlaylists(){
     return'<div class="sp-playlist-item" id="startpl-'+i+'" onclick="selStartPlaylist('+i+')" style="display:flex;align-items:center;gap:.65rem;padding:.45rem .65rem;border-radius:10px;cursor:pointer;transition:all .12s;margin-bottom:.25rem">'
       +img
       +'<div><div style="font-size:.8rem;font-weight:600;color:var(--tx)">'+esc(pl.name)+'</div>'
-      +'<div style="font-size:.65rem;color:var(--mt)" id="spc-'+i+'">'+(pl.tracks&&pl.tracks.total!=null?pl.tracks.total:'laden...')+' nummers</div></div>'
+      +'<div style="font-size:.65rem;color:var(--mt)" id="spc-'+i+'">'+(pl.tracks&&pl.tracks.total!=null?pl.tracks.total+'&nbsp;nummers':'')+'</div></div>'
       +'</div>';
   }).join('');
 }
 
 async function selStartPlaylist(idx){
   SP.selectedPlaylist=SP.playlists[idx];
+  var pl=SP.playlists[idx];
+
   // Highlight selected
   document.querySelectorAll('[id^="startpl-"]').forEach(function(el){
     el.style.background='';el.style.border='';
@@ -1723,8 +1725,23 @@ async function selStartPlaylist(idx){
   var el=document.getElementById('startpl-'+idx);
   if(el){el.style.background='rgba(155,109,255,.1)';el.style.border='1px solid rgba(155,109,255,.3)';}
 
+  // Load track count for this playlist if unknown
+  var countEl=document.getElementById('spc-'+idx);
+  if(countEl&&(!pl.tracks||pl.tracks.total==null)){
+    countEl.textContent='laden...';
+    try{
+      var r=await spFetch('https://api.spotify.com/v1/playlists/'+pl.id+'?fields=tracks.total');
+      var d=await r.json();
+      if(d.tracks&&d.tracks.total!=null){
+        pl.tracks={total:d.tracks.total};
+        countEl.textContent=d.tracks.total+' nummers';
+      }
+    }catch(e){}
+  }
+
+  var total=pl.tracks&&pl.tracks.total!=null?pl.tracks.total+' nummers':'onbekend aantal nummers';
   var sel=document.getElementById('start-sp-selected');
-  if(sel){sel.style.display='flex';sel.textContent='"'+SP.playlists[idx].name+'" geselecteerd — kaarten worden gegenereerd op basis van deze nummers';}
+  if(sel){sel.style.display='flex';sel.textContent='"'+pl.name+'" — '+total+' geselecteerd';}
 
   updCTA();
 }
