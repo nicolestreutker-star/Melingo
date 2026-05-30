@@ -1799,7 +1799,7 @@ async function loadSelectedPlaylist(){
   try{
     // Load all tracks (paginated)
     var tracks=[];
-    var url='https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/items?limit=100&market=from_token';
+    var url='https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/items?limit=100';
     while(url){
       var resp=await spFetch(url);
       var data=await resp.json();
@@ -1815,15 +1815,22 @@ async function loadSelectedPlaylist(){
           } : null
         }));
       }
+      // Log eerste item volledig voor debug
+      if(data.items&&data.items[0]){
+        console.log('Volledig eerste item:', JSON.stringify(data.items[0]));
+      }
       var valid=(data.items||[]).filter(function(item){
-        return item&&item.track&&item.track.type==='track'&&item.track.name&&item.track.artists;
+        return item&&item.track!==null&&item.track!==undefined&&item.track.name;
       });
       console.log('Na filter:', valid.length, 'van', (data.items||[]).length);
       tracks=tracks.concat(valid.map(function(item){return item.track;}));
       url=data.next||null;
     }
     console.log('Totaal tracks geladen:', tracks.length);
-    if(!tracks.length){showSpError('Geen afspeelbare nummers gevonden in deze playlist.');return;}
+    if(!tracks.length){
+      showSpError('Geen bruikbare nummers gevonden. Controleer of de playlist normale Spotify-nummers bevat (geen lokale bestanden).');
+      return;
+    }
 
     // Shuffle tracks and load into ST.songs
     SP.tracks=shuf(tracks);
