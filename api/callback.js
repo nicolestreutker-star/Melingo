@@ -1,5 +1,6 @@
 // api/callback.js
 // Receives auth code from Spotify, exchanges for access + refresh tokens
+// Passes tokens via query params to a dedicated callback page
 
 export default async function handler(req, res) {
   const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
@@ -34,14 +35,15 @@ export default async function handler(req, res) {
       return res.redirect(`/?spotify_error=${data.error}`);
     }
 
-    // Pass tokens to the frontend via URL fragment (never in query string)
-    const fragment = new URLSearchParams({
-      access_token: data.access_token,
-      refresh_token: data.refresh_token,
-      expires_in: data.expires_in,
+    // Pass tokens via query string to index — simpler and more reliable
+    // The frontend reads these and immediately removes them from the URL
+    const params = new URLSearchParams({
+      sp_at: data.access_token,
+      sp_rt: data.refresh_token,
+      sp_ex: data.expires_in,
     });
 
-    res.redirect(`/#spotify_auth=${encodeURIComponent(fragment.toString())}`);
+    res.redirect(`/?${params.toString()}`);
   } catch (err) {
     res.redirect(`/?spotify_error=server_error`);
   }
