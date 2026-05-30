@@ -1604,22 +1604,25 @@ function spotifyLogout(){
 }
 
 function parseSpotifyAuth(){
-  var hash=window.location.hash;
-  if(!hash.includes('spotify_auth='))return false;
+  // Read tokens from query params (set by /api/callback)
+  var params=new URLSearchParams(window.location.search);
+  var at=params.get('sp_at');
+  var rt=params.get('sp_rt');
+  var ex=params.get('sp_ex');
+  if(!at)return false;
   try{
-    var encoded=hash.split('spotify_auth=')[1];
-    var params=new URLSearchParams(decodeURIComponent(encoded));
-    SP.accessToken=params.get('access_token');
-    SP.refreshToken=params.get('refresh_token');
-    SP.expiresAt=Date.now()+parseInt(params.get('expires_in')||3600)*1000;
-    // Clean hash from URL
+    SP.accessToken=at;
+    SP.refreshToken=rt;
+    SP.expiresAt=Date.now()+parseInt(ex||3600)*1000;
+    // Clean query params from URL immediately
     history.replaceState(null,'',window.location.pathname);
-    // Save tokens
+    // Save tokens to localStorage
     try{localStorage.setItem('sp_tokens',JSON.stringify({
       accessToken:SP.accessToken,refreshToken:SP.refreshToken,expiresAt:SP.expiresAt
     }));}catch(e){}
+    console.log('Spotify token opgeslagen, verloopt over', Math.round((SP.expiresAt-Date.now())/60000), 'minuten');
     return true;
-  }catch(e){return false;}
+  }catch(e){console.error('parseSpotifyAuth fout:',e);return false;}
 }
 
 function loadSavedTokens(){
