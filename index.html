@@ -496,6 +496,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div style="color:var(--green);font-size:.8rem;font-weight:600;margin-bottom:.75rem" id="sp-user-name"></div>
           <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.5rem">Kies een playlist</div>
           <div id="sp-playlists" style="max-height:200px;overflow-y:auto;margin-bottom:.75rem"></div>
+          <div id="sp-loading-playlists" style="color:var(--mt);font-size:.8rem;padding:.5rem 0;display:none">Playlists laden...</div>
           <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" id="sp-load-btn" onclick="loadSelectedPlaylist()" disabled>Laad playlist in Melingo</button>
         </div>
         <!-- PLAYING -->
@@ -1684,8 +1685,7 @@ function initPlayer(){
   });
   SP.player.addListener('ready',function(e){
     SP.deviceId=e.device_id;
-    spConnectedUI();
-    loadPlaylists();
+    console.log('Spotify Player ready, device:', e.device_id);
   });
   SP.player.addListener('not_ready',function(){
     SP.deviceId=null;
@@ -1710,10 +1710,11 @@ function spConnectedUI(){
   document.getElementById('sp-panel').classList.add('sp-connected');
   document.getElementById('sp-connect-view').style.display='none';
   document.getElementById('sp-playlist-view').style.display='block';
-  // Load user name
+  // Load user name + playlists immediately
   spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
     document.getElementById('sp-user-name').textContent='Ingelogd als '+d.display_name;
   });
+  loadPlaylists();
 }
 
 function showSpError(msg){
@@ -1726,12 +1727,22 @@ function showSpError(msg){
 
 /* ── Playlists ── */
 async function loadPlaylists(){
+  var loadEl=document.getElementById('sp-loading-playlists');
+  if(loadEl)loadEl.style.display='block';
   try{
     var resp=await spFetch('https://api.spotify.com/v1/me/playlists?limit=50');
     var data=await resp.json();
-    SP.playlists=data.items||[];
+    if(data.error){
+      showSpError('Spotify fout: '+data.error.message);
+      if(loadEl)loadEl.style.display='none';
+      return;
+    }
+    SP.playlists=(data.items||[]).filter(function(p){return p&&p.id;});
     renderPlaylists();
-  }catch(e){showSpError('Kon playlists niet laden.');}
+  }catch(e){
+    showSpError('Kon playlists niet laden: '+e.message);
+  }
+  if(loadEl)loadEl.style.display='none';
 }
 
 function renderPlaylists(){
@@ -1851,7 +1862,9 @@ function checkSpotifyAuth(){
   var gotNew=parseSpotifyAuth();
   var gotSaved=!gotNew&&loadSavedTokens();
   if(gotNew||gotSaved){
-    // SDK may already be ready
+    // Show connected UI and load playlists immediately
+    spConnectedUI();
+    // Init player for playback (SDK may already be ready)
     if(window.Spotify&&window.Spotify.Player){
       initPlayer();
     }
