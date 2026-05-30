@@ -546,7 +546,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <div class="ph"><span>Bingo-instellingen</span></div>
       <div class="bmode-grid">
         <label class="bmode-btn on" id="bm-row"><input type="checkbox" checked onchange="updBmode('row',this.checked)"/><div><span class="bmode-label">Horizontale rij</span><span class="bmode-sub">5 vakjes op een rij →</span></div></label>
-        <label class="bmode-btn on" id="bm-col"><input type="checkbox" checked onchange="updBmode('col',this.checked)"/><div><span class="bmode-label">Verticale kolom</span><span class="bmode-sub">5 vakjes in een kolom ↓</span></div></label>
+        <label class="bmode-btn on" id="bm-col"><input type="checkbox" checked onchange="updBmode('col',this.checked)"/><div><span class="bmode-label">Verticale rij</span><span class="bmode-sub">5 vakjes in een rij ↓</span></div></label>
         <label class="bmode-btn on" id="bm-diag"><input type="checkbox" checked onchange="updBmode('diag',this.checked)"/><div><span class="bmode-label">Diagonaal</span><span class="bmode-sub">5 vakjes diagonaal ↘</span></div></label>
         <label class="bmode-btn" id="bm-full"><input type="checkbox" onchange="updBmode('full',this.checked)"/><div><span class="bmode-label">Volledige kaart</span><span class="bmode-sub">Alle 25 vakjes vol</span></div></label>
       </div>
@@ -1519,7 +1519,7 @@ function updBmode(key,val){
 
 function typeToKey(t){
   if(t==='rij')return'row';
-  if(t==='kolom')return'col';
+  if(t==='verticale rij')return'col';
   if(t==='diagonaal')return'diag';
   if(t==='volle kaart')return'full';
   return t;
@@ -1528,7 +1528,7 @@ function typeToKey(t){
 function allActiveCategories(){
   var a=[];
   if(ST.bmodes.row)a.push('rij');
-  if(ST.bmodes.col)a.push('kolom');
+  if(ST.bmodes.col)a.push('verticale rij');
   if(ST.bmodes.diag)a.push('diagonaal');
   if(ST.bmodes.full)a.push('volle kaart');
   return a;
@@ -1570,7 +1570,7 @@ function analyseCard(cardIdx){
   if(ST.bmodes.col && !ST.wonCategories.col){
     for(var col=0;col<5;col++){
       var ln=[];for(var r=0;r<5;r++)ln.push(r*5+col);
-      if(ln.every(function(i){return cp[i];})){blines=blines.concat(ln);if(wonTypes.indexOf('kolom')===-1)wonTypes.push('kolom');}
+      if(ln.every(function(i){return cp[i];})){blines=blines.concat(ln);if(wonTypes.indexOf('verticale rij')===-1)wonTypes.push('verticale rij');}
     }
   }
   if(ST.bmodes.diag && !ST.wonCategories.diag){
