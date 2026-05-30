@@ -374,6 +374,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <button class="tab on" id="tab-thema" onclick="setIM('thema')">Thema</button>
         <button class="tab" id="tab-eigen" onclick="setIM('eigen')">Eigen nummers</button>
         <button class="tab" id="tab-opgeslagen" onclick="setIM('opgeslagen')">Opgeslagen</button>
+        <button class="tab" id="tab-spotify" onclick="setIM('spotify')">Spotify</button>
       </div>
 
       <div id="inp-thema">
@@ -392,6 +393,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <label class="fl">Mijn opgeslagen playlists</label>
         <div id="saved-list-wrap"></div>
         <div id="no-saved" style="text-align:center;padding:1.5rem;color:var(--mt);font-size:.82rem">Nog geen playlists opgeslagen.</div>
+      </div>
+
+      <div id="inp-spotify" style="display:none">
+        <div id="start-sp-connect" style="display:block">
+          <div style="color:var(--mt);font-size:.82rem;margin-bottom:.85rem;line-height:1.6">Verbind Spotify om je eigen playlist te gebruiken voor de bingokaarten. Je hebt <strong style="color:var(--tx)">Spotify Premium</strong> nodig.</div>
+          <button class="btn bp" style="width:100%;min-height:44px;margin-bottom:.75rem" onclick="startSpotifyLogin()">
+            Verbinden met Spotify
+          </button>
+        </div>
+        <div id="start-sp-playlists" style="display:none">
+          <div style="color:var(--green);font-size:.8rem;font-weight:600;margin-bottom:.75rem" id="start-sp-user"></div>
+          <label class="fl">Kies een playlist</label>
+          <div id="start-sp-list" style="max-height:220px;overflow-y:auto;margin-bottom:.75rem"></div>
+          <div class="si ok" id="start-sp-selected" style="display:none;margin-bottom:.75rem">Playlist geselecteerd</div>
+        </div>
       </div>
 
       <div style="margin:1.25rem 0 .75rem">
@@ -1145,11 +1161,13 @@ function selT(id){
 /* ══ INPUT MODE ══ */
 function setIM(m){
   ST.mode=m;
-  ['thema','eigen','opgeslagen'].forEach(function(x){
-    document.getElementById('tab-'+x).classList.toggle('on',x===m);
+  ['thema','eigen','opgeslagen','spotify'].forEach(function(x){
+    var tab=document.getElementById('tab-'+x);
+    if(tab)tab.classList.toggle('on',x===m);
     var inp=document.getElementById('inp-'+x);if(inp)inp.style.display=x===m?'block':'none';
   });
   if(m==='opgeslagen')buildSavedList();
+  if(m==='spotify')initStartSpotify();
   updInd();updCTA();
 }
 
@@ -1189,13 +1207,21 @@ function updCTA(){
     btn.disabled=count<25;btn.textContent=count<25?'Voeg nog '+(25-count)+' nummers toe':'Start mijn muziekbingo';
   } else if(ST.mode==='opgeslagen'){
     btn.disabled=!ST.selSaved;btn.textContent=ST.selSaved?'Start mijn muziekbingo':'Kies een playlist';
+  } else if(ST.mode==='spotify'){
+    btn.disabled=!SP.selectedPlaylist;
+    btn.textContent=SP.selectedPlaylist?'Start mijn muziekbingo':'Kies eerst een playlist';
   } else {btn.disabled=false;btn.textContent='Start mijn muziekbingo';}
 }
 
 /* ══ GENERATE ══ */
 function gen(){
   var songs=[];
-  if(ST.mode==='thema'){
+  if(ST.mode==='spotify'){
+    if(!SP.selectedPlaylist){toast('Kies eerst een Spotify playlist.');return;}
+    // Load tracks from Spotify and generate cards
+    genFromSpotify();
+    return;
+  } else if(ST.mode==='thema'){
     var th=THEMES.filter(function(t){return t.id===ST.selTheme;})[0];if(!th){toast('Kies eerst een thema.');return;}
     songs=th.songs.slice();trackAnalytics(th.name);
   } else if(ST.mode==='opgeslagen'){
@@ -1211,6 +1237,38 @@ function gen(){
 }
 
 /* ══ CARD GENERATION — FIXED ══ */
+async function genFromSpotify(){
+  load('Spotify playlist laden...',0);
+  try{
+    var tracks=[];
+    var url='https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/items?limit=100';
+    while(url){
+      var resp=await spFetch(url);
+      var data=await resp.json();
+      if(data.error){toast('Spotify fout: '+data.error.message);unload();return;}
+      var valid=(data.items||[]).filter(function(item){
+        var t=item.item||item.track;return t&&t.name&&t.artists&&t.artists.length;
+      });
+      tracks=tracks.concat(valid.map(function(item){return item.item||item.track;}));
+      url=data.next||null;
+    }
+    if(!tracks.length){toast('Geen afspeelbare nummers gevonden in deze playlist.');unload();return;}
+    // Store tracks in SP for playback sync
+    SP.tracks=shuf(tracks);
+    SP.trackIdx=-1;
+    // Convert to Melingo format
+    ST.songs=SP.tracks.map(function(t){
+      return{t:t.name,a:t.artists.map(function(ar){return ar.name;}).join(', '),uri:t.uri};
+    });
+    ST.shuffled=ST.songs.slice();
+    ST.pidx=-1;
+    trackAnalytics('Spotify: '+SP.selectedPlaylist.name);
+    mkCards();buildPreviews();saveSession();
+    unload();
+    go('cards');
+  }catch(e){toast('Fout: '+e.message);unload();}
+}
+
 function mkCards(){
   ST.cards=[];
   for(var p=0;p<ST.players;p++){
@@ -1431,6 +1489,9 @@ async function spPlayTrack(uri){
       headers:{'Authorization':'Bearer '+SP.accessToken,'Content-Type':'application/json'},
       body:JSON.stringify({uris:[uri]})
     });
+    // Update Spotify played counter
+    var el=document.getElementById('sp-played-count');
+    if(el)el.textContent=ST.pidx+1;
     console.log('Spotify speelt:', uri);
   }catch(e){console.error('Spotify play fout:',e);}
 }
@@ -1589,6 +1650,78 @@ function closeBingoModal(){
 }
 
 function closeBingoGoFeedback(){closeBingoModal();go('feedback');}
+
+/* ══ SPOTIFY START SCREEN ══ */
+
+function startSpotifyLogin(){
+  // Save current state before redirecting
+  try{localStorage.setItem('sp_return','start');}catch(e){}
+  window.location.href='/api/login';
+}
+
+function initStartSpotify(){
+  // Check if already connected
+  if(SP.accessToken){
+    showStartSpConnected();
+  } else if(loadSavedTokens()){
+    showStartSpConnected();
+  }
+}
+
+function showStartSpConnected(){
+  document.getElementById('start-sp-connect').style.display='none';
+  document.getElementById('start-sp-playlists').style.display='block';
+  // Load user name
+  spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
+    var el=document.getElementById('start-sp-user');
+    if(el)el.textContent='Ingelogd als '+d.display_name;
+  });
+  loadStartPlaylists();
+}
+
+async function loadStartPlaylists(){
+  try{
+    var allPlaylists=[];
+    var url='https://api.spotify.com/v1/me/playlists?limit=50';
+    while(url){
+      var resp=await spFetch(url);
+      var data=await resp.json();
+      if(data.error)break;
+      allPlaylists=allPlaylists.concat((data.items||[]).filter(function(p){return p&&p.id;}));
+      url=data.next||null;
+    }
+    SP.playlists=allPlaylists;
+    renderStartPlaylists();
+  }catch(e){console.error('loadStartPlaylists:',e);}
+}
+
+function renderStartPlaylists(){
+  var el=document.getElementById('start-sp-list');
+  if(!el)return;
+  el.innerHTML=SP.playlists.map(function(pl,i){
+    var img=pl.images&&pl.images[0]?'<img src="'+pl.images[0].url+'" alt="" style="width:36px;height:36px;border-radius:6px;object-fit:cover;flex-shrink:0"/>':'<div style="width:36px;height:36px;border-radius:6px;background:rgba(255,255,255,.08);flex-shrink:0"></div>';
+    return'<div class="sp-playlist-item" id="startpl-'+i+'" onclick="selStartPlaylist('+i+')" style="display:flex;align-items:center;gap:.65rem;padding:.45rem .65rem;border-radius:10px;cursor:pointer;transition:all .12s;margin-bottom:.25rem">'
+      +img
+      +'<div><div style="font-size:.8rem;font-weight:600;color:var(--tx)">'+esc(pl.name)+'</div>'
+      +'<div style="font-size:.65rem;color:var(--mt)">'+(pl.tracks&&pl.tracks.total?pl.tracks.total:'?')+' nummers</div></div>'
+      +'</div>';
+  }).join('');
+}
+
+async function selStartPlaylist(idx){
+  SP.selectedPlaylist=SP.playlists[idx];
+  // Highlight selected
+  document.querySelectorAll('[id^="startpl-"]').forEach(function(el){
+    el.style.background='';el.style.border='';
+  });
+  var el=document.getElementById('startpl-'+idx);
+  if(el){el.style.background='rgba(155,109,255,.1)';el.style.border='1px solid rgba(155,109,255,.3)';}
+
+  var sel=document.getElementById('start-sp-selected');
+  if(sel){sel.style.display='flex';sel.textContent='"'+SP.playlists[idx].name+'" geselecteerd — kaarten worden gegenereerd op basis van deze nummers';}
+
+  updCTA();
+}
 
 /* ══ SPOTIFY ══ */
 var SP = {
@@ -1936,13 +2069,14 @@ function checkSpotifyAuth(){
   var gotNew=parseSpotifyAuth();
   var gotSaved=!gotNew&&loadSavedTokens();
   if(gotNew||gotSaved){
-    // Show connected UI and load playlists immediately
+    // Show connected UI in host screen
     spConnectedUI();
-    // Init player for playback (SDK may already be ready)
+    // Also show connected state on start screen if spotify tab is active
+    if(ST.mode==='spotify')showStartSpConnected();
+    // Init player for playback
     if(window.Spotify&&window.Spotify.Player){
       initPlayer();
     }
-    // else onSpotifyWebPlaybackSDKReady will fire
   }
 }
 
