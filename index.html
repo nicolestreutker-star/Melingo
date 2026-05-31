@@ -2196,6 +2196,8 @@ var SP = {
 
 /* ── Auth ── */
 function spotifyLogin(){
+  // Save current screen so we can return after auth
+  try{localStorage.setItem('sp_return_screen', ST.cards&&ST.cards.length>0?'host':'start');}catch(e){}
   window.location.href = '/api/login';
 }
 
@@ -2525,11 +2527,19 @@ function checkSpotifyAuth(){
   var gotNew=parseSpotifyAuth();
   var gotSaved=!gotNew&&loadSavedTokens();
   if(gotNew||gotSaved){
+    // If we just came back from Spotify login (gotNew) and have cards, go to host
+    var returnScreen='start';try{returnScreen=localStorage.getItem('sp_return_screen')||'start';}catch(e){}
+    if(gotNew&&returnScreen==='host'&&ST.cards&&ST.cards.length>0){
+      go('host');
+    } else if(gotNew&&returnScreen==='spotify'){
+      setIM('spotify');showStartSpConnected();
+    } else if(gotNew){
+      // Came from start screen spotify tab — stay and show playlists
+      showStartSpConnected();
+    }
     // Show connected UI in host screen
     spConnectedUI();
-    // Also show connected state on start screen if spotify tab is active
-    if(ST.mode==='spotify')showStartSpConnected();
-    // Init player for playback
+    // Init player
     if(window.Spotify&&window.Spotify.Player){
       initPlayer();
     }
