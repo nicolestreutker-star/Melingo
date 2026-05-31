@@ -1434,7 +1434,7 @@ function dlPDF(eco){
             if(eco){doc.setFillColor(245,245,245);doc.setDrawColor(200,200,200);doc.setLineWidth(.2);doc.roundedRect(x+.5,y+.5,cW-1,cH-1,2,2,'FD');}
             else{var cR=isAlt?c1R:c2R;doc.setFillColor(cR[0],cR[1],cR[2]);doc.roundedRect(x+.5,y+.5,cW-1,cH-1,2,2,'F');}
             if(s){
-              var mw=cW-3;
+              var mw=cW-2;
               // Dynamische fontgrootte op basis van titellengte
               var tLen=(s.t||'').length;
               var tSize=tLen>30?4.5:tLen>20?5.2:6;
