@@ -628,15 +628,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
           <label id="bm-row" onclick="updBmode('row',!ST.bmodes.row)" style="display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:12px;cursor:pointer;background:rgba(242,64,106,.12);border:1.5px solid rgba(242,64,106,.35);transition:all .2s">
             <div id="bm-row-check" style="width:20px;height:20px;border-radius:5px;background:var(--s);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;color:white;font-weight:700">✓</div>
-            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Rij</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Horizontale rij</div>
           </label>
           <label id="bm-col" onclick="updBmode('col',!ST.bmodes.col)" style="display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:12px;cursor:pointer;background:rgba(106,171,247,.12);border:1.5px solid rgba(106,171,247,.35);transition:all .2s">
             <div id="bm-col-check" style="width:20px;height:20px;border-radius:5px;background:var(--m);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;color:white;font-weight:700">✓</div>
-            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Kolom</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Verticale rij</div>
           </label>
           <label id="bm-diag" onclick="updBmode('diag',!ST.bmodes.diag)" style="display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:12px;cursor:pointer;background:rgba(155,109,255,.12);border:1.5px solid rgba(155,109,255,.35);transition:all .2s">
             <div id="bm-diag-check" style="width:20px;height:20px;border-radius:5px;background:var(--a);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;color:white;font-weight:700">✓</div>
-            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Diagonaal</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Diagonale rij</div>
           </label>
           <label id="bm-full" onclick="updBmode('full',!ST.bmodes.full)" style="display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:12px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid var(--bd);transition:all .2s;opacity:.5">
             <div id="bm-full-check" style="width:20px;height:20px;border-radius:5px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;color:var(--mt);font-weight:700"></div>
@@ -1762,7 +1762,7 @@ function typeToKey(t){
 
 function allActiveCategories(){
   var a=[];
-  if(ST.bmodes.row)a.push('rij');
+  if(ST.bmodes.row)a.push('horizontale rij');
   if(ST.bmodes.col)a.push('verticale rij');
   if(ST.bmodes.diag)a.push('diagonale rij');
   if(ST.bmodes.full)a.push('volle kaart');
@@ -1799,7 +1799,7 @@ function analyseCard(cardIdx){
   if(ST.bmodes.row && !ST.wonCategories.row){
     for(var row=0;row<5;row++){
       var ln=[];for(var c=0;c<5;c++)ln.push(row*5+c);
-      if(ln.every(function(i){return cp[i];})){blines=blines.concat(ln);if(wonTypes.indexOf('rij')===-1)wonTypes.push('rij');}
+      if(ln.every(function(i){return cp[i];})){blines=blines.concat(ln);if(wonTypes.indexOf('horizontale rij')===-1)wonTypes.push('horizontale rij');}
     }
   }
   if(ST.bmodes.col && !ST.wonCategories.col){
