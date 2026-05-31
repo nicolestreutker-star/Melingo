@@ -1345,7 +1345,7 @@ function buildReviews(){} // Static in HTML
 function buildLpShowcase(){
   var el=document.getElementById('lp-themes-showcase');if(!el)return;
   el.innerHTML=THEMES.map(function(th){
-    return'<div class="lp-th-card" onclick="setType('thema');selLpThemeDirect(''+th.id+'')">'
+    return'<div class="lp-th-card" onclick="selLpThemeDirect(this.dataset.id)" data-id="'+th.id+'">'
       +'<div class="lp-th-name">'+th.name+'</div>'
       +'<div class="lp-th-mood">'+th.mood+'</div>'
       +'<div class="lp-th-meta">40 nummers · max. 20 spelers</div>'
@@ -1353,7 +1353,7 @@ function buildLpShowcase(){
   }).join('');
 }
 
-function selLpThemeDirect(id){
+function selLpThemeDirect(id){setType('thema');
   ST.theme=id;
   buildLpThemes();
   document.querySelector('.lp-cfg-wrap').scrollIntoView({behavior:'smooth'});
