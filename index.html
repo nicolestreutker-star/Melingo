@@ -1437,15 +1437,15 @@ function dlPDF(eco){
               var mw=cW-4;
               // Dynamische fontgrootte op basis van titellengte
               var tLen=(s.t||'').length;
-              var tSize=tLen>40?13:tLen>30?15:tLen>20?17:19;
+              var tSize=14;
               doc.setFontSize(tSize);doc.setFont('helvetica','bold');
               var tL=doc.splitTextToSize(s.t,mw),sh=tL.slice(0,3);
               var aL=s.a?doc.splitTextToSize(s.a,mw)[0]:'';
-              var lh=tSize*0.82,tot=sh.length*lh+(aL?16:0);
+              var lh=tSize*0.85,tot=sh.length*lh+(aL?14:0);
               var ty=y+cH/2-tot/2+lh;
               doc.setTextColor(20,5,35);
               sh.forEach(function(line){doc.text(line,x+cW/2,ty,{align:'center'});ty+=lh;});
-              if(aL){ty+=1.5;doc.setFontSize(12);doc.setFont('helvetica','italic');
+              if(aL){ty+=2;doc.setFontSize(12);doc.setFont('helvetica','italic');
                 if(eco)doc.setTextColor(100,80,120);else doc.setTextColor(bR[0],bR[1],bR[2]);
                 doc.text(aL,x+cW/2,ty,{align:'center'});}
             }
