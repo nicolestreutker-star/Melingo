@@ -1094,7 +1094,7 @@ function buildThemeGrid2(){
 function selTheme2(id){
   ST.theme=id;
   document.querySelectorAll('.tcard').forEach(function(el){el.classList.remove('sel');});
-  var el=document.querySelector('.tcard[onclick*="''+id+''"]');
+  var el=document.querySelector('.tcard[data-id="'+id+'"]');
   if(el)el.classList.add('sel');
   updatePlayerSection();
   updCTA2();
