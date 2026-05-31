@@ -1391,6 +1391,12 @@ async function genFromSpotify(){
     });
     ST.shuffled=ST.songs.slice();
     ST.pidx=-1;
+    // Sla playlist op zodat hostscherm hem kent
+    ST.spotifyPlaylist={
+      id:SP.selectedPlaylist.id,
+      name:SP.selectedPlaylist.name,
+      img:SP.selectedPlaylist.images&&SP.selectedPlaylist.images[0]?SP.selectedPlaylist.images[0].url:''
+    };
     trackAnalytics('Spotify: '+SP.selectedPlaylist.name);
     mkCards();buildPreviews();saveSession();
     unload();
@@ -1625,6 +1631,25 @@ function initHost(){
   renderSavedSessions();
   updActiveModesDisplay();
   document.getElementById('host-status-bar').style.display='flex';
+  // Als playlist al gekozen was op startscherm — toon direct in Spotify paneel
+  if(ST.spotifyPlaylist&&SP.accessToken){
+    // Toon playing view met playlist info
+    var cv=document.getElementById('sp-connect-view');
+    var pv=document.getElementById('sp-playlist-view');
+    var playing=document.getElementById('sp-playing-view');
+    if(cv)cv.style.display='none';
+    if(pv)pv.style.display='none';
+    if(playing)playing.style.display='block';
+    var plImg=document.getElementById('sp-pl-img');
+    var plName=document.getElementById('sp-pl-name');
+    var plCount=document.getElementById('sp-pl-count');
+    if(plImg)plImg.src=ST.spotifyPlaylist.img;
+    if(plName)plName.textContent=ST.spotifyPlaylist.name;
+    if(plCount)plCount.textContent=SP.tracks.length+' nummers';
+    // Sync SP.selectedPlaylist
+    if(!SP.selectedPlaylist)SP.selectedPlaylist={id:ST.spotifyPlaylist.id,name:ST.spotifyPlaylist.name};
+    document.getElementById('sp-total-count').textContent=SP.tracks.length;
+  }
   document.getElementById('hcount').textContent=(ST.pidx<0?0:ST.pidx+1)+' van '+ST.songs.length;
   document.getElementById('hs-count').textContent=(ST.pidx<0?0:ST.pidx+1)+' van '+ST.songs.length+' gespeeld';
   var v=document.getElementById('hvinyl');if(v&&ST.pidx===-1)v.classList.remove('spin');
@@ -2390,25 +2415,22 @@ async function loadPlaylists(){
 }
 
 function renderPlaylists(){
-  // Make sure playlist view is visible
   var pv=document.getElementById('sp-playlist-view');
   if(pv)pv.style.display='block';
   var cv=document.getElementById('sp-connect-view');
   if(cv)cv.style.display='none';
 
   var el=document.getElementById('sp-playlists');
-  if(!el){console.error('sp-playlists element niet gevonden');return;}
+  if(!el)return;
   if(!SP.playlists.length){el.innerHTML='<div style="color:var(--mt);font-size:.8rem;padding:.5rem 0">Geen playlists gevonden.</div>';return;}
 
   el.innerHTML=SP.playlists.map(function(pl,i){
     var img=pl.images&&pl.images[0]?'<img src="'+pl.images[0].url+'" alt=""/>':'';
     return'<div class="sp-playlist-item" id="sppl-'+i+'" onclick="selPlaylist('+i+')">'
       +'<div class="sp-playlist-img">'+img+'</div>'
-      +'<div><div class="sp-playlist-name">'+esc(pl.name)+'</div>'
-      +'</div>'
+      +'<div><div class="sp-playlist-name">'+esc(pl.name)+'</div></div>'
       +'</div>';
   }).join('');
-  console.log('Playlists gerenderd:', SP.playlists.length);
 }
 
 function selPlaylist(idx){
@@ -2473,6 +2495,13 @@ async function loadSelectedPlaylist(){
     ST.shuffled=ST.songs.slice(); // already shuffled
     ST.pidx=-1;
 
+    // Sla playlist op in ST voor later
+    ST.spotifyPlaylist={
+      id:SP.selectedPlaylist.id,
+      name:SP.selectedPlaylist.name,
+      img:SP.selectedPlaylist.images&&SP.selectedPlaylist.images[0]?SP.selectedPlaylist.images[0].url:''
+    };
+    saveSession();
     // Switch to playing view
     document.getElementById('sp-playlist-view').style.display='none';
     document.getElementById('sp-playing-view').style.display='block';
