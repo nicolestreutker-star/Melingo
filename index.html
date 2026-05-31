@@ -1434,30 +1434,35 @@ function dlPDF(eco){
             if(eco){doc.setFillColor(245,245,245);doc.setDrawColor(200,200,200);doc.setLineWidth(.2);doc.roundedRect(x+.5,y+.5,cW-1,cH-1,2,2,'FD');}
             else{var cR=isAlt?c1R:c2R;doc.setFillColor(cR[0],cR[1],cR[2]);doc.roundedRect(x+.5,y+.5,cW-1,cH-1,2,2,'F');}
             if(s){
-              // Strip remastered/live suffixes
               var ct=(s.t||'').replace(/\s*[-\u2013]?\s*(Remaster(ed)?|Live|Radio Edit|Single Version|Deluxe Edition?)(\s+\d{4})?\s*/gi,'').replace(/\s*\([^)]*Remaster[^)]*\)/gi,'').trim();
-              // Only first artist
               var ca=(s.a||'').split(/[,&]/)[0].trim();
               var mw=cW-5;
-              var tSize=14;
+              // Font sizes
+              var tSize=13, aSize=10;
+              // Split title
               doc.setFontSize(tSize);doc.setFont('helvetica','bold');
-              var tLines=doc.splitTextToSize(ct,mw);
-              if(tLines.length>2){tSize=11;doc.setFontSize(tSize);tLines=doc.splitTextToSize(ct,mw);}
-              var sh=tLines.slice(0,2);
-              var aSize=10;
+              var sh=doc.splitTextToSize(ct,mw).slice(0,2);
+              // Artist line
+              doc.setFontSize(aSize);
               var aL=ca?doc.splitTextToSize(ca,mw)[0]:'';
-              var gap=1.5;
-              var lh=tSize*0.82;
-              var totalH=sh.length*lh+(aL?gap+aSize*0.82:0);
-              // Perfect vertical center
-              var ty=y+(cH-totalH)/2+lh;
+              // Line heights in mm (jsPDF uses pt, 1pt = 0.3528mm)
+              var tlh=tSize*0.3528*1.2;
+              var alh=aSize*0.3528*1.2;
+              var gap=1;
+              // Total block height
+              var blockH=sh.length*tlh+(aL?gap+alh:0);
+              // Start y = center of cell minus half block
+              var startY=y+(cH/2)-(blockH/2)+tlh;
+              // Draw title lines
               doc.setFontSize(tSize);doc.setFont('helvetica','bold');doc.setTextColor(20,5,35);
-              sh.forEach(function(line){doc.text(line,x+cW/2,ty,{align:'center'});ty+=lh;});
+              var cy=startY;
+              sh.forEach(function(line){doc.text(line,x+cW/2,cy,{align:'center'});cy+=tlh;});
+              // Draw artist
               if(aL){
-                ty+=gap;
+                cy+=gap;
                 doc.setFontSize(aSize);doc.setFont('helvetica','italic');
                 if(eco)doc.setTextColor(100,80,120);else doc.setTextColor(bR[0],bR[1],bR[2]);
-                doc.text(aL,x+cW/2,ty,{align:'center'});
+                doc.text(aL,x+cW/2,cy,{align:'center'});
               }
             }
           }
