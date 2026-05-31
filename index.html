@@ -1083,7 +1083,7 @@ function buildThemeGrid2(){
   var el=document.getElementById('theme-grid');
   if(!el)return;
   el.innerHTML=THEMES.map(function(th){
-    return'<div class="tcard'+(ST.theme===th.id?' sel':'')+'" onclick="selTheme2(''+th.id+'')">'
+    return'<div class="tcard'+(ST.theme===th.id?' sel':'')+'" onclick="selTheme2(this.dataset.id)" data-id="'+th.id+'">'
       +'<div class="tcard-name">'+th.name+'</div>'
       +'<div class="tcard-mood">'+th.mood+'</div>'
       +'<div class="tcard-meta">40 nummers · max. 20 spelers</div>'
