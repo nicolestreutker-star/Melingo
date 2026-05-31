@@ -1631,25 +1631,8 @@ function initHost(){
   renderSavedSessions();
   updActiveModesDisplay();
   document.getElementById('host-status-bar').style.display='flex';
-  // Als playlist al gekozen was op startscherm — toon direct in Spotify paneel
-  if(ST.spotifyPlaylist&&SP.accessToken){
-    // Toon playing view met playlist info
-    var cv=document.getElementById('sp-connect-view');
-    var pv=document.getElementById('sp-playlist-view');
-    var playing=document.getElementById('sp-playing-view');
-    if(cv)cv.style.display='none';
-    if(pv)pv.style.display='none';
-    if(playing)playing.style.display='block';
-    var plImg=document.getElementById('sp-pl-img');
-    var plName=document.getElementById('sp-pl-name');
-    var plCount=document.getElementById('sp-pl-count');
-    if(plImg)plImg.src=ST.spotifyPlaylist.img;
-    if(plName)plName.textContent=ST.spotifyPlaylist.name;
-    if(plCount)plCount.textContent=SP.tracks.length+' nummers';
-    // Sync SP.selectedPlaylist
-    if(!SP.selectedPlaylist)SP.selectedPlaylist={id:ST.spotifyPlaylist.id,name:ST.spotifyPlaylist.name};
-    document.getElementById('sp-total-count').textContent=SP.tracks.length;
-  }
+  // Als playlist al gekozen was — sync Spotify paneel
+  syncSpotifyHostPanel();
   document.getElementById('hcount').textContent=(ST.pidx<0?0:ST.pidx+1)+' van '+ST.songs.length;
   document.getElementById('hs-count').textContent=(ST.pidx<0?0:ST.pidx+1)+' van '+ST.songs.length+' gespeeld';
   var v=document.getElementById('hvinyl');if(v&&ST.pidx===-1)v.classList.remove('spin');
@@ -2088,6 +2071,35 @@ function deleteNamedSession(name){
   putNamedSessions(getNamedSessions().filter(function(s){return s.name!==name;}));
   renderSavedSessions();
   toast('Sessie verwijderd.');
+}
+
+function syncSpotifyHostPanel(){
+  if(!ST.spotifyPlaylist||!SP.accessToken)return;
+  // Open paneel
+  var body=document.getElementById('col-body-spotify');
+  var arrow=document.getElementById('col-arrow-spotify');
+  if(body)body.style.display='block';
+  if(arrow)arrow.classList.add('open');
+  // Verberg connect/picker, toon playing
+  var cv=document.getElementById('sp-connect-view');
+  var pv=document.getElementById('sp-playlist-view');
+  var playing=document.getElementById('sp-playing-view');
+  if(cv)cv.style.display='none';
+  if(pv)pv.style.display='none';
+  if(playing)playing.style.display='block';
+  // Vul playlist info in
+  var plImg=document.getElementById('sp-pl-img');
+  var plName=document.getElementById('sp-pl-name');
+  var plCount=document.getElementById('sp-pl-count');
+  if(plImg)plImg.src=ST.spotifyPlaylist.img||'';
+  if(plName)plName.textContent=ST.spotifyPlaylist.name;
+  if(plCount)plCount.textContent=(SP.tracks&&SP.tracks.length?SP.tracks.length:'?')+' nummers';
+  if(!SP.selectedPlaylist)SP.selectedPlaylist={id:ST.spotifyPlaylist.id,name:ST.spotifyPlaylist.name};
+  var tot=document.getElementById('sp-total-count');
+  if(tot)tot.textContent=SP.tracks&&SP.tracks.length?SP.tracks.length:'?';
+  // Status badge
+  var badge=document.getElementById('sp-status-badge');
+  if(badge){badge.textContent='Spotify verbonden';badge.style.color='var(--green)';}
 }
 
 function toggleCol(id){
