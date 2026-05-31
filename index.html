@@ -1437,11 +1437,17 @@ function dlPDF(eco){
               var ct=(s.t||'').replace(/\s*[-\u2013]?\s*(Remaster(ed)?|Live|Radio Edit|Single Version|Deluxe Edition?)(\s+\d{4})?\s*/gi,'').replace(/\s*\([^)]*Remaster[^)]*\)/gi,'').trim();
               var ca=(s.a||'').split(/[,&]/)[0].trim();
               var mw=cW-5;
-              // Font sizes
+              // Font sizes — schaal naar beneden tot alles past in 2 regels
               var tSize=13, aSize=10;
-              // Split title
               doc.setFontSize(tSize);doc.setFont('helvetica','bold');
-              var sh=doc.splitTextToSize(ct,mw).slice(0,2);
+              var sh=doc.splitTextToSize(ct,mw);
+              // Verklein totdat het past in 2 regels
+              while(sh.length>2&&tSize>8){
+                tSize-=1;
+                doc.setFontSize(tSize);
+                sh=doc.splitTextToSize(ct,mw);
+              }
+              sh=sh.slice(0,2);
               // Artist line
               doc.setFontSize(aSize);
               var aL=ca?doc.splitTextToSize(ca,mw)[0]:'';
