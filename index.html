@@ -280,88 +280,101 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .theme-grid{max-height:none;grid-template-columns:repeat(2,1fr)}
 }
 
-/* ══ NEW START SCREEN ══ */
-.s1-wrap{max-width:600px;margin:0 auto;padding:1.5rem 1.25rem 8rem;display:flex;flex-direction:column;gap:1.75rem}
-.s1-hero{text-align:center;padding:.5rem 0}
-.s1-logo{display:flex;align-items:center;gap:.65rem;justify-content:center;margin-bottom:1.25rem}
-.s1-brand{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.s1-slogan{font-size:.7rem;color:var(--mt);font-style:italic}
-.s1-h1{font-size:1.75rem;font-weight:800;line-height:1.2;margin:0 0 .75rem;color:var(--tx)}
-.s1-sub{font-size:.85rem;color:var(--mt);line-height:1.65;margin:0}
+/* ══ CONFIGURATOR ══ */
+.cfg-page{max-width:740px;margin:0 auto;padding:2rem 1.25rem 5rem;display:flex;flex-direction:column;gap:1.5rem}
 
-.s1-resume{background:rgba(155,109,255,.08);border:1px solid rgba(155,109,255,.25);border-radius:14px;padding:.85rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+/* Hero */
+.cfg-hero{text-align:center}
+.cfg-logo{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:1.1rem;flex-wrap:wrap}
+.cfg-brand{font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.cfg-dot{color:rgba(255,255,255,.2);font-size:.9rem}
+.cfg-slogan{font-size:.72rem;color:var(--mt);font-style:italic}
+.cfg-h1{font-size:1.6rem;font-weight:800;line-height:1.25;margin:.1rem 0 .6rem;color:var(--tx)}
+.cfg-sub{font-size:.82rem;color:var(--mt);line-height:1.65;margin:0 0 .75rem}
+.cfg-resume-chip{display:inline-flex;align-items:center;gap:.6rem;background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.25);border-radius:99px;padding:.35rem .85rem;font-size:.75rem;margin-top:.4rem}
 
-.s1-section{display:flex;flex-direction:column;gap:.75rem}
-.s1-step-label{display:flex;align-items:center;gap:.6rem;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt)}
-.s1-step-num{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--s),var(--a));color:#fff;font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+/* Main card */
+.cfg-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:1.5rem;display:flex;flex-direction:column;gap:0;backdrop-filter:blur(20px);box-shadow:0 24px 80px rgba(0,0,0,.35)}
 
-/* TYPE CARDS */
-.s1-type-grid{display:flex;flex-direction:column;gap:.65rem}
-.s1-type{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.07);border-radius:18px;padding:1rem 1.1rem;cursor:pointer;transition:all .2s;position:relative}
-.s1-type:hover{background:rgba(255,255,255,.07);border-color:rgba(155,109,255,.35)}
-.s1-type.sel{background:rgba(155,109,255,.1);border-color:var(--a);box-shadow:0 0 0 4px rgba(155,109,255,.08)}
-.s1-type-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}
-.s1-type-icon{font-size:1.4rem}
-.s1-badge{font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .55rem;border-radius:6px}
-.s1-badge-mid{background:rgba(155,109,255,.2);color:#c4a8ff}
-.s1-badge-low{background:rgba(106,171,247,.2);color:#6AABF7}
-.s1-badge-prem{background:rgba(29,185,84,.18);color:#1db954}
-.s1-type-name{font-size:.95rem;font-weight:700;color:var(--tx);margin-bottom:.3rem}
-.s1-type-desc{font-size:.78rem;color:var(--mt);line-height:1.5;margin-bottom:.6rem}
-.s1-type-tags{display:flex;flex-wrap:wrap;gap:.35rem}
-.s1-type-tags span{font-size:.68rem;color:var(--mt);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.2rem .5rem}
-.s1-type.sel .s1-type-tags span{border-color:rgba(155,109,255,.25);color:var(--a)}
+/* Steps */
+.cfg-step{padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.cfg-step:last-child{border-bottom:none}
+.cfg-step-hd{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+.cfg-step-n{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--s),var(--a));color:#fff;font-size:.68rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cfg-step-lbl{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt)}
 
-/* THEMA GRID */
-.s1-theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
-.s1-tcard{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.07);border-radius:14px;padding:.85rem;cursor:pointer;transition:all .15s}
-.s1-tcard:hover{background:rgba(255,255,255,.07);border-color:rgba(155,109,255,.3)}
-.s1-tcard.sel{border-color:var(--a);background:rgba(155,109,255,.1)}
-.s1-tcard-name{font-size:.85rem;font-weight:700;color:var(--tx);margin-bottom:.25rem}
-.s1-tcard-mood{font-size:.7rem;color:var(--mt);font-style:italic;margin-bottom:.3rem;line-height:1.4}
-.s1-tcard-meta{font-size:.65rem;color:rgba(255,255,255,.3)}
+/* Mode row */
+.cfg-mode-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem}
+.cfg-mode{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.06);border-radius:16px;padding:.9rem .75rem 1rem;cursor:pointer;transition:all .2s;text-align:center;position:relative}
+.cfg-mode:hover{background:rgba(255,255,255,.07);border-color:rgba(155,109,255,.3)}
+.cfg-mode.sel{border-color:var(--a);background:rgba(155,109,255,.1);box-shadow:0 0 0 4px rgba(155,109,255,.07)}
+.cfg-mode-featured{border-color:rgba(155,109,255,.2)}
+.cfg-mode-badge{font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .45rem;border-radius:5px;display:inline-block;margin-bottom:.55rem}
+.cfg-badge-mid{background:rgba(155,109,255,.2);color:#c4a8ff}
+.cfg-badge-low{background:rgba(106,171,247,.2);color:#6AABF7}
+.cfg-badge-prem{background:rgba(29,185,84,.18);color:#1db954}
+.cfg-mode-ico{font-size:1.35rem;margin-bottom:.35rem;display:block}
+.cfg-mode-name{font-size:.82rem;font-weight:700;color:var(--tx);margin-bottom:.2rem}
+.cfg-mode-desc{font-size:.7rem;color:var(--mt)}
 
-/* TEXTAREA */
-.s1-ta{width:100%;min-height:130px;background:rgba(255,255,255,.05);border:1.5px solid var(--bd);border-radius:14px;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;padding:.85rem;resize:vertical;outline:none;box-sizing:border-box;transition:border .2s}
-.s1-ta:focus{border-color:var(--a)}
-.s1-eigen-status{font-size:.78rem;font-weight:600;padding:.55rem .8rem;border-radius:10px}
-.s1-eigen-status.ok{background:rgba(29,185,84,.08);color:var(--green);border:1px solid rgba(29,185,84,.2)}
-.s1-eigen-status.warn{background:rgba(242,64,106,.08);color:var(--s);border:1px solid rgba(242,64,106,.2)}
+/* Textarea */
+.cfg-ta{width:100%;min-height:110px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);border-radius:14px;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;padding:.85rem;resize:vertical;outline:none;box-sizing:border-box;transition:border .2s;line-height:1.6}
+.cfg-ta:focus{border-color:var(--a)}
 
-/* SPOTIFY */
-.s1-sp-card{background:rgba(29,185,84,.05);border:1px solid rgba(29,185,84,.2);border-radius:16px;padding:1rem}
+/* Messages */
+.cfg-msg{font-size:.76rem;font-weight:600;padding:.5rem .75rem;border-radius:9px;margin-top:.5rem}
+.cfg-msg-ok{background:rgba(29,185,84,.08);color:var(--green);border:1px solid rgba(29,185,84,.2)}
+.cfg-msg-warn{background:rgba(242,64,106,.08);color:var(--s);border:1px solid rgba(242,64,106,.2)}
+.cfg-note{font-size:.74rem;color:var(--mt);margin-top:.6rem;line-height:1.5}
+.cfg-link{background:none;border:none;color:var(--a);font-size:.74rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:underline;padding:0}
+.cfg-upsell{font-size:.75rem;color:var(--mt);background:rgba(155,109,255,.06);border:1px solid rgba(155,109,255,.15);border-radius:10px;padding:.6rem .8rem;margin-top:.75rem;line-height:1.5}
 
-/* UPSELL */
-.s1-upsell{font-size:.75rem;color:var(--mt);background:rgba(155,109,255,.06);border:1px solid rgba(155,109,255,.18);border-radius:12px;padding:.65rem .85rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap;line-height:1.5}
-.s1-upsell-btn{background:none;border:1px solid rgba(155,109,255,.4);border-radius:8px;color:var(--a);font-size:.72rem;font-weight:600;padding:.3rem .65rem;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
-.s1-upsell-btn:hover{background:rgba(155,109,255,.15)}
+/* Theme grid */
+.cfg-theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;max-height:240px;overflow-y:auto;padding-right:.2rem}
+.cfg-tc{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.06);border-radius:12px;padding:.7rem .8rem;cursor:pointer;transition:all .15s}
+.cfg-tc:hover{background:rgba(255,255,255,.07);border-color:rgba(155,109,255,.3)}
+.cfg-tc.sel{border-color:var(--a);background:rgba(155,109,255,.1)}
+.cfg-tc-name{font-size:.82rem;font-weight:700;color:var(--tx);margin-bottom:.15rem}
+.cfg-tc-mood{font-size:.68rem;color:var(--mt);font-style:italic;line-height:1.4}
 
-/* PLAYER PICKER */
-.s1-player-row{display:flex;align-items:center;justify-content:center;gap:.6rem}
-.s1-pq{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid var(--bd);color:var(--tx);font-size:1rem;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
-.s1-pq:hover{background:rgba(255,255,255,.12)}
-.s1-pnum{font-size:2.4rem;font-weight:800;color:var(--a);min-width:70px;text-align:center}
-.s1-pquick{display:flex;gap:.4rem;justify-content:center}
-.s1-pqk{padding:.4rem .9rem;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--bd);color:var(--mt);font-size:.8rem;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
-.s1-pqk:hover,.s1-pqk.sel{background:rgba(155,109,255,.15);color:var(--a);border-color:var(--a)}
-.s1-pinfo{font-size:.78rem;color:var(--mt);text-align:center;line-height:1.5}
+/* Spotify */
+.cfg-sp-box{background:rgba(29,185,84,.05);border:1px solid rgba(29,185,84,.2);border-radius:14px;padding:1.1rem}
+.cfg-sp-box-title{font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.3rem}
+.cfg-sp-box-sub{font-size:.76rem;color:var(--mt);margin-bottom:.85rem;line-height:1.55}
+.cfg-sp-user{font-size:.78rem;font-weight:600;color:var(--green);margin-bottom:.65rem}
+.cfg-pl-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.45rem}
+.cfg-pl-list{max-height:190px;overflow-y:auto}
 
-/* SUMMARY */
-.s1-summary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1rem}
+/* Player picker */
+.cfg-player-ui{display:flex;flex-direction:column;align-items:center;gap:.65rem}
+.cfg-player-row{display:flex;align-items:center;gap:.55rem}
+.cfg-pq{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--tx);font-size:.95rem;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
+.cfg-pq:hover{background:rgba(255,255,255,.12)}
+.cfg-pnum{font-size:2.2rem;font-weight:800;color:var(--a);min-width:64px;text-align:center}
+.cfg-pquick{display:flex;gap:.35rem}
+.cfg-pqk{padding:.38rem .85rem;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--mt);font-size:.78rem;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
+.cfg-pqk:hover,.cfg-pqk.sel{background:rgba(155,109,255,.15);color:var(--a);border-color:rgba(155,109,255,.4)}
+.cfg-pinfo{font-size:.76rem;color:var(--mt);text-align:center;line-height:1.5}
 
-/* CTA */
-.s1-cta-wrap{position:sticky;bottom:1.25rem;z-index:10}
-.s1-cta{width:100%;min-height:54px;border-radius:16px;background:linear-gradient(135deg,var(--s),var(--a));border:none;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 8px 32px rgba(155,109,255,.25)}
-.s1-cta:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
-.s1-cta:disabled{background:rgba(255,255,255,.08);color:rgba(255,255,255,.3);cursor:not-allowed;box-shadow:none;transform:none}
+/* Bottom / CTA */
+.cfg-bottom{padding-top:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+.cfg-summary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:.8rem 1rem}
+.cfg-sum-title{font-size:.9rem;font-weight:700;color:var(--tx);margin-bottom:.2rem}
+.cfg-sum-meta{font-size:.74rem;color:var(--mt)}
+.cfg-cta{width:100%;min-height:52px;border-radius:14px;background:linear-gradient(135deg,var(--s),var(--a));border:none;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.97rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 6px 24px rgba(155,109,255,.2)}
+.cfg-cta:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
+.cfg-cta:disabled{background:rgba(255,255,255,.07);color:rgba(255,255,255,.25);cursor:not-allowed;box-shadow:none;transform:none}
 
-/* REVIEWS */
-.s1-reviews{padding-top:.5rem;border-top:1px solid rgba(255,255,255,.06)}
-.s1-rev-header{display:flex;align-items:center;margin-bottom:.75rem}
-.s1-stars{color:#ffd060;font-size:.9rem}
-.s1-rev-list{display:flex;flex-direction:column;gap:.5rem}
-.s1-rev-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:.75rem .9rem;font-size:.78rem;color:var(--mt);line-height:1.55}
-.s1-rev-author{font-size:.72rem;color:var(--a);margin-top:.35rem;font-weight:600}
+/* Social proof */
+.cfg-proof{text-align:center;font-size:.78rem;color:var(--mt)}
+.cfg-proof-stars{color:#ffd060;margin-right:.35rem}
+
+/* Mobile */
+@media(max-width:600px){
+  .cfg-mode-row{grid-template-columns:1fr}
+  .cfg-theme-grid{grid-template-columns:1fr 1fr;max-height:220px}
+  .cfg-h1{font-size:1.3rem}
+}
 
 /* COLLAPSIBLE PANELS */
 .collapsible-panel{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:18px;overflow:hidden;margin-bottom:.85rem}
@@ -424,169 +437,149 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <!-- ═══ SCREEN 1 — START ═══ -->
 <div id="screen-start" class="screen active">
 <div class="scroll">
-<div class="s1-wrap">
+<div class="cfg-page">
 
   <!-- HERO -->
-  <div class="s1-hero">
-    <div class="s1-logo">
-      <svg width="40" height="40" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
-      <div>
-        <div class="s1-brand">Melingo</div>
-        <div class="s1-slogan">Where melody meets bingo</div>
+  <div class="cfg-hero">
+    <div class="cfg-logo">
+      <svg width="32" height="32" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
+      <span class="cfg-brand">Melingo</span>
+      <span class="cfg-dot">·</span>
+      <span class="cfg-slogan">Where melody meets bingo</span>
+    </div>
+    <h1 class="cfg-h1">Maak muziekbingo in minuten</h1>
+    <p class="cfg-sub">Kies een thema, maak goedkope PDF-kaarten of speel met je eigen Spotify-playlist via het host-scherm.</p>
+
+    <!-- Resume chip -->
+    <div id="resume-bar" style="display:none" class="cfg-resume-chip">
+      <span id="resume-meta" style="font-size:.75rem;color:var(--mt)"></span>
+      <button class="btn bp" onclick="resumeSession()" style="font-size:.72rem;min-height:30px;padding:.3rem .75rem">Verdergaan</button>
+      <button onclick="dismissResume()" style="background:none;border:none;color:var(--mt);font-size:.75rem;cursor:pointer">×</button>
+    </div>
+  </div>
+
+  <!-- GENERATOR CARD -->
+  <div class="cfg-card">
+
+    <!-- STAP 1: SPEELMODUS -->
+    <div class="cfg-step">
+      <div class="cfg-step-hd">
+        <span class="cfg-step-n">1</span>
+        <span class="cfg-step-lbl">Kies je speelmodus</span>
+        <a onclick="showSaved()" style="margin-left:auto;font-size:.72rem;color:var(--mt);cursor:pointer;text-decoration:underline">Opgeslagen bingo's</a>
       </div>
-    </div>
-    <h1 class="s1-h1">Maak je eigen muziekbingo<br>in minuten</h1>
-    <p class="s1-sub">Kies een thema of gebruik je eigen Spotify-playlist, genereer unieke kaarten en speel live via het host-scherm.</p>
-  </div>
+      <div class="cfg-mode-row">
 
-  <!-- RESUME BAR (alleen als sessie bestaat) -->
-  <div id="resume-bar" style="display:none" class="s1-resume">
-    <div>
-      <div style="font-size:.8rem;font-weight:700;color:var(--tx)">Vorige sessie gevonden</div>
-      <div id="resume-meta" style="font-size:.72rem;color:var(--mt)"></div>
-    </div>
-    <div style="display:flex;gap:.5rem">
-      <button class="btn bp" onclick="resumeSession()" style="font-size:.75rem;min-height:36px;padding:.4rem .9rem">Verdergaan</button>
-      <button class="btn bs" onclick="dismissResume()" style="font-size:.75rem;min-height:36px;padding:.4rem .9rem">Nieuw</button>
-    </div>
-  </div>
-
-  <!-- STAP 1: TYPE KIEZEN -->
-  <div class="s1-section">
-    <div class="s1-step-label"><span class="s1-step-num">1</span> Kies je bingo-type</div>
-    <div class="s1-type-grid">
-
-      <div class="s1-type" id="st-thema" onclick="setType('thema')">
-        <div class="s1-type-top">
-          <span class="s1-badge s1-badge-mid">Snel &amp; voordelig</span>
-          <div class="s1-type-icon">🎵</div>
+        <div class="cfg-mode" id="cm-eigen" onclick="setType('eigen')">
+          <div class="cfg-mode-badge cfg-badge-low">Goedkoopste</div>
+          <div class="cfg-mode-ico">📄</div>
+          <div class="cfg-mode-name">Eigen nummers</div>
+          <div class="cfg-mode-desc">Alleen PDF-kaarten</div>
         </div>
-        <div class="s1-type-name">Kant-en-klaar thema</div>
-        <div class="s1-type-desc">Kies een thema en speel direct met het host-scherm.</div>
-        <div class="s1-type-tags">
-          <span>40 nummers</span><span>Max. 20 spelers</span><span>Host-scherm ✓</span>
+
+        <div class="cfg-mode cfg-mode-featured" id="cm-thema" onclick="setType('thema')">
+          <div class="cfg-mode-badge cfg-badge-mid">Snel &amp; voordelig</div>
+          <div class="cfg-mode-ico">🎵</div>
+          <div class="cfg-mode-name">Kant-en-klaar</div>
+          <div class="cfg-mode-desc">Met host-scherm</div>
+        </div>
+
+        <div class="cfg-mode" id="cm-spotify" onclick="setType('spotify')">
+          <div class="cfg-mode-badge cfg-badge-prem">Premium</div>
+          <div class="cfg-mode-ico" style="color:#1db954">♫</div>
+          <div class="cfg-mode-name">Spotify</div>
+          <div class="cfg-mode-desc">Eigen muziek</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STAP 2: MUZIEK -->
+    <div class="cfg-step" id="cfg-music" style="display:none">
+      <div class="cfg-step-hd">
+        <span class="cfg-step-n">2</span>
+        <span class="cfg-step-lbl" id="cfg-music-lbl">Kies je muziek</span>
+      </div>
+
+      <!-- EIGEN NUMMERS -->
+      <div id="cfg-inp-eigen" style="display:none">
+        <textarea class="cfg-ta" id="cfg-ta" placeholder="Plak je nummers hier, één per regel:&#10;ABBA – Dancing Queen&#10;Queen – Don't Stop Me Now&#10;Beyoncé – Crazy in Love" oninput="onEigenInput()"></textarea>
+        <div id="cfg-eigen-status" class="cfg-msg" style="display:none"></div>
+        <div class="cfg-note">Goedkoopste optie — alleen PDF-kaarten. Jij speelt de muziek zelf af. <button class="cfg-link" onclick="setType('thema')">Host-scherm nodig?</button></div>
+      </div>
+
+      <!-- THEMA GRID -->
+      <div id="cfg-inp-thema" style="display:none">
+        <div class="cfg-theme-grid" id="cfg-theme-grid"></div>
+        <div class="cfg-note" id="cfg-thema-note">40 nummers per thema · max. 20 spelers. <button class="cfg-link" onclick="setType('spotify')">Meer dan 20 spelers nodig?</button></div>
+      </div>
+
+      <!-- SPOTIFY -->
+      <div id="cfg-inp-spotify" style="display:none">
+        <div id="cfg-sp-connect" class="cfg-sp-box">
+          <div class="cfg-sp-box-title">Verbind Spotify Premium</div>
+          <div class="cfg-sp-box-sub">Melingo telt je nummers en berekent het maximale aantal spelers.</div>
+          <button class="btn bp" style="width:100%;min-height:46px" onclick="startSpotifyLogin()">Verbinden met Spotify</button>
+        </div>
+        <div id="cfg-sp-ok" style="display:none">
+          <div class="cfg-sp-user" id="cfg-sp-user"></div>
+          <div class="cfg-pl-label">Kies een playlist</div>
+          <div id="cfg-pl-list" class="cfg-pl-list"></div>
+          <div id="cfg-sp-feedback" class="cfg-msg cfg-msg-ok" style="display:none"></div>
         </div>
       </div>
+    </div>
 
-      <div class="s1-type" id="st-eigen" onclick="setType('eigen')">
-        <div class="s1-type-top">
-          <span class="s1-badge s1-badge-low">Goedkoopste optie</span>
-          <div class="s1-type-icon">📄</div>
+    <!-- STAP 3: SPELERS -->
+    <div class="cfg-step" id="cfg-players" style="display:none">
+      <div class="cfg-step-hd">
+        <span class="cfg-step-n">3</span>
+        <span class="cfg-step-lbl">Aantal spelers</span>
+      </div>
+      <div class="cfg-player-ui">
+        <div class="cfg-player-row">
+          <button class="cfg-pq" onclick="adjP(-5)">-5</button>
+          <button class="cfg-pq" onclick="adjP(-1)">−</button>
+          <span class="cfg-pnum" id="cfg-pnum">10</span>
+          <button class="cfg-pq" onclick="adjP(1)">+</button>
+          <button class="cfg-pq" onclick="adjP(5)">+5</button>
         </div>
-        <div class="s1-type-name">Eigen nummers</div>
-        <div class="s1-type-desc">Plak je eigen lijst en maak alleen printbare PDF-kaarten.</div>
-        <div class="s1-type-tags">
-          <span>Eigen lijst</span><span>Alleen PDF</span><span>Geen host-scherm</span>
+        <div class="cfg-pquick">
+          <button class="cfg-pqk" onclick="setP(5)">5</button>
+          <button class="cfg-pqk" onclick="setP(10)">10</button>
+          <button class="cfg-pqk" onclick="setP(15)">15</button>
+          <button class="cfg-pqk" onclick="setP(20)">20</button>
         </div>
+        <div class="cfg-pinfo" id="cfg-pinfo"></div>
       </div>
-
-      <div class="s1-type" id="st-spotify" onclick="setType('spotify')">
-        <div class="s1-type-top">
-          <span class="s1-badge s1-badge-prem">Premium</span>
-          <div class="s1-type-icon" style="color:#1db954">♫</div>
-        </div>
-        <div class="s1-type-name">Spotify-playlist</div>
-        <div class="s1-type-desc">Eigen muziek, grotere groepen en het host-scherm.</div>
-        <div class="s1-type-tags">
-          <span>Eigen muziek</span><span>Meer spelers</span><span>Host-scherm ✓</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- STAP 2: MUZIEK -->
-  <div class="s1-section" id="s1-music" style="display:none">
-    <div class="s1-step-label"><span class="s1-step-num">2</span> <span id="s1-music-label">Kies je muziek</span></div>
-
-    <!-- THEMA GRID -->
-    <div id="s1-inp-thema" style="display:none">
-      <div class="s1-theme-grid" id="s1-theme-grid"></div>
-      <div class="s1-upsell" id="s1-thema-upsell" style="display:none">
-        Wil je met meer dan 20 mensen spelen?
-        <button class="s1-upsell-btn" onclick="setType('spotify')">Kies Spotify →</button>
+      <div class="cfg-upsell" id="cfg-p-upsell" style="display:none">
+        Kant-en-klare thema's zijn voor max. 20 spelers.
+        <button class="cfg-link" onclick="setType('spotify')">Meer spelers? Kies Spotify →</button>
       </div>
     </div>
 
-    <!-- EIGEN NUMMERS -->
-    <div id="s1-inp-eigen" style="display:none">
-      <textarea class="s1-ta" id="s1-ta" placeholder="Plak je nummers hier, één per regel:&#10;ABBA – Dancing Queen&#10;Queen – Don't Stop Me Now&#10;Beyoncé – Crazy in Love" oninput="onEigenInput()"></textarea>
-      <div class="s1-eigen-status" id="s1-eigen-status" style="display:none"></div>
-      <div class="s1-upsell" style="margin-top:.75rem">
-        Alleen PDF-kaarten · geen host-scherm · jij speelt de muziek zelf af.
-        <button class="s1-upsell-btn" onclick="setType('thema')">Host-scherm nodig? →</button>
+    <!-- STAP 4: SAMENVATTING + CTA -->
+    <div class="cfg-bottom">
+      <div class="cfg-summary" id="cfg-summary" style="display:none">
+        <div id="cfg-sum-title" class="cfg-sum-title"></div>
+        <div id="cfg-sum-meta" class="cfg-sum-meta"></div>
       </div>
+      <button class="cfg-cta" id="cfg-cta" onclick="startGen()" disabled>Kies eerst je speelmodus</button>
     </div>
 
-    <!-- SPOTIFY -->
-    <div id="s1-inp-spotify" style="display:none">
-      <div id="s1-sp-connect" class="s1-sp-card">
-        <div style="font-size:.85rem;font-weight:700;color:var(--tx);margin-bottom:.35rem">Verbind je Spotify-account</div>
-        <div style="font-size:.78rem;color:var(--mt);margin-bottom:.85rem;line-height:1.6">Je hebt <strong style="color:var(--tx)">Spotify Premium</strong> nodig om muziek af te spelen via Melingo.</div>
-        <button class="btn bp" style="width:100%;min-height:48px;font-size:.9rem" onclick="startSpotifyLogin()">Verbinden met Spotify</button>
-      </div>
-      <div id="s1-sp-connected" style="display:none" class="s1-sp-card">
-        <div style="color:var(--green);font-size:.78rem;font-weight:600;margin-bottom:.75rem" id="s1-sp-user"></div>
-        <div style="font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.5rem">Kies een playlist</div>
-        <div id="s1-sp-list" style="max-height:240px;overflow-y:auto;margin-bottom:.75rem"></div>
-        <div id="s1-sp-feedback" style="display:none;font-size:.78rem;font-weight:600;color:var(--green);margin-bottom:.5rem"></div>
-      </div>
+    <!-- OPGESLAGEN (verborgen) -->
+    <div id="cfg-saved" style="display:none;padding:1rem 0 0;border-top:1px solid rgba(255,255,255,.06);margin-top:.5rem">
+      <div style="font-size:.75rem;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.65rem">Opgeslagen bingo's</div>
+      <div id="saved-list-wrap"></div>
+      <div id="no-saved" style="font-size:.82rem;color:var(--mt)">Nog geen bingo's opgeslagen.</div>
     </div>
+
   </div>
 
-  <!-- STAP 3: SPELERS -->
-  <div class="s1-section" id="s1-players" style="display:none">
-    <div class="s1-step-label"><span class="s1-step-num">3</span> Aantal spelers</div>
-    <div class="s1-player-row">
-      <button class="s1-pq" onclick="adjP(-5)">-5</button>
-      <button class="s1-pq" onclick="adjP(-1)">−</button>
-      <div class="s1-pnum" id="s1-pnum">10</div>
-      <button class="s1-pq" onclick="adjP(1)">+</button>
-      <button class="s1-pq" onclick="adjP(5)">+5</button>
-    </div>
-    <div class="s1-pquick">
-      <button class="s1-pqk" onclick="setP(5)">5</button>
-      <button class="s1-pqk" onclick="setP(10)">10</button>
-      <button class="s1-pqk" onclick="setP(15)">15</button>
-      <button class="s1-pqk" onclick="setP(20)">20</button>
-    </div>
-    <div class="s1-pinfo" id="s1-pinfo"></div>
-    <div class="s1-upsell" id="s1-p-upsell" style="display:none">
-      Kant-en-klare thema's werken tot max. 20 spelers.
-      <button class="s1-upsell-btn" onclick="setType('spotify')">Meer spelers? Kies Spotify →</button>
-    </div>
-  </div>
-
-  <!-- SAMENVATTING -->
-  <div class="s1-summary" id="s1-summary" style="display:none">
-    <div class="s1-sum-row">
-      <div id="s1-sum-title" style="font-size:.95rem;font-weight:700;color:var(--tx)"></div>
-      <div id="s1-sum-meta" style="font-size:.75rem;color:var(--mt);margin-top:.2rem"></div>
-    </div>
-  </div>
-
-  <!-- CTA -->
-  <div class="s1-cta-wrap">
-    <button class="s1-cta" id="s1-cta" onclick="startGen()" disabled>Kies eerst je bingo-type</button>
-    <div style="text-align:center;margin-top:.65rem">
-      <button onclick="showSaved()" style="background:none;border:none;color:var(--mt);font-size:.75rem;cursor:pointer;text-decoration:underline">Bekijk opgeslagen bingo's</button>
-    </div>
-  </div>
-
-  <!-- OPGESLAGEN (verborgen sectie) -->
-  <div id="s1-saved-section" style="display:none" class="s1-section">
-    <div class="s1-step-label">Opgeslagen bingo's</div>
-    <div id="saved-list-wrap"></div>
-    <div id="no-saved" style="color:var(--mt);font-size:.82rem;padding:.5rem 0">Nog geen bingo's opgeslagen.</div>
-  </div>
-
-  <!-- REVIEWS -->
-  <div class="s1-reviews">
-    <div class="s1-rev-header">
-      <span class="s1-stars">★★★★★</span>
-      <span style="font-size:.72rem;color:var(--mt);margin-left:.4rem">Wat anderen zeggen</span>
-    </div>
-    <div id="s1-rev-list" class="s1-rev-list"></div>
+  <!-- SOCIAL PROOF -->
+  <div class="cfg-proof">
+    <span class="cfg-proof-stars">★★★★★</span>
+    <span class="cfg-proof-text">Al gespeeld op feestjes, borrels en kerstavonden.</span>
   </div>
 
 </div>
@@ -1025,192 +1018,153 @@ function getMaxPlayers(n){
 
 function setType(mode){
   ST.mode=mode;
-  // Highlight type cards
-  ['thema','eigen','spotify'].forEach(function(m){
-    var el=document.getElementById('st-'+m);
+  ['eigen','thema','spotify'].forEach(function(m){
+    var el=document.getElementById('cm-'+m);
     if(el)el.classList.toggle('sel',m===mode);
   });
-  // Show music step
-  var sec=document.getElementById('s1-music');
+  var sec=document.getElementById('cfg-music');
   if(sec)sec.style.display='block';
-  ['s1-inp-thema','s1-inp-eigen','s1-inp-spotify'].forEach(function(id){
+  ['cfg-inp-eigen','cfg-inp-thema','cfg-inp-spotify'].forEach(function(id){
     var el=document.getElementById(id);if(el)el.style.display='none';
   });
-  var lbl=document.getElementById('s1-music-label');
-  if(mode==='thema'){
-    if(lbl)lbl.textContent='Kies je thema';
-    document.getElementById('s1-inp-thema').style.display='block';
-    buildS1ThemeGrid();
-  } else if(mode==='eigen'){
+  var lbl=document.getElementById('cfg-music-lbl');
+  if(mode==='eigen'){
     if(lbl)lbl.textContent='Jouw nummers';
-    document.getElementById('s1-inp-eigen').style.display='block';
+    document.getElementById('cfg-inp-eigen').style.display='block';
+  } else if(mode==='thema'){
+    if(lbl)lbl.textContent='Kies je thema';
+    document.getElementById('cfg-inp-thema').style.display='block';
+    buildCfgThemes();
   } else if(mode==='spotify'){
     if(lbl)lbl.textContent='Jouw Spotify-playlist';
-    document.getElementById('s1-inp-spotify').style.display='block';
-    if(SP.accessToken)showS1SpConnected();
+    document.getElementById('cfg-inp-spotify').style.display='block';
+    if(SP.accessToken)showCfgSpConnected();
   }
-  // Scroll to music step
-  var el=document.getElementById('s1-music');
-  if(el)setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'});},100);
-  updS1Players();
-  updS1CTA();
+  updCfgPlayers();updCfgCTA();
+  var ms=document.getElementById('cfg-music');
+  if(ms)setTimeout(function(){ms.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 }
 
-function buildS1ThemeGrid(){
-  var el=document.getElementById('s1-theme-grid');
-  if(!el)return;
+function buildCfgThemes(){
+  var el=document.getElementById('cfg-theme-grid');if(!el)return;
   el.innerHTML=THEMES.map(function(th){
-    return'<div class="s1-tcard'+(ST.theme===th.id?' sel':'')+'" onclick="selS1Theme(this)" data-id="'+th.id+'">'
-      +'<div class="s1-tcard-name">'+th.name+'</div>'
-      +'<div class="s1-tcard-mood">'+th.mood+'</div>'
-      +'<div class="s1-tcard-meta">40 nummers · max. 20 spelers</div>'
+    return'<div class="cfg-tc'+(ST.theme===th.id?' sel':'')+'" onclick="selCfgTheme(this)" data-id="'+th.id+'">'
+      +'<div class="cfg-tc-name">'+th.name+'</div>'
+      +'<div class="cfg-tc-mood">'+th.mood+'</div>'
       +'</div>';
   }).join('');
 }
 
-function selS1Theme(el){
+function selCfgTheme(el){
   ST.theme=el.dataset.id;
-  document.querySelectorAll('.s1-tcard').forEach(function(c){c.classList.remove('sel');});
+  document.querySelectorAll('.cfg-tc').forEach(function(c){c.classList.remove('sel');});
   el.classList.add('sel');
-  updS1Players();
-  updS1CTA();
-  var ps=document.getElementById('s1-players');
-  if(ps)setTimeout(function(){ps.scrollIntoView({behavior:'smooth',block:'start'});},100);
+  updCfgPlayers();updCfgCTA();
+  var ps=document.getElementById('cfg-players');
+  if(ps)setTimeout(function(){ps.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 }
 
 function onEigenInput(){
-  var txt=document.getElementById('s1-ta').value;
-  var songs=parseSongs(txt);
-  var count=songs.length;
-  var el=document.getElementById('s1-eigen-status');
-  if(!count){el.style.display='none';}
-  else if(count<25){
-    el.style.display='block';el.className='s1-eigen-status warn';
-    el.textContent=count+' nummers · voeg nog '+(25-count)+' toe voor een volledige kaart.';
+  var txt=document.getElementById('cfg-ta').value;
+  var songs=parseSongs(txt);var n=songs.length;
+  var el=document.getElementById('cfg-eigen-status');
+  if(!n){el.style.display='none';}
+  else if(n<25){
+    el.style.display='block';el.className='cfg-msg cfg-msg-warn';
+    el.textContent=n+' nummers · voeg nog '+(25-n)+' toe voor een volledige kaart.';
   } else {
-    el.style.display='block';el.className='s1-eigen-status ok';
-    el.textContent='✓ '+count+' nummers gevonden · alleen PDF-kaarten';
+    el.style.display='block';el.className='cfg-msg cfg-msg-ok';
+    el.textContent='✓ '+n+' nummers gevonden';
   }
-  updS1Players();
-  updS1CTA();
+  updCfgPlayers();updCfgCTA();
 }
 
-function showS1SpConnected(){
-  var conn=document.getElementById('s1-sp-connect');
-  var ok=document.getElementById('s1-sp-connected');
-  if(conn)conn.style.display='none';
-  if(ok)ok.style.display='block';
+function showCfgSpConnected(){
+  var conn=document.getElementById('cfg-sp-connect');var ok=document.getElementById('cfg-sp-ok');
+  if(conn)conn.style.display='none';if(ok)ok.style.display='block';
   spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
-    var el=document.getElementById('s1-sp-user');
-    if(el)el.textContent='Ingelogd als '+d.display_name;
+    var el=document.getElementById('cfg-sp-user');if(el)el.textContent='Ingelogd als '+d.display_name;
   });
-  loadS1Playlists();
+  loadCfgPlaylists();
 }
 
-async function loadS1Playlists(){
-  var all=[];
-  var url='https://api.spotify.com/v1/me/playlists?limit=50';
-  while(url){
-    var r=await spFetch(url);var d=await r.json();
-    if(d.error)break;
-    all=all.concat((d.items||[]).filter(function(p){return p&&p.id;}));
-    url=d.next||null;
-  }
-  SP.playlists=all;
-  renderS1Playlists();
+async function loadCfgPlaylists(){
+  var all=[];var url='https://api.spotify.com/v1/me/playlists?limit=50';
+  while(url){var r=await spFetch(url);var d=await r.json();if(d.error)break;all=all.concat((d.items||[]).filter(function(p){return p&&p.id;}));url=d.next||null;}
+  SP.playlists=all;renderCfgPlaylists();
 }
 
-function renderS1Playlists(){
-  var el=document.getElementById('s1-sp-list');
-  if(!el)return;
+function renderCfgPlaylists(){
+  var el=document.getElementById('cfg-pl-list');if(!el)return;
   el.innerHTML=SP.playlists.map(function(pl,i){
-    var img=pl.images&&pl.images[0]?'<img src="'+pl.images[0].url+'" style="width:36px;height:36px;border-radius:7px;object-fit:cover;flex-shrink:0" alt=""/>':'<div style="width:36px;height:36px;border-radius:7px;background:rgba(255,255,255,.08);flex-shrink:0"></div>';
-    return'<div class="sp-playlist-item" onclick="selS1Playlist(this)" data-idx="'+i+'" style="display:flex;align-items:center;gap:.65rem;padding:.45rem .65rem;border-radius:10px;cursor:pointer;transition:all .12s;margin-bottom:.25rem">'
-      +img+'<div style="font-size:.82rem;font-weight:600;color:var(--tx)">'+esc(pl.name)+'</div>'
-      +'</div>';
+    var img=pl.images&&pl.images[0]?'<img src="'+pl.images[0].url+'" style="width:32px;height:32px;border-radius:6px;object-fit:cover;flex-shrink:0" alt=""/>':'<div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,.08);flex-shrink:0"></div>';
+    return'<div class="sp-playlist-item" onclick="selCfgPlaylist(this)" data-idx="'+i+'" style="display:flex;align-items:center;gap:.6rem;padding:.4rem .6rem;border-radius:9px;cursor:pointer;margin-bottom:.2rem;transition:all .12s">'
+      +img+'<div style="font-size:.8rem;font-weight:600;color:var(--tx)">'+esc(pl.name)+'</div></div>';
   }).join('');
 }
 
-async function selS1Playlist(el){
-  var idx=parseInt(el.dataset.idx);
-  SP.selectedPlaylist=SP.playlists[idx];
-  document.querySelectorAll('#s1-sp-list .sp-playlist-item').forEach(function(e){e.style.background='';});
+async function selCfgPlaylist(el){
+  var idx=parseInt(el.dataset.idx);SP.selectedPlaylist=SP.playlists[idx];
+  document.querySelectorAll('#cfg-pl-list .sp-playlist-item').forEach(function(e){e.style.background='';});
   el.style.background='rgba(155,109,255,.12)';
-  // Load tracks count
-  var fb=document.getElementById('s1-sp-feedback');
-  if(fb){fb.style.display='block';fb.textContent='Nummers tellen...';}
+  var fb=document.getElementById('cfg-sp-feedback');
+  if(fb){fb.style.display='block';fb.className='cfg-msg cfg-msg-ok';fb.textContent='Nummers tellen...';}
   try{
-    var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'?fields=tracks.total');
-    var d=await r.json();
-    var count=d.tracks&&d.tracks.total?d.tracks.total:0;
-    var maxP=getMaxPlayers(count);
+    var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'?fields=tracks.total,images,name');
+    var d=await r.json();var count=d.tracks&&d.tracks.total?d.tracks.total:0;
     SP.selectedPlaylist._count=count;
-    if(fb){fb.textContent='✓ '+count+' nummers · max. '+maxP+' spelers';}
-    // Also load actual tracks for playback
+    var maxP=getMaxPlayers(count);
+    if(fb)fb.textContent='✓ '+count+' nummers · max. '+maxP+' spelers';
     loadSpotifyPlaylistForTheme(SP.selectedPlaylist.id,SP.selectedPlaylist.name);
-  }catch(e){if(fb)fb.textContent='Kon nummers niet laden.';}
-  updS1Players();
-  updS1CTA();
-  var ps=document.getElementById('s1-players');
-  if(ps)setTimeout(function(){ps.scrollIntoView({behavior:'smooth',block:'start'});},200);
+  }catch(e){if(fb){fb.className='cfg-msg cfg-msg-warn';fb.textContent='Kon nummers niet laden.';}}
+  updCfgPlayers();updCfgCTA();
+  var ps=document.getElementById('cfg-players');
+  if(ps)setTimeout(function(){ps.scrollIntoView({behavior:'smooth',block:'nearest'});},200);
 }
 
-function updS1Players(){
-  var mode=ST.mode;
-  var show=false;var maxP=20;
+function updCfgPlayers(){
+  var mode=ST.mode;var show=false;var maxP=20;
   if(mode==='thema'&&ST.theme){show=true;maxP=20;}
-  else if(mode==='eigen'){
-    var txt=document.getElementById('s1-ta');
-    var count=txt?parseSongs(txt.value).length:0;
-    if(count>=25){show=true;maxP=getMaxPlayers(count)||100;}
-  } else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count){
-    show=true;maxP=getMaxPlayers(SP.selectedPlaylist._count);
-  }
-  var sec=document.getElementById('s1-players');
-  if(sec)sec.style.display=show?'flex':'none';
-  if(sec)sec.style.flexDirection='column';
+  else if(mode==='eigen'){var n=parseSongs((document.getElementById('cfg-ta')||{}).value||'').length;if(n>=25){show=true;maxP=getMaxPlayers(n)||100;}}
+  else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count){show=true;maxP=getMaxPlayers(SP.selectedPlaylist._count);}
+  var sec=document.getElementById('cfg-players');if(sec)sec.style.display=show?'block':'none';
   if(show){
-    if(ST.players>maxP)ST.players=maxP;
-    if(ST.players<1)ST.players=1;
-    updS1PNum();
-    var info=document.getElementById('s1-pinfo');
+    if(ST.players>maxP)ST.players=maxP;if(ST.players<1)ST.players=1;
+    updCfgPNum();
+    var info=document.getElementById('cfg-pinfo');
     if(info){
-      if(mode==='eigen')info.textContent='Alleen PDF-kaarten · geen host-scherm · muziek speel je zelf af.';
-      else if(mode==='spotify')info.textContent='Voor '+SP.selectedPlaylist._count+' nummers zijn max. '+maxP+' spelers mogelijk.';
+      if(mode==='eigen')info.textContent='Alleen PDF-kaarten · geen host-scherm';
+      else if(mode==='spotify')info.textContent='Max. '+maxP+' spelers voor deze playlist';
       else info.textContent='';
     }
-    var upsell=document.getElementById('s1-p-upsell');
-    if(upsell&&mode==='thema')upsell.style.display=ST.players>=20?'flex':'none';
-    else if(upsell)upsell.style.display='none';
+    var u=document.getElementById('cfg-p-upsell');
+    if(u)u.style.display=(mode==='thema'&&ST.players>=20)?'block':'none';
   }
-  updS1CTA();
 }
 
 function adjP(d){
   var mode=ST.mode;var maxP=20;
-  if(mode==='eigen'){var txt=document.getElementById('s1-ta');if(txt)maxP=getMaxPlayers(parseSongs(txt.value).length)||100;}
+  if(mode==='eigen'){var n=parseSongs((document.getElementById('cfg-ta')||{}).value||'').length;maxP=getMaxPlayers(n)||100;}
   if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count)maxP=getMaxPlayers(SP.selectedPlaylist._count);
   ST.players=Math.max(1,Math.min(maxP,ST.players+d));
-  updS1PNum();
-  if(mode==='thema'){var u=document.getElementById('s1-p-upsell');if(u)u.style.display=ST.players>=20?'flex':'none';}
-  updS1CTA();
+  updCfgPNum();
+  var u=document.getElementById('cfg-p-upsell');if(u)u.style.display=(mode==='thema'&&ST.players>=20)?'block':'none';
+  updCfgCTA();
 }
-
 function setP(n){ST.players=n;adjP(0);}
 
-function updS1PNum(){
-  var el=document.getElementById('s1-pnum');if(el)el.textContent=ST.players;
-  document.querySelectorAll('.s1-pqk').forEach(function(b){b.classList.toggle('sel',parseInt(b.textContent)===ST.players);});
+function updCfgPNum(){
+  var el=document.getElementById('cfg-pnum');if(el)el.textContent=ST.players;
+  document.querySelectorAll('.cfg-pqk').forEach(function(b){b.classList.toggle('sel',parseInt(b.textContent)===ST.players);});
 }
 
-function updS1CTA(){
-  var btn=document.getElementById('s1-cta');
-  var sum=document.getElementById('s1-summary');
-  var st=document.getElementById('s1-sum-title');
-  var sm=document.getElementById('s1-sum-meta');
+function updCfgCTA(){
+  var btn=document.getElementById('cfg-cta');
+  var sum=document.getElementById('cfg-summary');
+  var st=document.getElementById('cfg-sum-title');var sm=document.getElementById('cfg-sum-meta');
   if(!btn)return;
   var mode=ST.mode;
-  if(!mode){btn.disabled=true;btn.textContent='Kies eerst je bingo-type';if(sum)sum.style.display='none';return;}
+  if(!mode){btn.disabled=true;btn.textContent='Kies eerst je speelmodus';if(sum)sum.style.display='none';return;}
   if(mode==='thema'){
     if(!ST.theme){btn.disabled=true;btn.textContent='Kies een thema';if(sum)sum.style.display='none';return;}
     var th=THEMES.find(function(t){return t.id===ST.theme;});
@@ -1219,7 +1173,7 @@ function updS1CTA(){
     return;
   }
   if(mode==='eigen'){
-    var txt=document.getElementById('s1-ta');var songs=txt?parseSongs(txt.value):[];
+    var songs=parseSongs((document.getElementById('cfg-ta')||{}).value||'');
     if(songs.length<25){btn.disabled=true;btn.textContent='Voeg nog '+(25-songs.length)+' nummers toe';if(sum)sum.style.display='none';return;}
     btn.disabled=false;btn.textContent='Maak PDF-kaarten';
     if(sum){sum.style.display='block';if(st)st.textContent='Eigen nummers';if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
@@ -1227,10 +1181,11 @@ function updS1CTA(){
   }
   if(mode==='spotify'){
     if(!SP.selectedPlaylist){btn.disabled=true;btn.textContent='Kies een Spotify-playlist';if(sum)sum.style.display='none';return;}
-    if(!SP.selectedPlaylist._count||SP.selectedPlaylist._count<35){btn.disabled=true;btn.textContent='Playlist heeft te weinig nummers';if(sum)sum.style.display='none';return;}
+    var cnt=SP.selectedPlaylist._count||0;
+    if(cnt<35){btn.disabled=true;btn.textContent='Playlist heeft te weinig nummers';if(sum)sum.style.display='none';return;}
     btn.disabled=false;btn.textContent='Maak Spotify-bingo';
-    var maxP=getMaxPlayers(SP.selectedPlaylist._count);
-    if(sum){sum.style.display='block';if(st)st.textContent='Spotify-playlist';if(sm)sm.textContent=SP.selectedPlaylist._count+' nummers · max. '+maxP+' spelers · inclusief host-scherm';}
+    var maxP2=getMaxPlayers(cnt);
+    if(sum){sum.style.display='block';if(st)st.textContent='Spotify-playlist';if(sm)sm.textContent=cnt+' nummers · max. '+maxP2+' spelers · inclusief host-scherm';}
     return;
   }
 }
@@ -1239,8 +1194,7 @@ function startGen(){
   var mode=ST.mode;
   if(mode==='thema'){if(!ST.theme){toast('Kies eerst een thema.');return;}gen();}
   else if(mode==='eigen'){
-    var txt=document.getElementById('s1-ta');
-    var songs=parseSongs(txt?txt.value:'');
+    var songs=parseSongs((document.getElementById('cfg-ta')||{}).value||'');
     if(songs.length<25){toast('Minimaal 25 nummers nodig.');return;}
     ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
     trackAnalytics('Eigen nummers');mkCards();buildPreviews();saveSession();go('cards');
@@ -1251,54 +1205,40 @@ function startGen(){
 }
 
 function showSaved(){
-  var sec=document.getElementById('s1-saved-section');
-  if(!sec)return;
-  var visible=sec.style.display!=='none';
-  sec.style.display=visible?'none':'block';
-  if(!visible)buildSavedList();
+  var sec=document.getElementById('cfg-saved');if(!sec)return;
+  var v=sec.style.display!=='none';sec.style.display=v?'none':'block';
+  if(!v)buildSavedList();
 }
 
 function checkResume(){
   try{
-    var raw=sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session');
-    var s=JSON.parse(raw||'null');
+    var s=JSON.parse(sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session')||'null');
     if(s&&s.cards&&s.cards.length>0){
-      var bar=document.getElementById('resume-bar');
-      var meta=document.getElementById('resume-meta');
-      if(bar)bar.style.display='flex';
-      if(meta)meta.textContent=s.cards.length+' kaarten · '+s.songs.length+' nummers';
+      var bar=document.getElementById('resume-bar');var meta=document.getElementById('resume-meta');
+      if(bar)bar.style.display='inline-flex';
+      if(meta)meta.textContent='Vorige sessie: '+s.cards.length+' kaarten · '+s.songs.length+' nummers';
     }
   }catch(e){}
 }
 
 function resumeSession(){
   try{
-    var raw=sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session');
-    var s=JSON.parse(raw||'null');
+    var s=JSON.parse(sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session')||'null');
     if(s){ST.songs=s.songs;ST.cards=s.cards;ST.players=s.players||s.cards.length;
       ST.shuffled=s.shuffled||shuf(s.songs);ST.pidx=s.pidx||-1;go('cards');}
   }catch(e){toast('Sessie kon niet worden hersteld.');}
 }
 
-function dismissResume(){
-  var bar=document.getElementById('resume-bar');if(bar)bar.style.display='none';
-}
+function dismissResume(){var bar=document.getElementById('resume-bar');if(bar)bar.style.display='none';}
 
 function buildReviews(){
-  var el=document.getElementById('s1-rev-list');if(!el)return;
-  var reviews=(typeof SEED_REVIEWS!=='undefined'?SEED_REVIEWS:[]).slice(0,3);
-  el.innerHTML=reviews.map(function(r){
-    return'<div class="s1-rev-item">'
-      +'<div style="color:#ffd060;font-size:.75rem;margin-bottom:.3rem">'+('★'.repeat(r.r1||5))+'</div>'
-      +esc(r.comment||'')
-      +'<div class="s1-rev-author">— '+esc(r.name||'Anoniem')+'</div>'
-      +'</div>';
-  }).join('');
+  var el=document.getElementById('cfg-proof');
+  // Social proof is already static HTML — no dynamic needed
 }
 
-/* ══ INIT ══ *//* ══ INIT ══ */
+/* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ */
 window.onload=function(){
-  updS1PNum();checkResume();buildReviews();checkSpotifyAuth();
+  updCfgPNum();checkResume();checkSpotifyAuth();
   var taps=0;
   document.querySelectorAll('.bar-logo').forEach(function(el){
     el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
@@ -2676,7 +2616,7 @@ function checkSpotifyAuth(){
     // Show connected UI in host screen
     spConnectedUI();
     // Show connected UI on start screen if spotify tab active
-    if(ST.mode==='spotify')showS1SpConnected();
+    if(ST.mode==='spotify')showCfgSpConnected();
     // Init player
     if(window.Spotify&&window.Spotify.Player){
       initPlayer();
