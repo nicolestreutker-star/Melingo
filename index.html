@@ -1008,18 +1008,6 @@ var _rIdx=0, _rTimer=null, _rAll=[];
 
 function starsHtml(n){var s='';for(var i=0;i<5;i++)s+=i<n?'★':'☆';return s;}
 
-function buildReviews(){
-  var live=[];
-  try{live=JSON.parse(localStorage.getItem('melo_feedback')||'[]');}catch(e){}
-  var liveShow=live.filter(function(f){return f.name&&f.r1;}).slice(-3).reverse();
-  _rAll=liveShow.concat(SEED_REVIEWS).slice(0,8);
-  var avg=_rAll.reduce(function(s,r){return s+(r.r1||0);},0)/_rAll.length;
-  document.getElementById('review-avg-display').textContent='★ '+avg.toFixed(1);
-  renderReviews();
-  if(_rTimer)clearInterval(_rTimer);
-  _rTimer=setInterval(function(){_rIdx=(_rIdx+1)%_rAll.length;renderReviews();},9000);
-}
-
 function renderReviews(){
   var c=document.getElementById('review-carousel');
   var d=document.getElementById('review-dots');
@@ -1261,29 +1249,6 @@ function startGen(){
     if(!SP.selectedPlaylist){toast('Kies eerst een Spotify-playlist.');return;}
     genFromSpotify();
   }
-}
-
-function checkResume(){
-  try{
-    var s=JSON.parse(sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session')||'null');
-    if(s&&s.cards&&s.cards.length>0){
-      var bar=document.getElementById('resume-bar');
-      var meta=document.getElementById('resume-meta');
-      if(bar)bar.style.display='flex';
-      if(meta)meta.textContent=s.cards.length+' kaarten · '+s.songs.length+' nummers';
-    }
-  }catch(e){}
-}
-
-function resumeSession(){
-  try{
-    var s=JSON.parse(sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session')||'null');
-    if(s){
-      ST.songs=s.songs;ST.cards=s.cards;ST.players=s.players||s.cards.length;
-      ST.shuffled=s.shuffled||shuf(s.songs);ST.pidx=s.pidx||-1;
-      go('cards');
-    }
-  }catch(e){toast('Sessie kon niet worden hersteld.');}
 }
 
 function dismissResume(){
