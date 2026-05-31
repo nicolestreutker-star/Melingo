@@ -1439,21 +1439,22 @@ function dlPDF(eco){
               // Only first artist
               var ca=(s.a||'').split(/[,&]/)[0].trim();
               var mw=cW-5;
-              // Try 14pt, fall back to 11pt if more than 2 lines
               var tSize=14;
               doc.setFontSize(tSize);doc.setFont('helvetica','bold');
               var tLines=doc.splitTextToSize(ct,mw);
               if(tLines.length>2){tSize=11;doc.setFontSize(tSize);tLines=doc.splitTextToSize(ct,mw);}
               var sh=tLines.slice(0,2);
-              var aSize=11;
+              var aSize=10;
               var aL=ca?doc.splitTextToSize(ca,mw)[0]:'';
-              var lh=tSize*0.85,aLh=aSize;
-              var totalH=sh.length*lh+(aL?aLh+3:0);
-              var ty=y+cH/2-totalH/2+lh;
+              var gap=1.5;
+              var lh=tSize*0.82;
+              var totalH=sh.length*lh+(aL?gap+aSize*0.82:0);
+              // Perfect vertical center
+              var ty=y+(cH-totalH)/2+lh;
               doc.setFontSize(tSize);doc.setFont('helvetica','bold');doc.setTextColor(20,5,35);
               sh.forEach(function(line){doc.text(line,x+cW/2,ty,{align:'center'});ty+=lh;});
               if(aL){
-                ty+=3;
+                ty+=gap;
                 doc.setFontSize(aSize);doc.setFont('helvetica','italic');
                 if(eco)doc.setTextColor(100,80,120);else doc.setTextColor(bR[0],bR[1],bR[2]);
                 doc.text(aL,x+cW/2,ty,{align:'center'});
