@@ -272,6 +272,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .sp-playlist-count{font-size:.65rem;color:var(--mt)}
 .sp-error{background:rgba(242,64,106,.08);border:1px solid rgba(242,64,106,.25);border-radius:10px;padding:.6rem .85rem;font-size:.78rem;color:var(--s);margin-bottom:.75rem}
 
+/* COLLAPSIBLE PANELS */
+.collapsible-panel{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:18px;overflow:hidden;margin-bottom:.85rem}
+.col-toggle{width:100%;padding:.75rem 1rem;background:none;border:none;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;text-align:left;transition:background .15s}
+.col-toggle:hover{background:rgba(255,255,255,.04)}
+.col-arrow{font-size:.7rem;color:var(--mt);transition:transform .2s}
+.col-arrow.open{transform:rotate(180deg)}
+.col-body{border-top:1px solid var(--bd)}
+
 /* ADMIN */
 #screen-admin{background:var(--bg)}
 .admin-table{width:100%;border-collapse:collapse;font-size:.82rem}
@@ -452,20 +460,31 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 <!-- ═══ SCREEN 3 — HOST ═══ -->
 <div id="screen-host" class="screen">
+
+  <!-- TOPBAR -->
   <div class="bar">
     <button class="btn bs" onclick="go('cards')">← Kaarten</button>
     <div class="bar-logo">Host</div>
-    <button class="btn bs" onclick="go('feedback')">Feedback</button>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <div id="host-status-bar" style="font-size:.72rem;color:var(--mt);text-align:right;display:none">
+        <span id="hs-count" style="color:var(--tx);font-weight:600"></span>
+        <span id="hs-spotify" style="color:var(--green);margin-left:.5rem"></span>
+      </div>
+      <button class="btn bs" onclick="go('feedback')">Feedback</button>
+    </div>
   </div>
+
   <div class="scroll">
   <div class="host-body">
+
+    <!-- ══ BLOK 1: NU SPEELT ══ -->
     <div class="now-card">
       <div class="now-glow"></div>
       <svg class="now-vinyl" id="hvinyl" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
       <div class="now-lbl">Nu speelt</div>
       <div class="now-title" id="htitle">Druk op volgend nummer</div>
       <div class="now-artist" id="hartist"></div>
-      <div class="now-count" id="hcount">0 / 0</div>
+      <div class="now-count" id="hcount" style="margin-top:.35rem;font-size:.78rem;color:var(--mt)">0 van 0</div>
       <div class="twrap" id="twrap">
         <svg class="tsvg" width="80" height="80" viewBox="0 0 80 80">
           <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="6"/>
@@ -474,157 +493,186 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="tnum" id="tnum">30</div>
       </div>
     </div>
-    <div class="seg">
-      <button class="seg-btn on" id="sm" onclick="setHM('manual')">Handmatig</button>
-      <button class="seg-btn" id="sa" onclick="setHM('auto')">Automatisch</button>
-    </div>
-    <label style="display:flex;align-items:center;gap:.6rem;width:100%;margin-bottom:1rem;cursor:pointer;padding:.65rem .9rem;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:12px">
-      <input type="checkbox" id="missed-toggle" style="accent-color:var(--a);width:17px;height:17px" onchange="ST.missedBingoAlert=this.checked"/>
-      <div>
-        <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Gemiste bingo detectie</div>
-        <div style="font-size:.7rem;color:var(--mt)">Popup als iemand bingo had kunnen hebben maar nog niet heeft geroepen</div>
-      </div>
-    </label>
-    <div class="spd-btns" id="srow" style="display:none">
-      <button class="spd" data-s="15" onclick="setSpd(15)">15 sec</button>
-      <button class="spd on" data-s="30" onclick="setSpd(30)">30 sec</button>
-      <button class="spd" data-s="45" onclick="setSpd(45)">45 sec</button>
-      <button class="spd" data-s="60" onclick="setSpd(60)">60 sec</button>
-    </div>
-    <div style="width:100%;margin-bottom:1rem">
-      <div style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:.5rem">Start nummer vanaf</div>
-      <div class="spd-btns">
-        <button class="spd" data-p="0" onclick="setStartPos(0)">Begin</button>
-        <button class="spd" data-p="15" onclick="setStartPos(15)">15 sec</button>
-        <button class="spd on" data-p="30" onclick="setStartPos(30)">30 sec</button>
-        <button class="spd" data-p="45" onclick="setStartPos(45)">45 sec</button>
-      </div>
-    </div>
-    <div class="prog"><div class="prog-f" id="pf" style="width:0%"></div></div>
+
+    <!-- Volgend nummer + pauze -->
     <div class="host-ctrl">
       <button class="btn-next" onclick="nextSong()">Volgend nummer</button>
       <button class="btn-pause" id="bpause" onclick="togglePause()">⏸</button>
     </div>
-    <!-- SPOTIFY PANEL -->
-    <div class="sp-panel" id="sp-panel">
-      <div class="sp-header">
-        <div class="sp-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          Spotify
-        </div>
-        <div id="sp-status-badge" style="font-size:.68rem;font-weight:600;color:var(--mt)">Niet verbonden</div>
+
+    <!-- Handmatig/Automatisch + instellingen compact -->
+    <div style="width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:16px;padding:.85rem 1rem;margin-bottom:1.1rem">
+      <div class="seg" style="margin-bottom:.75rem">
+        <button class="seg-btn on" id="sm" onclick="setHM('manual')">Handmatig</button>
+        <button class="seg-btn" id="sa" onclick="setHM('auto')">Automatisch</button>
       </div>
-      <div class="sp-body" id="sp-body">
-        <!-- NOT CONNECTED -->
-        <div id="sp-connect-view">
-          <div style="color:var(--mt);font-size:.82rem;margin-bottom:.85rem;line-height:1.6">Verbind Spotify om muziek automatisch af te spelen. Je hebt <strong style="color:var(--tx)">Spotify Premium</strong> nodig.</div>
-          <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" onclick="spotifyLogin()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-            Verbinden met Spotify
-          </button>
-        </div>
-        <!-- CONNECTED — playlist picker -->
-        <div id="sp-playlist-view" style="display:none">
-          <div style="color:var(--green);font-size:.8rem;font-weight:600;margin-bottom:.75rem" id="sp-user-name"></div>
-          <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.5rem">Kies een playlist</div>
-          <div id="sp-playlists" style="max-height:200px;overflow-y:auto;margin-bottom:.75rem"></div>
-          <div id="sp-loading-playlists" style="color:var(--mt);font-size:.8rem;padding:.5rem 0;display:none">Playlists laden...</div>
-          <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" id="sp-load-btn" onclick="loadSelectedPlaylist()" disabled>Laad playlist in Melingo</button>
-        </div>
-        <!-- PLAYING -->
-        <div id="sp-playing-view" style="display:none">
-          <div class="sp-now">
-            <div class="sp-art"><img id="sp-art-img" src="" alt=""/></div>
-            <div>
-              <div class="sp-track-title" id="sp-track-title">—</div>
-              <div class="sp-track-artist" id="sp-track-artist"></div>
-            </div>
-          </div>
-          <div class="sp-progress"><div class="sp-progress-fill" id="sp-prog" style="width:0%"></div></div>
-          <div class="sp-controls">
-            <button class="sp-btn primary" onclick="spPlay()" id="sp-play-btn" style="flex:1;justify-content:center;min-height:40px">▶ Afspelen</button>
-            <button class="sp-btn" onclick="spPause()" style="min-height:40px">⏸</button>
-            <button class="sp-btn" onclick="spNext()" style="min-height:40px">⏭</button>
-          </div>
-          <div style="margin-top:.65rem;font-size:.72rem;color:var(--mt)">
-            Gespeeld via Spotify: <span id="sp-played-count" style="color:var(--a);font-weight:700">0</span> / <span id="sp-total-count">0</span>
-          </div>
+      <div id="srow" style="display:none">
+        <div style="font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.45rem">Start nummer vanaf</div>
+        <div class="spd-btns" style="margin-bottom:0">
+          <button class="spd" data-p="0" onclick="setStartPos(0)">Begin</button>
+          <button class="spd" data-p="15" onclick="setStartPos(15)">15 sec</button>
+          <button class="spd on" data-p="30" onclick="setStartPos(30)">30 sec</button>
+          <button class="spd" data-p="45" onclick="setStartPos(45)">45 sec</button>
         </div>
       </div>
     </div>
 
+    <!-- Voortgangsbalk -->
+    <div class="prog" style="margin-bottom:1.1rem"><div class="prog-f" id="pf" style="width:0%"></div></div>
+
+    <!-- ══ BLOK 2: GESPEELD ══ -->
     <div class="panel">
       <div class="ph"><span>Gespeeld</span><span class="badge" id="pbadge">0</span></div>
       <input type="text" class="psrch" id="psrch" placeholder="Zoek in gespeelde nummers..." oninput="filterPlayed()"/>
       <div class="plist" id="plist"><div class="pempty">Nog geen nummers gespeeld</div></div>
     </div>
-    <div style="width:100%;margin-bottom:1.1rem">
-      <div style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:.6rem;padding:0 .1rem">Bingo-instellingen</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
-        <label id="bm-row" onclick="updBmode('row',!ST.bmodes.row)" style="display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:14px;cursor:pointer;background:linear-gradient(135deg,rgba(242,64,106,.15),rgba(155,109,255,.1));border:1.5px solid rgba(242,64,106,.4);transition:all .2s">
-          <div id="bm-row-check" style="width:22px;height:22px;border-radius:6px;background:var(--s);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;color:white">✓</div>
-          <div><div style="font-size:.82rem;font-weight:700;color:var(--tx)">Horizontale rij</div><div style="font-size:.65rem;color:var(--mt);margin-top:.1rem">5 op een rij →</div></div>
-        </label>
-        <label id="bm-col" onclick="updBmode('col',!ST.bmodes.col)" style="display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:14px;cursor:pointer;background:linear-gradient(135deg,rgba(106,171,247,.15),rgba(155,109,255,.1));border:1.5px solid rgba(106,171,247,.4);transition:all .2s">
-          <div id="bm-col-check" style="width:22px;height:22px;border-radius:6px;background:var(--m);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;color:white">✓</div>
-          <div><div style="font-size:.82rem;font-weight:700;color:var(--tx)">Verticale rij</div><div style="font-size:.65rem;color:var(--mt);margin-top:.1rem">5 op een kolom ↓</div></div>
-        </label>
-        <label id="bm-diag" onclick="updBmode('diag',!ST.bmodes.diag)" style="display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:14px;cursor:pointer;background:linear-gradient(135deg,rgba(155,109,255,.15),rgba(239,59,85,.1));border:1.5px solid rgba(155,109,255,.4);transition:all .2s">
-          <div id="bm-diag-check" style="width:22px;height:22px;border-radius:6px;background:var(--a);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;color:white">✓</div>
-          <div><div style="font-size:.82rem;font-weight:700;color:var(--tx)">Diagonale rij</div><div style="font-size:.65rem;color:var(--mt);margin-top:.1rem">5 diagonaal ↘</div></div>
-        </label>
-        <label id="bm-full" onclick="updBmode('full',!ST.bmodes.full)" style="display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:14px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid var(--bd);transition:all .2s">
-          <div id="bm-full-check" style="width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;color:var(--mt)">✓</div>
-          <div><div style="font-size:.82rem;font-weight:700;color:var(--mt)">Volledige kaart</div><div style="font-size:.65rem;color:var(--mt2);margin-top:.1rem">Alle 25 vakjes vol</div></div>
-        </label>
-      </div>
-    </div>
-    <!-- Won status panel -->
-    <div id="won-status" style="display:none;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:14px;padding:.75rem 1rem;margin-bottom:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem"></div>
 
-    <!-- Handmatig nummer toevoegen -->
-    <div class="panel" style="margin-bottom:1.1rem">
-      <div class="ph"><span>Handmatig nummer toevoegen</span></div>
-      <div style="padding:.85rem;display:flex;gap:.5rem;flex-wrap:wrap">
-        <input type="text" class="ci" id="manual-inp" placeholder="Artiest of titel..." style="flex:1;min-width:150px"/>
-        <button class="btn bp" onclick="addManualSong()" style="min-height:44px">Voeg toe</button>
-      </div>
-      <div id="manual-suggestions" style="padding:0 .85rem .85rem;display:none"></div>
-    </div>
-
+    <!-- ══ BLOK 3: BINGO CONTROLEREN ══ -->
     <div class="panel">
       <div class="ph"><span>Bingo controleren</span></div>
       <div class="crow">
         <input type="number" class="ci" id="cinp" placeholder="Kaartnummer (bijv. 17)" min="1"/>
         <button class="btn bp" onclick="checkBingo()" style="min-height:44px">Controleer</button>
       </div>
+      <!-- Actieve modi compact -->
+      <div id="active-modes-display" style="padding:0 .85rem .6rem;font-size:.7rem;color:var(--mt)"></div>
       <div class="cres" id="cres"></div>
       <div id="missed-bingo" style="display:none;margin:.25rem .85rem .75rem;padding:.7rem;border-radius:10px;font-size:.78rem;font-weight:600;background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.25);color:#ffd060;line-height:1.5"></div>
       <div class="cgrid" id="cgrid"></div>
     </div>
-    <!-- Bingo history -->
+
+    <!-- Bingo overzicht (verschijnt na eerste bingo) -->
     <div class="panel" id="bingo-history-panel" style="display:none;margin-bottom:1.1rem">
       <div class="ph"><span>Bingo overzicht</span><span class="badge" id="bingo-history-count">0</span></div>
       <div id="bingo-history-list" style="padding:.75rem"></div>
     </div>
 
-    <!-- Sessie opslaan -->
-    <div class="panel" style="margin-bottom:1.1rem">
-      <div class="ph"><span>Sessie opslaan</span></div>
-      <div style="padding:.85rem;display:flex;gap:.5rem;flex-wrap:wrap">
-        <input type="text" class="ci" id="session-name" placeholder="Naam voor deze bingo (bijv. Kerst 2025)" style="flex:1;min-width:160px"/>
-        <button class="btn bgr" onclick="saveNamedSession()" style="min-height:44px">Opslaan</button>
+    <!-- Won status chips -->
+    <div id="won-status" style="display:none;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:14px;padding:.75rem 1rem;margin-bottom:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem"></div>
+
+    <!-- ══ INKLAPBAAR: SPOTIFY ══ -->
+    <div class="collapsible-panel" id="col-spotify">
+      <button class="col-toggle" onclick="toggleCol('spotify')">
+        <span style="display:flex;align-items:center;gap:.5rem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--green)"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Spotify &amp; playlist
+        </span>
+        <span class="col-arrow" id="col-arrow-spotify">▼</span>
+      </button>
+      <div class="col-body" id="col-body-spotify" style="display:none">
+        <div class="sp-panel" id="sp-panel" style="margin:0;border-radius:0;border:none;border-top:1px solid var(--bd)">
+          <div class="sp-body" id="sp-body" style="padding:.85rem 1rem">
+            <div id="sp-connect-view">
+              <div style="color:var(--mt);font-size:.82rem;margin-bottom:.85rem;line-height:1.6">Verbind Spotify om muziek automatisch af te spelen. Je hebt <strong style="color:var(--tx)">Spotify Premium</strong> nodig.</div>
+              <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" onclick="spotifyLogin()">
+                Verbinden met Spotify
+              </button>
+            </div>
+            <div id="sp-playlist-view" style="display:none">
+              <div style="color:var(--green);font-size:.8rem;font-weight:600;margin-bottom:.75rem" id="sp-user-name"></div>
+              <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.5rem">Kies een playlist</div>
+              <div id="sp-playlists" style="max-height:200px;overflow-y:auto;margin-bottom:.75rem"></div>
+              <div id="sp-loading-playlists" style="color:var(--mt);font-size:.8rem;padding:.5rem 0;display:none">Playlists laden...</div>
+              <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" id="sp-load-btn" onclick="loadSelectedPlaylist()" disabled>Laad playlist in Melingo</button>
+            </div>
+            <div id="sp-playing-view" style="display:none">
+              <div class="sp-now">
+                <div class="sp-art"><img id="sp-art-img" src="" alt=""/></div>
+                <div>
+                  <div class="sp-track-title" id="sp-track-title">—</div>
+                  <div class="sp-track-artist" id="sp-track-artist"></div>
+                </div>
+              </div>
+              <div class="sp-progress"><div class="sp-progress-fill" id="sp-prog" style="width:0%"></div></div>
+              <div class="sp-controls">
+                <button class="sp-btn primary" onclick="spPlay()" id="sp-play-btn" style="flex:1;justify-content:center;min-height:40px">▶ Afspelen</button>
+                <button class="sp-btn" onclick="spPause()" style="min-height:40px">⏸</button>
+                <button class="sp-btn" onclick="spNext()" style="min-height:40px">⏭</button>
+              </div>
+              <div style="margin-top:.65rem;font-size:.72rem;color:var(--mt)">
+                Gespeeld via Spotify: <span id="sp-played-count" style="color:var(--a);font-weight:700">0</span> / <span id="sp-total-count">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="saved-sessions-list" style="padding:0 .85rem .85rem"></div>
     </div>
 
-    <div style="display:flex;gap:.5rem;width:100%;margin-bottom:1rem">
-      <button class="btn bs" style="flex:1;min-height:44px" onclick="resetHost()">Opnieuw</button>
-      <button class="btn bs" style="flex:1;min-height:44px" onclick="go('start')">Nieuw spel</button>
+    <!-- ══ INKLAPBAAR: BINGO-INSTELLINGEN ══ -->
+    <div class="collapsible-panel" id="col-settings">
+      <button class="col-toggle" onclick="toggleCol('settings')">
+        <span>Bingo-instellingen</span>
+        <span class="col-arrow" id="col-arrow-settings">▼</span>
+      </button>
+      <div class="col-body" id="col-body-settings" style="display:none;padding:.85rem 1rem">
+        <!-- Gemiste bingo toggle -->
+        <label style="display:flex;align-items:center;gap:.6rem;width:100%;margin-bottom:.85rem;cursor:pointer;padding:.65rem .9rem;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:12px">
+          <input type="checkbox" id="missed-toggle" style="accent-color:var(--a);width:17px;height:17px" onchange="ST.missedBingoAlert=this.checked"/>
+          <div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Gemiste bingo detectie</div>
+            <div style="font-size:.7rem;color:var(--mt)">Popup als iemand bingo had kunnen hebben maar nog niet heeft geroepen</div>
+          </div>
+        </label>
+        <!-- Bingo modes compact -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+          <label id="bm-row" onclick="updBmode('row',!ST.bmodes.row)" style="display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:12px;cursor:pointer;background:rgba(242,64,106,.12);border:1.5px solid rgba(242,64,106,.35);transition:all .2s">
+            <div id="bm-row-check" style="width:20px;height:20px;border-radius:5px;background:var(--s);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;color:white;font-weight:700">✓</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Rij</div>
+          </label>
+          <label id="bm-col" onclick="updBmode('col',!ST.bmodes.col)" style="display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:12px;cursor:pointer;background:rgba(106,171,247,.12);border:1.5px solid rgba(106,171,247,.35);transition:all .2s">
+            <div id="bm-col-check" style="width:20px;height:20px;border-radius:5px;background:var(--m);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;color:white;font-weight:700">✓</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Kolom</div>
+          </label>
+          <label id="bm-diag" onclick="updBmode('diag',!ST.bmodes.diag)" style="display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:12px;cursor:pointer;background:rgba(155,109,255,.12);border:1.5px solid rgba(155,109,255,.35);transition:all .2s">
+            <div id="bm-diag-check" style="width:20px;height:20px;border-radius:5px;background:var(--a);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;color:white;font-weight:700">✓</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Diagonaal</div>
+          </label>
+          <label id="bm-full" onclick="updBmode('full',!ST.bmodes.full)" style="display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:12px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid var(--bd);transition:all .2s;opacity:.5">
+            <div id="bm-full-check" style="width:20px;height:20px;border-radius:5px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;color:var(--mt);font-weight:700"></div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--mt)">Volle kaart</div>
+          </label>
+        </div>
+      </div>
     </div>
+
+    <!-- ══ INKLAPBAAR: HANDMATIG NUMMER ══ -->
+    <div class="collapsible-panel" id="col-manual">
+      <button class="col-toggle" onclick="toggleCol('manual')">
+        <span>Handmatig nummer toevoegen</span>
+        <span class="col-arrow" id="col-arrow-manual">▼</span>
+      </button>
+      <div class="col-body" id="col-body-manual" style="display:none;padding:.85rem 1rem">
+        <div style="display:flex;gap:.5rem;margin-bottom:.5rem">
+          <input type="text" class="ci" id="manual-inp" placeholder="Artiest of titel..." style="flex:1"/>
+          <button class="btn bp" onclick="addManualSong()" style="min-height:44px">Zoek</button>
+        </div>
+        <div id="manual-suggestions" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- ══ INKLAPBAAR: SESSIE ══ -->
+    <div class="collapsible-panel" id="col-session">
+      <button class="col-toggle" onclick="toggleCol('session')">
+        <span>Sessie opslaan &amp; herstel</span>
+        <span class="col-arrow" id="col-arrow-session">▼</span>
+      </button>
+      <div class="col-body" id="col-body-session" style="display:none;padding:.85rem 1rem">
+        <div style="display:flex;gap:.5rem;margin-bottom:.75rem">
+          <input type="text" class="ci" id="session-name" placeholder="Naam voor deze bingo (bijv. Kerst 2025)" style="flex:1"/>
+          <button class="btn bgr" onclick="saveNamedSession()" style="min-height:44px;white-space:nowrap">Opslaan</button>
+        </div>
+        <div id="saved-sessions-list"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.75rem">
+          <button class="btn bs" style="flex:1;min-height:44px" onclick="resetHost()">Opnieuw</button>
+          <button class="btn bs" style="flex:1;min-height:44px" onclick="go('start')">Nieuw spel</button>
+        </div>
+      </div>
+    </div>
+
   </div>
   </div>
 </div>
+
 
 <!-- ═══ SCREEN 4 — FEEDBACK ═══ -->
 <div id="screen-feedback" class="screen">
@@ -1535,7 +1583,7 @@ function initHost(){
     var cur=ST.shuffled[ST.pidx];
     document.getElementById('htitle').textContent=cur?cur.t:'—';
     document.getElementById('hartist').textContent=cur?cur.a:'';
-    document.getElementById('hcount').textContent=(ST.pidx+1)+' / '+ST.songs.length;
+    document.getElementById('hcount').textContent=(ST.pidx+1)+' van '+ST.songs.length;
     document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
     document.getElementById('pbadge').textContent=ST.pidx+1;
     var pl=document.getElementById('plist');pl.innerHTML='';
@@ -1553,7 +1601,10 @@ function initHost(){
   document.getElementById('psrch').value='';
   document.getElementById('bpause').textContent='⏸';
   renderSavedSessions();
-  document.getElementById('hcount').textContent=(ST.pidx<0?0:ST.pidx+1)+' / '+ST.songs.length;
+  updActiveModesDisplay();
+  document.getElementById('host-status-bar').style.display='flex';
+  document.getElementById('hcount').textContent=(ST.pidx<0?0:ST.pidx+1)+' van '+ST.songs.length;
+  document.getElementById('hs-count').textContent=(ST.pidx<0?0:ST.pidx+1)+' van '+ST.songs.length+' gespeeld';
   var v=document.getElementById('hvinyl');if(v&&ST.pidx===-1)v.classList.remove('spin');
   setHM(ST.hmode);setSpd(ST.speed);
 }
@@ -1565,7 +1616,7 @@ function nextSong(){
   if(ST.pidx>=ST.shuffled.length){document.getElementById('htitle').textContent='Alle nummers gespeeld!';document.getElementById('hartist').textContent='Einde van de ronde';document.getElementById('twrap').style.display='none';var v=document.getElementById('hvinyl');if(v)v.classList.remove('spin');return;}
   var s=ST.shuffled[ST.pidx];
   document.getElementById('htitle').textContent=s.t;document.getElementById('hartist').textContent=s.a;
-  document.getElementById('hcount').textContent=(ST.pidx+1)+' / '+ST.songs.length;
+  document.getElementById('hcount').textContent=(ST.pidx+1)+' van '+ST.songs.length;
   document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
   document.getElementById('pbadge').textContent=ST.pidx+1;
   var pl=document.getElementById('plist');
@@ -1675,7 +1726,7 @@ function confirmManualSong(idx){
   // Update UI
   document.getElementById('htitle').textContent=s.t;
   document.getElementById('hartist').textContent=s.a;
-  document.getElementById('hcount').textContent=(ST.pidx+1)+' / '+ST.songs.length;
+  document.getElementById('hcount').textContent=(ST.pidx+1)+' van '+ST.songs.length;
   document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
   document.getElementById('pbadge').textContent=ST.pidx+1;
   var pl=document.getElementById('plist');
@@ -1982,6 +2033,15 @@ function deleteNamedSession(name){
   putNamedSessions(getNamedSessions().filter(function(s){return s.name!==name;}));
   renderSavedSessions();
   toast('Sessie verwijderd.');
+}
+
+function toggleCol(id){
+  var body=document.getElementById('col-body-'+id);
+  var arrow=document.getElementById('col-arrow-'+id);
+  if(!body)return;
+  var isOpen=body.style.display!=='none';
+  body.style.display=isOpen?'none':'block';
+  if(arrow)arrow.classList.toggle('open',!isOpen);
 }
 
 function closeBingoModal(){
