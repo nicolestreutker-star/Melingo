@@ -2155,9 +2155,7 @@ function renderStartPlaylists(){
     var img=pl.images&&pl.images[0]?'<img src="'+pl.images[0].url+'" alt="" style="width:36px;height:36px;border-radius:6px;object-fit:cover;flex-shrink:0"/>':'<div style="width:36px;height:36px;border-radius:6px;background:rgba(255,255,255,.08);flex-shrink:0"></div>';
     return'<div class="sp-playlist-item" id="startpl-'+i+'" onclick="selStartPlaylist('+i+')" style="display:flex;align-items:center;gap:.65rem;padding:.45rem .65rem;border-radius:10px;cursor:pointer;transition:all .12s;margin-bottom:.25rem">'
       +img
-      +'<div><div style="font-size:.8rem;font-weight:600;color:var(--tx)">'+esc(pl.name)+'</div>'
-      +'<div style="font-size:.65rem;" '>span style="color:'+(ok?'var(--green)':'var(--s)')+'">'+(ok?'✓ ':'⚠ ')+t+' nummers</span>';
-    }())+'</div></div>'
+      +'<div><div style="font-size:.8rem;font-weight:600;color:var(--tx)">'+esc(pl.name)+'</div></div>'
       +'</div>';
   }).join('');
 }
