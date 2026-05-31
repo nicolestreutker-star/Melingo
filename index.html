@@ -1957,8 +1957,8 @@ function renderSavedSessions(){
         +'<div><div style="font-size:.8rem;font-weight:600;color:var(--tx)">'+esc(s.name)+'</div>'
         +'<div style="font-size:.65rem;color:var(--mt)">'+s.cards.length+' kaarten &middot; nr. '+(s.pidx+1)+' gespeeld &middot; '+d.toLocaleDateString('nl-NL')+'</div></div>'
         +'<div style="display:flex;gap:.35rem">'
-        +'<button class="btn bp" style="font-size:.72rem;padding:.35rem .65rem" onclick="loadNamedSession(''+esc(s.name)+'')">Herstel</button>'
-        +'<button class="btn bs" style="font-size:.72rem;padding:.35rem .65rem" onclick="deleteNamedSession(''+esc(s.name)+'')">✕</button>'
+        +'<button class="btn bp" style="font-size:.72rem;padding:.35rem .65rem" onclick="loadNamedSession(this.dataset.n)" data-n="'+esc(s.name)+'">Herstel</button>'
+        +'<button class="btn bs" style="font-size:.72rem;padding:.35rem .65rem" onclick="deleteNamedSession(this.dataset.n)" data-n="'+esc(s.name)+'">✕</button>'
         +'</div>'
         +'</div>';
     }).join('');
