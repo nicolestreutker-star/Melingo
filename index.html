@@ -478,6 +478,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <button class="seg-btn on" id="sm" onclick="setHM('manual')">Handmatig</button>
       <button class="seg-btn" id="sa" onclick="setHM('auto')">Automatisch</button>
     </div>
+    <label style="display:flex;align-items:center;gap:.6rem;width:100%;margin-bottom:1rem;cursor:pointer;padding:.65rem .9rem;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:12px">
+      <input type="checkbox" id="missed-toggle" style="accent-color:var(--a);width:17px;height:17px" onchange="ST.missedBingoAlert=this.checked"/>
+      <div>
+        <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Gemiste bingo detectie</div>
+        <div style="font-size:.7rem;color:var(--mt)">Popup als iemand bingo had kunnen hebben maar nog niet heeft geroepen</div>
+      </div>
+    </label>
     <div class="spd-btns" id="srow" style="display:none">
       <button class="spd" data-s="15" onclick="setSpd(15)">15 sec</button>
       <button class="spd on" data-s="30" onclick="setSpd(30)">30 sec</button>
@@ -1054,7 +1061,9 @@ var ST={
   bmodes:{row:true,col:true,diag:true,full:false},
   startPos:30,
   wonCategories:{},
-  bingoHistory:[],  // [{cardId, type, atSong, pidx}]
+  bingoHistory:[],
+  missedBingoAlert:false,
+  missedChecked:{}, // cardId+type -> true if already alerted  // [{cardId, type, atSong, pidx}]
   fbRatings:{fb1:0},fbRecommend:null,
 };
 var CIRC=2*Math.PI*32;
@@ -1458,6 +1467,7 @@ function initHost(){
   ST.paused=false;clearInterval(ST.tint);ST.tint=null;
   ST.wonCategories={};
   ST.bingoHistory=[];
+  ST.missedChecked={};
   updBingoHistory();
   updWonStatus();
   if(ST.pidx===-1){
@@ -1510,6 +1520,8 @@ function nextSong(){
   var v=document.getElementById('hvinyl');if(v)v.classList.add('spin');
   if(ST.hmode==='auto')startTimer();
   saveSession();
+  // Check for missed bingos after each song
+  if(ST.missedBingoAlert)checkAllMissedBingos();
   // Sync Spotify: play the matching track if connected
   if(SP.accessToken&&SP.tracks&&SP.tracks.length>0){
     var spTrack=SP.tracks[ST.pidx];
@@ -1743,6 +1755,59 @@ function checkBingo(){
     if(missedMsg){missedEl.style.display='block';missedEl.textContent=missedMsg;}
     else{missedEl.style.display='none';}
   }
+}
+
+function checkAllMissedBingos(){
+  if(!ST.cards.length||ST.pidx<0)return;
+  var missed=[];
+  ST.cards.forEach(function(card){
+    var cardIdx=card.id-1;
+    // Build played set
+    var played={};
+    for(var i=0;i<=ST.pidx;i++){if(ST.shuffled[i])played[ST.shuffled[i].t+'|'+ST.shuffled[i].a]=true;}
+    var cp=card.cells.map(function(s){return s===null?true:!!played[s.t+'|'+s.a];});
+
+    // Check each active category
+    var wonTypes=[];
+    if(ST.bmodes.row&&!ST.wonCategories.row){
+      for(var row=0;row<5;row++){var ln=[];for(var c=0;c<5;c++)ln.push(row*5+c);if(ln.every(function(i){return cp[i];})){if(wonTypes.indexOf('horizontale rij')===-1)wonTypes.push('horizontale rij');}}
+    }
+    if(ST.bmodes.col&&!ST.wonCategories.col){
+      for(var col=0;col<5;col++){var ln=[];for(var r=0;r<5;r++)ln.push(r*5+col);if(ln.every(function(i){return cp[i];})){if(wonTypes.indexOf('verticale rij')===-1)wonTypes.push('verticale rij');}}
+    }
+    if(ST.bmodes.diag&&!ST.wonCategories.diag){
+      var d1=[0,6,12,18,24],d2=[4,8,12,16,20];
+      if(d1.every(function(i){return cp[i];})||d2.every(function(i){return cp[i];})){if(wonTypes.indexOf('diagonale rij')===-1)wonTypes.push('diagonale rij');}
+    }
+    if(ST.bmodes.full&&!ST.wonCategories.full){
+      if(cp.every(function(v){return v;})){if(wonTypes.indexOf('volle kaart')===-1)wonTypes.push('volle kaart');}
+    }
+
+    wonTypes.forEach(function(t){
+      var key=card.id+'-'+t;
+      if(!ST.missedChecked[key]){
+        ST.missedChecked[key]=true;
+        missed.push({cardId:card.id,type:t});
+      }
+    });
+  });
+
+  if(missed.length>0){
+    showMissedBingoPopup(missed);
+  }
+}
+
+function showMissedBingoPopup(missed){
+  var modal=document.getElementById('missed-modal');
+  var info=document.getElementById('missed-info');
+  if(!modal||!info)return;
+  info.innerHTML=missed.map(function(m){
+    return'<div style="padding:.5rem .75rem;background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.2);border-radius:10px;margin-bottom:.4rem">'
+      +'<strong style="color:#ffd060">Kaart '+m.cardId+'</strong>'
+      +' <span style="color:var(--mt);font-size:.8rem">— heeft een '+m.type+' maar heeft nog geen bingo geroepen!</span>'
+      +'</div>';
+  }).join('');
+  modal.style.display='flex';
 }
 
 function checkMissedBingo(cardIdx){
@@ -2313,6 +2378,17 @@ function buildAdmin(){
 }
 function clearAnalytics(){if(confirm('Alle analytics en feedback wissen?')){localStorage.removeItem('melo_analytics');localStorage.removeItem('melo_feedback');buildAdmin();toast('Data gewist.');}}
 </script>
+
+<!-- GEMISTE BINGO MODAL -->
+<div id="missed-modal" style="display:none;position:fixed;inset:0;background:rgba(13,13,24,.85);z-index:490;flex-direction:column;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(10px)">
+  <div style="width:100%;max-width:420px;background:rgba(30,20,5,.95);border:1px solid rgba(255,180,0,.35);border-radius:24px;padding:2rem;text-align:center">
+    <div style="font-size:2.2rem;margin-bottom:.6rem">👀</div>
+    <div style="font-size:1.3rem;font-weight:800;margin-bottom:.4rem;color:#ffd060">Iemand heeft bingo gemist!</div>
+    <div style="color:var(--mt);font-size:.82rem;margin-bottom:1rem">De volgende kaart(en) hadden al bingo kunnen roepen:</div>
+    <div id="missed-info" style="margin-bottom:1.25rem;text-align:left"></div>
+    <button class="btn bp" style="width:100%;min-height:44px" onclick="document.getElementById('missed-modal').style.display='none'">Oké, spel gaat door</button>
+  </div>
+</div>
 
 <!-- BINGO CELEBRATION MODAL -->
 <div id="bingo-modal" style="display:none;position:fixed;inset:0;background:rgba(13,13,24,.95);z-index:500;flex-direction:column;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(20px)">
