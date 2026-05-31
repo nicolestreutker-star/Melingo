@@ -484,6 +484,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <button class="spd" data-s="45" onclick="setSpd(45)">45 sec</button>
       <button class="spd" data-s="60" onclick="setSpd(60)">60 sec</button>
     </div>
+    <div style="width:100%;margin-bottom:1rem">
+      <div style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:.5rem">Start nummer vanaf</div>
+      <div class="spd-btns">
+        <button class="spd" data-p="0" onclick="setStartPos(0)">Begin</button>
+        <button class="spd" data-p="15" onclick="setStartPos(15)">15 sec</button>
+        <button class="spd on" data-p="30" onclick="setStartPos(30)">30 sec</button>
+        <button class="spd" data-p="45" onclick="setStartPos(45)">45 sec</button>
+      </div>
+    </div>
     <div class="prog"><div class="prog-f" id="pf" style="width:0%"></div></div>
     <div class="host-ctrl">
       <button class="btn-next" onclick="nextSong()">Volgend nummer</button>
@@ -554,6 +563,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <!-- Won status panel -->
     <div id="won-status" style="display:none;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:14px;padding:.75rem 1rem;margin-bottom:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem"></div>
 
+    <!-- Handmatig nummer toevoegen -->
+    <div class="panel" style="margin-bottom:1.1rem">
+      <div class="ph"><span>Handmatig nummer toevoegen</span></div>
+      <div style="padding:.85rem;display:flex;gap:.5rem;flex-wrap:wrap">
+        <input type="text" class="ci" id="manual-inp" placeholder="Artiest of titel..." style="flex:1;min-width:150px"/>
+        <button class="btn bp" onclick="addManualSong()" style="min-height:44px">Voeg toe</button>
+      </div>
+      <div id="manual-suggestions" style="padding:0 .85rem .85rem;display:none"></div>
+    </div>
+
     <div class="panel">
       <div class="ph"><span>Bingo controleren</span></div>
       <div class="crow">
@@ -561,8 +580,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <button class="btn bp" onclick="checkBingo()" style="min-height:44px">Controleer</button>
       </div>
       <div class="cres" id="cres"></div>
+      <div id="missed-bingo" style="display:none;margin:.25rem .85rem .75rem;padding:.7rem;border-radius:10px;font-size:.78rem;font-weight:600;background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.25);color:#ffd060;line-height:1.5"></div>
       <div class="cgrid" id="cgrid"></div>
     </div>
+    <!-- Bingo history -->
+    <div class="panel" id="bingo-history-panel" style="display:none;margin-bottom:1.1rem">
+      <div class="ph"><span>Bingo overzicht</span><span class="badge" id="bingo-history-count">0</span></div>
+      <div id="bingo-history-list" style="padding:.75rem"></div>
+    </div>
+
     <div style="display:flex;gap:.5rem;width:100%;margin-bottom:1rem">
       <button class="btn bs" style="flex:1;min-height:44px" onclick="initHost()">Opnieuw</button>
       <button class="btn bs" style="flex:1;min-height:44px" onclick="go('start')">Nieuw spel</button>
@@ -1026,7 +1052,9 @@ var ST={
   songs:[],players:20,cards:[],shuffled:[],pidx:-1,
   hmode:'manual',speed:30,paused:false,tint:null,
   bmodes:{row:true,col:true,diag:true,full:false},
-  wonCategories:{},   // tracks which categories have been won globally
+  startPos:30,
+  wonCategories:{},
+  bingoHistory:[],  // [{cardId, type, atSong, pidx}]
   fbRatings:{fb1:0},fbRecommend:null,
 };
 var CIRC=2*Math.PI*32;
@@ -1428,7 +1456,9 @@ function dlPDF(eco){
 function initHost(){
   if(ST.pidx===-1)ST.shuffled=shuf(ST.songs);
   ST.paused=false;clearInterval(ST.tint);ST.tint=null;
-  ST.wonCategories={};  // reset won categories on new game
+  ST.wonCategories={};
+  ST.bingoHistory=[];
+  updBingoHistory();
   updWonStatus();
   if(ST.pidx===-1){
     document.getElementById('htitle').textContent='Druk op volgend nummer';
@@ -1462,7 +1492,8 @@ function initHost(){
   setHM(ST.hmode);setSpd(ST.speed);
 }
 function setHM(m){ST.hmode=m;document.getElementById('sm').classList.toggle('on',m==='manual');document.getElementById('sa').classList.toggle('on',m==='auto');document.getElementById('srow').style.display=m==='auto'?'flex':'none';document.getElementById('twrap').style.display='none';clearInterval(ST.tint);ST.tint=null;}
-function setSpd(s){ST.speed=parseInt(s);document.querySelectorAll('.spd').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.s)===ST.speed);});}
+function setSpd(s){ST.speed=parseInt(s);document.querySelectorAll('[data-s]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.s)===ST.speed);});}
+function setStartPos(p){ST.startPos=p;document.querySelectorAll('[data-p]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.p)===p);});}
 function nextSong(){
   if(ST.paused)return;clearInterval(ST.tint);ST.tint=null;ST.pidx++;
   if(ST.pidx>=ST.shuffled.length){document.getElementById('htitle').textContent='Alle nummers gespeeld!';document.getElementById('hartist').textContent='Einde van de ronde';document.getElementById('twrap').style.display='none';var v=document.getElementById('hvinyl');if(v)v.classList.remove('spin');return;}
@@ -1490,10 +1521,11 @@ function nextSong(){
 
 async function spPlayTrack(uri){
   try{
+    var posMs=(ST.startPos||0)*1000;
     await spFetch('https://api.spotify.com/v1/me/player/play?device_id='+SP.deviceId,{
       method:'PUT',
       headers:{'Authorization':'Bearer '+SP.accessToken,'Content-Type':'application/json'},
-      body:JSON.stringify({uris:[uri]})
+      body:JSON.stringify({uris:[uri],position_ms:posMs})
     });
     // Update Spotify played counter
     var el=document.getElementById('sp-played-count');
@@ -1529,6 +1561,51 @@ function updBmode(key,val){
   // Remove from won if unchecked
   if(!val)delete ST.wonCategories[key];
   updWonStatus();
+}
+
+/* ══ HANDMATIG NUMMER ══ */
+function addManualSong(){
+  var q=document.getElementById('manual-inp').value.trim().toLowerCase();
+  if(!q){toast('Voer een artiest of titel in.');return;}
+  // Zoek in alle nummers
+  var matches=ST.songs.filter(function(s){
+    return s.t.toLowerCase().includes(q)||s.a.toLowerCase().includes(q);
+  });
+  if(!matches.length){toast('Geen nummer gevonden met "'+q+'".');return;}
+  var sug=document.getElementById('manual-suggestions');
+  sug.style.display='block';
+  sug.innerHTML='<div style="font-size:.7rem;color:var(--mt);margin-bottom:.4rem">Kies het juiste nummer:</div>'
+    +matches.slice(0,5).map(function(s,i){
+      return'<div onclick="confirmManualSong('+ST.songs.indexOf(s)+')" style="padding:.45rem .65rem;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.05);border:1px solid var(--bd);margin-bottom:.3rem;font-size:.8rem">'
+        +'<strong>'+esc(s.t)+'</strong> <span style="color:var(--mt)">— '+esc(s.a)+'</span>'
+        +(ST.shuffled.indexOf(s)<=ST.pidx?'<span style="color:var(--green);font-size:.65rem;margin-left:.4rem">al gespeeld</span>':'')
+        +'</div>';
+    }).join('');
+}
+
+function confirmManualSong(idx){
+  var s=ST.songs[idx];
+  if(!s)return;
+  // Check if already played
+  var alreadyPlayed=ST.shuffled.slice(0,ST.pidx+1).some(function(p){return p.t===s.t&&p.a===s.a;});
+  if(alreadyPlayed){toast('"'+s.t+'" is al gespeeld.');return;}
+  // Insert at current position
+  ST.pidx++;
+  ST.shuffled.splice(ST.pidx,0,s);
+  // Update UI
+  document.getElementById('htitle').textContent=s.t;
+  document.getElementById('hartist').textContent=s.a;
+  document.getElementById('hcount').textContent=(ST.pidx+1)+' / '+ST.songs.length;
+  document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
+  document.getElementById('pbadge').textContent=ST.pidx+1;
+  var pl=document.getElementById('plist');
+  var r=document.createElement('div');r.className='prow';
+  r.innerHTML='<div class="pidx">'+(ST.pidx+1)+'</div><div><div class="ptit">'+esc(s.t)+'</div><div class="part">'+esc(s.a)+' <span style="color:var(--a);font-size:.6rem">(handmatig)</span></div></div>';
+  pl.insertBefore(r,pl.firstChild);
+  document.getElementById('manual-inp').value='';
+  document.getElementById('manual-suggestions').style.display='none';
+  saveSession();
+  toast('"'+s.t+'" toegevoegd als gespeeld.');
 }
 
 /* ══ CHECKER ══ */
@@ -1616,7 +1693,16 @@ function checkBingo(){
   if(wonTypes.length>0){
     // Register won categories globally
     wonTypes.forEach(function(t){ST.wonCategories[typeToKey(t)]=true;});
+    // Add to bingo history
+    var curSong=ST.shuffled[ST.pidx];
+    ST.bingoHistory.push({
+      cardId:val,
+      types:wonTypes.join(' & '),
+      atSong:curSong?curSong.t:'',
+      atNum:ST.pidx+1
+    });
     updWonStatus();
+    updBingoHistory();
 
     var rem=remainingCategories();
     var remTxt=rem.length?'Nog te winnen: '+rem.join(', '):'Alle categorieën gewonnen!';
@@ -1648,6 +1734,39 @@ function checkBingo(){
     var lbl=s.t.length>18?s.t.slice(0,16)+'...':s.t;
     return'<div class="'+cls+'">'+esc(lbl)+'</div>';
   }).join('');
+
+  // ── Gemiste bingo detectie ──
+  // Controleer of er een moment was waarop deze kaart al bingo had kunnen hebben
+  var missedMsg=checkMissedBingo(val-1);
+  var missedEl=document.getElementById('missed-bingo');
+  if(missedEl){
+    if(missedMsg){missedEl.style.display='block';missedEl.textContent=missedMsg;}
+    else{missedEl.style.display='none';}
+  }
+}
+
+function checkMissedBingo(cardIdx){
+  var card=ST.cards[cardIdx];
+  // Walk back through played songs and find earliest possible bingo moment
+  for(var upTo=0;upTo<=ST.pidx;upTo++){
+    var playedSoFar={};
+    for(var i=0;i<=upTo;i++){
+      if(ST.shuffled[i])playedSoFar[ST.shuffled[i].t+'|'+ST.shuffled[i].a]=true;
+    }
+    var cpCheck=card.cells.map(function(s){return s===null?true:!!playedSoFar[s.t+'|'+s.a];});
+    // Check all active categories
+    var hadBingo=false;
+    if(ST.bmodes.row){for(var row=0;row<5;row++){var ln=[];for(var c=0;c<5;c++)ln.push(row*5+c);if(ln.every(function(i){return cpCheck[i];})){hadBingo=true;}}}
+    if(!hadBingo&&ST.bmodes.col){for(var col=0;col<5;col++){var ln=[];for(var r=0;r<5;r++)ln.push(r*5+col);if(ln.every(function(i){return cpCheck[i];})){hadBingo=true;}}}
+    if(!hadBingo&&ST.bmodes.diag){var d1=[0,6,12,18,24],d2=[4,8,12,16,20];if(d1.every(function(i){return cpCheck[i];})||d2.every(function(i){return cpCheck[i];})){hadBingo=true;}}
+    if(!hadBingo&&ST.bmodes.full){if(cpCheck.every(function(v){return v;})){hadBingo=true;}}
+    if(hadBingo&&upTo<ST.pidx){
+      // This card could have had bingo earlier!
+      var missedAt=ST.shuffled[upTo];
+      return'⚠ Deze kaart had al bingo kunnen hebben na nummer '+(upTo+1)+' ("'+missedAt.t+'"). Iemand heeft niet opgelet!';
+    }
+  }
+  return null;
 }
 
 function showBingoModal(cardId,type,modes,isFinal){
@@ -1669,6 +1788,27 @@ function showBingoModal(cardId,type,modes,isFinal){
 function closeBingoModal(){
   document.getElementById('bingo-modal').style.display='none';
   if(window._bingoAnim)clearInterval(window._bingoAnim);
+}
+
+function updBingoHistory(){
+  var panel=document.getElementById('bingo-history-panel');
+  var list=document.getElementById('bingo-history-list');
+  var count=document.getElementById('bingo-history-count');
+  if(!panel||!list)return;
+  if(!ST.bingoHistory.length){panel.style.display='none';return;}
+  panel.style.display='block';
+  if(count)count.textContent=ST.bingoHistory.length;
+  list.innerHTML=ST.bingoHistory.map(function(b,i){
+    return'<div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04)">'
+      +'<div>'
+      +'<span style="font-size:.85rem;font-weight:700;color:var(--tx)">Kaart '+b.cardId+'</span>'
+      +'<span style="font-size:.75rem;color:var(--a);margin-left:.5rem">'+b.types+'</span>'
+      +'</div>'
+      +'<div style="font-size:.7rem;color:var(--mt);text-align:right">'
+      +'Nr. '+b.atNum+'<br><span style="font-size:.65rem">'+esc(b.atSong)+'</span>'
+      +'</div>'
+      +'</div>';
+  }).join('');
 }
 
 function closeBingoGoFeedback(){closeBingoModal();go('feedback');}
