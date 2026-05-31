@@ -1339,78 +1339,14 @@ function selSaved(id){ST.selSaved=id;buildSavedList();updCTA();}
 function delPl(id,e){e.stopPropagation();putSaved(getSaved().filter(function(p){return p.id!==id;}));if(ST.selSaved===id)ST.selSaved=null;buildSavedList();updCTA();}
 
 /* ══ THEMES ══ */
-function buildThemeGrid(){
-  var g=document.getElementById('tgrid');
-  g.innerHTML=THEMES.map(function(th){
-    return'<div class="tcard" id="tc-'+th.id+'" style="--tc:'+th.color+';background:'+th.color+'15" onclick="selT(\''+th.id+'\')">'
-      +'<span class="tcard-name">'+th.name+'</span>'
-      +'<span class="tcard-desc">'+th.desc+'</span>'
-      +'<span class="tcard-meta">'+th.songs.length+' nummers &middot; '+th.mood+'</span>'
-      +'</div>';
-  }).join('');
-}
-function selT(id){
-  ST.selTheme=id;
-  document.querySelectorAll('.tcard').forEach(function(c){c.classList.remove('sel');});
-  var el=document.getElementById('tc-'+id);if(el)el.classList.add('sel');
-  updCTA();
-}
-
 /* ══ INPUT MODE ══ */
-function setIM(m){
-  ST.mode=m;
-  ['thema','eigen','opgeslagen','spotify'].forEach(function(x){
-    var tab=document.getElementById('tab-'+x);
-    if(tab)tab.classList.toggle('on',x===m);
-    var inp=document.getElementById('inp-'+x);if(inp)inp.style.display=x===m?'block':'none';
-  });
-  if(m==='opgeslagen')buildSavedList();
-  if(m==='spotify')initStartSpotify();
-  updInd();updCTA();
-}
-
 /* ══ PLAYERS ══ */
 function chP(d){updP(Math.min(200,Math.max(1,ST.players+d)));}
-function updP(v){
-  ST.players=parseInt(v);
-  document.getElementById('pnum').textContent=ST.players;
-  document.getElementById('plbl').textContent=ST.players;
-  document.getElementById('psl').value=ST.players;
-  var m=minN(ST.players);
-  document.getElementById('mn-p').textContent=ST.players;
-  document.getElementById('mn-c').textContent=m;
-  updInd();updCTA();
-}
 function parseSongs(txt){
   return txt.trim().split('\n').map(function(l){return l.trim();}).filter(Boolean).map(function(l){
     var p=l.split(/\s*[-–—]\s*/);return p.length>=2?{a:p[0].trim(),t:p.slice(1).join(' - ').trim()}:{a:'',t:l};
   });
 }
-function updInd(){
-  var ind=document.getElementById('song-ind');if(!ind)return;
-  if(ST.mode!=='eigen'){ind.style.display='none';return;}
-  ind.style.display='flex';
-  var txt=document.getElementById('songs-in')?document.getElementById('songs-in').value:'';
-  var songs=parseSongs(txt),count=songs.length,min=minN(ST.players);
-  if(count===0){ind.className='si';ind.textContent='Voer nummers in om te beginnen.';}
-  else if(count<25){ind.className='si warn';ind.textContent='Je hebt '+count+' nummers — voeg minimaal '+(25-count)+' toe voor een 5x5 kaart.';}
-  else if(count<min){ind.className='si warn';ind.textContent='Je hebt '+count+' nummers — voor '+ST.players+' spelers zijn '+min+' nummers aanbevolen.';}
-  else{ind.className='si ok';ind.textContent='Je hebt '+count+' nummers — genoeg voor '+ST.players+' unieke kaarten!';}
-}
-function updCTA(){
-  var btn=document.getElementById('cta-btn');if(!btn)return;
-  if(ST.mode==='thema'){btn.disabled=!ST.selTheme;btn.textContent=ST.selTheme?'Start mijn muziekbingo':'Kies eerst een thema';}
-  else if(ST.mode==='eigen'){
-    var count=parseSongs(document.getElementById('songs-in')?document.getElementById('songs-in').value:'').length;
-    btn.disabled=count<25;btn.textContent=count<25?'Voeg nog '+(25-count)+' nummers toe':'Start mijn muziekbingo';
-  } else if(ST.mode==='opgeslagen'){
-    btn.disabled=!ST.selSaved;btn.textContent=ST.selSaved?'Start mijn muziekbingo':'Kies een playlist';
-  } else if(ST.mode==='spotify'){
-    btn.disabled=!SP.selectedPlaylist;
-    btn.textContent=SP.selectedPlaylist?'Start mijn muziekbingo':'Kies eerst een playlist';
-  } else {btn.disabled=false;btn.textContent='Start mijn muziekbingo';}
-}
-
 /* ══ GENERATE ══ */
 function gen(){
   var songs=[];
@@ -1708,8 +1644,6 @@ function initHost(){
   setHM(ST.hmode);setSpd(ST.speed);
 }
 function setHM(m){ST.hmode=m;document.getElementById('sm').classList.toggle('on',m==='manual');document.getElementById('sa').classList.toggle('on',m==='auto');var srow=document.getElementById('srow');if(srow)srow.style.display=m==='auto'?'block':'none';document.getElementById('twrap').style.display='none';clearInterval(ST.tint);ST.tint=null;}
-function setSpd(s){ST.speed=parseInt(s);document.querySelectorAll('[data-s]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.s)===ST.speed);});}
-function setStartPos(p){ST.startPos=p;document.querySelectorAll('[data-p]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.p)===p);});}
 function nextSong(){
   if(ST.paused)return;clearInterval(ST.tint);ST.tint=null;ST.pidx++;
   if(ST.pidx>=ST.shuffled.length){document.getElementById('htitle').textContent='Alle nummers gespeeld!';document.getElementById('hartist').textContent='Einde van de ronde';document.getElementById('twrap').style.display='none';var v=document.getElementById('hvinyl');if(v)v.classList.remove('spin');return;}
