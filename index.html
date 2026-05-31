@@ -502,17 +502,28 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
     <!-- Handmatig/Automatisch + instellingen compact -->
     <div style="width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:16px;padding:.85rem 1rem;margin-bottom:1.1rem">
-      <div class="seg" style="margin-bottom:.75rem">
+      <div class="seg" style="margin-bottom:.85rem">
         <button class="seg-btn on" id="sm" onclick="setHM('manual')">Handmatig</button>
         <button class="seg-btn" id="sa" onclick="setHM('auto')">Automatisch</button>
       </div>
-      <div id="srow" style="display:none">
+      <!-- Start vanaf — altijd zichtbaar -->
+      <div style="margin-bottom:.65rem">
         <div style="font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.45rem">Start nummer vanaf</div>
         <div class="spd-btns" style="margin-bottom:0">
           <button class="spd" data-p="0" onclick="setStartPos(0)">Begin</button>
           <button class="spd" data-p="15" onclick="setStartPos(15)">15 sec</button>
           <button class="spd on" data-p="30" onclick="setStartPos(30)">30 sec</button>
-          <button class="spd" data-p="45" onclick="setStartPos(45)">45 sec</button>
+          <button class="spd" data-p="60" onclick="setStartPos(60)">60 sec</button>
+        </div>
+      </div>
+      <!-- Duur per nummer — alleen bij automatisch -->
+      <div id="srow" style="display:none">
+        <div style="font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.45rem">Duur per nummer</div>
+        <div class="spd-btns" style="margin-bottom:0">
+          <button class="spd" data-s="15" onclick="setSpd(15)">15 sec</button>
+          <button class="spd on" data-s="30" onclick="setSpd(30)">30 sec</button>
+          <button class="spd" data-s="45" onclick="setSpd(45)">45 sec</button>
+          <button class="spd" data-s="60" onclick="setSpd(60)">60 sec</button>
         </div>
       </div>
     </div>
@@ -1608,7 +1619,7 @@ function initHost(){
   var v=document.getElementById('hvinyl');if(v&&ST.pidx===-1)v.classList.remove('spin');
   setHM(ST.hmode);setSpd(ST.speed);
 }
-function setHM(m){ST.hmode=m;document.getElementById('sm').classList.toggle('on',m==='manual');document.getElementById('sa').classList.toggle('on',m==='auto');document.getElementById('srow').style.display=m==='auto'?'flex':'none';document.getElementById('twrap').style.display='none';clearInterval(ST.tint);ST.tint=null;}
+function setHM(m){ST.hmode=m;document.getElementById('sm').classList.toggle('on',m==='manual');document.getElementById('sa').classList.toggle('on',m==='auto');var srow=document.getElementById('srow');if(srow)srow.style.display=m==='auto'?'block':'none';document.getElementById('twrap').style.display='none';clearInterval(ST.tint);ST.tint=null;}
 function setSpd(s){ST.speed=parseInt(s);document.querySelectorAll('[data-s]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.s)===ST.speed);});}
 function setStartPos(p){ST.startPos=p;document.querySelectorAll('[data-p]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.p)===p);});}
 function nextSong(){
