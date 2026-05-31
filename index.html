@@ -1169,7 +1169,7 @@ function toast(m){var t=document.getElementById('toast');t.textContent=m;t.class
 function load(t,p){document.getElementById('ltxt').textContent=t||'Even geduld...';document.getElementById('load').classList.add('on');if(p!==undefined)document.getElementById('lprogf').style.width=p+'%';}
 function setLP(p){document.getElementById('lprogf').style.width=p+'%';}
 function unload(){document.getElementById('load').classList.remove('on');document.getElementById('lprogf').style.width='0%';}
-function go(s){document.querySelectorAll('.screen').forEach(function(x){x.classList.remove('active');});document.getElementById('screen-'+s).classList.add('active');if(s==='host')initHost();if(s==='admin')buildAdmin();window.scrollTo(0,0);}
+function go(s){document.querySelectorAll('.screen').forEach(function(x){x.classList.remove('active');});document.getElementById('screen-'+s).classList.add('active');if(s==='host'){initHost();setTimeout(syncSpotifyHostPanel,100);}if(s==='admin')buildAdmin();window.scrollTo(0,0);}
 
 /* ══ REVIEWS CAROUSEL ══ */
 var _rIdx=0, _rTimer=null, _rAll=[];
