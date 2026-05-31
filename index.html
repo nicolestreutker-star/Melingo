@@ -558,13 +558,25 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <input type="text" class="psrch" id="psrch" placeholder="Zoek in gespeelde nummers..." oninput="filterPlayed()"/>
       <div class="plist" id="plist"><div class="pempty">Nog geen nummers gespeeld</div></div>
     </div>
-    <div class="panel">
-      <div class="ph"><span>Bingo-instellingen</span></div>
-      <div class="bmode-grid">
-        <label class="bmode-btn on" id="bm-row"><input type="checkbox" checked onchange="updBmode('row',this.checked)"/><div><span class="bmode-label">Horizontale rij</span><span class="bmode-sub">5 vakjes op een rij →</span></div></label>
-        <label class="bmode-btn on" id="bm-col"><input type="checkbox" checked onchange="updBmode('col',this.checked)"/><div><span class="bmode-label">Verticale rij</span><span class="bmode-sub">5 vakjes in een rij ↓</span></div></label>
-        <label class="bmode-btn on" id="bm-diag"><input type="checkbox" checked onchange="updBmode('diag',this.checked)"/><div><span class="bmode-label">Diagonale rij</span><span class="bmode-sub">5 vakjes diagonaal ↘</span></div></label>
-        <label class="bmode-btn" id="bm-full"><input type="checkbox" onchange="updBmode('full',this.checked)"/><div><span class="bmode-label">Volledige kaart</span><span class="bmode-sub">Alle 25 vakjes vol</span></div></label>
+    <div style="width:100%;margin-bottom:1.1rem">
+      <div style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:.6rem;padding:0 .1rem">Bingo-instellingen</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+        <label id="bm-row" onclick="updBmode('row',!ST.bmodes.row)" style="display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:14px;cursor:pointer;background:linear-gradient(135deg,rgba(242,64,106,.15),rgba(155,109,255,.1));border:1.5px solid rgba(242,64,106,.4);transition:all .2s">
+          <div id="bm-row-check" style="width:22px;height:22px;border-radius:6px;background:var(--s);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;color:white">✓</div>
+          <div><div style="font-size:.82rem;font-weight:700;color:var(--tx)">Horizontale rij</div><div style="font-size:.65rem;color:var(--mt);margin-top:.1rem">5 op een rij →</div></div>
+        </label>
+        <label id="bm-col" onclick="updBmode('col',!ST.bmodes.col)" style="display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:14px;cursor:pointer;background:linear-gradient(135deg,rgba(106,171,247,.15),rgba(155,109,255,.1));border:1.5px solid rgba(106,171,247,.4);transition:all .2s">
+          <div id="bm-col-check" style="width:22px;height:22px;border-radius:6px;background:var(--m);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;color:white">✓</div>
+          <div><div style="font-size:.82rem;font-weight:700;color:var(--tx)">Verticale rij</div><div style="font-size:.65rem;color:var(--mt);margin-top:.1rem">5 op een kolom ↓</div></div>
+        </label>
+        <label id="bm-diag" onclick="updBmode('diag',!ST.bmodes.diag)" style="display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:14px;cursor:pointer;background:linear-gradient(135deg,rgba(155,109,255,.15),rgba(239,59,85,.1));border:1.5px solid rgba(155,109,255,.4);transition:all .2s">
+          <div id="bm-diag-check" style="width:22px;height:22px;border-radius:6px;background:var(--a);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;color:white">✓</div>
+          <div><div style="font-size:.82rem;font-weight:700;color:var(--tx)">Diagonale rij</div><div style="font-size:.65rem;color:var(--mt);margin-top:.1rem">5 diagonaal ↘</div></div>
+        </label>
+        <label id="bm-full" onclick="updBmode('full',!ST.bmodes.full)" style="display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:14px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid var(--bd);transition:all .2s">
+          <div id="bm-full-check" style="width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;color:var(--mt)">✓</div>
+          <div><div style="font-size:.82rem;font-weight:700;color:var(--mt)">Volledige kaart</div><div style="font-size:.65rem;color:var(--mt2);margin-top:.1rem">Alle 25 vakjes vol</div></div>
+        </label>
       </div>
     </div>
     <!-- Won status panel -->
@@ -596,8 +608,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <div id="bingo-history-list" style="padding:.75rem"></div>
     </div>
 
+    <!-- Sessie opslaan -->
+    <div class="panel" style="margin-bottom:1.1rem">
+      <div class="ph"><span>Sessie opslaan</span></div>
+      <div style="padding:.85rem;display:flex;gap:.5rem;flex-wrap:wrap">
+        <input type="text" class="ci" id="session-name" placeholder="Naam voor deze bingo (bijv. Kerst 2025)" style="flex:1;min-width:160px"/>
+        <button class="btn bgr" onclick="saveNamedSession()" style="min-height:44px">Opslaan</button>
+      </div>
+      <div id="saved-sessions-list" style="padding:0 .85rem .85rem"></div>
+    </div>
+
     <div style="display:flex;gap:.5rem;width:100%;margin-bottom:1rem">
-      <button class="btn bs" style="flex:1;min-height:44px" onclick="initHost()">Opnieuw</button>
+      <button class="btn bs" style="flex:1;min-height:44px" onclick="resetHost()">Opnieuw</button>
       <button class="btn bs" style="flex:1;min-height:44px" onclick="go('start')">Nieuw spel</button>
     </div>
   </div>
@@ -1484,6 +1506,17 @@ function dlPDF(eco){
 }
 
 /* ══ HOST ══ */
+function resetHost(){
+  // Reset spel maar behoud kaarten en nummers
+  ST.pidx=-1;
+  ST.shuffled=shuf(ST.songs);
+  ST.wonCategories={};
+  ST.bingoHistory=[];
+  ST.missedChecked={};
+  initHost();
+  toast('Spel gereset — zelfde kaarten, nieuwe volgorde.');
+}
+
 function initHost(){
   if(ST.pidx===-1)ST.shuffled=shuf(ST.songs);
   ST.paused=false;clearInterval(ST.tint);ST.tint=null;
@@ -1519,6 +1552,7 @@ function initHost(){
   document.getElementById('cinp').value='';
   document.getElementById('psrch').value='';
   document.getElementById('bpause').textContent='⏸';
+  renderSavedSessions();
   document.getElementById('hcount').textContent=(ST.pidx<0?0:ST.pidx+1)+' / '+ST.songs.length;
   var v=document.getElementById('hvinyl');if(v&&ST.pidx===-1)v.classList.remove('spin');
   setHM(ST.hmode);setSpd(ST.speed);
@@ -1591,8 +1625,20 @@ function filterPlayed(){var q=document.getElementById('psrch').value.toLowerCase
 /* ══ BINGO MODES ══ */
 function updBmode(key,val){
   ST.bmodes[key]=val;
-  var el=document.getElementById('bm-'+key);if(el)el.classList.toggle('on',val);
-  // Remove from won if unchecked
+  // Update visual check button
+  var colors={row:'var(--s)',col:'var(--m)',diag:'var(--a)',full:'rgba(255,255,255,.15)'};
+  var textColors={row:'white',col:'white',diag:'white',full:'var(--mt)'};
+  var labelColors={row:'var(--tx)',col:'var(--tx)',diag:'var(--tx)',full:val?'var(--tx)':'var(--mt)'};
+  var check=document.getElementById('bm-'+key+'-check');
+  var label=document.getElementById('bm-'+key);
+  if(check){
+    check.style.background=val?colors[key]:'rgba(255,255,255,.08)';
+    check.style.color=val?textColors[key]:'var(--mt2)';
+    check.textContent=val?'✓':'';
+  }
+  if(label){
+    label.style.opacity=val?'1':'0.45';
+  }
   if(!val)delete ST.wonCategories[key];
   updWonStatus();
 }
@@ -1870,6 +1916,72 @@ function showBingoModal(cardId,type,modes,isFinal){
   var ci2=0;
   if(window._bingoAnim)clearInterval(window._bingoAnim);
   window._bingoAnim=setInterval(function(){document.getElementById('bingo-confetti').textContent=emojis[ci2%emojis.length];ci2++;},isFinal?350:500);
+}
+
+function getNamedSessions(){try{return JSON.parse(localStorage.getItem('melo_sessions')||'[]');}catch(e){return[];}}
+function putNamedSessions(arr){try{localStorage.setItem('melo_sessions',JSON.stringify(arr));}catch(e){}}
+
+function saveNamedSession(){
+  var name=document.getElementById('session-name').value.trim();
+  if(!name){toast('Geef je sessie een naam.');return;}
+  var sessions=getNamedSessions();
+  // Remove existing with same name
+  sessions=sessions.filter(function(s){return s.name!==name;});
+  sessions.unshift({
+    name:name,
+    songs:ST.songs,
+    cards:ST.cards,
+    players:ST.players,
+    shuffled:ST.shuffled,
+    pidx:ST.pidx,
+    wonCategories:ST.wonCategories,
+    bingoHistory:ST.bingoHistory,
+    saved:new Date().toISOString()
+  });
+  // Keep max 10 sessions
+  sessions=sessions.slice(0,10);
+  putNamedSessions(sessions);
+  toast('"'+name+'" opgeslagen!');
+  renderSavedSessions();
+}
+
+function renderSavedSessions(){
+  var el=document.getElementById('saved-sessions-list');
+  if(!el)return;
+  var sessions=getNamedSessions();
+  if(!sessions.length){el.innerHTML='';return;}
+  el.innerHTML='<div style="font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.4rem">Opgeslagen sessies</div>'
+    +sessions.map(function(s){
+      var d=new Date(s.saved);
+      return'<div style="display:flex;align-items:center;justify-content:space-between;padding:.45rem .1rem;border-bottom:1px solid rgba(255,255,255,.04)">'
+        +'<div><div style="font-size:.8rem;font-weight:600;color:var(--tx)">'+esc(s.name)+'</div>'
+        +'<div style="font-size:.65rem;color:var(--mt)">'+s.cards.length+' kaarten &middot; nr. '+(s.pidx+1)+' gespeeld &middot; '+d.toLocaleDateString('nl-NL')+'</div></div>'
+        +'<div style="display:flex;gap:.35rem">'
+        +'<button class="btn bp" style="font-size:.72rem;padding:.35rem .65rem" onclick="loadNamedSession(''+esc(s.name)+'')">Herstel</button>'
+        +'<button class="btn bs" style="font-size:.72rem;padding:.35rem .65rem" onclick="deleteNamedSession(''+esc(s.name)+'')">✕</button>'
+        +'</div>'
+        +'</div>';
+    }).join('');
+}
+
+function loadNamedSession(name){
+  var sessions=getNamedSessions();
+  var s=sessions.filter(function(x){return x.name===name;})[0];
+  if(!s){toast('Sessie niet gevonden.');return;}
+  ST.songs=s.songs;ST.cards=s.cards;ST.players=s.players;
+  ST.shuffled=s.shuffled;ST.pidx=s.pidx;
+  ST.wonCategories=s.wonCategories||{};
+  ST.bingoHistory=s.bingoHistory||[];
+  ST.missedChecked={};
+  saveSession();
+  initHost();
+  toast('"'+name+'" hersteld — verder waar je gebleven was!');
+}
+
+function deleteNamedSession(name){
+  putNamedSessions(getNamedSessions().filter(function(s){return s.name!==name;}));
+  renderSavedSessions();
+  toast('Sessie verwijderd.');
 }
 
 function closeBingoModal(){
