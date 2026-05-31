@@ -272,6 +272,101 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .sp-playlist-count{font-size:.65rem;color:var(--mt)}
 .sp-error{background:rgba(242,64,106,.08);border:1px solid rgba(242,64,106,.25);border-radius:10px;padding:.6rem .85rem;font-size:.78rem;color:var(--s);margin-bottom:.75rem}
 
+/* ══ START SCREEN ══ */
+.start-wrap{display:flex;align-items:flex-start;justify-content:center;gap:3rem;padding:2.5rem 1.5rem;min-height:100vh;max-width:1200px;margin:0 auto}
+.start-left{flex:1;min-width:0;max-width:440px;padding-top:.5rem}
+.start-right{flex:1;min-width:0;max-width:520px;position:sticky;top:1.5rem}
+.start-logo-wrap{display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem}
+.start-brand{font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.start-slogan{font-size:.72rem;color:var(--mt);font-style:italic;margin-top:.1rem}
+.start-hero{font-size:2rem;font-weight:800;line-height:1.2;margin:0 0 .85rem;color:var(--tx)}
+.start-sub{font-size:.88rem;color:var(--mt);line-height:1.65;margin:0 0 1.75rem}
+.start-steps{display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.25rem}
+.start-step{display:flex;align-items:flex-start;gap:.75rem}
+.step-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--s),var(--a));color:#fff;font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.step-desc{font-size:.75rem;color:var(--mt);margin-top:.1rem}
+.start-ideal{font-size:.78rem;color:var(--mt);font-style:italic;margin-bottom:1.25rem;padding:.6rem .85rem;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid var(--bd)}
+.start-reviews{margin-bottom:1.25rem}
+.rev-stars{font-size:.85rem;color:#ffd060;margin-bottom:.6rem}
+.rev-carousel{position:relative;min-height:80px}
+.rev-item{display:none;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:14px;padding:.75rem 1rem;font-size:.78rem;color:var(--mt);line-height:1.55}
+.rev-item.active{display:block}
+.rev-dots{display:flex;gap:.35rem;margin-top:.5rem}
+.rev-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s}
+.rev-dot.active{background:var(--a);width:16px;border-radius:3px}
+.resume-bar{background:rgba(155,109,255,.08);border:1px solid rgba(155,109,255,.25);border-radius:14px;padding:.85rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+
+/* GENERATOR */
+.generator-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.5rem;backdrop-filter:blur(20px)}
+.gen-section{margin-bottom:1.25rem}
+.gen-label{font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mt);margin-bottom:.75rem}
+
+/* TYPE CARDS */
+.type-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.type-card{background:rgba(255,255,255,.04);border:2px solid transparent;border-radius:16px;padding:.9rem .75rem;cursor:pointer;transition:all .2s;position:relative}
+.type-card:hover{background:rgba(255,255,255,.07);border-color:rgba(155,109,255,.3)}
+.type-card.sel{background:rgba(155,109,255,.1);border-color:var(--a)}
+.type-badge{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border-radius:6px;display:inline-block;margin-bottom:.5rem}
+.badge-mid{background:rgba(155,109,255,.2);color:var(--a)}
+.badge-low{background:rgba(106,171,247,.2);color:var(--m)}
+.badge-prem{background:rgba(29,185,84,.2);color:var(--green)}
+.type-icon{font-size:1.4rem;margin-bottom:.4rem}
+.type-title{font-size:.82rem;font-weight:700;color:var(--tx);margin-bottom:.35rem}
+.type-desc{font-size:.72rem;color:var(--mt);line-height:1.5;margin-bottom:.5rem}
+.type-bullets{list-style:none;padding:0;margin:0;font-size:.7rem;color:var(--mt);display:flex;flex-direction:column;gap:.2rem}
+.type-bullets li::before{content:"✓ ";color:var(--green);font-weight:700}
+
+/* THEME GRID */
+.theme-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;max-height:280px;overflow-y:auto;padding-right:.25rem}
+.tcard{background:rgba(255,255,255,.04);border:2px solid transparent;border-radius:14px;padding:.75rem;cursor:pointer;transition:all .15s}
+.tcard:hover{background:rgba(255,255,255,.07);border-color:rgba(155,109,255,.3)}
+.tcard.sel{border-color:var(--a);background:rgba(155,109,255,.1)}
+.tcard-name{font-size:.82rem;font-weight:700;color:var(--tx);margin-bottom:.2rem}
+.tcard-mood{font-size:.68rem;color:var(--mt);margin-bottom:.3rem;font-style:italic}
+.tcard-meta{font-size:.65rem;color:rgba(255,255,255,.35)}
+
+/* EIGEN NUMMERS */
+.eigen-ta{width:100%;min-height:120px;background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:14px;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;padding:.85rem;resize:vertical;outline:none;transition:border .2s;box-sizing:border-box}
+.eigen-ta:focus{border-color:var(--a)}
+.eigen-status{font-size:.78rem;font-weight:600;margin-top:.5rem;padding:.5rem .75rem;border-radius:10px}
+.eigen-status.ok{background:rgba(29,185,84,.08);color:var(--green);border:1px solid rgba(29,185,84,.2)}
+.eigen-status.warn{background:rgba(242,64,106,.08);color:var(--s);border:1px solid rgba(242,64,106,.2)}
+
+/* PLAYER PICKER */
+.player-row{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.65rem}
+.pq{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid var(--bd);color:var(--tx);font-size:.9rem;font-weight:700;cursor:pointer;transition:all .15s}
+.pq:hover{background:rgba(255,255,255,.12)}
+.pnum{font-size:2.2rem;font-weight:800;color:var(--a);min-width:60px;text-align:center}
+.player-quick{display:flex;gap:.4rem;justify-content:center;margin-bottom:.65rem}
+.pqk{padding:.35rem .75rem;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--bd);color:var(--mt);font-size:.78rem;cursor:pointer;transition:all .15s}
+.pqk:hover{background:rgba(155,109,255,.15);color:var(--a);border-color:var(--a)}
+.pqk.sel{background:rgba(155,109,255,.2);color:var(--a);border-color:var(--a)}
+.player-info{font-size:.75rem;color:var(--mt);text-align:center;min-height:20px}
+
+/* UPSELL */
+.upsell-bar{background:rgba(155,109,255,.07);border:1px solid rgba(155,109,255,.2);border-radius:12px;padding:.65rem .85rem;font-size:.75rem;color:var(--mt);display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+.upsell-btn{background:none;border:1px solid rgba(155,109,255,.4);border-radius:8px;color:var(--a);font-size:.72rem;font-weight:600;padding:.3rem .65rem;cursor:pointer;white-space:nowrap;transition:all .15s}
+.upsell-btn:hover{background:rgba(155,109,255,.15)}
+
+/* SUMMARY + CTA */
+.gen-summary{background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:14px;padding:.85rem 1rem}
+.summary-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.sum-title{font-size:.88rem;font-weight:700;color:var(--tx)}
+.sum-meta{font-size:.72rem;color:var(--mt);text-align:right}
+.btn-cta{width:100%;min-height:52px;border-radius:16px;background:linear-gradient(135deg,var(--s),var(--a));border:none;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:.1rem}
+.btn-cta:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
+.btn-cta:disabled{background:rgba(255,255,255,.08);color:var(--mt);cursor:not-allowed;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .start-wrap{flex-direction:column;padding:1.5rem 1rem;gap:2rem}
+  .start-left{max-width:100%}
+  .start-right{max-width:100%;position:static}
+  .start-hero{font-size:1.5rem}
+  .type-cards{grid-template-columns:1fr}
+  .theme-grid{max-height:none;grid-template-columns:repeat(2,1fr)}
+}
+
 /* COLLAPSIBLE PANELS */
 .collapsible-panel{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:18px;overflow:hidden;margin-bottom:.85rem}
 .col-toggle{width:100%;padding:.75rem 1rem;background:none;border:none;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;text-align:left;transition:background .15s}
@@ -333,123 +428,184 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <!-- ═══ SCREEN 1 — START ═══ -->
 <div id="screen-start" class="screen active">
 <div class="scroll">
-<div style="display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.25rem;min-height:100vh;position:relative;z-index:1">
-<div class="start-layout">
+<div class="start-wrap">
 
-  <!-- LEFT -->
+  <!-- LEFT COL -->
   <div class="start-left">
-    <div style="text-align:center;margin-bottom:1.75rem">
-      <div style="width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--s),var(--a));margin:0 auto .9rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 50px rgba(155,109,255,.4)">
-        <svg width="40" height="40" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#111"/><circle cx="50" cy="50" r="38" fill="#1a1a1a"/><circle cx="50" cy="50" r="28" fill="#111"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#111"/></svg>
-      </div>
-      <div style="font-size:2.4rem;font-weight:800;letter-spacing:-1px;background:linear-gradient(130deg,#fff 0%,var(--m) 40%,var(--a) 70%,var(--s) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Melingo</div>
-      <div style="color:var(--mt);font-size:.82rem;font-style:italic;margin-top:.25rem">Where melody meets bingo</div>
-    </div>
-
-    <!-- Uitleg -->
-    <div class="gc" style="margin-bottom:1.25rem">
-      <div class="how-step">
-        <div class="how-num">1</div>
-        <div><div class="how-title">Kies je nummers</div><div class="how-desc">Kies een kant-en-klaar thema of plak je eigen nummers. Hoe meer nummers, hoe unieker de kaarten.</div></div>
-      </div>
-      <div class="how-step">
-        <div class="how-num">2</div>
-        <div><div class="how-title">Genereer en print</div><div class="how-desc">Melingo maakt unieke kaarten voor elke speler. Download de PDF, print ze thuis en deel ze uit.</div></div>
-      </div>
-      <div class="how-step" style="margin-bottom:0">
-        <div class="how-num">3</div>
-        <div><div class="how-title">Speel!</div><div class="how-desc">Open het host-scherm, zet Spotify aan en klik op volgend nummer. Wie een rij vol heeft roept MELINGO!</div></div>
-      </div>
-      <div class="divider"></div>
-      <div class="tip-box"><strong>Pro tip:</strong> speel meerdere rondes met oplopende moeilijkheid. Ronde 1: één rij. Ronde 2: diagonaal. Ronde 3: volledige kaart.</div>
-    </div>
-
-    <!-- Reviews carousel -->
-    <div class="reviews-section">
-      <div class="reviews-title">
-        <span>Wat anderen zeggen</span>
-        <span class="review-avg" id="review-avg-display">★ 4.8</span>
-      </div>
-      <div class="review-carousel" id="review-carousel"></div>
-      <div class="review-dots" id="review-dots"></div>
-    </div>
-  </div>
-
-  <!-- RIGHT -->
-  <div>
-    <div class="resume-banner" id="resume-banner" style="display:none">
+    <div class="start-logo-wrap">
+      <svg width="44" height="44" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
       <div>
-        <div class="resume-info">Vorige sessie — <strong id="rb-info"></strong></div>
-        <div class="resume-sub" id="rb-sub"></div>
-      </div>
-      <div style="display:flex;gap:.4rem;flex-shrink:0">
-        <button class="btn bp" style="font-size:.78rem;padding:.45rem .85rem" onclick="resumeSession()">Verder</button>
-        <button class="btn bs" style="font-size:.78rem;padding:.45rem .85rem" onclick="clearSession()">Nieuw</button>
+        <div class="start-brand">Melingo</div>
+        <div class="start-slogan">Where melody meets bingo</div>
       </div>
     </div>
 
-    <div class="gc">
-      <div class="tabs" style="margin-bottom:1.2rem">
-        <button class="tab on" id="tab-thema" onclick="setIM('thema')">Thema</button>
-        <button class="tab" id="tab-eigen" onclick="setIM('eigen')">Eigen nummers</button>
-        <button class="tab" id="tab-opgeslagen" onclick="setIM('opgeslagen')">Opgeslagen</button>
-        <button class="tab" id="tab-spotify" onclick="setIM('spotify')">Spotify</button>
-      </div>
+    <h1 class="start-hero">Maak je eigen muziekbingo in minuten</h1>
+    <p class="start-sub">Kies een thema, maak goedkope PDF-kaarten of speel met je eigen Spotify-playlist via het host-scherm.</p>
 
-      <div id="inp-thema">
-        <label class="fl">Kies een thema</label>
-        <div class="tgrid" id="tgrid"></div>
-      </div>
+    <div class="start-steps">
+      <div class="start-step"><div class="step-num">1</div><div><strong>Kies je bingo-type</strong><div class="step-desc">Thema, eigen nummers of Spotify</div></div></div>
+      <div class="start-step"><div class="step-num">2</div><div><strong>Genereer unieke kaarten</strong><div class="step-desc">Elke speler krijgt een andere kaart</div></div></div>
+      <div class="start-step"><div class="step-num">3</div><div><strong>Print of host</strong><div class="step-desc">PDF printen of live spelen via het host-scherm</div></div></div>
+    </div>
 
-      <div id="inp-eigen" style="display:none">
-        <label class="fl">Plak je nummers — artiest - titel, één per regel</label>
-        <textarea class="fi" id="songs-in" oninput="updInd()" placeholder="Queen – Don't Stop Me Now&#10;ABBA – Dancing Queen&#10;Bon Jovi – Livin' on a Prayer&#10;Toto – Africa&#10;Michael Jackson – Billie Jean"></textarea>
-        <div class="si" id="song-ind" style="margin-top:.5rem">Voer nummers in om te beginnen.</div>
-        <button class="btn bs" style="margin-top:.6rem;font-size:.78rem;width:100%" onclick="savePlaylist()">Sla op als mijn playlist</button>
-      </div>
+    <div class="start-ideal">Ideaal voor feestjes, borrels, kerstavonden en familiespelletjes.</div>
 
-      <div id="inp-opgeslagen" style="display:none">
-        <label class="fl">Mijn opgeslagen playlists</label>
-        <div id="saved-list-wrap"></div>
-        <div id="no-saved" style="text-align:center;padding:1.5rem;color:var(--mt);font-size:.82rem">Nog geen playlists opgeslagen.</div>
+    <!-- Reviews -->
+    <div class="start-reviews">
+      <div class="rev-stars">★★★★★ <span style="color:var(--mt);font-size:.72rem">4.8 gemiddeld</span></div>
+      <div class="rev-carousel" id="rev-carousel">
+        <div class="rev-item active" id="rev-0"></div>
+        <div class="rev-item" id="rev-1"></div>
+        <div class="rev-item" id="rev-2"></div>
       </div>
+      <div class="rev-dots" id="rev-dots"></div>
+    </div>
 
-      <div id="inp-spotify" style="display:none">
-        <div id="start-sp-connect" style="display:block">
-          <div style="color:var(--mt);font-size:.82rem;margin-bottom:.85rem;line-height:1.6">Verbind Spotify om je eigen playlist te gebruiken voor de bingokaarten. Je hebt <strong style="color:var(--tx)">Spotify Premium</strong> nodig.</div>
-          <button class="btn bp" style="width:100%;min-height:44px;margin-bottom:.75rem" onclick="startSpotifyLogin()">
-            Verbinden met Spotify
-          </button>
+    <!-- Saved sessions subtle link -->
+    <div id="resume-bar" style="display:none" class="resume-bar">
+      <div>
+        <div style="font-size:.78rem;font-weight:600;color:var(--tx)">Vorige sessie gevonden</div>
+        <div id="resume-meta" style="font-size:.7rem;color:var(--mt)"></div>
+      </div>
+      <div style="display:flex;gap:.5rem">
+        <button class="btn bp" onclick="resumeSession()" style="font-size:.75rem;padding:.4rem .85rem;min-height:36px">Verdergaan</button>
+        <button class="btn bs" onclick="dismissResume()" style="font-size:.75rem;padding:.4rem .85rem;min-height:36px">Nieuwe bingo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COL — GENERATOR -->
+  <div class="start-right">
+    <div class="generator-card">
+
+      <!-- STAP 1: TYPE -->
+      <div class="gen-section">
+        <div class="gen-label">Stap 1 — Kies je bingo-type</div>
+        <div class="type-cards">
+
+          <div class="type-card" id="tc-thema" onclick="setType('thema')">
+            <div class="type-badge badge-mid">Snel &amp; voordelig</div>
+            <div class="type-icon">🎵</div>
+            <div class="type-title">Kant-en-klaar thema</div>
+            <div class="type-desc">Speel direct met een bekend thema en het host-scherm.</div>
+            <ul class="type-bullets">
+              <li>40 nummers</li>
+              <li>Max. 20 spelers</li>
+              <li>Inclusief host-scherm</li>
+            </ul>
+          </div>
+
+          <div class="type-card" id="tc-eigen" onclick="setType('eigen')">
+            <div class="type-badge badge-low">Goedkoopste optie</div>
+            <div class="type-icon">📄</div>
+            <div class="type-title">Eigen nummers</div>
+            <div class="type-desc">Plak je eigen lijst en maak alleen printbare PDF-kaarten.</div>
+            <ul class="type-bullets">
+              <li>Eigen nummers plakken</li>
+              <li>Alleen PDF-kaarten</li>
+              <li>Geen host-scherm</li>
+            </ul>
+          </div>
+
+          <div class="type-card" id="tc-spotify" onclick="setType('spotify')">
+            <div class="type-badge badge-prem">Premium</div>
+            <div class="type-icon" style="color:#1db954">♫</div>
+            <div class="type-title">Spotify-playlist</div>
+            <div class="type-desc">Eigen muziek, grotere groepen en het host-scherm.</div>
+            <ul class="type-bullets">
+              <li>Eigen Spotify-playlist</li>
+              <li>Meer spelers mogelijk</li>
+              <li>Inclusief host-scherm</li>
+            </ul>
+          </div>
+
         </div>
-        <div id="start-sp-playlists" style="display:none">
-          <div style="color:var(--green);font-size:.8rem;font-weight:600;margin-bottom:.75rem" id="start-sp-user"></div>
-          <label class="fl">Kies een playlist</label>
-          <div id="start-sp-list" style="max-height:220px;overflow-y:auto;margin-bottom:.75rem"></div>
-          <div class="si ok" id="start-sp-selected" style="display:none;margin-bottom:.75rem">Playlist geselecteerd</div>
+      </div>
+
+      <!-- STAP 2: MUZIEK -->
+      <div class="gen-section" id="gen-music" style="display:none">
+        <div class="gen-label" id="gen-music-label">Stap 2 — Kies je muziek</div>
+
+        <!-- THEMA GRID -->
+        <div id="inp-thema" style="display:none">
+          <div class="theme-grid" id="theme-grid"></div>
+          <div class="upsell-bar" id="thema-upsell" style="display:none">
+            <span>Wil je met meer dan 20 mensen spelen én eigen muziek gebruiken?</span>
+            <button class="upsell-btn" onclick="setType('spotify')">Kies Spotify →</button>
+          </div>
+        </div>
+
+        <!-- EIGEN NUMMERS -->
+        <div id="inp-eigen" style="display:none">
+          <textarea class="eigen-ta" id="eigen-ta" placeholder="Plak je nummers hier, één per regel:&#10;ABBA – Dancing Queen&#10;Queen – Don't Stop Me Now&#10;Beyoncé – Crazy in Love" oninput="onEigenInput()"></textarea>
+          <div class="eigen-status" id="eigen-status"></div>
+          <div class="upsell-bar" style="margin-top:.75rem">
+            <span>Alleen PDF-kaarten. Wil je ook een host-scherm?</span>
+            <button class="upsell-btn" onclick="setType('thema')">Kies Kant-en-klaar →</button>
+          </div>
+        </div>
+
+        <!-- SPOTIFY -->
+        <div id="inp-spotify" style="display:none">
+          <div id="start-sp-connect-wrap">
+            <div style="color:var(--mt);font-size:.82rem;margin-bottom:.85rem;line-height:1.6">Verbind Spotify om je eigen playlist te gebruiken. Je hebt <strong style="color:var(--tx)">Spotify Premium</strong> nodig.</div>
+            <button class="btn bp" style="width:100%;min-height:48px;font-size:.9rem" onclick="startSpotifyLogin()">Verbinden met Spotify</button>
+          </div>
+          <div id="start-sp-connected-wrap" style="display:none">
+            <div style="color:var(--green);font-size:.8rem;font-weight:600;margin-bottom:.75rem" id="start-sp-user"></div>
+            <div class="gen-label" style="margin-bottom:.5rem">Kies een playlist</div>
+            <div id="start-sp-list" style="max-height:200px;overflow-y:auto;margin-bottom:.75rem"></div>
+            <div id="start-sp-feedback" class="eigen-status" style="display:none"></div>
+          </div>
         </div>
       </div>
 
-      <div style="margin:1.25rem 0 .75rem">
-        <label class="fl">Aantal spelers — <span id="plbl" style="color:var(--a);font-weight:700">20</span></label>
-        <div class="prow">
-          <button class="btn bic" onclick="chP(-5)" style="font-size:.68rem">−5</button>
-          <button class="btn bic" onclick="chP(-1)">−</button>
-          <div class="pnum" id="pnum">20</div>
-          <button class="btn bic" onclick="chP(1)">+</button>
-          <button class="btn bic" onclick="chP(5)" style="font-size:.68rem">+5</button>
-          <input type="range" min="1" max="200" value="20" step="1" id="psl" oninput="updP(this.value)" style="flex:1"/>
+      <!-- STAP 3: SPELERS -->
+      <div class="gen-section" id="gen-players" style="display:none">
+        <div class="gen-label">Stap 3 — Aantal spelers</div>
+        <div class="player-row">
+          <button class="pq" onclick="adjP(-5)">-5</button>
+          <button class="pq" onclick="adjP(-1)">-</button>
+          <div class="pnum" id="pnum">10</div>
+          <button class="pq" onclick="adjP(1)">+</button>
+          <button class="pq" onclick="adjP(5)">+5</button>
+        </div>
+        <div class="player-quick">
+          <button class="pqk" onclick="setP(5)">5</button>
+          <button class="pqk" onclick="setP(10)">10</button>
+          <button class="pqk" onclick="setP(15)">15</button>
+          <button class="pqk" onclick="setP(20)">20</button>
+        </div>
+        <div class="player-info" id="player-info"></div>
+        <div class="upsell-bar" id="player-upsell" style="display:none">
+          <span>Kant-en-klare thema's werken tot max. 20 spelers.</span>
+          <button class="upsell-btn" onclick="setType('spotify')">Meer spelers? Kies Spotify →</button>
         </div>
       </div>
-      <div class="minnote" style="margin-bottom:1.1rem">Voor <strong id="mn-p">20</strong> spelers heb je minimaal <strong id="mn-c">40</strong> nummers nodig voor genoeg variatie.</div>
 
-      <button class="btn bp blg" id="cta-btn" onclick="gen()">Start mijn muziekbingo</button>
+      <!-- SAMENVATTING + CTA -->
+      <div class="gen-section gen-summary" id="gen-summary" style="display:none">
+        <div class="summary-row">
+          <div id="sum-title" class="sum-title"></div>
+          <div id="sum-meta" class="sum-meta"></div>
+        </div>
+      </div>
+
+      <button class="btn-cta" id="btn-start" onclick="startGen()">Kies eerst je bingo-type</button>
+
+      <!-- Opgeslagen link -->
+      <div style="text-align:center;margin-top:.75rem">
+        <button onclick="setType('opgeslagen')" style="background:none;border:none;color:var(--mt);font-size:.75rem;cursor:pointer;text-decoration:underline">Bekijk opgeslagen bingo's</button>
+      </div>
+
     </div>
   </div>
 
 </div>
 </div>
 </div>
-</div>
+
 
 <!-- ═══ SCREEN 2 — KAARTEN ═══ -->
 <div id="screen-cards" class="screen">
@@ -886,9 +1042,281 @@ function goReview(idx){
   _rTimer=setInterval(function(){_rIdx=(_rIdx+1)%_rAll.length;renderReviews();},9000);
 }
 
+/* ══ START SCREEN LOGIC ══ */
+
+function getMaxPlayers(n){
+  if(n<35)return 0;
+  if(n<40)return 10;
+  if(n<50)return 20;
+  if(n<60)return 30;
+  if(n<75)return 40;
+  if(n<90)return 60;
+  if(n<110)return 80;
+  return 100;
+}
+
+function setType(mode){
+  ST.mode=mode;
+  // Highlight type card
+  ['thema','eigen','spotify'].forEach(function(m){
+    var el=document.getElementById('tc-'+m);
+    if(el)el.classList.toggle('sel',m===mode);
+  });
+  // Show music step
+  var musicSec=document.getElementById('gen-music');
+  if(musicSec)musicSec.style.display=mode==='opgeslagen'?'none':'block';
+  // Show correct input
+  ['inp-thema','inp-eigen','inp-spotify'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.style.display='none';
+  });
+  if(mode==='thema'){
+    document.getElementById('inp-thema').style.display='block';
+    document.getElementById('gen-music-label').textContent='Stap 2 — Kies je thema';
+    buildThemeGrid2();
+  } else if(mode==='eigen'){
+    document.getElementById('inp-eigen').style.display='block';
+    document.getElementById('gen-music-label').textContent='Stap 2 — Jouw nummers';
+  } else if(mode==='spotify'){
+    document.getElementById('inp-spotify').style.display='block';
+    document.getElementById('gen-music-label').textContent='Stap 2 — Jouw Spotify-playlist';
+    if(SP.accessToken)initStartSpotify();
+  } else if(mode==='opgeslagen'){
+    buildSavedList();
+    go('start'); // stay on start, show saved in a modal or section
+    return;
+  }
+  // Show player step if thema/spotify ready
+  updatePlayerSection();
+  updCTA2();
+}
+
+function buildThemeGrid2(){
+  var el=document.getElementById('theme-grid');
+  if(!el)return;
+  el.innerHTML=THEMES.map(function(th){
+    return'<div class="tcard'+(ST.theme===th.id?' sel':'')+'" onclick="selTheme2(''+th.id+'')">'
+      +'<div class="tcard-name">'+th.name+'</div>'
+      +'<div class="tcard-mood">'+th.mood+'</div>'
+      +'<div class="tcard-meta">40 nummers · max. 20 spelers</div>'
+      +'</div>';
+  }).join('');
+}
+
+function selTheme2(id){
+  ST.theme=id;
+  document.querySelectorAll('.tcard').forEach(function(el){el.classList.remove('sel');});
+  var el=document.querySelector('.tcard[onclick*="''+id+''"]');
+  if(el)el.classList.add('sel');
+  updatePlayerSection();
+  updCTA2();
+}
+
+function onEigenInput(){
+  var txt=document.getElementById('eigen-ta').value;
+  var songs=parseSongs(txt);
+  var count=songs.length;
+  var el=document.getElementById('eigen-status');
+  if(!count){el.style.display='none';}
+  else if(count<25){
+    el.style.display='block';el.className='eigen-status warn';
+    el.textContent=count+' nummers gevonden — voeg nog '+(25-count)+' toe voor een volledige kaart.';
+  } else {
+    el.style.display='block';el.className='eigen-status ok';
+    el.textContent=count+' nummers gevonden ✓ Alleen PDF-kaarten, geen host-scherm.';
+  }
+  updatePlayerSection();
+  updCTA2();
+}
+
+function updatePlayerSection(){
+  var mode=ST.mode;
+  var show=false;
+  var maxP=20;
+  var songCount=0;
+
+  if(mode==='thema'&&ST.theme){
+    show=true;maxP=20;
+    var qi=document.getElementById('player-upsell');if(qi)qi.style.display='none';
+    // Quick buttons max 20
+    document.querySelectorAll('.pqk').forEach(function(b){b.style.display='';});
+  } else if(mode==='eigen'){
+    var txt=document.getElementById('eigen-ta');
+    if(txt){songCount=parseSongs(txt.value).length;}
+    if(songCount>=25){show=true;maxP=getMaxPlayers(songCount)||20;}
+  } else if(mode==='spotify'){
+    if(SP.tracks&&SP.tracks.length>=35){
+      songCount=SP.tracks.length;maxP=getMaxPlayers(songCount);show=true;
+    }
+  }
+
+  var sec=document.getElementById('gen-players');
+  if(sec)sec.style.display=show?'block':'none';
+
+  if(show){
+    // Cap players
+    if(ST.players>maxP)ST.players=maxP;
+    if(ST.players<1)ST.players=1;
+    updPNum();
+    // Player info
+    var info=document.getElementById('player-info');
+    if(info){
+      if(mode==='eigen')info.textContent='Alleen PDF-kaarten · geen host-scherm.';
+      else if(mode==='spotify')info.textContent='Voor '+songCount+' nummers zijn max. '+maxP+' spelers mogelijk.';
+      else info.textContent='';
+    }
+    // Upsell for thema at 20
+    var upsell=document.getElementById('player-upsell');
+    if(upsell&&mode==='thema'){
+      upsell.style.display=ST.players>=20?'flex':'none';
+    }
+  }
+  updCTA2();
+}
+
+function adjP(d){
+  var mode=ST.mode;
+  var maxP=20;
+  if(mode==='eigen'){var txt=document.getElementById('eigen-ta');if(txt){maxP=getMaxPlayers(parseSongs(txt.value).length)||200;}}
+  if(mode==='spotify'&&SP.tracks)maxP=getMaxPlayers(SP.tracks.length);
+  ST.players=Math.max(1,Math.min(maxP,ST.players+d));
+  updPNum();
+  // Show upsell if at thema limit
+  if(mode==='thema'){
+    var upsell=document.getElementById('player-upsell');
+    if(upsell)upsell.style.display=ST.players>=20?'flex':'none';
+  }
+  updCTA2();
+}
+
+function setP(n){
+  ST.players=n;
+  adjP(0); // clamp
+  updPNum();
+  updCTA2();
+}
+
+function updPNum(){
+  var el=document.getElementById('pnum');
+  if(el)el.textContent=ST.players;
+  // Highlight quick buttons
+  document.querySelectorAll('.pqk').forEach(function(b){
+    b.classList.toggle('sel',parseInt(b.textContent)===ST.players);
+  });
+}
+
+function updCTA2(){
+  var btn=document.getElementById('btn-start');
+  var sumSec=document.getElementById('gen-summary');
+  var sumTitle=document.getElementById('sum-title');
+  var sumMeta=document.getElementById('sum-meta');
+  if(!btn)return;
+
+  var mode=ST.mode;
+
+  if(!mode||mode==='opgeslagen'){
+    btn.disabled=true;btn.textContent='Kies eerst je bingo-type';
+    if(sumSec)sumSec.style.display='none';return;
+  }
+  if(mode==='thema'){
+    if(!ST.theme){btn.disabled=true;btn.textContent='Kies een thema';if(sumSec)sumSec.style.display='none';return;}
+    var th=THEMES.find(function(t){return t.id===ST.theme;});
+    btn.disabled=false;btn.textContent='Maak '+ST.players+' bingokaarten';
+    if(sumSec){sumSec.style.display='block';sumTitle.textContent=th?th.name:'Thema';sumMeta.textContent='40 nummers · '+ST.players+' spelers · inclusief host-scherm';}
+    return;
+  }
+  if(mode==='eigen'){
+    var txt=document.getElementById('eigen-ta');
+    var songs=txt?parseSongs(txt.value):[];
+    if(songs.length<25){btn.disabled=true;btn.textContent='Voeg nog '+(25-songs.length)+' nummers toe';if(sumSec)sumSec.style.display='none';return;}
+    btn.disabled=false;btn.textContent='Maak PDF-kaarten';
+    if(sumSec){sumSec.style.display='block';sumTitle.textContent='Eigen nummers';sumMeta.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
+    return;
+  }
+  if(mode==='spotify'){
+    if(!SP.accessToken||!SP.tracks||!SP.tracks.length){btn.disabled=true;btn.textContent='Laad je Spotify-playlist';if(sumSec)sumSec.style.display='none';return;}
+    if(SP.tracks.length<35){btn.disabled=true;btn.textContent='Voeg nog '+(35-SP.tracks.length)+' nummers toe aan je playlist';if(sumSec)sumSec.style.display='none';return;}
+    btn.disabled=false;btn.textContent='Maak Spotify-bingo';
+    var maxP=getMaxPlayers(SP.tracks.length);
+    if(sumSec){sumSec.style.display='block';sumTitle.textContent='Spotify-playlist';sumMeta.textContent=SP.tracks.length+' nummers · max. '+maxP+' spelers · inclusief host-scherm';}
+    return;
+  }
+}
+
+function startGen(){
+  var mode=ST.mode;
+  if(mode==='thema'){
+    // Use existing gen() but set ST.theme first
+    if(!ST.theme){toast('Kies eerst een thema.');return;}
+    gen();
+  } else if(mode==='eigen'){
+    var txt=document.getElementById('eigen-ta');
+    var songs=parseSongs(txt?txt.value:'');
+    if(songs.length<25){toast('Minimaal 25 nummers nodig.');return;}
+    ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
+    trackAnalytics('Eigen nummers');
+    mkCards();buildPreviews();saveSession();
+    go('cards');
+  } else if(mode==='spotify'){
+    if(!SP.selectedPlaylist){toast('Kies eerst een Spotify-playlist.');return;}
+    genFromSpotify();
+  }
+}
+
+function checkResume(){
+  try{
+    var s=JSON.parse(sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session')||'null');
+    if(s&&s.cards&&s.cards.length>0){
+      var bar=document.getElementById('resume-bar');
+      var meta=document.getElementById('resume-meta');
+      if(bar)bar.style.display='flex';
+      if(meta)meta.textContent=s.cards.length+' kaarten · '+s.songs.length+' nummers';
+    }
+  }catch(e){}
+}
+
+function resumeSession(){
+  try{
+    var s=JSON.parse(sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session')||'null');
+    if(s){
+      ST.songs=s.songs;ST.cards=s.cards;ST.players=s.players||s.cards.length;
+      ST.shuffled=s.shuffled||shuf(s.songs);ST.pidx=s.pidx||-1;
+      go('cards');
+    }
+  }catch(e){toast('Sessie kon niet worden hersteld.');}
+}
+
+function dismissResume(){
+  var bar=document.getElementById('resume-bar');
+  if(bar)bar.style.display='none';
+}
+
+function buildReviews(){
+  var reviews=SEED_REVIEWS.slice(0,3);
+  reviews.forEach(function(r,i){
+    var el=document.getElementById('rev-'+i);
+    if(!el)return;
+    el.innerHTML='"'+r.comment+'"<div style="margin-top:.4rem;font-size:.7rem;color:var(--a)">— '+r.name+'</div>';
+  });
+  // Dots
+  var dots=document.getElementById('rev-dots');
+  if(dots){
+    dots.innerHTML=reviews.map(function(_,i){
+      return'<div class="rev-dot'+(i===0?' active':'')+'" onclick="showRev('+i+')"></div>';
+    }).join('');
+  }
+  var idx=0;
+  setInterval(function(){idx=(idx+1)%reviews.length;showRev(idx);},7000);
+}
+
+function showRev(i){
+  document.querySelectorAll('.rev-item').forEach(function(el,j){el.classList.toggle('active',j===i);});
+  document.querySelectorAll('.rev-dot').forEach(function(el,j){el.classList.toggle('active',j===i);});
+}
+
 /* ══ INIT ══ */
 window.onload=function(){
-  buildThemeGrid();updP(20);updInd();checkResume();buildReviews();checkSpotifyAuth();
+  updPNum();checkResume();buildReviews();checkSpotifyAuth();
   var taps=0;
   document.querySelectorAll('.bar-logo').forEach(function(el){
     el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
