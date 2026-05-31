@@ -587,6 +587,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" id="sp-load-btn" onclick="loadSelectedPlaylist()" disabled>Laad playlist in Melingo</button>
             </div>
             <div id="sp-playing-view" style="display:none">
+              <!-- Playlist info -->
+              <div id="sp-playlist-info" style="display:flex;align-items:center;gap:.75rem;padding:.6rem 0 .85rem;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:.85rem">
+                <img id="sp-pl-img" src="" alt="" style="width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,.08)"/>
+                <div>
+                  <div style="font-size:.65rem;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.15rem">Gekozen playlist</div>
+                  <div id="sp-pl-name" style="font-size:.88rem;font-weight:700;color:var(--tx)">—</div>
+                  <div id="sp-pl-count" style="font-size:.7rem;color:var(--mt)"></div>
+                </div>
+                <button class="sp-btn" onclick="showPlaylistPicker()" style="margin-left:auto;font-size:.72rem;white-space:nowrap">Andere playlist</button>
+              </div>
+              <!-- Nu spelend -->
               <div class="sp-now">
                 <div class="sp-art"><img id="sp-art-img" src="" alt=""/></div>
                 <div>
@@ -1927,6 +1938,14 @@ function checkAllMissedBingos(){
   }
 }
 
+function showPlaylistPicker(){
+  var pv=document.getElementById('sp-playlist-view');
+  var playing=document.getElementById('sp-playing-view');
+  if(pv)pv.style.display='block';
+  if(playing)playing.style.display='none';
+  loadPlaylists();
+}
+
 function showMissedBingoPopup(missed){
   var modal=document.getElementById('missed-modal');
   var info=document.getElementById('missed-info');
@@ -2467,6 +2486,14 @@ async function loadSelectedPlaylist(){
     document.getElementById('sp-playlist-view').style.display='none';
     document.getElementById('sp-playing-view').style.display='block';
     document.getElementById('sp-total-count').textContent=SP.tracks.length;
+    // Toon playlist info
+    var plImg=SP.selectedPlaylist.images&&SP.selectedPlaylist.images[0]?SP.selectedPlaylist.images[0].url:'';
+    var plImgEl=document.getElementById('sp-pl-img');
+    if(plImgEl)plImgEl.src=plImg;
+    var plNameEl=document.getElementById('sp-pl-name');
+    if(plNameEl)plNameEl.textContent=SP.selectedPlaylist.name;
+    var plCountEl=document.getElementById('sp-pl-count');
+    if(plCountEl)plCountEl.textContent=SP.tracks.length+' nummers';
 
     toast('Playlist geladen: '+SP.tracks.length+' nummers');
 
