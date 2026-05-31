@@ -280,6 +280,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .col-arrow.open{transform:rotate(180deg)}
 .col-body{border-top:1px solid var(--bd)}
 
+/* HELP MODAL */
+.help-sec{display:flex;align-items:flex-start;gap:.75rem;padding:.6rem .75rem;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04)}
+.help-ico{width:28px;height:28px;border-radius:8px;background:rgba(155,109,255,.12);border:1px solid rgba(155,109,255,.2);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;color:var(--a)}
+.help-title{font-size:.82rem;font-weight:700;color:var(--tx);margin-bottom:.2rem}
+.help-desc{font-size:.75rem;color:var(--mt);line-height:1.55}
+
 /* ADMIN */
 #screen-admin{background:var(--bg)}
 .admin-table{width:100%;border-collapse:collapse;font-size:.82rem}
@@ -464,7 +470,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   <!-- TOPBAR -->
   <div class="bar">
     <button class="btn bs" onclick="go('cards')">← Kaarten</button>
-    <div class="bar-logo">Host</div>
+    <div class="bar-logo" style="display:flex;align-items:center;gap:.5rem">
+      Host
+      <button id="host-help-btn" onclick="openHostHelp()" aria-label="Hulp bij het host-scherm" style="width:22px;height:22px;border-radius:50%;background:rgba(155,109,255,.2);border:1px solid rgba(155,109,255,.4);color:var(--a);font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative" onmouseenter="showHelpTooltip()" onmouseleave="hideHelpTooltip()">i
+        <div id="help-tooltip" style="display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(20,15,40,.97);border:1px solid rgba(155,109,255,.3);border-radius:12px;padding:.65rem .9rem;width:200px;text-align:left;z-index:200;pointer-events:none">
+          <div style="font-size:.78rem;font-weight:700;color:var(--tx);margin-bottom:.25rem">Hulp bij het host-scherm</div>
+          <div style="font-size:.7rem;color:var(--mt);line-height:1.5">Bekijk hoe je nummers afspeelt, bingo's controleert en instellingen gebruikt.</div>
+          <div style="font-size:.68rem;color:var(--a);margin-top:.35rem">Klik voor uitleg →</div>
+        </div>
+      </button>
+    </div>
     <div style="display:flex;align-items:center;gap:.75rem">
       <div id="host-status-bar" style="font-size:.72rem;color:var(--mt);text-align:right;display:none">
         <span id="hs-count" style="color:var(--tx);font-weight:600"></span>
@@ -2111,6 +2126,24 @@ function toggleCol(id){
   if(arrow)arrow.classList.toggle('open',!isOpen);
 }
 
+/* ══ HOST HELP ══ */
+function openHostHelp(){
+  // Check no-show preference
+  try{if(localStorage.getItem('help_noshow')==='1')return;}catch(e){}
+  var modal=document.getElementById('host-help-modal');
+  if(modal){modal.style.display='flex';document.addEventListener('keydown',helpKeyHandler);}
+}
+function closeHostHelp(){
+  var modal=document.getElementById('host-help-modal');
+  if(modal)modal.style.display='none';
+  document.removeEventListener('keydown',helpKeyHandler);
+}
+function closeHostHelpOutside(e){if(e.target===document.getElementById('host-help-modal'))closeHostHelp();}
+function helpKeyHandler(e){if(e.key==='Escape')closeHostHelp();}
+function showHelpTooltip(){var t=document.getElementById('help-tooltip');if(t)t.style.display='block';}
+function hideHelpTooltip(){var t=document.getElementById('help-tooltip');if(t)t.style.display='none';}
+function toggleHelpNoShow(val){try{localStorage.setItem('help_noshow',val?'1':'0');}catch(e){}}
+
 function closeBingoModal(){
   document.getElementById('bingo-modal').style.display='none';
   if(window._bingoAnim)clearInterval(window._bingoAnim);
@@ -2659,6 +2692,92 @@ function buildAdmin(){
 }
 function clearAnalytics(){if(confirm('Alle analytics en feedback wissen?')){localStorage.removeItem('melo_analytics');localStorage.removeItem('melo_feedback');buildAdmin();toast('Data gewist.');}}
 </script>
+
+<!-- HOST HELP MODAL -->
+<div id="host-help-modal" style="display:none;position:fixed;inset:0;background:rgba(10,8,24,.88);z-index:600;align-items:flex-start;justify-content:center;padding:1.5rem 1rem;overflow-y:auto;backdrop-filter:blur(12px)" onclick="closeHostHelpOutside(event)" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">
+  <div style="width:100%;max-width:620px;background:rgba(22,18,42,.98);border:1px solid rgba(155,109,255,.25);border-radius:24px;overflow:hidden;margin:auto">
+    <!-- Header -->
+    <div style="padding:1.5rem 1.5rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:1.15rem;font-weight:800;color:var(--tx)" id="help-modal-title">Hoe werkt het host-scherm?</div>
+        <div style="font-size:.78rem;color:var(--mt);margin-top:.25rem;line-height:1.5">Gebruik dit scherm tijdens het spelen van je muziekbingo. Hier speel je nummers af, houd je bij wat al geweest is, laad je jouw Spotify-playlist en controleer je snel of een bingo klopt.</div>
+      </div>
+      <button onclick="closeHostHelp()" aria-label="Sluiten" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--mt);font-size:1rem;cursor:pointer;flex-shrink:0;margin-left:1rem;display:flex;align-items:center;justify-content:center">✕</button>
+    </div>
+    <!-- Secties -->
+    <div style="padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.85rem">
+
+      <div class="help-sec">
+        <div class="help-ico">🎵</div>
+        <div><div class="help-title">Nu speelt</div><div class="help-desc">Bovenaan zie je welk nummer nu aan de beurt is. Je ziet de titel, artiest en hoeveel nummers er al gespeeld zijn.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">▶</div>
+        <div><div class="help-title">Volgend nummer</div><div class="help-desc">Klik op "Volgend nummer" om naar het volgende liedje te gaan. Gebruik de pauze/play-knop om het afspelen tijdelijk te stoppen of weer te starten.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">⚙</div>
+        <div><div class="help-title">Handmatig of automatisch</div><div class="help-desc">Kies "Handmatig" als je zelf bepaalt wanneer het volgende nummer start. Kies "Automatisch" als je wilt dat Melingo vanzelf doorgaat.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">⏱</div>
+        <div><div class="help-title">Start nummer vanaf</div><div class="help-desc">Kies vanaf welk moment een nummer begint: het begin, 15, 30 of 60 seconden. Starten vanaf 30 of 60 seconden maakt het nummer sneller herkenbaar — je zit dan vaker dichter bij het refrein.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">📋</div>
+        <div><div class="help-title">Gespeelde nummers</div><div class="help-desc">Hier zie je welke nummers al zijn geweest. Gebruik de zoekbalk om snel een gespeeld nummer terug te vinden — handig bij het controleren van bingo's en voorkomt discussie.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">✓</div>
+        <div><div class="help-title">Bingo controleren</div><div class="help-desc">Roept iemand bingo? Vul het kaartnummer in en klik op "Controleer". Melingo checkt of de kaart voldoet aan de gekozen bingo-instellingen.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">🎯</div>
+        <div><div class="help-title">Bingo-instellingen</div><div class="help-desc">Hier bepaal je welke bingo's geldig zijn: horizontale rij, verticale rij, diagonale rij of volle kaart. Zet alleen aan wat tijdens deze ronde meetelt.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">👀</div>
+        <div><div class="help-title">Gemiste bingo detectie</div><div class="help-desc">Als deze optie aan staat, geeft Melingo een melding wanneer iemand mogelijk al bingo had kunnen hebben maar dit nog niet heeft geroepen. Houdt het spel eerlijk.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico" style="color:var(--green)">♫</div>
+        <div><div class="help-title">Spotify & playlist</div><div class="help-desc">Hier kies en laad je jouw Spotify-playlist. Selecteer de juiste playlist voordat je begint. Je ziet welke playlist actief is en hoeveel nummers erin staan.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">⚠</div>
+        <div><div class="help-title">Gemist nummer toevoegen</div><div class="help-desc">Gebruik dit alleen als hersteloptie — bijvoorbeeld bij een storing of slechte verbinding waarbij een nummer niet automatisch geregistreerd is. Dit is geen standaardfunctie.</div></div>
+      </div>
+
+      <div class="help-sec">
+        <div class="help-ico">💾</div>
+        <div><div class="help-title">Sessie opslaan & herstel</div><div class="help-desc">Sla je sessie op als je later verder wilt spelen of de ronde veilig wilt bewaren. Handig bij langere spellen, evenementen of meerdere rondes.</div></div>
+      </div>
+
+      <!-- Tip box -->
+      <div style="background:rgba(155,109,255,.08);border:1px solid rgba(155,109,255,.2);border-radius:12px;padding:.85rem 1rem;display:flex;gap:.65rem;align-items:flex-start">
+        <div style="font-size:.9rem;flex-shrink:0">💡</div>
+        <div style="font-size:.78rem;color:var(--mt);line-height:1.6"><strong style="color:var(--tx)">Tip:</strong> Speel meerdere rondes met oplopende moeilijkheid. Begin met één rij, daarna diagonaal en eindig met een volle kaart.</div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="padding:1rem 1.5rem;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap">
+      <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.75rem;color:var(--mt)">
+        <input type="checkbox" id="help-no-show" style="accent-color:var(--a)" onchange="toggleHelpNoShow(this.checked)"/>
+        Toon deze uitleg niet meer
+      </label>
+      <button class="btn bp" onclick="closeHostHelp()" style="min-height:40px;padding:.5rem 1.5rem">Begrepen</button>
+    </div>
+  </div>
+</div>
 
 <!-- GEMISTE BINGO MODAL -->
 <div id="missed-modal" style="display:none;position:fixed;inset:0;background:rgba(13,13,24,.85);z-index:490;flex-direction:column;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(10px)">
