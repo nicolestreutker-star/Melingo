@@ -477,14 +477,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <button class="btn bs" onclick="go('cards')">← Kaarten</button>
     <div class="bar-logo" style="display:flex;align-items:center;gap:.5rem">
       Host
-      <div class="help-trigger" onclick="openHostHelp()" aria-label="Hulp bij het host-scherm" role="button" tabindex="0">
-        <span style="font-size:.75rem;font-weight:800;line-height:1">i</span>
-        <div class="help-tipbox">
+      <button onclick="openHostHelp()" title="Hulp bij het host-scherm" style="background:rgba(155,109,255,.18);border:1.5px solid rgba(155,109,255,.5);border-radius:50%;width:26px;height:26px;color:#c4a8ff;font-size:.8rem;font-style:italic;font-weight:700;font-family:Georgia,serif;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s" onmouseenter="this.querySelector('.htip').style.display='block'" onmouseleave="this.querySelector('.htip').style.display='none'">
+        i
+        <div class="htip" style="display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#1a1030;border:1px solid rgba(155,109,255,.4);border-radius:12px;padding:.75rem 1rem;width:210px;text-align:left;z-index:999;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.6);font-style:normal;font-family:'Plus Jakarta Sans',sans-serif">
           <div style="font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.3rem">Hulp bij het host-scherm</div>
-          <div style="font-size:.72rem;color:rgba(255,255,255,.65);line-height:1.5">Bekijk hoe je nummers afspeelt, bingo's controleert en instellingen gebruikt.</div>
-          <div style="font-size:.7rem;color:var(--a);margin-top:.4rem;font-weight:600">Klik voor uitleg →</div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.6);line-height:1.5">Bekijk hoe je nummers afspeelt, bingo's controleert en instellingen gebruikt.</div>
+          <div style="font-size:.7rem;color:#c4a8ff;margin-top:.4rem;font-weight:600">Klik voor de volledige uitleg →</div>
         </div>
-      </div>
+      </button>
     </div>
     <div style="display:flex;align-items:center;gap:.75rem">
       <div id="host-status-bar" style="font-size:.72rem;color:var(--mt);text-align:right;display:none">
