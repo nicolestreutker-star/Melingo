@@ -1385,7 +1385,7 @@ function dlPDF(eco){
       var doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
       var PW=297,PH=210,bw=5,mg=10+bw;
       var cW=(PW-mg*2)/5,hdrH=12,topArea=26;
-      var gridTop=topArea+hdrH+1,cH=(PH-gridTop-10)/5;
+      var gridTop=topArea+hdrH+1,cH=Math.floor((PH-gridTop-10)/5);
       var total=ST.cards.length;
       function doCard(idx){
         if(idx>=total){doc.save(eco?'melingo-eco.pdf':'melingo-kleur.pdf');toast('PDF gedownload ('+total+' kaarten)!');unload();return;}
