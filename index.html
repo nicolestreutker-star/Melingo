@@ -1382,9 +1382,9 @@ function dlPDF(eco){
   setTimeout(function(){
     try{
       var jsPDF=window.jspdf.jsPDF;
-      var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-      var PW=210,PH=297,bw=5,mg=12+bw;
-      var cW=(PW-mg*2)/5,hdrH=11,topArea=30;
+      var doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+      var PW=297,PH=210,bw=5,mg=10+bw;
+      var cW=(PW-mg*2)/5,hdrH=12,topArea=26;
       var gridTop=topArea+hdrH+1,cH=(PH-gridTop-10)/5;
       var total=ST.cards.length;
       function doCard(idx){
@@ -1397,10 +1397,10 @@ function dlPDF(eco){
         var bC=eco?[60,60,60]:bR;
         doc.setFillColor(bC[0],bC[1],bC[2]);
         doc.rect(0,0,PW,bw,'F');doc.rect(0,PH-bw,PW,bw,'F');doc.rect(0,0,bw,PH,'F');doc.rect(PW-bw,0,bw,PH,'F');
-        doc.setFontSize(20);doc.setFont('helvetica','bold');
+        doc.setFontSize(22);doc.setFont('helvetica','bold');
         if(eco)doc.setTextColor(20,5,35);else doc.setTextColor(bR[0],bR[1],bR[2]);
         doc.text('Melingo',PW/2,16,{align:'center'});
-        doc.setFontSize(6.5);doc.setFont('helvetica','italic');
+        doc.setFontSize(8);doc.setFont('helvetica','italic');
         if(eco)doc.setTextColor(100,80,120);else doc.setTextColor(bR[0],bR[1],bR[2]);
         doc.text('Where melody meets bingo',PW/2,21,{align:'center'});
         if(eco)doc.setFillColor(60,60,60);else doc.setFillColor(bR[0],bR[1],bR[2]);
@@ -1411,7 +1411,7 @@ function dlPDF(eco){
           var x=mg+c*cW;
           if(eco)doc.setFillColor(60,60,60);else doc.setFillColor(bR[0],bR[1],bR[2]);
           doc.roundedRect(x+.5,topArea,cW-1,hdrH,2,2,'F');
-          doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);
+          doc.setFontSize(14);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);
           doc.text(l,x+cW/2,topArea+7.8,{align:'center'});
         });
         var pdfCi=0;
@@ -1434,18 +1434,18 @@ function dlPDF(eco){
             if(eco){doc.setFillColor(245,245,245);doc.setDrawColor(200,200,200);doc.setLineWidth(.2);doc.roundedRect(x+.5,y+.5,cW-1,cH-1,2,2,'FD');}
             else{var cR=isAlt?c1R:c2R;doc.setFillColor(cR[0],cR[1],cR[2]);doc.roundedRect(x+.5,y+.5,cW-1,cH-1,2,2,'F');}
             if(s){
-              var mw=cW-2;
+              var mw=cW-4;
               // Dynamische fontgrootte op basis van titellengte
               var tLen=(s.t||'').length;
-              var tSize=tLen>35?11:tLen>25?13:tLen>18?14:16;
+              var tSize=tLen>40?13:tLen>30?15:tLen>20?17:19;
               doc.setFontSize(tSize);doc.setFont('helvetica','bold');
               var tL=doc.splitTextToSize(s.t,mw),sh=tL.slice(0,3);
               var aL=s.a?doc.splitTextToSize(s.a,mw)[0]:'';
-              var lh=tSize*0.78,tot=sh.length*lh+(aL?7:0);
+              var lh=tSize*0.82,tot=sh.length*lh+(aL?16:0);
               var ty=y+cH/2-tot/2+lh;
               doc.setTextColor(20,5,35);
               sh.forEach(function(line){doc.text(line,x+cW/2,ty,{align:'center'});ty+=lh;});
-              if(aL){ty+=1;doc.setFontSize(9);doc.setFont('helvetica','italic');
+              if(aL){ty+=1.5;doc.setFontSize(12);doc.setFont('helvetica','italic');
                 if(eco)doc.setTextColor(100,80,120);else doc.setTextColor(bR[0],bR[1],bR[2]);
                 doc.text(aL,x+cW/2,ty,{align:'center'});}
             }
