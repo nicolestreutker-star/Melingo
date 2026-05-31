@@ -2184,9 +2184,9 @@ async function selStartPlaylist(idx){
     }catch(e){}
   }
 
-  var total=pl.tracks&&pl.tracks.total!=null?pl.tracks.total+' nummers':'onbekend aantal nummers';
+  var total=pl.tracks&&pl.tracks.total!=null?pl.tracks.total+' nummers':'';
   var sel=document.getElementById('start-sp-selected');
-  if(sel){sel.style.display='flex';sel.textContent='"'+pl.name+'" — '+total+' geselecteerd';}
+  if(sel){sel.style.display='flex';sel.textContent='"'+pl.name+'"'+(total?' — '+total:'')+'  geselecteerd';}
 
   updCTA();
 }
@@ -2405,7 +2405,7 @@ function renderPlaylists(){
     return'<div class="sp-playlist-item" id="sppl-'+i+'" onclick="selPlaylist('+i+')">'
       +'<div class="sp-playlist-img">'+img+'</div>'
       +'<div><div class="sp-playlist-name">'+esc(pl.name)+'</div>'
-      +'<div class="sp-playlist-count">'+(pl.tracks&&pl.tracks.total?pl.tracks.total:'?')+' nummers</div></div>'
+      +'</div>'
       +'</div>';
   }).join('');
   console.log('Playlists gerenderd:', SP.playlists.length);
@@ -2416,9 +2416,7 @@ function selPlaylist(idx){
   document.querySelectorAll('.sp-playlist-item').forEach(function(el){el.classList.remove('sel');});
   var el=document.getElementById('sppl-'+idx);if(el)el.classList.add('sel');
   document.getElementById('sp-load-btn').disabled=false;
-  var pl=SP.playlists[idx];
-  var total=pl.tracks&&pl.tracks.total?pl.tracks.total:'onbekend';
-  document.getElementById('sp-load-btn').textContent='Laad "'+pl.name+'" ('+total+' nummers)';
+  document.getElementById('sp-load-btn').textContent='Laad "'+SP.playlists[idx].name+'"';
 }
 
 async function loadSelectedPlaylist(){
