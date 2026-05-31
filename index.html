@@ -2317,11 +2317,18 @@ function initPlayer(){
 }
 
 function spConnectedUI(){
-  document.getElementById('sp-status-badge').textContent='Verbonden';
-  document.getElementById('sp-status-badge').style.color='var(--green)';
-  document.getElementById('sp-panel').classList.add('sp-connected');
-  document.getElementById('sp-connect-view').style.display='none';
-  document.getElementById('sp-playlist-view').style.display='block';
+  // Open the Spotify collapsible panel so user can see it
+  var body=document.getElementById('col-body-spotify');
+  var arrow=document.getElementById('col-arrow-spotify');
+  if(body&&body.style.display==='none'){body.style.display='block';if(arrow)arrow.classList.add('open');}
+  var badge=document.getElementById('sp-status-badge');
+  if(badge){badge.textContent='Spotify verbonden';badge.style.color='var(--green)';}
+  var panel=document.getElementById('sp-panel');
+  if(panel)panel.classList.add('sp-connected');
+  var cv=document.getElementById('sp-connect-view');
+  var pv=document.getElementById('sp-playlist-view');
+  if(cv)cv.style.display='none';
+  if(pv)pv.style.display='block';
   // Load user name + playlists immediately
   spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
     document.getElementById('sp-user-name').textContent='Ingelogd als '+d.display_name;
