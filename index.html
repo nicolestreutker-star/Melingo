@@ -1756,6 +1756,14 @@ function initHost(){
   var v=document.getElementById('hvinyl');if(v&&ST.pidx===-1)v.classList.remove('spin');
   setHM(ST.hmode);setSpd(ST.speed);
 }
+function setSpd(s){
+  ST.speed=parseInt(s);
+  document.querySelectorAll('[data-s]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.s)===ST.speed);});
+}
+function setStartPos(p){
+  ST.startPos=p;
+  document.querySelectorAll('[data-p]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.p)===p);});
+}
 function setHM(m){ST.hmode=m;document.getElementById('sm').classList.toggle('on',m==='manual');document.getElementById('sa').classList.toggle('on',m==='auto');var srow=document.getElementById('srow');if(srow)srow.style.display=m==='auto'?'block':'none';document.getElementById('twrap').style.display='none';clearInterval(ST.tint);ST.tint=null;}
 function nextSong(){
   if(ST.paused)return;clearInterval(ST.tint);ST.tint=null;ST.pidx++;
