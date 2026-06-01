@@ -282,47 +282,62 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 /* ══ LANDING PAGE ══ */
 
-/* NAV */
-.lp-nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(13,13,24,.9);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
-.lp-nav-logo{display:flex;align-items:center;gap:.5rem}
-.lp-nav-brand{font-size:1.05rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.lp-resume-chip{display:flex;align-items:center;gap:.5rem;background:rgba(155,109,255,.12);border:1px solid rgba(155,109,255,.3);border-radius:99px;padding:.3rem .75rem;font-size:.72rem;color:var(--mt)}
-
-/* HERO BANNER */
-.lp-hero-banner{min-height:320px;background:url('/hero.jpg') center 35%/cover no-repeat;display:flex;align-items:center;justify-content:center;position:relative}
-.lp-hero-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,24,.55) 0%,rgba(13,13,24,.8) 100%);pointer-events:none}
-.lp-hero-text{position:relative;z-index:1;text-align:center;padding:3rem 1.5rem;max-width:680px}
-.lp-hero-eyebrow{display:inline-block;background:rgba(155,109,255,.15);border:1px solid rgba(155,109,255,.3);border-radius:99px;font-size:.72rem;font-weight:700;color:var(--a);padding:.3rem .85rem;margin-bottom:1rem;letter-spacing:.05em}
-.lp-hero-h1{font-size:2.6rem;font-weight:800;line-height:1.15;margin:0 0 .75rem;color:#fff}
-.lp-hero-sub{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.65;margin:0}
+/* HERO */
+.lp-hero-banner{min-height:400px;background:url('/hero.jpg') center 35%/cover no-repeat;position:relative;display:flex;flex-direction:column}
+.lp-hero-logo{position:absolute;top:1rem;left:1.25rem;display:flex;align-items:center;gap:.45rem;z-index:2}
+.lp-hero-brand{font-size:1rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lp-resume-chip{position:absolute;top:.85rem;right:1.25rem;display:flex;align-items:center;gap:.5rem;background:rgba(13,13,24,.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:99px;padding:.3rem .75rem;font-size:.72rem;z-index:2}
+.lp-hero-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 1.5rem 2.5rem;text-align:center}
+.lp-hero-pill{display:inline-block;background:rgba(155,109,255,.25);border:1px solid rgba(155,109,255,.5);border-radius:99px;font-size:.72rem;font-weight:700;color:#d4b8ff;padding:.3rem .85rem;margin-bottom:1rem;letter-spacing:.05em;backdrop-filter:blur(8px)}
+.lp-hero-textbox{background:linear-gradient(135deg,rgba(155,109,255,.25),rgba(242,64,106,.2));backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:1.5rem 2rem;margin-bottom:1rem;max-width:580px}
+.lp-hero-h1{font-size:2.4rem;font-weight:800;line-height:1.15;margin:0 0 .6rem;color:#fff}
+.lp-hero-sub{font-size:.85rem;color:rgba(255,255,255,.8);line-height:1.6;margin:0}
+.lp-hero-proof{font-size:.78rem}
 
 /* BODY */
 .lp-body{max-width:860px;margin:0 auto;padding:2.5rem 1.25rem 4rem;display:flex;flex-direction:column;gap:4rem}
 
 /* CONFIGURATOR */
-.lp-cfg-outer{}
 .lp-cfg-label{font-size:1.15rem;font-weight:800;color:var(--tx);text-align:center;margin-bottom:1.25rem}
-.lp-cfg-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px rgba(155,109,255,.08),0 24px 80px rgba(0,0,0,.4)}
+.lp-cfg-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px rgba(155,109,255,.07),0 24px 80px rgba(0,0,0,.4)}
 
 .lp-sec{padding:1.25rem 1.4rem}
 .lp-sec-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:.85rem}
 .lp-divider{height:1px;background:rgba(255,255,255,.06)}
 .lp-bottom{display:flex;flex-direction:column;gap:.65rem}
 
-/* MODES */
-.lp-modes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem}
-.lp-mode{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.07);border-radius:16px;padding:1rem .9rem 1.1rem;cursor:pointer;transition:all .2s;text-align:center}
+/* MODES — spotify left, col right */
+.lp-modes{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.lp-modes-col{display:flex;flex-direction:column;gap:.65rem}
+
+/* Base mode card */
+.lp-mode{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.07);border-radius:16px;padding:1.1rem;cursor:pointer;transition:all .2s}
 .lp-mode:hover{background:rgba(255,255,255,.07);border-color:rgba(155,109,255,.3);transform:translateY(-2px)}
-.lp-mode.sel{border-color:var(--a);background:rgba(155,109,255,.1);box-shadow:0 0 20px rgba(155,109,255,.12)}
-.lp-mode-hot{border-color:rgba(155,109,255,.2);background:rgba(155,109,255,.05)}
-.lp-mode-badge{font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .48rem;border-radius:5px;display:inline-block;margin-bottom:.6rem}
+.lp-mode.sel{border-color:var(--a);background:rgba(155,109,255,.1);box-shadow:0 0 24px rgba(155,109,255,.12)}
+
+/* Spotify — groot, linker kolom */
+.lp-mode-spotify{border-color:rgba(155,109,255,.25);background:rgba(155,109,255,.06)}
+.lp-mode-spotify.sel{border-color:var(--a);background:rgba(155,109,255,.12);box-shadow:0 0 32px rgba(155,109,255,.18)}
+
+/* Kleine cards rechterkolom */
+.lp-mode-sm{padding:.85rem 1rem}
+
+.lp-mode-badge{font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .5rem;border-radius:5px;display:inline-block;margin-bottom:.55rem}
 .lp-mb-low{background:rgba(106,171,247,.18);color:#6AABF7}
 .lp-mb-mid{background:rgba(155,109,255,.22);color:#c4a8ff}
-.lp-mb-prem{background:rgba(29,185,84,.18);color:#1db954}
-.lp-mode-ico{font-size:1.5rem;margin-bottom:.4rem;display:block}
-.lp-mode-name{font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.25rem}
-.lp-mode-detail{font-size:.7rem;color:var(--mt);line-height:1.4}
-.lp-mode.sel .lp-mode-detail{color:rgba(255,255,255,.6)}
+.lp-mb-prem{background:rgba(155,109,255,.3);color:#d4b8ff;border:1px solid rgba(155,109,255,.5)}
+.lp-mode-name{font-size:.9rem;font-weight:700;color:var(--tx);margin-bottom:.35rem}
+.lp-mode-spotify .lp-mode-name{font-size:1rem}
+.lp-mode-desc{font-size:.75rem;color:var(--mt);line-height:1.55;margin-bottom:.6rem}
+.lp-mode-sm .lp-mode-desc{font-size:.72rem;margin-bottom:.45rem}
+.lp-mode.sel .lp-mode-desc{color:rgba(255,255,255,.65)}
+.lp-mode-ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.25rem}
+.lp-mode-ul li{font-size:.75rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:.4rem}
+.lp-mode-ul li::before{content:"✓";color:var(--a);font-size:.7rem;font-weight:700}
+.lp-mode.sel .lp-mode-ul li{color:rgba(255,255,255,.75)}
+.lp-mode-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.lp-mode-tags span{font-size:.65rem;color:var(--mt);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:5px;padding:.18rem .45rem}
+.lp-mode.sel .lp-mode-tags span{color:rgba(255,255,255,.6);border-color:rgba(155,109,255,.25)}
 
 /* TEXTAREA */
 .lp-ta{width:100%;min-height:110px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);border-radius:12px;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;padding:.85rem;resize:vertical;outline:none;box-sizing:border-box;transition:border .2s;line-height:1.6}
@@ -369,20 +384,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .lp-cta:disabled{background:rgba(255,255,255,.07);color:rgba(255,255,255,.2);cursor:not-allowed;box-shadow:none;transform:none}
 
 /* THEMA'S SECTIE */
-.lp-themes-sec{}
 .lp-section-hd{font-size:1.4rem;font-weight:800;color:var(--tx);text-align:center;margin-bottom:.4rem}
 .lp-section-sub{font-size:.8rem;color:var(--mt);text-align:center;margin-bottom:1.5rem}
 .lp-themes-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem}
 .lp-th{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.9rem .75rem;cursor:pointer;transition:all .18s;text-align:center;position:relative;overflow:hidden}
-.lp-th::before{content:'';position:absolute;inset:0;background:var(--tc,rgba(155,109,255,.1));opacity:0;transition:opacity .2s}
+.lp-th::before{content:'';position:absolute;inset:0;background:var(--tc,rgba(155,109,255,.1));opacity:0;transition:opacity .2s;pointer-events:none}
 .lp-th:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
 .lp-th:hover::before{opacity:1}
 .lp-th-name{font-size:.82rem;font-weight:700;color:var(--tx);margin-bottom:.3rem;position:relative}
-.lp-th-mood{font-size:.65rem;color:var(--mt);font-style:italic;line-height:1.4;position:relative}
+.lp-th-line{font-size:.68rem;color:var(--mt);font-style:italic;line-height:1.4;position:relative}
 .lp-th-tag{font-size:.6rem;font-weight:700;padding:.15rem .4rem;border-radius:4px;display:inline-block;margin-top:.4rem;position:relative}
 
 /* REVIEWS */
-.lp-reviews-sec{}
 .lp-proof-bar{display:flex;align-items:center;justify-content:center;gap:.4rem;margin-bottom:1.25rem}
 .lp-stars{color:#ffd060;font-size:.9rem}
 .lp-proof-txt{font-size:.78rem;color:var(--mt)}
@@ -393,7 +406,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 /* FAQ */
 .lp-faq-sec{max-width:640px;margin:0 auto;width:100%}
-.lp-faq-list{}
 .lp-faq-item{border-bottom:1px solid rgba(255,255,255,.06)}
 .lp-faq-q{width:100%;background:none;border:none;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;font-weight:600;text-align:left;padding:.9rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:.5rem}
 .lp-faq-q span{color:var(--a);font-size:1rem;flex-shrink:0}
@@ -407,8 +419,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 /* MOBILE */
 @media(max-width:680px){
-  .lp-hero-h1{font-size:1.7rem}
-  .lp-hero-banner{min-height:220px}
+  .lp-hero-h1{font-size:1.6rem}
+  .lp-hero-banner{min-height:300px}
+  .lp-hero-textbox{padding:1.1rem 1.25rem}
   .lp-modes{grid-template-columns:1fr}
   .lp-tgrid{grid-template-columns:1fr 1fr}
   .lp-themes-grid{grid-template-columns:1fr 1fr}
@@ -478,65 +491,78 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <div id="screen-start" class="screen active">
 <div class="scroll">
 
-<!-- NAV -->
-<nav class="lp-nav">
-  <div class="lp-nav-logo">
-    <svg width="26" height="26" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
-    <span class="lp-nav-brand">Melingo</span>
+<!-- HERO -->
+<div class="lp-hero-banner">
+  <div class="lp-hero-logo">
+    <svg width="24" height="24" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
+    <span class="lp-hero-brand">Melingo</span>
   </div>
   <div id="resume-bar" style="display:none" class="lp-resume-chip">
-    <span id="resume-meta"></span>
+    <span id="resume-meta" style="font-size:.7rem;color:rgba(255,255,255,.7)"></span>
     <button class="btn bp" onclick="resumeSession()" style="font-size:.68rem;min-height:26px;padding:.2rem .6rem">Verdergaan</button>
-    <button onclick="dismissResume()" style="background:none;border:none;color:var(--mt);cursor:pointer;font-size:.85rem;line-height:1;padding:0">×</button>
+    <button onclick="dismissResume()" style="background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:.9rem;line-height:1;padding:0">×</button>
   </div>
-</nav>
-
-<!-- HERO BANNER -->
-<div class="lp-hero-banner">
-  <div class="lp-hero-text">
-    <div class="lp-hero-eyebrow">🎵 Muziekbingo voor elk feestje</div>
-    <h1 class="lp-hero-h1">Maak muziekbingo<br>in minuten.</h1>
-    <p class="lp-hero-sub">Genereer unieke kaarten, speel met het host-scherm en gebruik je eigen Spotify-playlist.</p>
+  <div class="lp-hero-content">
+    <div class="lp-hero-pill">🎵 Muziekbingo voor elk feestje</div>
+    <div class="lp-hero-textbox">
+      <h1 class="lp-hero-h1">Maak muziekbingo<br>in minuten.</h1>
+      <p class="lp-hero-sub">Genereer unieke kaarten, speel met het host-scherm en gebruik je eigen Spotify-playlist.</p>
+    </div>
+    <div class="lp-hero-proof"><span style="color:#ffd060">★★★★★</span> <span style="color:rgba(255,255,255,.7);font-size:.78rem">Perfect voor feestjes, borrels en kerstavonden</span></div>
   </div>
 </div>
 
-<!-- CONFIGURATOR -->
+<!-- BODY -->
 <div class="lp-body">
 
+  <!-- CONFIGURATOR -->
   <div class="lp-cfg-outer">
     <div class="lp-cfg-label">Hoe wil je spelen?</div>
-
     <div class="lp-cfg-card">
 
-      <!-- STAP 1 -->
+      <!-- MODES — Spotify eerst als beste keuze -->
       <div class="lp-sec">
         <div class="lp-modes">
 
-          <div class="lp-mode" id="lm-eigen" onclick="setType('eigen')">
-            <div class="lp-mode-badge lp-mb-low">Goedkoopst</div>
-            <div class="lp-mode-ico">📄</div>
-            <div class="lp-mode-name">Eigen nummers</div>
-            <div class="lp-mode-detail">Alleen PDF · geen host-scherm</div>
+          <!-- SPOTIFY — beste keuze, prominent bovenaan/eerst -->
+          <div class="lp-mode lp-mode-spotify" id="lm-spotify" onclick="setType('spotify')">
+            <div class="lp-mode-badge lp-mb-prem">★ Aanbevolen</div>
+            <div class="lp-mode-name">Spotify Bingo</div>
+            <div class="lp-mode-desc">Gebruik je eigen Spotify-playlist. Jij bepaalt de muziek, Melingo regelt de rest — unieke kaarten, host-scherm en automatische bingo-controle.</div>
+            <ul class="lp-mode-ul">
+              <li>Eigen muziek en playlist</li>
+              <li>Meer spelers mogelijk</li>
+              <li>Inclusief host-scherm</li>
+              <li>Meest persoonlijk &amp; flexibel</li>
+            </ul>
           </div>
 
-          <div class="lp-mode lp-mode-hot" id="lm-thema" onclick="setType('thema')">
-            <div class="lp-mode-badge lp-mb-mid">⚡ Populair</div>
-            <div class="lp-mode-ico">🎵</div>
-            <div class="lp-mode-name">Kant-en-klaar</div>
-            <div class="lp-mode-detail">40 nummers · host-scherm ✓</div>
-          </div>
+          <!-- RECHTERKOLOM: kant-en-klaar + eigen -->
+          <div class="lp-modes-col">
 
-          <div class="lp-mode" id="lm-spotify" onclick="setType('spotify')">
-            <div class="lp-mode-badge lp-mb-prem">Premium</div>
-            <div class="lp-mode-ico" style="color:#1db954">♫</div>
-            <div class="lp-mode-name">Spotify</div>
-            <div class="lp-mode-detail">Eigen muziek · meer spelers</div>
-          </div>
+            <div class="lp-mode lp-mode-sm" id="lm-thema" onclick="setType('thema')">
+              <div class="lp-mode-badge lp-mb-mid">⚡ Populair</div>
+              <div class="lp-mode-name">Kant-en-klaar thema</div>
+              <div class="lp-mode-desc">Kies een thema en speel direct. Inclusief host-scherm.</div>
+              <div class="lp-mode-tags">
+                <span>40 nummers</span><span>Max. 20 spelers</span><span>Host-scherm ✓</span>
+              </div>
+            </div>
 
+            <div class="lp-mode lp-mode-sm" id="lm-eigen" onclick="setType('eigen')">
+              <div class="lp-mode-badge lp-mb-low">Goedkoopst</div>
+              <div class="lp-mode-name">Eigen nummers</div>
+              <div class="lp-mode-desc">Plak je eigen lijst en download PDF-kaarten. Jij speelt de muziek zelf af.</div>
+              <div class="lp-mode-tags">
+                <span>Alleen PDF</span><span>Geen host-scherm</span>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <!-- STAP 2 (dynamisch) -->
+      <!-- STAP 2 -->
       <div id="lp-step2" style="display:none">
         <div class="lp-divider"></div>
         <div class="lp-sec">
@@ -546,13 +572,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div id="lp-inp-eigen" style="display:none">
             <textarea class="lp-ta" id="lp-ta" placeholder="Plak je nummers hier, één per regel:&#10;ABBA – Dancing Queen&#10;Queen – Don't Stop Me Now&#10;Beyoncé – Crazy in Love" oninput="onEigenInput()"></textarea>
             <div id="lp-eigen-st" class="lp-fmsg" style="display:none"></div>
-            <div class="lp-hint">Alleen PDF-kaarten · jij speelt de muziek zelf af · <button class="lp-lnk" onclick="setType('thema')">host-scherm nodig?</button></div>
+            <div class="lp-hint">Alleen PDF-kaarten · jij speelt muziek zelf af · <button class="lp-lnk" onclick="setType('thema')">host-scherm nodig?</button></div>
           </div>
 
           <!-- THEMA -->
           <div id="lp-inp-thema" style="display:none">
             <div class="lp-tgrid" id="lp-tgrid"></div>
-            <div class="lp-hint">40 nummers · max. 20 spelers · <button class="lp-lnk" onclick="setType('spotify')">meer dan 20 spelers nodig?</button></div>
+            <div class="lp-hint">40 nummers · max. 20 spelers · <button class="lp-lnk" onclick="setType('spotify')">meer dan 20 spelers?</button></div>
           </div>
 
           <!-- SPOTIFY -->
@@ -599,7 +625,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         </div>
       </div>
 
-      <!-- SAMENVATTING + CTA -->
+      <!-- CTA -->
       <div class="lp-divider"></div>
       <div class="lp-sec lp-bottom">
         <div id="lp-summary" class="lp-summary" style="display:none">
@@ -608,17 +634,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         </div>
         <button class="lp-cta" id="lp-cta" onclick="startGen()" disabled>Kies eerst je speelmodus</button>
         <div style="text-align:center;margin-top:.5rem">
-          <button onclick="showSaved()" style="background:none;border:none;color:rgba(255,255,255,.25);font-size:.7rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Opgeslagen bingo's</button>
+          <button onclick="showSaved()" style="background:none;border:none;color:rgba(255,255,255,.2);font-size:.7rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Opgeslagen bingo's</button>
         </div>
       </div>
 
-      <!-- OPGESLAGEN -->
       <div id="lp-saved" style="display:none;border-top:1px solid rgba(255,255,255,.06);padding:1rem 1.25rem 0">
         <div class="lp-sec-label" style="margin-bottom:.5rem">Opgeslagen bingo's</div>
         <div id="saved-list-wrap"></div>
         <div id="no-saved" style="font-size:.8rem;color:var(--mt)">Nog geen bingo's opgeslagen.</div>
       </div>
-
     </div>
   </div>
 
@@ -1084,6 +1108,8 @@ function goReview(idx){
 
 /* ══ START SCREEN LOGIC ══ */
 
+var THEME_LINES = {"jaren80": "Synthesizers, schoudervullingen en tijdloze hits.", "jaren90": "Van eurodance tot grunge \u2014 puur nostalgie.", "jaren00": "De hits van jouw tienertijd.", "nl": "Andr\u00e9, Marco, BL\u00d8F en al het moois daartussen.", "rock": "Luchtgitaar verplicht.", "pop": "De grootste pophits van de afgelopen decennia.", "rnb": "Soul, groove en R&B-klassiekers.", "foute": "Meezingen, meewiegen, niet nadenken.", "guilty": "De nummers waar je stiekem van houdt.", "kerst": "Mariah, Wham! en alles wat glinstert."};
+
 function getMaxPlayers(n){
   if(n<35)return 0;if(n<40)return 10;if(n<50)return 20;if(n<60)return 30;
   if(n<75)return 40;if(n<90)return 60;if(n<110)return 80;return 100;
@@ -1099,23 +1125,11 @@ function setType(mode){
     var el=document.getElementById(id);if(el)el.style.display='none';
   });
   var lbl=document.getElementById('lp-step2-lbl');
-  if(mode==='eigen'){
-    if(lbl)lbl.textContent='Jouw nummers';
-    document.getElementById('lp-inp-eigen').style.display='block';
-  } else if(mode==='thema'){
-    if(lbl)lbl.textContent='Kies je thema';
-    document.getElementById('lp-inp-thema').style.display='block';
-    buildLpTgrid();
-  } else if(mode==='spotify'){
-    if(lbl)lbl.textContent='Jouw Spotify-playlist';
-    document.getElementById('lp-inp-spotify').style.display='block';
-    if(SP.accessToken)showLpSpOk();
-  }
+  if(mode==='eigen'){if(lbl)lbl.textContent='Jouw nummers';document.getElementById('lp-inp-eigen').style.display='block';}
+  else if(mode==='thema'){if(lbl)lbl.textContent='Kies je thema';document.getElementById('lp-inp-thema').style.display='block';buildLpTgrid();}
+  else if(mode==='spotify'){if(lbl)lbl.textContent='Jouw Spotify-playlist';document.getElementById('lp-inp-spotify').style.display='block';if(SP.accessToken)showLpSpOk();}
   updLpPlayers();updLpCTA();
-  setTimeout(function(){
-    var s2=document.getElementById('lp-step2');
-    if(s2)s2.scrollIntoView({behavior:'smooth',block:'nearest'});
-  },80);
+  setTimeout(function(){var s2=document.getElementById('lp-step2');if(s2)s2.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 }
 
 function buildLpTgrid(){
@@ -1133,10 +1147,7 @@ function selLpTheme(el){
   document.querySelectorAll('.lp-tc').forEach(function(c){c.classList.remove('sel');});
   el.classList.add('sel');
   updLpPlayers();updLpCTA();
-  setTimeout(function(){
-    var s3=document.getElementById('lp-step3');
-    if(s3)s3.scrollIntoView({behavior:'smooth',block:'nearest'});
-  },80);
+  setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3)s3.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 }
 
 function onEigenInput(){
@@ -1273,8 +1284,7 @@ function startGen(){
 
 function showSaved(){
   var s=document.getElementById('lp-saved');if(!s)return;
-  s.style.display=s.style.display!=='none'?'none':'block';
-  buildSavedList();
+  s.style.display=s.style.display!=='none'?'none':'block';buildSavedList();
 }
 
 function checkResume(){
@@ -1302,32 +1312,33 @@ function buildLpThemeShowcase(){
   var el=document.getElementById('lp-themes-grid');if(!el)return;
   el.innerHTML=THEMES.map(function(th,i){
     var c=COLORS[i%COLORS.length];
+    var line=THEME_LINES[th.id]||th.mood;
     return'<div class="lp-th" style="--tc:'+c+'22;border-color:'+c+'22" onclick="selLpThemeDirect(this)" data-id="'+th.id+'">'
       +'<div class="lp-th-name">'+th.name+'</div>'
-      +'<div class="lp-th-mood">'+th.mood+'</div>'
-      +'<div class="lp-th-tag" style="background:'+c+'22;color:'+c+'">40 nummers</div>'
+      +'<div class="lp-th-line">'+line+'</div>'
+      +'<div class="lp-th-tag" style="background:'+c+'22;color:'+c+'">Host-scherm ✓</div>'
       +'</div>';
   }).join('');
 }
 
 function selLpThemeDirect(el){
-  setType('thema');
-  ST.theme=el.dataset.id;
-  buildLpTgrid();
+  setType('thema');ST.theme=el.dataset.id;buildLpTgrid();
   document.querySelector('.lp-cfg-outer').scrollIntoView({behavior:'smooth'});
 }
 
 function buildFAQ(){
   var el=document.getElementById('lp-faq');if(!el)return;
   var faqs=[
-    ['Hoeveel nummers heb ik nodig?','Voor een 5×5-kaart heb je minimaal 25 nummers nodig. We adviseren minimaal 35 voor genoeg variatie.'],
-    ['Kan ik mijn eigen Spotify-playlist gebruiken?','Ja, met Spotify Bingo. Je hebt wel Spotify Premium nodig. Melingo telt automatisch je nummers en berekent het maximale aantal spelers.'],
-    ['Wat is het verschil tussen Eigen nummers en Spotify?','Bij Eigen nummers maak je alleen PDF-kaarten en speel je de muziek zelf af. Bij Spotify gebruik je je eigen playlist én krijg je het Melingo host-scherm.'],
-    ['Zit het host-scherm overal bij?','Het host-scherm is inbegrepen bij Kant-en-klaar en Spotify Bingo. Bij Eigen nummers PDF niet.'],
-    ['Hoeveel spelers kunnen meedoen?','Met kant-en-klaar max. 20. Met Spotify hangt het af van je playlist — 110+ nummers geeft max. 100 spelers.'],
-    ['Kan ik de kaarten printen?','Ja, je downloadt een PDF die je op gewoon A4 kunt printen.'],
-    ['Moet ik iets installeren?','Nee, Melingo werkt volledig in de browser.'],
-    ['Kan ik Melingo gebruiken voor een bedrijfsborrel?','Absoluut. Kies een thema of gebruik je eigen Spotify-playlist voor een persoonlijke touch.'],
+    ['Wat is Melingo?','Melingo is een slimme muziekbingo-tool waarmee je eenvoudig een complete muziekbingo maakt en speelt. Je kiest een thema of gebruikt je eigen muzieklijst, maakt automatisch unieke bingokaarten en begeleidt het spel met het ingebouwde hostscherm. Zo hoef je niet zelf te knippen, plakken, controleren of bijhouden welke nummers al geweest zijn.'],
+    ['Hoe werkt Melingo?','1. Kies een kant-en-klaar thema of maak een bingo met je eigen muzieklijst. 2. Kies met hoeveel mensen je speelt. 3. Download de unieke bingokaarten als PDF. 4. Start het hostscherm en speel de muziekbingo. Het hostscherm helpt je tijdens het spel met afspelen, overzicht houden en bingo's controleren.'],
+    ['Wat is het hostscherm?','Het hostscherm is het scherm waarmee je de muziekbingo begeleidt. Hier zie je welk nummer aan de beurt is, welke nummers al zijn afgespeeld en kun je controleren of een bingo klopt. Je hoeft niet meer zelf met losse lijstjes, pen en papier bij te houden wat er al is geweest.'],
+    ['Kan ik controleren of iemand echt bingo heeft?','Ja. Elke bingokaart heeft een uniek kaartnummer. Wanneer iemand bingo roept, voer je het kaartnummer in op het hostscherm. Melingo laat dan direct zien of de bingo klopt. Goede nummers worden groen weergegeven, ontbrekende nummers rood.'],
+    ['Zijn alle bingokaarten uniek?','Ja. Melingo maakt automatisch unieke bingokaarten aan. Daardoor speelt iedere deelnemer met een andere combinatie van nummers. Dit maakt het spel eerlijker en leuker.'],
+    ['Heb ik Spotify nodig?','Je kunt Melingo gebruiken met een Spotify-playlist, maar je kunt ook zelf nummers invoeren of een kant-en-klaar thema kiezen. Voor Spotify Bingo heb je wel Spotify Premium nodig.'],
+    ['Kan ik de kaarten printen?','Ja. De bingokaarten zijn printklaar en worden als PDF gedownload. Er is ook een zwart-wit optie, handig als je inkt wilt besparen.'],
+    ['Moet ik iets installeren?','Nee. Melingo werkt volledig in de browser. Je hoeft niets te installeren.'],
+    ['Voor welke gelegenheden is Melingo geschikt?','Verjaardagen, vriendinnenavonden, familiefeesten, borrels, teamuitjes, feestdagen, bruiloften, kroegavonden, spelavonden en meer. Omdat muziek herinneringen oproept, is Melingo leuk voor jong en oud.'],
+    ['Komt er ook een abonnement?','Ja, in de toekomst komen er abonnementen voor gebruikers die vaker muziekbingo willen spelen. Handig voor cafés, kroegen, scholen, verenigingen en bedrijven. Voor nu kun je Melingo per spel gebruiken.'],
   ];
   el.innerHTML=faqs.map(function(f){
     return'<div class="lp-faq-item">'
@@ -1343,8 +1354,9 @@ function toggleFAQ(btn){
   if(!open){a.classList.add('open');btn.querySelector('span').textContent='−';}
 }
 
-/* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ */
+/* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ */
 window.onload=function(){
+  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();checkSpotifyAuth();
   updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();checkSpotifyAuth();
   updLpPNum();checkResume();buildLpShowcase();buildFAQ();checkSpotifyAuth();
   var taps=0;
