@@ -282,10 +282,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 /* ══ LANDING PAGE ══ */
 /* Hero */
-.lp-hero-img-wrap{display:grid;width:100%;max-height:420px;overflow:hidden}
-.lp-hero-img{grid-area:1/1;width:100%;height:420px;object-fit:cover;object-position:center 60%;display:block;filter:brightness(.55)}
-.lp-hero-inner{grid-area:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1.5rem;width:100%;box-sizing:border-box;background:linear-gradient(180deg,rgba(13,13,24,.3) 0%,rgba(13,13,24,.6) 100%)}
-.lp-hero{background:linear-gradient(180deg,rgba(155,109,255,.06) 0%,transparent 100%);border-bottom:1px solid rgba(255,255,255,.05);padding:0}
+.lp-hero-inner{text-align:center;padding:2.5rem 1.5rem 2rem;max-width:680px;margin:0 auto}
+.lp-hero{background:url('/hero.jpg') center 60%/cover no-repeat;border-bottom:1px solid rgba(255,255,255,.05);padding:0;position:relative}.lp-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,24,.45) 0%,rgba(13,13,24,.65) 100%);pointer-events:none}.lp-hero>*{position:relative;z-index:1}
 .lp-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;max-width:1100px;margin:0 auto}
 .lp-nav-logo{display:flex;align-items:center;gap:.5rem}
 .lp-nav-brand{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -505,16 +503,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
     </div>
 
-    <div class="lp-hero-img-wrap">
-      <img src="/hero.jpg" alt="Melingo muziekbingo" class="lp-hero-img"/>
-      <div class="lp-hero-inner">
-        <div class="lp-hero-badge">🎵 Muziekbingo voor elk feestje</div>
-        <h1 class="lp-h1">Maak muziekbingo in minuten.<br>Speel zonder gedoe.</h1>
-        <p class="lp-sub">Genereer unieke bingokaarten, download de PDF en speel soepel met het host-scherm.</p>
-        <div class="lp-proof">
-          <span class="lp-stars">★★★★★</span>
-          <span class="lp-proof-txt">Perfect voor feestjes, borrels, kerst en teamuitjes</span>
-        </div>
+    <div class="lp-hero-inner">
+      <div class="lp-hero-badge">🎵 Muziekbingo voor elk feestje</div>
+      <h1 class="lp-h1">Maak muziekbingo in minuten.<br>Speel zonder gedoe.</h1>
+      <p class="lp-sub">Genereer unieke bingokaarten, download de PDF en speel soepel met het host-scherm.</p>
+      <div class="lp-proof">
+        <span class="lp-stars">★★★★★</span>
+        <span class="lp-proof-txt">Perfect voor feestjes, borrels, kerst en teamuitjes</span>
       </div>
     </div>
   </div>
