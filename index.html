@@ -1464,6 +1464,12 @@ function gen(){
     return;
   } else if(ST.mode==='thema'){
     var th=THEMES.filter(function(t){return t.id===(ST.theme||ST.selTheme);})[0];if(!th){toast('Kies eerst een thema.');return;}
+    // Auto-koppel Spotify playlist als thema een spotifyId heeft en Spotify verbonden is
+    if(th.spotifyId&&SP.accessToken){
+      ST.spotifyPlaylist={id:th.spotifyId,name:th.name,img:''};
+      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[]};
+      loadSpotifyPlaylistForTheme(th.spotifyId,th.name);
+    }
     songs=th.songs.slice();trackAnalytics(th.name);
   } else if(ST.mode==='opgeslagen'){
     var pl=getSaved().filter(function(p){return p.id===ST.selSaved;})[0];if(!pl){toast('Kies een playlist.');return;}
@@ -2184,6 +2190,18 @@ function deleteNamedSession(name){
 }
 
 function syncSpotifyHostPanel(){
+  // Als thema geselecteerd maar Spotify niet verbonden — toon connect prompt
+  if(!SP.accessToken&&ST.theme){
+    var th=THEMES.filter(function(t){return t.id===ST.theme;})[0];
+    if(th&&th.spotifyId){
+      // Open Spotify paneel met connect knop
+      var body=document.getElementById('col-body-spotify');
+      var arrow=document.getElementById('col-arrow-spotify');
+      if(body)body.style.display='block';
+      if(arrow)arrow.classList.add('open');
+      return;
+    }
+  }
   if(!ST.spotifyPlaylist||!SP.accessToken)return;
   // Open paneel
   var body=document.getElementById('col-body-spotify');
