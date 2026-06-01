@@ -1189,18 +1189,16 @@ function renderLpPlaylists(){
 }
 
 async function selLpPlaylist(el){
-  var idx=parseInt(el.dataset.idx);SP.selectedPlaylist=SP.playlists[idx];
+  var idx=parseInt(el.dataset.idx);SP.selectedPlaylist=SP.playlists[idx];SP.selectedPlaylist._count=undefined;
   document.querySelectorAll('#lp-pl-list .sp-playlist-item').forEach(function(e){e.style.background='';});
   el.style.background='rgba(155,109,255,.12)';
   var fb=document.getElementById('lp-sp-fb');
   if(fb){fb.style.display='block';fb.className='lp-fmsg lp-fmsg-ok';fb.textContent='Nummers tellen...';}
   try{
-    // Gebruik count van eerder geladen playlist data als beschikbaar
-    var cnt=SP.selectedPlaylist.tracks&&SP.selectedPlaylist.tracks.total||0;
-    if(!cnt){
-      var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id);
-      var d=await r.json();cnt=d.tracks&&d.tracks.total||0;
-    }
+    // Altijd ophalen via playlist endpoint — gegarandeerd tracks.total
+    var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'?market=NL');
+    var d=await r.json();
+    var cnt=d.tracks&&typeof d.tracks.total==='number'?d.tracks.total:0;
     SP.selectedPlaylist._count=cnt;
     if(fb)fb.textContent='✓ '+cnt+' nummers · max. '+getMaxPlayers(cnt)+' spelers';
     loadSpotifyPlaylistForTheme(SP.selectedPlaylist.id,SP.selectedPlaylist.name);
@@ -1213,7 +1211,7 @@ function updLpPlayers(){
   var mode=ST.mode,show=false,maxP=20;
   if(mode==='thema'&&ST.theme){show=true;maxP=20;}
   else if(mode==='eigen'){var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;if(n>=25){show=true;maxP=getMaxPlayers(n)||100;}}
-  else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count){show=true;maxP=getMaxPlayers(SP.selectedPlaylist._count);}
+  else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count>0){show=true;maxP=getMaxPlayers(SP.selectedPlaylist._count);}
   var s3=document.getElementById('lp-step3');if(s3)s3.style.display=show?'block':'none';
   if(show){
     if(ST.players>maxP)ST.players=maxP;if(ST.players<1)ST.players=1;
@@ -1266,7 +1264,7 @@ function updLpCTA(){
     return;
   }
   if(mode==='spotify'){
-    if(!SP.selectedPlaylist){btn.disabled=true;btn.textContent='Kies een playlist';if(sum)sum.style.display='none';return;}
+    if(!SP.selectedPlaylist||SP.selectedPlaylist._count===undefined){btn.disabled=true;btn.textContent='Kies een playlist';if(sum)sum.style.display='none';return;}
     var cnt=SP.selectedPlaylist._count||0;
     if(cnt<35){btn.disabled=true;btn.textContent='Playlist heeft te weinig nummers';if(sum)sum.style.display='none';return;}
     btn.disabled=false;btn.textContent='Maak Spotify-bingo →';
