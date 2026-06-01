@@ -281,150 +281,139 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 }
 
 /* ══ LANDING PAGE ══ */
-/* Hero */
-.lp-hero-inner{text-align:center;padding:2.5rem 1.5rem 2rem;max-width:680px;margin:0 auto}
-.lp-hero{background:url('/hero.jpg') center 35%/cover no-repeat;border-bottom:1px solid rgba(255,255,255,.05);padding:0;position:relative}.lp-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,24,.55) 0%,rgba(13,13,24,.72) 100%);pointer-events:none}.lp-hero>*{position:relative;z-index:1}
-.lp-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;max-width:1100px;margin:0 auto}
+
+/* NAV */
+.lp-nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(13,13,24,.9);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
 .lp-nav-logo{display:flex;align-items:center;gap:.5rem}
-.lp-nav-brand{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.lp-resume{display:flex;align-items:center;gap:.5rem;background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.25);border-radius:99px;padding:.3rem .75rem}
-.lp-hero-inner{text-align:center;padding:2rem 1.5rem 1rem;max-width:680px;margin:0 auto}
-.lp-hero-badge{display:inline-block;background:rgba(155,109,255,.12);border:1px solid rgba(155,109,255,.25);border-radius:99px;font-size:.72rem;font-weight:700;color:var(--a);padding:.3rem .85rem;margin-bottom:1.1rem;letter-spacing:.05em}
-.lp-h1{font-size:2.4rem;font-weight:800;line-height:1.2;margin:0 0 .85rem;color:var(--tx)}
-.lp-sub{font-size:.88rem;color:var(--mt);line-height:1.7;margin:0 0 1.1rem}
-.lp-proof{display:flex;align-items:center;justify-content:center;gap:.4rem}
-.lp-stars{color:#ffd060;font-size:.85rem}
-.lp-proof-txt{font-size:.75rem;color:var(--mt)}
+.lp-nav-brand{font-size:1.05rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lp-resume-chip{display:flex;align-items:center;gap:.5rem;background:rgba(155,109,255,.12);border:1px solid rgba(155,109,255,.3);border-radius:99px;padding:.3rem .75rem;font-size:.72rem;color:var(--mt)}
 
-/* Configurator */
-.lp-cfg-wrap{max-width:900px;margin:0 auto;padding:2rem 1.25rem}
-.lp-cfg-title{font-size:1.1rem;font-weight:700;color:var(--tx);text-align:center;margin-bottom:1.25rem}
-.lp-cfg{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:24px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.3)}
+/* HERO BANNER */
+.lp-hero-banner{min-height:320px;background:url('/hero.jpg') center 35%/cover no-repeat;display:flex;align-items:center;justify-content:center;position:relative}
+.lp-hero-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,24,.55) 0%,rgba(13,13,24,.8) 100%);pointer-events:none}
+.lp-hero-text{position:relative;z-index:1;text-align:center;padding:3rem 1.5rem;max-width:680px}
+.lp-hero-eyebrow{display:inline-block;background:rgba(155,109,255,.15);border:1px solid rgba(155,109,255,.3);border-radius:99px;font-size:.72rem;font-weight:700;color:var(--a);padding:.3rem .85rem;margin-bottom:1rem;letter-spacing:.05em}
+.lp-hero-h1{font-size:2.6rem;font-weight:800;line-height:1.15;margin:0 0 .75rem;color:#fff}
+.lp-hero-sub{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.65;margin:0}
 
-/* Mode cards */
-.lp-modes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
-.lp-mode{padding:1.4rem 1.1rem;cursor:pointer;transition:all .2s;border-right:1px solid rgba(255,255,255,.06);position:relative}
-.lp-mode:last-child{border-right:none}
-.lp-mode:hover{background:rgba(255,255,255,.04)}
-.lp-mode.sel{background:rgba(155,109,255,.08)}
-.lp-mode.sel::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--s),var(--a))}
-.lp-mode-pop{background:rgba(155,109,255,.04)}
-.lp-mode-top{margin-bottom:.75rem}
-.lp-mbadge{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .5rem;border-radius:5px;display:inline-block}
+/* BODY */
+.lp-body{max-width:860px;margin:0 auto;padding:2.5rem 1.25rem 4rem;display:flex;flex-direction:column;gap:4rem}
+
+/* CONFIGURATOR */
+.lp-cfg-outer{}
+.lp-cfg-label{font-size:1.15rem;font-weight:800;color:var(--tx);text-align:center;margin-bottom:1.25rem}
+.lp-cfg-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px rgba(155,109,255,.08),0 24px 80px rgba(0,0,0,.4)}
+
+.lp-sec{padding:1.25rem 1.4rem}
+.lp-sec-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:.85rem}
+.lp-divider{height:1px;background:rgba(255,255,255,.06)}
+.lp-bottom{display:flex;flex-direction:column;gap:.65rem}
+
+/* MODES */
+.lp-modes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem}
+.lp-mode{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.07);border-radius:16px;padding:1rem .9rem 1.1rem;cursor:pointer;transition:all .2s;text-align:center}
+.lp-mode:hover{background:rgba(255,255,255,.07);border-color:rgba(155,109,255,.3);transform:translateY(-2px)}
+.lp-mode.sel{border-color:var(--a);background:rgba(155,109,255,.1);box-shadow:0 0 20px rgba(155,109,255,.12)}
+.lp-mode-hot{border-color:rgba(155,109,255,.2);background:rgba(155,109,255,.05)}
+.lp-mode-badge{font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .48rem;border-radius:5px;display:inline-block;margin-bottom:.6rem}
 .lp-mb-low{background:rgba(106,171,247,.18);color:#6AABF7}
-.lp-mb-mid{background:rgba(155,109,255,.2);color:#c4a8ff}
+.lp-mb-mid{background:rgba(155,109,255,.22);color:#c4a8ff}
 .lp-mb-prem{background:rgba(29,185,84,.18);color:#1db954}
-.lp-mode-ico{font-size:1.5rem;margin-bottom:.4rem}
-.lp-mode-name{font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.5rem}
-.lp-mode-ul{list-style:none;padding:0;margin:0 0 .75rem;display:flex;flex-direction:column;gap:.25rem}
-.lp-mode-ul li{font-size:.72rem;color:var(--mt);display:flex;align-items:center;gap:.35rem}
-.lp-mode-ul li::before{content:'·';color:var(--a)}
-.lp-mode.sel .lp-mode-ul li{color:rgba(255,255,255,.7)}
-.lp-mode-cta{font-size:.72rem;color:var(--a);font-weight:600;opacity:0;transition:opacity .2s}
-.lp-mode:hover .lp-mode-cta,.lp-mode.sel .lp-mode-cta{opacity:1}
+.lp-mode-ico{font-size:1.5rem;margin-bottom:.4rem;display:block}
+.lp-mode-name{font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.25rem}
+.lp-mode-detail{font-size:.7rem;color:var(--mt);line-height:1.4}
+.lp-mode.sel .lp-mode-detail{color:rgba(255,255,255,.6)}
 
-/* Dynamic section */
-.lp-divider{height:1px;background:rgba(255,255,255,.06);margin:0}
-.lp-step2,.lp-step3-wrap{padding:1.25rem 1.4rem}
-.lp-step-hd{display:flex;align-items:center;gap:.55rem;margin-bottom:.85rem}
-.lp-step-n{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--s),var(--a));color:#fff;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.lp-step-hd span:last-child{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt)}
-
-/* Textarea */
+/* TEXTAREA */
 .lp-ta{width:100%;min-height:110px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);border-radius:12px;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;padding:.85rem;resize:vertical;outline:none;box-sizing:border-box;transition:border .2s;line-height:1.6}
 .lp-ta:focus{border-color:var(--a)}
-.lp-field-msg{font-size:.75rem;font-weight:600;padding:.45rem .7rem;border-radius:8px;margin-top:.45rem}
-.lp-msg-ok{background:rgba(29,185,84,.08);color:var(--green);border:1px solid rgba(29,185,84,.2)}
-.lp-msg-warn{background:rgba(242,64,106,.08);color:var(--s);border:1px solid rgba(242,64,106,.2)}
-.lp-mode-note{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.55rem;line-height:1.5}
-.lp-txt-btn{background:none;border:none;color:var(--a);font-size:.72rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:underline;padding:0}
+.lp-fmsg{font-size:.75rem;font-weight:600;padding:.45rem .7rem;border-radius:8px;margin-top:.4rem}
+.lp-fmsg-ok{background:rgba(29,185,84,.08);color:var(--green);border:1px solid rgba(29,185,84,.2)}
+.lp-fmsg-warn{background:rgba(242,64,106,.08);color:var(--s);border:1px solid rgba(242,64,106,.2)}
+.lp-hint{font-size:.72rem;color:rgba(255,255,255,.3);margin-top:.55rem;line-height:1.5}
+.lp-lnk{background:none;border:none;color:var(--a);font-size:.72rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:underline;padding:0}
 
-/* Theme grid */
-.lp-theme-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem}
-.lp-tc{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.06);border-radius:10px;padding:.6rem .65rem;cursor:pointer;transition:all .15s}
-.lp-tc:hover{background:rgba(255,255,255,.08);border-color:rgba(155,109,255,.3)}
+/* THEMA GRID IN CONFIG */
+.lp-tgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem}
+.lp-tc{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.07);border-radius:10px;padding:.6rem .55rem;cursor:pointer;transition:all .15s;text-align:center}
+.lp-tc:hover{background:rgba(255,255,255,.08);border-color:rgba(155,109,255,.35);transform:translateY(-1px)}
 .lp-tc.sel{border-color:var(--a);background:rgba(155,109,255,.12)}
-.lp-tc-name{font-size:.75rem;font-weight:700;color:var(--tx);margin-bottom:.15rem}
-.lp-tc-mood{font-size:.62rem;color:var(--mt);line-height:1.35;font-style:italic}
+.lp-tc-name{font-size:.75rem;font-weight:700;color:var(--tx);margin-bottom:.1rem}
+.lp-tc-mood{font-size:.6rem;color:var(--mt);line-height:1.35;font-style:italic}
 
-/* Spotify */
+/* SPOTIFY */
 .lp-sp-box{background:rgba(29,185,84,.05);border:1px solid rgba(29,185,84,.18);border-radius:12px;padding:1rem}
+.lp-sp-title{font-size:.9rem;font-weight:700;color:var(--tx);margin-bottom:.3rem}
+.lp-sp-sub{font-size:.76rem;color:var(--mt);margin-bottom:.85rem;line-height:1.55}
 .lp-sp-user{font-size:.78rem;font-weight:600;color:var(--green);margin-bottom:.6rem}
-.lp-pl-list{max-height:180px;overflow-y:auto}
+.lp-pl-list{max-height:180px;overflow-y:auto;margin-bottom:.5rem}
 
-/* Player picker */
-#lp-step3{padding:0 1.4rem 1.25rem}
+/* PLAYER */
 .lp-player-ui{display:flex;flex-direction:column;align-items:center;gap:.55rem}
-.lp-player-row{display:flex;align-items:center;gap:.5rem}
-.lp-pq{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--tx);font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
-.lp-pq:hover{background:rgba(255,255,255,.12)}
-.lp-pnum{font-size:2rem;font-weight:800;color:var(--a);min-width:60px;text-align:center}
+.lp-prow{display:flex;align-items:center;gap:.5rem}
+.lp-pq{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--tx);font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
+.lp-pq:hover{background:rgba(255,255,255,.13)}
+.lp-pnum{font-size:2.2rem;font-weight:800;color:var(--a);min-width:60px;text-align:center}
 .lp-pquick{display:flex;gap:.35rem}
 .lp-pqk{padding:.35rem .8rem;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--mt);font-size:.76rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
 .lp-pqk:hover,.lp-pqk.sel{background:rgba(155,109,255,.15);color:var(--a);border-color:rgba(155,109,255,.35)}
-.lp-pinfo{font-size:.74rem;color:var(--mt);text-align:center;line-height:1.5}
+.lp-pinfo{font-size:.75rem;color:var(--mt);text-align:center;line-height:1.5}
 .lp-upsell{font-size:.74rem;color:var(--mt);background:rgba(155,109,255,.06);border:1px solid rgba(155,109,255,.15);border-radius:9px;padding:.55rem .75rem;margin-top:.6rem;line-height:1.5}
 
-/* Bottom CTA */
-.lp-bottom{padding:1.1rem 1.4rem;background:rgba(155,109,255,.04);border-top:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:.6rem}
-.lp-summary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.7rem .9rem}
-.lp-sum-t{font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.15rem}
+/* SUMMARY + CTA */
+.lp-summary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.7rem .9rem}
+.lp-sum-t{font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.2rem}
 .lp-sum-m{font-size:.72rem;color:var(--mt)}
-.lp-cta{width:100%;min-height:50px;border-radius:13px;background:linear-gradient(135deg,var(--s),var(--a));border:none;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 6px 24px rgba(155,109,255,.2);display:block}
+.lp-cta{width:100%;min-height:50px;border-radius:13px;background:linear-gradient(135deg,var(--s),var(--a));border:none;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 24px rgba(155,109,255,.25)}
 .lp-cta:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
 .lp-cta:disabled{background:rgba(255,255,255,.07);color:rgba(255,255,255,.2);cursor:not-allowed;box-shadow:none;transform:none}
 
-/* USP sectie */
-.lp-usp-section{max-width:900px;margin:0 auto;padding:2.5rem 1.25rem}
-.lp-section-title{font-size:1.25rem;font-weight:800;color:var(--tx);text-align:center;margin-bottom:.5rem}
+/* THEMA'S SECTIE */
+.lp-themes-sec{}
+.lp-section-hd{font-size:1.4rem;font-weight:800;color:var(--tx);text-align:center;margin-bottom:.4rem}
 .lp-section-sub{font-size:.8rem;color:var(--mt);text-align:center;margin-bottom:1.5rem}
-.lp-usp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
-.lp-usp-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.25rem 1rem;text-align:center}
-.lp-usp-ico{font-size:1.6rem;margin-bottom:.5rem}
-.lp-usp-name{font-size:.85rem;font-weight:700;color:var(--tx);margin-bottom:.35rem}
-.lp-usp-desc{font-size:.75rem;color:var(--mt);line-height:1.6}
+.lp-themes-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem}
+.lp-th{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.9rem .75rem;cursor:pointer;transition:all .18s;text-align:center;position:relative;overflow:hidden}
+.lp-th::before{content:'';position:absolute;inset:0;background:var(--tc,rgba(155,109,255,.1));opacity:0;transition:opacity .2s}
+.lp-th:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.lp-th:hover::before{opacity:1}
+.lp-th-name{font-size:.82rem;font-weight:700;color:var(--tx);margin-bottom:.3rem;position:relative}
+.lp-th-mood{font-size:.65rem;color:var(--mt);font-style:italic;line-height:1.4;position:relative}
+.lp-th-tag{font-size:.6rem;font-weight:700;padding:.15rem .4rem;border-radius:4px;display:inline-block;margin-top:.4rem;position:relative}
 
-/* Thema's sectie */
-.lp-themes-section{max-width:900px;margin:0 auto;padding:0 1.25rem 2.5rem}
-.lp-themes-showcase{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-top:1.25rem}
-.lp-th-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.85rem .75rem;cursor:pointer;transition:all .15s;text-align:center}
-.lp-th-card:hover{background:rgba(155,109,255,.08);border-color:rgba(155,109,255,.3);transform:translateY(-2px)}
-.lp-th-name{font-size:.78rem;font-weight:700;color:var(--tx);margin-bottom:.25rem}
-.lp-th-mood{font-size:.65rem;color:var(--mt);font-style:italic;line-height:1.35}
-.lp-th-meta{font-size:.6rem;color:rgba(255,255,255,.25);margin-top:.35rem}
-
-/* Reviews */
-.lp-reviews{max-width:900px;margin:0 auto;padding:0 1.25rem 2.5rem}
-.lp-reviews-hd{display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
-.lp-rev-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
-.lp-rev{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:.9rem 1rem;font-size:.78rem;color:var(--mt);line-height:1.6;font-style:italic}
-.lp-rev-by{font-size:.7rem;color:var(--a);font-style:normal;font-weight:600;margin-top:.45rem}
+/* REVIEWS */
+.lp-reviews-sec{}
+.lp-proof-bar{display:flex;align-items:center;justify-content:center;gap:.4rem;margin-bottom:1.25rem}
+.lp-stars{color:#ffd060;font-size:.9rem}
+.lp-proof-txt{font-size:.78rem;color:var(--mt)}
+.lp-rev-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.85rem}
+.lp-rev{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.1rem 1rem}
+.lp-rev-q{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.6;font-style:italic;margin-bottom:.6rem}
+.lp-rev-by{font-size:.72rem;color:var(--a);font-weight:600}
 
 /* FAQ */
-.lp-faq{max-width:700px;margin:0 auto;padding:0 1.25rem 2.5rem}
+.lp-faq-sec{max-width:640px;margin:0 auto;width:100%}
+.lp-faq-list{}
 .lp-faq-item{border-bottom:1px solid rgba(255,255,255,.06)}
 .lp-faq-q{width:100%;background:none;border:none;color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;font-weight:600;text-align:left;padding:.9rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:.5rem}
-.lp-faq-a{font-size:.78rem;color:var(--mt);line-height:1.65;padding-bottom:.85rem;display:none}
+.lp-faq-q span{color:var(--a);font-size:1rem;flex-shrink:0}
+.lp-faq-a{font-size:.78rem;color:var(--mt);line-height:1.7;padding-bottom:.85rem;display:none}
 .lp-faq-a.open{display:block}
 
-/* Footer CTA */
-.lp-footer-cta{text-align:center;padding:2rem 1.25rem 4rem;max-width:500px;margin:0 auto;display:flex;flex-direction:column}
+/* FOOTER CTA */
+.lp-footer-cta{text-align:center;padding:1rem 0 2rem}
+.lp-footer-title{font-size:1.3rem;font-weight:800;color:var(--tx);margin-bottom:.4rem}
+.lp-footer-sub{font-size:.82rem;color:var(--mt);margin-bottom:1.25rem}
 
-/* Mobile */
-@media(max-width:700px){
-  .lp-h1{font-size:1.35rem}
-  .lp-hero-img{height:340px}
-  .lp-hero-inner{padding:1.25rem 1rem 1.75rem}
+/* MOBILE */
+@media(max-width:680px){
+  .lp-hero-h1{font-size:1.7rem}
+  .lp-hero-banner{min-height:220px}
   .lp-modes{grid-template-columns:1fr}
-  .lp-mode{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
-  .lp-mode:last-child{border-bottom:none}
-  .lp-theme-grid{grid-template-columns:1fr 1fr}
-  .lp-tc{padding:.55rem}
-  .lp-themes-showcase{grid-template-columns:1fr 1fr}
-  .lp-usp-grid{grid-template-columns:1fr}
-  .lp-rev-row{grid-template-columns:1fr}
-  .lp-step2,.lp-step3-wrap{padding:.85rem 1rem}
-  .lp-bottom{padding:.9rem 1rem}
+  .lp-tgrid{grid-template-columns:1fr 1fr}
+  .lp-themes-grid{grid-template-columns:1fr 1fr}
+  .lp-rev-grid{grid-template-columns:1fr}
+  .lp-body{padding:1.5rem 1rem 3rem;gap:3rem}
 }
 
 /* COLLAPSIBLE PANELS */
@@ -489,130 +478,107 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <div id="screen-start" class="screen active">
 <div class="scroll">
 
-  <!-- HERO SECTION -->
-  <div class="lp-hero">
-    <div class="lp-nav">
-      <div class="lp-nav-logo">
-        <svg width="28" height="28" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
-        <span class="lp-nav-brand">Melingo</span>
-      </div>
-      <div id="resume-bar" style="display:none" class="lp-resume">
-        <span id="resume-meta" style="font-size:.72rem;color:var(--mt)">Vorige sessie gevonden</span>
-        <button class="btn bp" onclick="resumeSession()" style="font-size:.7rem;min-height:28px;padding:.25rem .65rem">Verdergaan</button>
-        <button onclick="dismissResume()" style="background:none;border:none;color:var(--mt);font-size:.8rem;cursor:pointer;line-height:1">×</button>
-      </div>
-    </div>
-
-    <div class="lp-hero-inner">
-      <div class="lp-hero-badge">🎵 Muziekbingo voor elk feestje</div>
-      <h1 class="lp-h1">Maak muziekbingo in minuten.<br>Speel zonder gedoe.</h1>
-      <p class="lp-sub">Genereer unieke bingokaarten, download de PDF en speel soepel met het host-scherm.</p>
-      <div class="lp-proof">
-        <span class="lp-stars">★★★★★</span>
-        <span class="lp-proof-txt">Perfect voor feestjes, borrels, kerst en teamuitjes</span>
-      </div>
-    </div>
+<!-- NAV -->
+<nav class="lp-nav">
+  <div class="lp-nav-logo">
+    <svg width="26" height="26" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
+    <span class="lp-nav-brand">Melingo</span>
   </div>
+  <div id="resume-bar" style="display:none" class="lp-resume-chip">
+    <span id="resume-meta"></span>
+    <button class="btn bp" onclick="resumeSession()" style="font-size:.68rem;min-height:26px;padding:.2rem .6rem">Verdergaan</button>
+    <button onclick="dismissResume()" style="background:none;border:none;color:var(--mt);cursor:pointer;font-size:.85rem;line-height:1;padding:0">×</button>
+  </div>
+</nav>
 
-  <!-- CONFIGURATOR -->
-  <div class="lp-cfg-wrap">
-    <div class="lp-cfg-title">Hoe wil je spelen?</div>
+<!-- HERO BANNER -->
+<div class="lp-hero-banner">
+  <div class="lp-hero-text">
+    <div class="lp-hero-eyebrow">🎵 Muziekbingo voor elk feestje</div>
+    <h1 class="lp-hero-h1">Maak muziekbingo<br>in minuten.</h1>
+    <p class="lp-hero-sub">Genereer unieke kaarten, speel met het host-scherm en gebruik je eigen Spotify-playlist.</p>
+  </div>
+</div>
 
-    <div class="lp-cfg">
+<!-- CONFIGURATOR -->
+<div class="lp-body">
 
-      <!-- MODE CARDS -->
-      <div class="lp-modes">
+  <div class="lp-cfg-outer">
+    <div class="lp-cfg-label">Hoe wil je spelen?</div>
 
-        <div class="lp-mode" id="lm-eigen" onclick="setType('eigen')">
-          <div class="lp-mode-top">
-            <span class="lp-mbadge lp-mb-low">Goedkoopste optie</span>
-          </div>
-          <div class="lp-mode-body">
+    <div class="lp-cfg-card">
+
+      <!-- STAP 1 -->
+      <div class="lp-sec">
+        <div class="lp-modes">
+
+          <div class="lp-mode" id="lm-eigen" onclick="setType('eigen')">
+            <div class="lp-mode-badge lp-mb-low">Goedkoopst</div>
             <div class="lp-mode-ico">📄</div>
             <div class="lp-mode-name">Eigen nummers</div>
-            <ul class="lp-mode-ul">
-              <li>Eigen nummers plakken</li>
-              <li>Alleen PDF-kaarten</li>
-              <li>Geen host-scherm</li>
-            </ul>
+            <div class="lp-mode-detail">Alleen PDF · geen host-scherm</div>
           </div>
-          <div class="lp-mode-cta">Maak PDF-kaarten →</div>
-        </div>
 
-        <div class="lp-mode lp-mode-pop" id="lm-thema" onclick="setType('thema')">
-          <div class="lp-mode-top">
-            <span class="lp-mbadge lp-mb-mid">⚡ Populair</span>
-          </div>
-          <div class="lp-mode-body">
+          <div class="lp-mode lp-mode-hot" id="lm-thema" onclick="setType('thema')">
+            <div class="lp-mode-badge lp-mb-mid">⚡ Populair</div>
             <div class="lp-mode-ico">🎵</div>
-            <div class="lp-mode-name">Kant-en-klaar thema</div>
-            <ul class="lp-mode-ul">
-              <li>40 nummers inbegrepen</li>
-              <li>Max. 20 spelers</li>
-              <li>Inclusief host-scherm ✓</li>
-            </ul>
+            <div class="lp-mode-name">Kant-en-klaar</div>
+            <div class="lp-mode-detail">40 nummers · host-scherm ✓</div>
           </div>
-          <div class="lp-mode-cta">Kies een thema →</div>
-        </div>
 
-        <div class="lp-mode" id="lm-spotify" onclick="setType('spotify')">
-          <div class="lp-mode-top">
-            <span class="lp-mbadge lp-mb-prem">Premium</span>
-          </div>
-          <div class="lp-mode-body">
+          <div class="lp-mode" id="lm-spotify" onclick="setType('spotify')">
+            <div class="lp-mode-badge lp-mb-prem">Premium</div>
             <div class="lp-mode-ico" style="color:#1db954">♫</div>
-            <div class="lp-mode-name">Spotify Bingo</div>
-            <ul class="lp-mode-ul">
-              <li>Eigen Spotify-playlist</li>
-              <li>Meer spelers mogelijk</li>
-              <li>Inclusief host-scherm ✓</li>
-            </ul>
+            <div class="lp-mode-name">Spotify</div>
+            <div class="lp-mode-detail">Eigen muziek · meer spelers</div>
           </div>
-          <div class="lp-mode-cta">Gebruik Spotify →</div>
-        </div>
 
+        </div>
       </div>
 
-      <!-- DYNAMISCHE SECTIE -->
-      <div id="lp-dynamic" style="display:none">
+      <!-- STAP 2 (dynamisch) -->
+      <div id="lp-step2" style="display:none">
         <div class="lp-divider"></div>
+        <div class="lp-sec">
+          <div class="lp-sec-label" id="lp-step2-lbl">Kies je muziek</div>
 
-        <!-- STAP 2 -->
-        <div class="lp-step2">
-          <div class="lp-step-hd"><span class="lp-step-n">2</span><span id="lp-step2-lbl">Kies je muziek</span></div>
-
+          <!-- EIGEN -->
           <div id="lp-inp-eigen" style="display:none">
             <textarea class="lp-ta" id="lp-ta" placeholder="Plak je nummers hier, één per regel:&#10;ABBA – Dancing Queen&#10;Queen – Don't Stop Me Now&#10;Beyoncé – Crazy in Love" oninput="onEigenInput()"></textarea>
-            <div id="lp-eigen-st" class="lp-field-msg" style="display:none"></div>
-            <div class="lp-mode-note">Goedkoopste optie · alleen PDF · jij speelt muziek zelf af · <button class="lp-txt-btn" onclick="setType('thema')">wil je ook een host-scherm?</button></div>
+            <div id="lp-eigen-st" class="lp-fmsg" style="display:none"></div>
+            <div class="lp-hint">Alleen PDF-kaarten · jij speelt de muziek zelf af · <button class="lp-lnk" onclick="setType('thema')">host-scherm nodig?</button></div>
           </div>
 
+          <!-- THEMA -->
           <div id="lp-inp-thema" style="display:none">
-            <div class="lp-theme-grid" id="lp-theme-grid"></div>
-            <div class="lp-mode-note">40 nummers per thema · max. 20 spelers · host-scherm inbegrepen · <button class="lp-txt-btn" onclick="setType('spotify')">meer spelers nodig?</button></div>
+            <div class="lp-tgrid" id="lp-tgrid"></div>
+            <div class="lp-hint">40 nummers · max. 20 spelers · <button class="lp-lnk" onclick="setType('spotify')">meer dan 20 spelers nodig?</button></div>
           </div>
 
+          <!-- SPOTIFY -->
           <div id="lp-inp-spotify" style="display:none">
             <div id="lp-sp-conn" class="lp-sp-box">
-              <div style="font-size:.92rem;font-weight:700;color:var(--tx);margin-bottom:.3rem">Verbind Spotify Premium</div>
-              <div style="font-size:.78rem;color:var(--mt);margin-bottom:.85rem;line-height:1.55">Melingo telt je nummers automatisch en berekent het maximale aantal spelers.</div>
-              <button class="btn bp" style="width:100%;min-height:46px;font-size:.88rem" onclick="startSpotifyLogin()">Verbinden met Spotify</button>
+              <div class="lp-sp-title">Verbind Spotify Premium</div>
+              <div class="lp-sp-sub">Melingo telt automatisch je nummers en berekent het maximale aantal spelers.</div>
+              <button class="btn bp" style="width:100%;min-height:44px" onclick="startSpotifyLogin()">Verbinden met Spotify</button>
             </div>
             <div id="lp-sp-ok" style="display:none">
               <div class="lp-sp-user" id="lp-sp-user"></div>
-              <div style="font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.45rem">Kies een playlist</div>
+              <div class="lp-sec-label" style="margin-bottom:.45rem">Kies een playlist</div>
               <div id="lp-pl-list" class="lp-pl-list"></div>
-              <div id="lp-sp-fb" class="lp-field-msg lp-msg-ok" style="display:none"></div>
+              <div id="lp-sp-fb" class="lp-fmsg lp-fmsg-ok" style="display:none"></div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- STAP 3 -->
-        <div id="lp-step3" style="display:none">
-          <div class="lp-divider"></div>
-          <div class="lp-step-hd"><span class="lp-step-n">3</span><span>Aantal spelers</span></div>
+      <!-- STAP 3 spelers -->
+      <div id="lp-step3" style="display:none">
+        <div class="lp-divider"></div>
+        <div class="lp-sec">
+          <div class="lp-sec-label">Aantal spelers</div>
           <div class="lp-player-ui">
-            <div class="lp-player-row">
+            <div class="lp-prow">
               <button class="lp-pq" onclick="adjP(-5)">-5</button>
               <button class="lp-pq" onclick="adjP(-1)">−</button>
               <span class="lp-pnum" id="lp-pnum">10</span>
@@ -628,27 +594,27 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             <div class="lp-pinfo" id="lp-pinfo"></div>
           </div>
           <div class="lp-upsell" id="lp-p-upsell" style="display:none">
-            Kant-en-klare thema's zijn voor max. 20 spelers.
-            <button class="lp-txt-btn" onclick="setType('spotify')">Meer spelers? Kies Spotify →</button>
-          </div>
-        </div>
-
-        <!-- SAMENVATTING + CTA -->
-        <div class="lp-bottom">
-          <div id="lp-summary" class="lp-summary" style="display:none">
-            <div id="lp-sum-t" class="lp-sum-t"></div>
-            <div id="lp-sum-m" class="lp-sum-m"></div>
-          </div>
-          <button class="lp-cta" id="lp-cta" onclick="startGen()" disabled>Kies eerst je speelmodus</button>
-          <div style="text-align:center;margin-top:.5rem">
-            <button onclick="showSaved()" style="background:none;border:none;color:rgba(255,255,255,.3);font-size:.72rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Bekijk opgeslagen bingo's</button>
+            Max. 20 spelers met kant-en-klaar. <button class="lp-lnk" onclick="setType('spotify')">Meer spelers? Kies Spotify →</button>
           </div>
         </div>
       </div>
 
-      <!-- OPGESLAGEN (verborgen) -->
-      <div id="lp-saved" style="display:none;border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;margin-top:.5rem">
-        <div style="font-size:.68rem;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Opgeslagen bingo's</div>
+      <!-- SAMENVATTING + CTA -->
+      <div class="lp-divider"></div>
+      <div class="lp-sec lp-bottom">
+        <div id="lp-summary" class="lp-summary" style="display:none">
+          <div id="lp-sum-t" class="lp-sum-t"></div>
+          <div id="lp-sum-m" class="lp-sum-m"></div>
+        </div>
+        <button class="lp-cta" id="lp-cta" onclick="startGen()" disabled>Kies eerst je speelmodus</button>
+        <div style="text-align:center;margin-top:.5rem">
+          <button onclick="showSaved()" style="background:none;border:none;color:rgba(255,255,255,.25);font-size:.7rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Opgeslagen bingo's</button>
+        </div>
+      </div>
+
+      <!-- OPGESLAGEN -->
+      <div id="lp-saved" style="display:none;border-top:1px solid rgba(255,255,255,.06);padding:1rem 1.25rem 0">
+        <div class="lp-sec-label" style="margin-bottom:.5rem">Opgeslagen bingo's</div>
         <div id="saved-list-wrap"></div>
         <div id="no-saved" style="font-size:.8rem;color:var(--mt)">Nog geen bingo's opgeslagen.</div>
       </div>
@@ -656,64 +622,40 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
   </div>
 
-  <!-- USP SECTIE -->
-  <div class="lp-usp-section">
-    <div class="lp-section-title">Niet alleen kaarten. Ook soepel hosten.</div>
-    <div class="lp-usp-grid">
-      <div class="lp-usp-card">
-        <div class="lp-usp-ico">🎴</div>
-        <div class="lp-usp-name">Unieke kaarten</div>
-        <div class="lp-usp-desc">Elke speler krijgt een andere kaart. Nooit meer discussie over wie wint.</div>
-      </div>
-      <div class="lp-usp-card">
-        <div class="lp-usp-ico">🎛️</div>
-        <div class="lp-usp-name">Host-scherm</div>
-        <div class="lp-usp-desc">Speel nummers af, bijhoud wat gespeeld is en controleer bingo's in één scherm.</div>
-      </div>
-      <div class="lp-usp-card">
-        <div class="lp-usp-ico">✅</div>
-        <div class="lp-usp-name">Bingo controleren</div>
-        <div class="lp-usp-desc">Voer het kaartnummer in en Melingo controleert direct of de bingo klopt.</div>
-      </div>
+  <!-- THEMA'S -->
+  <div class="lp-themes-sec">
+    <div class="lp-section-hd">Kant-en-klare thema's</div>
+    <div class="lp-section-sub">40 nummers per thema · max. 20 spelers · host-scherm inbegrepen</div>
+    <div class="lp-themes-grid" id="lp-themes-grid"></div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <button class="btn bp" onclick="setType('thema');document.querySelector('.lp-cfg-outer').scrollIntoView({behavior:'smooth'})" style="min-height:44px;padding:.65rem 2rem;font-size:.88rem">Kies een thema en start →</button>
     </div>
   </div>
 
-  <!-- THEMA'S SECTIE -->
-  <div class="lp-themes-section">
-    <div class="lp-section-title">Kant-en-klare thema's</div>
-    <div class="lp-section-sub">40 herkenbare nummers per thema · tot 20 spelers · host-scherm inbegrepen</div>
-    <div class="lp-themes-showcase" id="lp-themes-showcase"></div>
-    <div style="text-align:center;margin-top:1.25rem">
-      <button class="btn bp" onclick="setType('thema');document.querySelector('.lp-cfg-wrap').scrollIntoView({behavior:'smooth'})" style="min-height:44px;padding:.6rem 2rem">Kies een thema en start →</button>
-    </div>
-  </div>
-
-  <!-- REVIEWS COMPACT -->
-  <div class="lp-reviews">
-    <div class="lp-reviews-hd">
-      <span class="lp-stars">★★★★★</span>
-      <span style="font-size:.78rem;color:var(--mt);margin-left:.4rem">4.8/5 · gespeeld op feestjes, borrels en kerstavonden</span>
-    </div>
-    <div class="lp-rev-row">
-      <div class="lp-rev">"Binnen 5 minuten hadden we kaarten en konden we spelen."<div class="lp-rev-by">— Marieke</div></div>
-      <div class="lp-rev">"Het host-scherm maakte het echt makkelijk."<div class="lp-rev-by">— Thomas</div></div>
-      <div class="lp-rev">"Veel leuker dan een gewone playlist op shuffle."<div class="lp-rev-by">— Sanne</div></div>
+  <!-- REVIEWS -->
+  <div class="lp-reviews-sec">
+    <div class="lp-proof-bar"><span class="lp-stars">★★★★★</span><span class="lp-proof-txt">4.8/5 · gespeeld op feestjes, borrels en kerstavonden</span></div>
+    <div class="lp-rev-grid">
+      <div class="lp-rev"><div class="lp-rev-q">"Binnen 5 minuten hadden we kaarten en konden we spelen."</div><div class="lp-rev-by">— Marieke</div></div>
+      <div class="lp-rev"><div class="lp-rev-q">"Het host-scherm maakte het echt makkelijk."</div><div class="lp-rev-by">— Thomas</div></div>
+      <div class="lp-rev"><div class="lp-rev-q">"Veel leuker dan een gewone playlist op shuffle."</div><div class="lp-rev-by">— Sanne &amp; vriendinnen</div></div>
     </div>
   </div>
 
   <!-- FAQ -->
-  <div class="lp-faq">
-    <div class="lp-section-title">Veelgestelde vragen</div>
-    <div class="lp-faq-list" id="lp-faq-list"></div>
+  <div class="lp-faq-sec">
+    <div class="lp-section-hd">Veelgestelde vragen</div>
+    <div id="lp-faq" class="lp-faq-list"></div>
   </div>
 
   <!-- FOOTER CTA -->
   <div class="lp-footer-cta">
-    <div style="font-size:1.3rem;font-weight:800;color:var(--tx);margin-bottom:.5rem">Klaar om te spelen?</div>
-    <div style="font-size:.82rem;color:var(--mt);margin-bottom:1.25rem">Maak je eerste muziekbingo in minder dan 5 minuten.</div>
-    <button class="lp-cta" onclick="document.querySelector('.lp-cfg-wrap').scrollIntoView({behavior:'smooth'})" style="max-width:280px;margin:0 auto">Start nu gratis →</button>
+    <div class="lp-footer-title">Klaar om te spelen?</div>
+    <div class="lp-footer-sub">Maak je eerste muziekbingo in minder dan 5 minuten.</div>
+    <button class="lp-cta" onclick="document.querySelector('.lp-cfg-outer').scrollIntoView({behavior:'smooth'})" style="max-width:260px;margin:0 auto;display:block">Start nu →</button>
   </div>
 
+</div>
 </div>
 </div>
 
@@ -1152,22 +1094,32 @@ function setType(mode){
   ['eigen','thema','spotify'].forEach(function(m){
     var el=document.getElementById('lm-'+m);if(el)el.classList.toggle('sel',m===mode);
   });
-  // Show dynamic section
-  var dyn=document.getElementById('lp-dynamic');if(dyn)dyn.style.display='block';
+  document.getElementById('lp-step2').style.display='block';
   ['lp-inp-eigen','lp-inp-thema','lp-inp-spotify'].forEach(function(id){
     var el=document.getElementById(id);if(el)el.style.display='none';
   });
   var lbl=document.getElementById('lp-step2-lbl');
-  if(mode==='eigen'){if(lbl)lbl.textContent='Jouw nummers';document.getElementById('lp-inp-eigen').style.display='block';}
-  else if(mode==='thema'){if(lbl)lbl.textContent='Kies je thema';document.getElementById('lp-inp-thema').style.display='block';buildLpThemes();}
-  else if(mode==='spotify'){if(lbl)lbl.textContent='Jouw Spotify-playlist';document.getElementById('lp-inp-spotify').style.display='block';if(SP.accessToken)showLpSpOk();}
+  if(mode==='eigen'){
+    if(lbl)lbl.textContent='Jouw nummers';
+    document.getElementById('lp-inp-eigen').style.display='block';
+  } else if(mode==='thema'){
+    if(lbl)lbl.textContent='Kies je thema';
+    document.getElementById('lp-inp-thema').style.display='block';
+    buildLpTgrid();
+  } else if(mode==='spotify'){
+    if(lbl)lbl.textContent='Jouw Spotify-playlist';
+    document.getElementById('lp-inp-spotify').style.display='block';
+    if(SP.accessToken)showLpSpOk();
+  }
   updLpPlayers();updLpCTA();
-  // Smooth scroll to dynamic
-  setTimeout(function(){var d=document.getElementById('lp-dynamic');if(d)d.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
+  setTimeout(function(){
+    var s2=document.getElementById('lp-step2');
+    if(s2)s2.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },80);
 }
 
-function buildLpThemes(){
-  var el=document.getElementById('lp-theme-grid');if(!el)return;
+function buildLpTgrid(){
+  var el=document.getElementById('lp-tgrid');if(!el)return;
   el.innerHTML=THEMES.map(function(th){
     return'<div class="lp-tc'+(ST.theme===th.id?' sel':'')+'" onclick="selLpTheme(this)" data-id="'+th.id+'">'
       +'<div class="lp-tc-name">'+th.name+'</div>'
@@ -1181,22 +1133,25 @@ function selLpTheme(el){
   document.querySelectorAll('.lp-tc').forEach(function(c){c.classList.remove('sel');});
   el.classList.add('sel');
   updLpPlayers();updLpCTA();
-  var s3=document.getElementById('lp-step3');if(s3)setTimeout(function(){s3.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
+  setTimeout(function(){
+    var s3=document.getElementById('lp-step3');
+    if(s3)s3.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },80);
 }
 
 function onEigenInput(){
-  var txt=document.getElementById('lp-ta').value;
-  var n=parseSongs(txt).length;
+  var val=(document.getElementById('lp-ta')||{}).value||'';
+  var n=parseSongs(val).length;
   var el=document.getElementById('lp-eigen-st');
   if(!n){el.style.display='none';}
-  else if(n<25){el.style.display='block';el.className='lp-field-msg lp-msg-warn';el.textContent=n+' nummers · voeg nog '+(25-n)+' toe.';}
-  else{el.style.display='block';el.className='lp-field-msg lp-msg-ok';el.textContent='✓ '+n+' nummers gevonden';}
+  else if(n<25){el.style.display='block';el.className='lp-fmsg lp-fmsg-warn';el.textContent=n+' nummers · voeg nog '+(25-n)+' toe.';}
+  else{el.style.display='block';el.className='lp-fmsg lp-fmsg-ok';el.textContent='✓ '+n+' nummers gevonden';}
   updLpPlayers();updLpCTA();
 }
 
 function showLpSpOk(){
-  var conn=document.getElementById('lp-sp-conn');var ok=document.getElementById('lp-sp-ok');
-  if(conn)conn.style.display='none';if(ok)ok.style.display='block';
+  var c=document.getElementById('lp-sp-conn'),o=document.getElementById('lp-sp-ok');
+  if(c)c.style.display='none';if(o)o.style.display='block';
   spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
     var el=document.getElementById('lp-sp-user');if(el)el.textContent='Ingelogd als '+d.display_name;
   });
@@ -1204,16 +1159,17 @@ function showLpSpOk(){
 }
 
 async function loadLpPlaylists(){
-  var all=[];var url='https://api.spotify.com/v1/me/playlists?limit=50';
-  while(url){var r=await spFetch(url);var d=await r.json();if(d.error)break;all=all.concat((d.items||[]).filter(function(p){return p&&p.id;}));url=d.next||null;}
+  var all=[],url='https://api.spotify.com/v1/me/playlists?limit=50';
+  while(url){var r=await spFetch(url);var d=await r.json();if(d.error)break;
+    all=all.concat((d.items||[]).filter(function(p){return p&&p.id;}));url=d.next||null;}
   SP.playlists=all;renderLpPlaylists();
 }
 
 function renderLpPlaylists(){
   var el=document.getElementById('lp-pl-list');if(!el)return;
   el.innerHTML=SP.playlists.map(function(pl,i){
-    var img=pl.images&&pl.images[0]?'<img src="'+pl.images[0].url+'" style="width:30px;height:30px;border-radius:5px;object-fit:cover;flex-shrink:0" alt=""/>':'<div style="width:30px;height:30px;border-radius:5px;background:rgba(255,255,255,.08);flex-shrink:0"></div>';
-    return'<div class="sp-playlist-item" onclick="selLpPlaylist(this)" data-idx="'+i+'" style="display:flex;align-items:center;gap:.55rem;padding:.35rem .55rem;border-radius:8px;cursor:pointer;margin-bottom:.18rem;transition:background .12s">'
+    var img=pl.images&&pl.images[0]?'<img src="'+pl.images[0].url+'" style="width:30px;height:30px;border-radius:5px;object-fit:cover;flex-shrink:0"/>':'<div style="width:30px;height:30px;border-radius:5px;background:rgba(255,255,255,.08);flex-shrink:0"></div>';
+    return'<div class="sp-playlist-item" onclick="selLpPlaylist(this)" data-idx="'+i+'" style="display:flex;align-items:center;gap:.55rem;padding:.38rem .55rem;border-radius:8px;cursor:pointer;margin-bottom:.2rem;transition:background .12s">'
       +img+'<span style="font-size:.78rem;font-weight:600;color:var(--tx)">'+esc(pl.name)+'</span></div>';
   }).join('');
 }
@@ -1223,20 +1179,20 @@ async function selLpPlaylist(el){
   document.querySelectorAll('#lp-pl-list .sp-playlist-item').forEach(function(e){e.style.background='';});
   el.style.background='rgba(155,109,255,.12)';
   var fb=document.getElementById('lp-sp-fb');
-  if(fb){fb.style.display='block';fb.className='lp-field-msg lp-msg-ok';fb.textContent='Nummers tellen...';}
+  if(fb){fb.style.display='block';fb.className='lp-fmsg lp-fmsg-ok';fb.textContent='Nummers tellen...';}
   try{
     var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'?fields=tracks.total,name');
-    var d=await r.json();var cnt=d.tracks&&d.tracks.total?d.tracks.total:0;
-    SP.selectedPlaylist._count=cnt;var maxP=getMaxPlayers(cnt);
-    if(fb)fb.textContent='✓ '+cnt+' nummers · max. '+maxP+' spelers';
+    var d=await r.json();var cnt=d.tracks&&d.tracks.total||0;
+    SP.selectedPlaylist._count=cnt;
+    if(fb)fb.textContent='✓ '+cnt+' nummers · max. '+getMaxPlayers(cnt)+' spelers';
     loadSpotifyPlaylistForTheme(SP.selectedPlaylist.id,SP.selectedPlaylist.name);
-  }catch(e){if(fb){fb.className='lp-field-msg lp-msg-warn';fb.textContent='Kon nummers niet laden.';}}
+  }catch(e){if(fb){fb.className='lp-fmsg lp-fmsg-warn';fb.textContent='Kon nummers niet laden.';}}
   updLpPlayers();updLpCTA();
-  var s3=document.getElementById('lp-step3');if(s3)setTimeout(function(){s3.scrollIntoView({behavior:'smooth',block:'nearest'});},200);
+  setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3)s3.scrollIntoView({behavior:'smooth',block:'nearest'});},200);
 }
 
 function updLpPlayers(){
-  var mode=ST.mode;var show=false;var maxP=20;
+  var mode=ST.mode,show=false,maxP=20;
   if(mode==='thema'&&ST.theme){show=true;maxP=20;}
   else if(mode==='eigen'){var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;if(n>=25){show=true;maxP=getMaxPlayers(n)||100;}}
   else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count){show=true;maxP=getMaxPlayers(SP.selectedPlaylist._count);}
@@ -1256,7 +1212,7 @@ function updLpPlayers(){
 }
 
 function adjP(d){
-  var mode=ST.mode;var maxP=20;
+  var mode=ST.mode,maxP=20;
   if(mode==='eigen'){var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;maxP=getMaxPlayers(n)||100;}
   if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count)maxP=getMaxPlayers(SP.selectedPlaylist._count);
   ST.players=Math.max(1,Math.min(maxP,ST.players+d));
@@ -1272,9 +1228,8 @@ function updLpPNum(){
 }
 
 function updLpCTA(){
-  var btn=document.getElementById('lp-cta');
-  var sum=document.getElementById('lp-summary');
-  var st=document.getElementById('lp-sum-t');var sm=document.getElementById('lp-sum-m');
+  var btn=document.getElementById('lp-cta'),sum=document.getElementById('lp-summary');
+  var st=document.getElementById('lp-sum-t'),sm=document.getElementById('lp-sum-m');
   if(!btn)return;
   var mode=ST.mode;
   if(!mode){btn.disabled=true;btn.textContent='Kies eerst je speelmodus';if(sum)sum.style.display='none';return;}
@@ -1282,7 +1237,7 @@ function updLpCTA(){
     if(!ST.theme){btn.disabled=true;btn.textContent='Kies een thema';if(sum)sum.style.display='none';return;}
     var th=THEMES.find(function(t){return t.id===ST.theme;});
     btn.disabled=false;btn.textContent='Maak '+ST.players+' bingokaarten →';
-    if(sum){sum.style.display='block';if(st)st.textContent=th?th.name:'Thema';if(sm)sm.textContent='40 nummers · '+ST.players+' spelers · inclusief host-scherm';}
+    if(sum){sum.style.display='block';if(st)st.textContent=th?th.name:'Thema';if(sm)sm.textContent='40 nummers · '+ST.players+' spelers · host-scherm';}
     return;
   }
   if(mode==='eigen'){
@@ -1293,13 +1248,12 @@ function updLpCTA(){
     return;
   }
   if(mode==='spotify'){
-    if(!SP.selectedPlaylist){btn.disabled=true;btn.textContent='Kies een Spotify-playlist';if(sum)sum.style.display='none';return;}
+    if(!SP.selectedPlaylist){btn.disabled=true;btn.textContent='Kies een playlist';if(sum)sum.style.display='none';return;}
     var cnt=SP.selectedPlaylist._count||0;
     if(cnt<35){btn.disabled=true;btn.textContent='Playlist heeft te weinig nummers';if(sum)sum.style.display='none';return;}
     btn.disabled=false;btn.textContent='Maak Spotify-bingo →';
-    var maxP2=getMaxPlayers(cnt);
-    if(sum){sum.style.display='block';if(st)st.textContent='Spotify-playlist';if(sm)sm.textContent=cnt+' nummers · max. '+maxP2+' spelers · host-scherm';}
-    return;
+    var mp=getMaxPlayers(cnt);
+    if(sum){sum.style.display='block';if(st)st.textContent='Spotify-playlist';if(sm)sm.textContent=cnt+' nummers · max. '+mp+' spelers · host-scherm';}
   }
 }
 
@@ -1312,28 +1266,27 @@ function startGen(){
     ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
     trackAnalytics('Eigen nummers');mkCards();buildPreviews();saveSession();go('cards');
   } else if(mode==='spotify'){
-    if(!SP.selectedPlaylist){toast('Kies eerst een Spotify-playlist.');return;}
+    if(!SP.selectedPlaylist){toast('Kies eerst een playlist.');return;}
     genFromSpotify();
   }
 }
 
 function showSaved(){
-  var sec=document.getElementById('lp-saved');if(!sec)return;
-  var v=sec.style.display!=='none';sec.style.display=v?'none':'block';
-  if(!v)buildSavedList();
+  var s=document.getElementById('lp-saved');if(!s)return;
+  s.style.display=s.style.display!=='none'?'none':'block';
+  buildSavedList();
 }
 
 function checkResume(){
   try{
     var s=JSON.parse(sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session')||'null');
-    if(s&&s.cards&&s.cards.length>0){
-      var bar=document.getElementById('resume-bar');var meta=document.getElementById('resume-meta');
-      if(bar)bar.style.display='flex';
-      if(meta)meta.textContent='Vorige sessie: '+s.cards.length+' kaarten · '+s.songs.length+' nummers';
+    if(s&&s.cards&&s.cards.length){
+      var b=document.getElementById('resume-bar'),m=document.getElementById('resume-meta');
+      if(b)b.style.display='flex';
+      if(m)m.textContent='Vorige sessie: '+s.cards.length+' kaarten';
     }
   }catch(e){}
 }
-
 function resumeSession(){
   try{
     var s=JSON.parse(sessionStorage.getItem('melo_session')||localStorage.getItem('melo_session')||'null');
@@ -1342,55 +1295,57 @@ function resumeSession(){
   }catch(e){toast('Sessie kon niet worden hersteld.');}
 }
 function dismissResume(){var b=document.getElementById('resume-bar');if(b)b.style.display='none';}
+function buildReviews(){}
 
-function buildReviews(){} // Static in HTML
-
-function buildLpShowcase(){
-  var el=document.getElementById('lp-themes-showcase');if(!el)return;
-  el.innerHTML=THEMES.map(function(th){
-    return'<div class="lp-th-card" onclick="selLpThemeDirect(this.dataset.id)" data-id="'+th.id+'">'
+function buildLpThemeShowcase(){
+  var COLORS=['#9B6DFF','#F2406A','#6AABF7','#EF3B55','#6AABF7','#F2406A','#9B6DFF','#EF3B55','#F2406A','#1db954'];
+  var el=document.getElementById('lp-themes-grid');if(!el)return;
+  el.innerHTML=THEMES.map(function(th,i){
+    var c=COLORS[i%COLORS.length];
+    return'<div class="lp-th" style="--tc:'+c+'22;border-color:'+c+'22" onclick="selLpThemeDirect(this)" data-id="'+th.id+'">'
       +'<div class="lp-th-name">'+th.name+'</div>'
       +'<div class="lp-th-mood">'+th.mood+'</div>'
-      +'<div class="lp-th-meta">40 nummers · max. 20 spelers</div>'
+      +'<div class="lp-th-tag" style="background:'+c+'22;color:'+c+'">40 nummers</div>'
       +'</div>';
   }).join('');
 }
 
-function selLpThemeDirect(id){setType('thema');
-  ST.theme=id;
-  buildLpThemes();
-  document.querySelector('.lp-cfg-wrap').scrollIntoView({behavior:'smooth'});
+function selLpThemeDirect(el){
+  setType('thema');
+  ST.theme=el.dataset.id;
+  buildLpTgrid();
+  document.querySelector('.lp-cfg-outer').scrollIntoView({behavior:'smooth'});
 }
 
 function buildFAQ(){
-  var el=document.getElementById('lp-faq-list');if(!el)return;
+  var el=document.getElementById('lp-faq');if(!el)return;
   var faqs=[
-    ['Hoeveel nummers heb ik nodig?','Voor een 5×5-kaart heb je minimaal 25 nummers nodig, maar we adviseren minimaal 35 nummers voor genoeg variatie tussen kaarten.'],
-    ['Kan ik mijn eigen Spotify-playlist gebruiken?','Ja — met Spotify Bingo koppel je je eigen playlist. Melingo telt automatisch de nummers en berekent het maximum aantal spelers. Je hebt wel Spotify Premium nodig.'],
-    ['Wat is het verschil tussen Eigen nummers en Spotify?','Bij Eigen nummers maak je alleen printbare PDF-kaarten. Jij speelt de muziek zelf af via je telefoon, laptop of DJ. Bij Spotify gebruik je je eigen playlist én krijg je het Melingo host-scherm om alles te begeleiden.'],
-    ['Zit het host-scherm overal bij?','Het host-scherm is inbegrepen bij Kant-en-klaar thema en Spotify Bingo. Bij Eigen nummers PDF is er geen host-scherm.'],
-    ['Hoeveel spelers kunnen meedoen?','Met een kant-en-klaar thema (40 nummers) zijn er max. 20 spelers. Met Spotify Bingo hangt het af van je playlist: 75+ nummers = max. 60 spelers, 110+ nummers = max. 100 spelers.'],
-    ["Kan ik de kaarten printen?","Ja, je downloadt een PDF die je thuis of op kantoor kunt printen op gewoon A4-papier."],
-    ['Moet ik iets installeren?','Nee — Melingo werkt volledig in de browser. Geen app nodig.'],
-    ['Kan ik Melingo gebruiken voor een bedrijfsborrel?','Absoluut. Melingo werkt perfect voor teamuitjes, kerstborrels en bedrijfsevenementen. Kies een thema of gebruik je eigen Spotify-playlist voor een persoonlijke touch.'],
+    ['Hoeveel nummers heb ik nodig?','Voor een 5×5-kaart heb je minimaal 25 nummers nodig. We adviseren minimaal 35 voor genoeg variatie.'],
+    ['Kan ik mijn eigen Spotify-playlist gebruiken?','Ja, met Spotify Bingo. Je hebt wel Spotify Premium nodig. Melingo telt automatisch je nummers en berekent het maximale aantal spelers.'],
+    ['Wat is het verschil tussen Eigen nummers en Spotify?','Bij Eigen nummers maak je alleen PDF-kaarten en speel je de muziek zelf af. Bij Spotify gebruik je je eigen playlist én krijg je het Melingo host-scherm.'],
+    ['Zit het host-scherm overal bij?','Het host-scherm is inbegrepen bij Kant-en-klaar en Spotify Bingo. Bij Eigen nummers PDF niet.'],
+    ['Hoeveel spelers kunnen meedoen?','Met kant-en-klaar max. 20. Met Spotify hangt het af van je playlist — 110+ nummers geeft max. 100 spelers.'],
+    ['Kan ik de kaarten printen?','Ja, je downloadt een PDF die je op gewoon A4 kunt printen.'],
+    ['Moet ik iets installeren?','Nee, Melingo werkt volledig in de browser.'],
+    ['Kan ik Melingo gebruiken voor een bedrijfsborrel?','Absoluut. Kies een thema of gebruik je eigen Spotify-playlist voor een persoonlijke touch.'],
   ];
-  el.innerHTML=faqs.map(function(f,i){
+  el.innerHTML=faqs.map(function(f){
     return'<div class="lp-faq-item">'
       +'<button class="lp-faq-q" onclick="toggleFAQ(this)">'+f[0]+'<span>+</span></button>'
       +'<div class="lp-faq-a">'+f[1]+'</div>'
       +'</div>';
   }).join('');
 }
-
 function toggleFAQ(btn){
-  var a=btn.nextElementSibling;var open=a.classList.contains('open');
-  document.querySelectorAll('.lp-faq-a').forEach(function(el){el.classList.remove('open');});
-  document.querySelectorAll('.lp-faq-q span').forEach(function(el){el.textContent='+';});
+  var a=btn.nextElementSibling,open=a.classList.contains('open');
+  document.querySelectorAll('.lp-faq-a').forEach(function(e){e.classList.remove('open');});
+  document.querySelectorAll('.lp-faq-q span').forEach(function(e){e.textContent='+';});
   if(!open){a.classList.add('open');btn.querySelector('span').textContent='−';}
 }
 
-/* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ */
+/* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ *//* ══ INIT ══ */
 window.onload=function(){
+  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();checkSpotifyAuth();
   updLpPNum();checkResume();buildLpShowcase();buildFAQ();checkSpotifyAuth();
   var taps=0;
   document.querySelectorAll('.bar-logo').forEach(function(el){
