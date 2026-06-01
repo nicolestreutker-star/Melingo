@@ -282,12 +282,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 /* ══ LANDING PAGE ══ */
 /* Hero */
+.lp-hero-img-wrap{position:relative;overflow:hidden;max-height:520px}
+.lp-hero-img{width:100%;height:520px;object-fit:cover;object-position:center 30%;display:block;filter:brightness(.55)}
+.lp-hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to top,rgba(13,13,24,.95) 0%,rgba(13,13,24,.4) 50%,transparent 100%)}
+.lp-hero-inner{padding:2rem 1.5rem 2.5rem;max-width:700px;margin:0 auto;width:100%;box-sizing:border-box}
 .lp-hero{background:linear-gradient(180deg,rgba(155,109,255,.06) 0%,transparent 100%);border-bottom:1px solid rgba(255,255,255,.05);padding:0}
 .lp-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;max-width:1100px;margin:0 auto}
 .lp-nav-logo{display:flex;align-items:center;gap:.5rem}
 .lp-nav-brand{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .lp-resume{display:flex;align-items:center;gap:.5rem;background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.25);border-radius:99px;padding:.3rem .75rem}
-.lp-hero-inner{text-align:center;padding:2.5rem 1.5rem 3rem;max-width:700px;margin:0 auto}
+.lp-hero-inner{text-align:center}
 .lp-hero-badge{display:inline-block;background:rgba(155,109,255,.12);border:1px solid rgba(155,109,255,.25);border-radius:99px;font-size:.72rem;font-weight:700;color:var(--a);padding:.3rem .85rem;margin-bottom:1.1rem;letter-spacing:.05em}
 .lp-h1{font-size:2.4rem;font-weight:800;line-height:1.2;margin:0 0 .85rem;color:var(--tx)}
 .lp-sub{font-size:.88rem;color:var(--mt);line-height:1.7;margin:0 0 1.1rem}
@@ -411,7 +415,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 /* Mobile */
 @media(max-width:700px){
-  .lp-h1{font-size:1.5rem}
+  .lp-h1{font-size:1.35rem}
+  .lp-hero-img{height:340px}
+  .lp-hero-inner{padding:1.25rem 1rem 1.75rem}
   .lp-modes{grid-template-columns:1fr}
   .lp-mode{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
   .lp-mode:last-child{border-bottom:none}
@@ -500,13 +506,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
     </div>
 
-    <div class="lp-hero-inner">
-      <div class="lp-hero-badge">🎵 Muziekbingo voor elk feestje</div>
-      <h1 class="lp-h1">Maak muziekbingo<br>in minuten. Speel zonder gedoe.</h1>
-      <p class="lp-sub">Genereer unieke bingokaarten, download de PDF en speel soepel met het host-scherm. Kies een thema, gebruik alleen PDF of speel via je eigen Spotify-playlist.</p>
-      <div class="lp-proof">
-        <span class="lp-stars">★★★★★</span>
-        <span class="lp-proof-txt">Perfect voor feestjes, borrels, kerst en teamuitjes</span>
+    <div class="lp-hero-img-wrap">
+      <img src="/hero.jpg" alt="Melingo muziekbingo - mensen spelen aan een bar" class="lp-hero-img"/>
+      <div class="lp-hero-overlay">
+        <div class="lp-hero-inner">
+          <div class="lp-hero-badge">🎵 Muziekbingo voor elk feestje</div>
+          <h1 class="lp-h1">Maak muziekbingo<br>in minuten. Speel zonder gedoe.</h1>
+          <p class="lp-sub">Genereer unieke bingokaarten, download de PDF en speel soepel met het host-scherm.</p>
+          <div class="lp-proof">
+            <span class="lp-stars">★★★★★</span>
+            <span class="lp-proof-txt">Perfect voor feestjes, borrels, kerst en teamuitjes</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
