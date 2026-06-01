@@ -1463,7 +1463,7 @@ function gen(){
     genFromSpotify();
     return;
   } else if(ST.mode==='thema'){
-    var th=THEMES.filter(function(t){return t.id===ST.selTheme;})[0];if(!th){toast('Kies eerst een thema.');return;}
+    var th=THEMES.filter(function(t){return t.id===(ST.theme||ST.selTheme);})[0];if(!th){toast('Kies eerst een thema.');return;}
     songs=th.songs.slice();trackAnalytics(th.name);
   } else if(ST.mode==='opgeslagen'){
     var pl=getSaved().filter(function(p){return p.id===ST.selSaved;})[0];if(!pl){toast('Kies een playlist.');return;}
