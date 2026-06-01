@@ -690,9 +690,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <div class="bar-logo">Melingo</div>
     <div class="bar-actions">
       <button class="btn bs" onclick="reshuffle()">Schud opnieuw</button>
-      <button class="btn bgr" onclick="dlPDF(true)">Eco PDF</button>
-      <button class="btn bpu" onclick="dlPDF(false)">Kleur PDF</button>
-      <button class="btn bp" onclick="go('host')">Host-scherm</button>
+      <button class="btn bgr keep" onclick="dlPDF(true)">Eco PDF</button>
+      <button class="btn bpu keep" onclick="dlPDF(false)">Kleur PDF</button>
+      <button class="btn bp keep" onclick="go('host')">Host-scherm</button>
     </div>
   </div>
   <div class="scroll">
@@ -1192,8 +1192,12 @@ async function selLpPlaylist(el){
   var fb=document.getElementById('lp-sp-fb');
   if(fb){fb.style.display='block';fb.className='lp-fmsg lp-fmsg-ok';fb.textContent='Nummers tellen...';}
   try{
-    var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'?fields=tracks.total,name');
-    var d=await r.json();var cnt=d.tracks&&d.tracks.total||0;
+    // Gebruik count van eerder geladen playlist data als beschikbaar
+    var cnt=SP.selectedPlaylist.tracks&&SP.selectedPlaylist.tracks.total||0;
+    if(!cnt){
+      var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id);
+      var d=await r.json();cnt=d.tracks&&d.tracks.total||0;
+    }
     SP.selectedPlaylist._count=cnt;
     if(fb)fb.textContent='✓ '+cnt+' nummers · max. '+getMaxPlayers(cnt)+' spelers';
     loadSpotifyPlaylistForTheme(SP.selectedPlaylist.id,SP.selectedPlaylist.name);
