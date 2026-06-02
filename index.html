@@ -1188,35 +1188,55 @@ function onEigenInput(){
 }
 
 function showLpSpOk(){
-  // Zorg dat de spotify sectie zichtbaar is
-  var step2=document.getElementById('lp-step2');
-  if(step2)step2.style.display='block';
-  // Verberg andere inputs
-  ['lp-inp-eigen','lp-inp-thema'].forEach(function(id){
-    var el=document.getElementById(id);if(el)el.style.display='none';
-  });
-  // Toon spotify input
-  var spInp=document.getElementById('lp-inp-spotify');
-  if(spInp)spInp.style.display='block';
-  // Highlight spotify mode card
+  // Stap 1: zet mode
+  ST.mode='spotify';
+
+  // Stap 2: highlight spotify card
   ['eigen','thema','spotify'].forEach(function(m){
     var el=document.getElementById('lm-'+m);
     if(el)el.classList.toggle('sel',m==='spotify');
   });
-  // ST bijwerken
-  ST.mode='spotify';
-  // Toggle connect/ok panels
-  var c=document.getElementById('lp-sp-conn');
-  var o=document.getElementById('lp-sp-ok');
-  if(c)c.style.display='none';
-  if(o)o.style.display='block';
-  // Laad gebruikersnaam
-  spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
-    var el=document.getElementById('lp-sp-user');
-    if(el)el.textContent='Ingelogd als '+d.display_name;
-  }).catch(function(){});
-  // Laad playlists
+
+  // Stap 3: toon stap 2
+  var step2=document.getElementById('lp-step2');
+  if(step2)step2.style.display='block';
+
+  // Stap 4: verberg andere inputs
+  var eigen=document.getElementById('lp-inp-eigen');
+  if(eigen)eigen.style.display='none';
+  var thema=document.getElementById('lp-inp-thema');
+  if(thema)thema.style.display='none';
+
+  // Stap 5: toon spotify input
+  var spInp=document.getElementById('lp-inp-spotify');
+  if(spInp)spInp.style.display='block';
+
+  // Stap 6: verberg connect knop, toon connected view
+  var conn=document.getElementById('lp-sp-conn');
+  if(conn)conn.style.display='none';
+  var ok=document.getElementById('lp-sp-ok');
+  if(ok)ok.style.display='block';
+
+  // Stap 7: update label
+  var lbl=document.getElementById('lp-step2-lbl');
+  if(lbl)lbl.textContent='Jouw Spotify-playlist';
+
+  // Stap 8: laad gebruikersnaam
+  spFetch('https://api.spotify.com/v1/me')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var el=document.getElementById('lp-sp-user');
+      if(el&&d.display_name)el.textContent='Ingelogd als '+d.display_name;
+    })
+    .catch(function(){});
+
+  // Stap 9: laad playlists
   loadLpPlaylists();
+
+  // Stap 10: scroll naar stap 2
+  setTimeout(function(){
+    if(step2)step2.scrollIntoView({behavior:'smooth',block:'start'});
+  },200);
 }
 
 function updLpPNum(){
