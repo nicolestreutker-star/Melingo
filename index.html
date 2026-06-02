@@ -2593,15 +2593,14 @@ function checkSpotifyAuth(){
     if(gotNew&&returnScreen==='host'&&ST.cards&&ST.cards.length>0){
       go('host');
     } else if(gotNew){
-      // Terug van Spotify login — toon juiste scherm
-      if(ST.mode==='spotify'||!ST.mode){
+      // Terug van Spotify login — forceer spotify modus en toon playlists
+      setTimeout(function(){
         setType('spotify');
-      }
+        setTimeout(function(){showLpSpOk();},150);
+      },50);
     }
     // Show connected UI in host screen
     spConnectedUI();
-    // Show connected UI op startscherm als spotify modus actief
-    if(document.getElementById('lp-sp-ok'))showLpSpOk();
     // Init player
     if(window.Spotify&&window.Spotify.Player){
       initPlayer();
