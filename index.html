@@ -2119,14 +2119,8 @@ function initStartSpotify(){
 }
 
 function showStartSpConnected(){
-  document.getElementById('start-sp-connect').style.display='none';
-  document.getElementById('start-sp-playlists').style.display='block';
-  // Load user name
-  spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
-    var el=document.getElementById('start-sp-user');
-    if(el)el.textContent='Ingelogd als '+d.display_name;
-  });
-  loadStartPlaylists();
+  // Delegeer naar nieuwe startscherm functie
+  showLpSpOk();
 }
 
 async function loadStartPlaylists(){
@@ -2577,34 +2571,30 @@ function checkSpotifyAuth(){
   var urlParams=new URLSearchParams(window.location.search);
   var spError=urlParams.get('spotify_error');
   if(spError){
-    toast('Spotify verbinden mislukt: '+spError+'. Probeer opnieuw.');
+    toast('Spotify verbinden mislukt: '+spError);
     history.replaceState(null,'',window.location.pathname);
+    return;
   }
-  // Herstel mode na Spotify redirect
-  try{
-    var preMode=localStorage.getItem('sp_pre_mode');
-    if(preMode){ST.mode=preMode;localStorage.removeItem('sp_pre_mode');}
-  }catch(e){}
   var gotNew=parseSpotifyAuth();
   var gotSaved=!gotNew&&loadSavedTokens();
-  if(gotNew||gotSaved){
-    // If we just came back from Spotify login (gotNew) and have cards, go to host
-    var returnScreen='start';try{returnScreen=localStorage.getItem('sp_return_screen')||'start';}catch(e){}
-    if(gotNew&&returnScreen==='host'&&ST.cards&&ST.cards.length>0){
-      go('host');
-    } else if(gotNew){
-      // Terug van Spotify login — forceer spotify modus en toon playlists
-      setTimeout(function(){
-        setType('spotify');
-        setTimeout(function(){showLpSpOk();},150);
-      },50);
+  if(!(gotNew||gotSaved))return;
+  // Tokens geladen — toon juiste scherm
+  spConnectedUI();
+  if(window.Spotify&&window.Spotify.Player)initPlayer();
+  if(gotNew){
+    // Terug van Spotify login
+    var returnScreen='start';
+    try{returnScreen=localStorage.getItem('sp_return_screen')||'start';}catch(e){}
+    if(returnScreen==='host'&&ST.cards&&ST.cards.length>0){
+      go('host');return;
     }
-    // Show connected UI in host screen
-    spConnectedUI();
-    // Init player
-    if(window.Spotify&&window.Spotify.Player){
-      initPlayer();
-    }
+    // Altijd spotify modus tonen na login
+    setTimeout(function(){
+      setType('spotify');
+      setTimeout(function(){showLpSpOk();},100);
+    },50);
+  } else if(gotSaved&&ST.mode==='spotify'){
+    showLpSpOk();
   }
 }
 
@@ -2687,7 +2677,7 @@ function startGen(){
 window.onload=function(){
   updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();
   // Geef browser even tijd om URL te lezen na redirect
-  setTimeout(function(){checkSpotifyAuth();},100);
+  checkSpotifyAuth();
   var taps=0;
   document.querySelectorAll('.bar-logo').forEach(function(el){
     el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
