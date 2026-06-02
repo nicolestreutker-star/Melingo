@@ -2627,6 +2627,43 @@ function buildAdmin(){
   }catch(e){}
 }
 function clearAnalytics(){if(confirm('Alle analytics en feedback wissen?')){localStorage.removeItem('melo_analytics');localStorage.removeItem('melo_feedback');buildAdmin();toast('Data gewist.');}}
+
+function startGen(){
+  var mode=ST.mode;
+  if(mode==='thema'){
+    if(!ST.theme){toast('Kies eerst een thema.');return;}
+    var th=THEMES.filter(function(t){return t.id===ST.theme;})[0];
+    if(!th){toast('Thema niet gevonden.');return;}
+    if(th.spotifyId&&SP.accessToken){
+      ST.spotifyPlaylist={id:th.spotifyId,name:th.name,img:''};
+      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:40};
+      loadSpotifyPlaylistForTheme(th.spotifyId,th.name);
+    }
+    ST.songs=shuf(th.songs.map(function(s){return{t:s.t,a:s.a};}));
+    ST.shuffled=ST.songs.slice();
+    ST.pidx=-1;
+    trackAnalytics('Thema:'+th.id);
+    mkCards();buildPreviews();saveSession();go('cards');
+  } else if(mode==='eigen'){
+    var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
+    if(songs.length<25){toast('Minimaal 25 nummers nodig.');return;}
+    ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
+    trackAnalytics('Eigen nummers');mkCards();buildPreviews();saveSession();go('cards');
+  } else if(mode==='spotify'){
+    if(!SP.selectedPlaylist){toast('Kies eerst een playlist.');return;}
+    var cnt=SP.selectedPlaylist._count||0;
+    if(cnt<35){toast('Playlist heeft te weinig nummers (min. 35).');return;}
+    genFromSpotify();
+  }
+}
+
+window.onload=function(){
+  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();checkSpotifyAuth();
+  var taps=0;
+  document.querySelectorAll('.bar-logo').forEach(function(el){
+    el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
+  });
+};
 </script>
 
 <!-- HOST HELP MODAL -->
