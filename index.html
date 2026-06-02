@@ -1187,11 +1187,34 @@ function onEigenInput(){
 }
 
 function showLpSpOk(){
-  var c=document.getElementById('lp-sp-conn'),o=document.getElementById('lp-sp-ok');
-  if(c)c.style.display='none';if(o)o.style.display='block';
-  spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
-    var el=document.getElementById('lp-sp-user');if(el)el.textContent='Ingelogd als '+d.display_name;
+  // Zorg dat de spotify sectie zichtbaar is
+  var step2=document.getElementById('lp-step2');
+  if(step2)step2.style.display='block';
+  // Verberg andere inputs
+  ['lp-inp-eigen','lp-inp-thema'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.style.display='none';
   });
+  // Toon spotify input
+  var spInp=document.getElementById('lp-inp-spotify');
+  if(spInp)spInp.style.display='block';
+  // Highlight spotify mode card
+  ['eigen','thema','spotify'].forEach(function(m){
+    var el=document.getElementById('lm-'+m);
+    if(el)el.classList.toggle('sel',m==='spotify');
+  });
+  // ST bijwerken
+  ST.mode='spotify';
+  // Toggle connect/ok panels
+  var c=document.getElementById('lp-sp-conn');
+  var o=document.getElementById('lp-sp-ok');
+  if(c)c.style.display='none';
+  if(o)o.style.display='block';
+  // Laad gebruikersnaam
+  spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
+    var el=document.getElementById('lp-sp-user');
+    if(el)el.textContent='Ingelogd als '+d.display_name;
+  }).catch(function(){});
+  // Laad playlists
   loadLpPlaylists();
 }
 
@@ -2567,32 +2590,24 @@ function hookSpotify(){
 
 /* Check for Spotify auth on page load */
 function checkSpotifyAuth(){
-  // Check voor Spotify error in URL
   var urlParams=new URLSearchParams(window.location.search);
   var spError=urlParams.get('spotify_error');
   if(spError){
-    toast('Spotify verbinden mislukt: '+spError);
     history.replaceState(null,'',window.location.pathname);
+    toast('Spotify fout: '+spError);
     return;
   }
   var gotNew=parseSpotifyAuth();
   var gotSaved=!gotNew&&loadSavedTokens();
   if(!(gotNew||gotSaved))return;
-  // Tokens geladen — toon juiste scherm
   spConnectedUI();
   if(window.Spotify&&window.Spotify.Player)initPlayer();
   if(gotNew){
-    // Terug van Spotify login
     var returnScreen='start';
     try{returnScreen=localStorage.getItem('sp_return_screen')||'start';}catch(e){}
-    if(returnScreen==='host'&&ST.cards&&ST.cards.length>0){
-      go('host');return;
-    }
-    // Altijd spotify modus tonen na login
-    setTimeout(function(){
-      setType('spotify');
-      setTimeout(function(){showLpSpOk();},100);
-    },50);
+    if(returnScreen==='host'&&ST.cards&&ST.cards.length>0){go('host');return;}
+    // Direct tonen — showLpSpOk doet alles zelf
+    showLpSpOk();
   } else if(gotSaved&&ST.mode==='spotify'){
     showLpSpOk();
   }
