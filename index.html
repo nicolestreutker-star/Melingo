@@ -2229,10 +2229,26 @@ function parseSpotifyAuth(){
   var at=params.get('sp_at');
   var rt=params.get('sp_rt');
   var ex=params.get('sp_ex');
-  // Fallback: check hash fragment (voor mobiele browsers die query params strippen)
+  // Fallback 1: check hash fragment
   if(!at&&window.location.hash){
     var hashParams=new URLSearchParams(window.location.hash.substring(1));
     at=hashParams.get('sp_at');rt=hashParams.get('sp_rt');ex=hashParams.get('sp_ex');
+  }
+  // Fallback 2: al opgeslagen in localStorage door callback HTML
+  if(!at){
+    try{
+      var saved=localStorage.getItem('sp_tokens');
+      if(saved){
+        var obj=JSON.parse(saved);
+        if(obj.accessToken&&obj.expiresAt>Date.now()){
+          SP.accessToken=obj.accessToken;
+          SP.refreshToken=obj.refreshToken||'';
+          SP.expiresAt=obj.expiresAt;
+          localStorage.removeItem('sp_tokens');
+          return true;
+        }
+      }
+    }catch(e){}
   }
   if(!at)return false;
   try{
