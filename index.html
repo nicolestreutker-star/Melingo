@@ -2142,7 +2142,7 @@ function initStartSpotify(){
 }
 
 function showStartSpConnected(){
-  // Delegeer naar nieuwe startscherm functie
+  // Verouderde functie — delegeer naar nieuwe implementatie
   showLpSpOk();
 }
 
@@ -2241,46 +2241,19 @@ function spotifyLogout(){
 }
 
 function parseSpotifyAuth(){
-  // Read tokens from query params (set by /api/callback)
   var params=new URLSearchParams(window.location.search);
   var at=params.get('sp_at');
   var rt=params.get('sp_rt');
   var ex=params.get('sp_ex');
-  // Fallback 1: check hash fragment
-  if(!at&&window.location.hash){
-    var hashParams=new URLSearchParams(window.location.hash.substring(1));
-    at=hashParams.get('sp_at');rt=hashParams.get('sp_rt');ex=hashParams.get('sp_ex');
-  }
-  // Fallback 2: al opgeslagen in localStorage door callback HTML
-  if(!at){
-    try{
-      var saved=localStorage.getItem('sp_tokens');
-      if(saved){
-        var obj=JSON.parse(saved);
-        if(obj.accessToken&&obj.expiresAt>Date.now()){
-          SP.accessToken=obj.accessToken;
-          SP.refreshToken=obj.refreshToken||'';
-          SP.expiresAt=obj.expiresAt;
-          localStorage.removeItem('sp_tokens');
-          return true;
-        }
-      }
-    }catch(e){}
-  }
   if(!at)return false;
-  try{
-    SP.accessToken=at;
-    SP.refreshToken=rt;
-    SP.expiresAt=Date.now()+parseInt(ex||3600)*1000;
-    // Clean query params from URL immediately
-    history.replaceState(null,'',window.location.pathname);
-    // Save tokens to localStorage
-    try{localStorage.setItem('sp_tokens',JSON.stringify({
-      accessToken:SP.accessToken,refreshToken:SP.refreshToken,expiresAt:SP.expiresAt
-    }));}catch(e){}
-    console.log('Spotify token opgeslagen, verloopt over', Math.round((SP.expiresAt-Date.now())/60000), 'minuten');
-    return true;
-  }catch(e){console.error('parseSpotifyAuth fout:',e);return false;}
+  SP.accessToken=at;
+  SP.refreshToken=rt||'';
+  SP.expiresAt=Date.now()+parseInt(ex||3600)*1000;
+  history.replaceState(null,'',window.location.pathname);
+  try{localStorage.setItem('sp_tokens',JSON.stringify({
+    accessToken:SP.accessToken,refreshToken:SP.refreshToken,expiresAt:SP.expiresAt
+  }));}catch(e){}
+  return true;
 }
 
 function loadSavedTokens(){
@@ -2590,13 +2563,6 @@ function hookSpotify(){
 
 /* Check for Spotify auth on page load */
 function checkSpotifyAuth(){
-  var urlParams=new URLSearchParams(window.location.search);
-  var spError=urlParams.get('spotify_error');
-  if(spError){
-    history.replaceState(null,'',window.location.pathname);
-    toast('Spotify fout: '+spError);
-    return;
-  }
   var gotNew=parseSpotifyAuth();
   var gotSaved=!gotNew&&loadSavedTokens();
   if(!(gotNew||gotSaved))return;
@@ -2606,9 +2572,7 @@ function checkSpotifyAuth(){
     var returnScreen='start';
     try{returnScreen=localStorage.getItem('sp_return_screen')||'start';}catch(e){}
     if(returnScreen==='host'&&ST.cards&&ST.cards.length>0){go('host');return;}
-    // Direct tonen — showLpSpOk doet alles zelf
-    showLpSpOk();
-  } else if(gotSaved&&ST.mode==='spotify'){
+    // Altijd: toon spotify sectie na login
     showLpSpOk();
   }
 }
