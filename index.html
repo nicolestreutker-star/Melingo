@@ -441,12 +441,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .lp-usp-d{font-size:.76rem;color:var(--mt);line-height:1.6}
 
 /* NEON HOVER MODE CARDS */
-.lp-mode{transition:all .2s;position:relative}
-.lp-mode::before{content:'';position:absolute;inset:-1px;border-radius:17px;background:linear-gradient(135deg,rgba(155,109,255,.5),rgba(242,64,106,.4));opacity:0;transition:opacity .2s;pointer-events:none;z-index:0}
-.lp-mode:hover::before,.lp-mode.sel::before{opacity:1}
-.lp-mode>*{position:relative;z-index:1}
-.lp-mode:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(155,109,255,.2)}
-.lp-mode-spotify:hover,.lp-mode-spotify.sel{box-shadow:0 8px 40px rgba(155,109,255,.3)}
+.lp-mode{transition:all .2s}
+.lp-mode:hover{transform:translateY(-2px);box-shadow:0 0 0 2px rgba(155,109,255,.5),0 8px 32px rgba(155,109,255,.15)}
+.lp-mode.sel{box-shadow:0 0 0 2px var(--a),0 8px 32px rgba(155,109,255,.2)}
+.lp-mode-spotify:hover,.lp-mode-spotify.sel{box-shadow:0 0 0 2px var(--a),0 8px 40px rgba(155,109,255,.25)}
 
 @media(max-width:680px){
   .lp-usp-grid{grid-template-columns:1fr 1fr}
