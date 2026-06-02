@@ -2229,6 +2229,11 @@ function parseSpotifyAuth(){
   var at=params.get('sp_at');
   var rt=params.get('sp_rt');
   var ex=params.get('sp_ex');
+  // Fallback: check hash fragment (voor mobiele browsers die query params strippen)
+  if(!at&&window.location.hash){
+    var hashParams=new URLSearchParams(window.location.hash.substring(1));
+    at=hashParams.get('sp_at');rt=hashParams.get('sp_rt');ex=hashParams.get('sp_ex');
+  }
   if(!at)return false;
   try{
     SP.accessToken=at;
@@ -2552,6 +2557,13 @@ function hookSpotify(){
 
 /* Check for Spotify auth on page load */
 function checkSpotifyAuth(){
+  // Check voor Spotify error in URL
+  var urlParams=new URLSearchParams(window.location.search);
+  var spError=urlParams.get('spotify_error');
+  if(spError){
+    toast('Spotify verbinden mislukt: '+spError+'. Probeer opnieuw.');
+    history.replaceState(null,'',window.location.pathname);
+  }
   // Herstel mode na Spotify redirect
   try{
     var preMode=localStorage.getItem('sp_pre_mode');
@@ -2658,7 +2670,9 @@ function startGen(){
 }
 
 window.onload=function(){
-  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();checkSpotifyAuth();
+  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();
+  // Geef browser even tijd om URL te lezen na redirect
+  setTimeout(function(){checkSpotifyAuth();},100);
   var taps=0;
   document.querySelectorAll('.bar-logo').forEach(function(el){
     el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
