@@ -1216,6 +1216,167 @@ function showLpSpOk(){
   loadLpPlaylists();
 }
 
+function updLpPNum(){
+  var el=document.getElementById('lp-pnum');if(el)el.textContent=ST.players;
+  document.querySelectorAll('.lp-pqk').forEach(function(b){b.classList.toggle('sel',parseInt(b.textContent)===ST.players);});
+}
+
+function updLpPlayers(){
+  var mode=ST.mode,show=false,maxP=20;
+  if(mode==='thema'&&ST.theme){show=true;maxP=20;}
+  else if(mode==='eigen'){
+    var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;
+    if(n>=25){show=true;maxP=getMaxPlayers(n)||100;}
+  } else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count>0){
+    show=true;maxP=getMaxPlayers(SP.selectedPlaylist._count);
+  }
+  var s3=document.getElementById('lp-step3');if(s3)s3.style.display=show?'block':'none';
+  if(show){
+    if(ST.players>maxP)ST.players=maxP;if(ST.players<1)ST.players=1;
+    updLpPNum();
+    var info=document.getElementById('lp-pinfo');
+    if(info){
+      if(mode==='eigen')info.textContent='Alleen PDF-kaarten · geen host-scherm';
+      else if(mode==='spotify')info.textContent='Max. '+maxP+' spelers voor deze playlist';
+      else info.textContent='';
+    }
+    var u=document.getElementById('lp-p-upsell');
+    if(u)u.style.display=(mode==='thema'&&ST.players>=20)?'block':'none';
+  }
+}
+
+function adjP(d){
+  var mode=ST.mode,maxP=20;
+  if(mode==='eigen'){var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;maxP=getMaxPlayers(n)||100;}
+  if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count)maxP=getMaxPlayers(SP.selectedPlaylist._count);
+  ST.players=Math.max(1,Math.min(maxP,ST.players+d));
+  updLpPNum();
+  var u=document.getElementById('lp-p-upsell');
+  if(u)u.style.display=(mode==='thema'&&ST.players>=20)?'block':'none';
+  updLpCTA();
+}
+
+function setP(n){ST.players=n;adjP(0);}
+
+function updLpCTA(){
+  var btn=document.getElementById('lp-cta'),sum=document.getElementById('lp-summary');
+  var st=document.getElementById('lp-sum-t'),sm=document.getElementById('lp-sum-m');
+  if(!btn)return;
+  var mode=ST.mode;
+  if(!mode){btn.disabled=true;btn.textContent='Kies eerst je speelmodus';if(sum)sum.style.display='none';return;}
+  if(mode==='thema'){
+    if(!ST.theme){btn.disabled=true;btn.textContent='Kies een thema';if(sum)sum.style.display='none';return;}
+    var th=THEMES.find(function(t){return t.id===ST.theme;});
+    btn.disabled=false;btn.textContent='Maak '+ST.players+' bingokaarten →';
+    if(sum){sum.style.display='block';if(st)st.textContent=th?th.name:'Thema';if(sm)sm.textContent='40 nummers · '+ST.players+' spelers · host-scherm';}
+    return;
+  }
+  if(mode==='eigen'){
+    var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
+    if(songs.length<25){btn.disabled=true;btn.textContent='Voeg nog '+(25-songs.length)+' nummers toe';if(sum)sum.style.display='none';return;}
+    btn.disabled=false;btn.textContent='Maak PDF-kaarten →';
+    if(sum){sum.style.display='block';if(st)st.textContent='Eigen nummers';if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
+    return;
+  }
+  if(mode==='spotify'){
+    if(!SP.selectedPlaylist||SP.selectedPlaylist._count===undefined){btn.disabled=true;btn.textContent='Kies een playlist';if(sum)sum.style.display='none';return;}
+    var cnt=SP.selectedPlaylist._count||0;
+    if(cnt<35){btn.disabled=true;btn.textContent='Playlist heeft te weinig nummers';if(sum)sum.style.display='none';return;}
+    btn.disabled=false;btn.textContent='Maak Spotify-bingo →';
+    var mp=getMaxPlayers(cnt);
+    if(sum){sum.style.display='block';if(st)st.textContent='Spotify-playlist';if(sm)sm.textContent=cnt+' nummers · max. '+mp+' spelers · host-scherm';}
+  }
+}
+
+function showSaved(){
+  var s=document.getElementById('lp-saved');if(!s)return;
+  s.style.display=s.style.display!=='none'?'none':'block';
+  buildSavedList();
+}
+
+function buildSavedList(){
+  var wrap=document.getElementById('saved-list-wrap');
+  var noSaved=document.getElementById('no-saved');
+  if(!wrap)return;
+  var sessions=getNamedSessions();
+  if(!sessions||!sessions.length){
+    wrap.innerHTML='';
+    if(noSaved)noSaved.style.display='block';
+    return;
+  }
+  if(noSaved)noSaved.style.display='none';
+  wrap.innerHTML=sessions.map(function(s){
+    return'<div style="display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)">'
+      +'<div style="font-size:.8rem;color:var(--tx)">'+esc(s.name)+'</div>'
+      +'<button class="btn bp" style="font-size:.72rem;min-height:30px;padding:.25rem .65rem" onclick="loadNamedSession(this.dataset.n)" data-n="'+esc(s.name)+'">Herstel</button>'
+      +'</div>';
+  }).join('');
+}
+
+var THEME_LINES={
+  'jaren80':'Synthesizers, schoudervullingen en tijdloze hits.',
+  'jaren90':'Van eurodance tot grunge — puur nostalgie.',
+  'jaren00':'De hits van jouw tienertijd.',
+  'nl':'André, Marco, BLØF en al het moois daartussen.',
+  'rock':'Luchtgitaar verplicht.',
+  'pop':'De grootste pophits van de afgelopen decennia.',
+  'rnb':'Soul, groove en R&B-klassiekers.',
+  'foute':'Meezingen, meewiegen, niet nadenken.',
+  'guilty':'De nummers waar je stiekem van houdt.',
+  'kerst':'Mariah, Wham! en alles wat glinstert.'
+};
+
+function buildLpThemeShowcase(){
+  var COLORS=['#9B6DFF','#F2406A','#6AABF7','#EF3B55','#6AABF7','#F2406A','#9B6DFF','#EF3B55','#F2406A','#1db954'];
+  var el=document.getElementById('lp-themes-grid');if(!el)return;
+  el.innerHTML=THEMES.map(function(th,i){
+    var c=COLORS[i%COLORS.length];
+    var line=THEME_LINES[th.id]||th.mood;
+    return'<div class="lp-th" style="--tc:'+c+'22;border-color:'+c+'22" onclick="selLpThemeDirect(this)" data-id="'+th.id+'">'
+      +'<div class="lp-th-name">'+th.name+'</div>'
+      +'<div class="lp-th-line">'+line+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+function selLpThemeDirect(el){
+  setType('thema');
+  ST.theme=el.dataset.id;
+  buildLpTgrid();
+  var cfg=document.querySelector('.lp-cfg-outer');
+  if(cfg)cfg.scrollIntoView({behavior:'smooth'});
+}
+
+function buildFAQ(){
+  var el=document.getElementById('lp-faq');if(!el)return;
+  var faqs=[
+    ['Wat is Melingo?','Melingo is een slimme muziekbingo-tool waarmee je eenvoudig een complete muziekbingo maakt en speelt. Je kiest een thema of gebruikt je eigen muzieklijst, maakt automatisch unieke bingokaarten en begeleidt het spel met het ingebouwde hostscherm.'],
+    ['Hoe werkt Melingo?','1. Kies een kant-en-klaar thema of maak een bingo met je eigen muzieklijst. 2. Kies met hoeveel mensen je speelt. 3. Download de unieke bingokaarten als PDF. 4. Start het hostscherm en speel de muziekbingo.'],
+    ['Wat is het hostscherm?','Het hostscherm is het scherm waarmee je de muziekbingo begeleidt. Hier zie je welk nummer aan de beurt is, welke nummers al zijn afgespeeld en kun je controleren of een bingo klopt.'],
+    ['Kan ik controleren of iemand echt bingo heeft?','Ja. Elke bingokaart heeft een uniek kaartnummer. Wanneer iemand bingo roept, voer je het kaartnummer in op het hostscherm. Melingo laat dan direct zien of de bingo klopt.'],
+    ['Zijn alle bingokaarten uniek?','Ja. Melingo maakt automatisch unieke bingokaarten aan. Daardoor speelt iedere deelnemer met een andere combinatie van nummers.'],
+    ['Heb ik Spotify nodig?','Je kunt Melingo gebruiken met een Spotify-playlist, maar je kunt ook zelf nummers invoeren of een kant-en-klaar thema kiezen. Voor Spotify Bingo heb je wel Spotify Premium nodig.'],
+    ['Kan ik de kaarten printen?','Ja. De bingokaarten zijn printklaar en worden als PDF gedownload. Er is ook een zwart-wit optie.'],
+    ['Moet ik iets installeren?','Nee. Melingo werkt volledig in de browser.'],
+    ['Voor welke gelegenheden is Melingo geschikt?','Verjaardagen, vriendinnenavonden, familiefeesten, borrels, teamuitjes, feestdagen, bruiloften, kroegavonden en meer.'],
+    ['Komt er ook een abonnement?','Ja, in de toekomst komen er abonnementen voor gebruikers die vaker muziekbingo willen spelen.'],
+  ];
+  el.innerHTML=faqs.map(function(f){
+    return'<div class="lp-faq-item">'
+      +'<button class="lp-faq-q" onclick="toggleFAQ(this)">'+f[0]+'<span>+</span></button>'
+      +'<div class="lp-faq-a">'+f[1]+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+function toggleFAQ(btn){
+  var a=btn.nextElementSibling,open=a.classList.contains('open');
+  document.querySelectorAll('.lp-faq-a').forEach(function(e){e.classList.remove('open');});
+  document.querySelectorAll('.lp-faq-q span').forEach(function(e){e.textContent='+';});
+  if(!open){a.classList.add('open');btn.querySelector('span').textContent='−';}
+}
+
+
 async function loadLpPlaylists(){
   var all=[],url='https://api.spotify.com/v1/me/playlists?limit=50';
   while(url){var r=await spFetch(url);var d=await r.json();if(d.error)break;
