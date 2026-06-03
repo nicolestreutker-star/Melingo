@@ -1169,10 +1169,20 @@ function buildLpTgrid(){
   }).join('');
 }
 
-function selLpTheme(el){
+async function selLpTheme(el){
   ST.theme=el.dataset.id;
   document.querySelectorAll('.lp-tc').forEach(function(c){c.classList.remove('sel');});
   el.classList.add('sel');
+  var th=THEMES.find(function(t){return t.id===ST.theme;});
+  if(th&&th.spotifyId&&SP.accessToken){
+    try{
+      var r=await spFetch('https://api.spotify.com/v1/playlists/'+th.spotifyId+'/tracks?limit=1&market=NL');
+      var d=await r.json();
+      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:d.total||0};
+    }catch(e){
+      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:0};
+    }
+  }
   updLpPlayers();updLpCTA();
   setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3)s3.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 }
@@ -1246,7 +1256,10 @@ function updLpPNum(){
 
 function updLpPlayers(){
   var mode=ST.mode,show=false,maxP=20;
-  if(mode==='thema'&&ST.theme){show=true;maxP=20;}
+  if(mode==='thema'&&ST.theme){
+    show=true;
+    maxP=SP.selectedPlaylist&&SP.selectedPlaylist._count>0?getMaxPlayers(SP.selectedPlaylist._count):20;
+  }
   else if(mode==='eigen'){
     var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;
     if(n>=25){show=true;maxP=getMaxPlayers(n)||100;}
@@ -1425,17 +1438,9 @@ async function selLpPlaylist(el){
   var fb=document.getElementById('lp-sp-fb');
   if(fb){fb.style.display='block';fb.className='lp-fmsg lp-fmsg-ok';fb.textContent='Playlist analyseren...';}
   try{
-    var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'?market=NL&fields=tracks(total),name,images');
+    var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/tracks?limit=1&market=NL');
     var d=await r.json();
-    var cnt=0;
-    if(d.tracks&&typeof d.tracks.total==='number'){
-      cnt=d.tracks.total;
-    } else {
-      // Fallback: tel via items endpoint
-      var r2=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/tracks?limit=1&market=NL');
-      var d2=await r2.json();
-      cnt=d2.total||0;
-    }
+    var cnt=d.total||0;
     SP.selectedPlaylist._count=cnt;
     var maxP=getMaxPlayers(cnt);
     if(fb){
@@ -2814,7 +2819,8 @@ function startGen(){
     if(!th){toast('Thema niet gevonden.');return;}
     if(th.spotifyId&&SP.accessToken){
       ST.spotifyPlaylist={id:th.spotifyId,name:th.name,img:''};
-      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:40};
+      var existingCount=SP.selectedPlaylist&&SP.selectedPlaylist.id===th.spotifyId?SP.selectedPlaylist._count:0;
+      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:existingCount||0};
       loadSpotifyPlaylistForTheme(th.spotifyId,th.name);
     }
     ST.songs=shuf(th.songs.map(function(s){return{t:s.t,a:s.a};}));
