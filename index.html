@@ -2894,12 +2894,91 @@ function buildAdmin(){
 }
 function clearAnalytics(){if(confirm('Alle analytics en feedback wissen?')){localStorage.removeItem('melo_analytics');localStorage.removeItem('melo_feedback');buildAdmin();toast('Data gewist.');}}
 
-function startGen(){
+/* ── Checkout helpers ──────────────────────────────────────────────────────
+ * Frontend mag alleen: productKey kiezen, players doorgeven, checkout/create
+ * aanroepen en de server-response volgen.
+ * Admin- en betaalstatus worden server-side bepaald. Nooit hier.
+ */
+
+function productKeyFor(mode, players){
+  if(mode==='thema')return'ready_made_theme';
+  var tier=players<=25?'small':players<=75?'party':'event';
+  if(mode==='spotify')return'spotify_host_'+tier;
+  return'cards_only_'+tier;
+}
+
+async function resolveCheckout(productKey){
+  var body={
+    productKey:productKey,
+    players:ST.players,
+    playlistId:SP.selectedPlaylist?SP.selectedPlaylist.id:null,
+    trackCount:SP.selectedPlaylist&&SP.selectedPlaylist._count?SP.selectedPlaylist._count:0
+  };
+  var btn=document.getElementById('lp-cta');
+  if(btn){btn.disabled=true;btn.textContent='Even geduld...';}
+  try{
+    var resp=await fetch('/api/checkout/create',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      credentials:'include',
+      body:JSON.stringify(body)
+    });
+    var data=await resp.json();
+    if(!resp.ok){
+      toast(data.error||'Fout bij starten. Probeer opnieuw.');
+      if(btn){btn.disabled=false;}updLpCTA();return{granted:false};
+    }
+    if(data.warning)toast(data.warning);
+    if(data.mode==='admin_granted'){
+      ST.gameSession=data.gameSession||null;
+      ST.orderId=data.orderId||null;
+      toast(data.message||'Admin testmodus actief.');
+      return{granted:true};
+    }
+    if(data.mode==='checkout'){
+      ST.orderId=data.orderId||null;
+      window.location.href=data.checkoutUrl;
+      return{granted:false,redirecting:true};
+    }
+    toast('Onbekende server-response.');
+    return{granted:false};
+  }catch(e){
+    toast('Verbindingsfout. Probeer opnieuw.');
+    if(btn){btn.disabled=false;}updLpCTA();
+    return{granted:false};
+  }
+}
+
+/* Check ?order=ORDER_ID in URL after Stripe redirect */
+async function checkOrderAccess(){
+  var params=new URLSearchParams(window.location.search);
+  var orderId=params.get('order');
+  var payment=params.get('payment');
+  if(!orderId)return;
+  history.replaceState(null,'',window.location.pathname);
+  if(payment==='cancelled'){toast('Betaling geannuleerd.');return;}
+  try{
+    var resp=await fetch('/api/orders/'+encodeURIComponent(orderId)+'/access',{credentials:'include'});
+    var data=await resp.json();
+    if(resp.status===202){
+      toast('Betaling wordt verwerkt — vernieuw over enkele seconden.');return;
+    }
+    if(!resp.ok){toast(data.error||'Toegang geweigerd.');return;}
+    if(data.gameSession){
+      ST.gameSession=data.gameSession;ST.orderId=orderId;
+      toast('Toegang verleend! Je kunt nu kaarten aanmaken.');
+    }
+  }catch(e){toast('Kon betaalstatus niet ophalen.');}
+}
+
+async function startGen(){
   var mode=ST.mode;
   if(mode==='thema'){
     if(!ST.theme){toast('Kies eerst een thema.');return;}
     var th=THEMES.filter(function(t){return t.id===ST.theme;})[0];
     if(!th){toast('Thema niet gevonden.');return;}
+    var checkout=await resolveCheckout(productKeyFor(mode,ST.players));
+    if(!checkout.granted)return;
     if(th.spotifyId&&SP.accessToken){
       ST.spotifyPlaylist={id:th.spotifyId,name:th.name,img:''};
       var existingCount=SP.selectedPlaylist&&SP.selectedPlaylist.id===th.spotifyId?SP.selectedPlaylist._count:0;
@@ -2914,12 +2993,16 @@ function startGen(){
   } else if(mode==='eigen'){
     var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
     if(songs.length<25){toast('Minimaal 25 nummers nodig.');return;}
+    var checkout2=await resolveCheckout(productKeyFor(mode,ST.players));
+    if(!checkout2.granted)return;
     ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
     trackAnalytics('Eigen nummers');mkCards();buildPreviews();saveSession();go('cards');
   } else if(mode==='spotify'){
     if(!SP.selectedPlaylist){toast('Kies eerst een playlist.');return;}
     var cnt=SP.selectedPlaylist._count||0;
     var capCheck=getPlaylistCapacity(cnt);if(capCheck.blocked){toast(capCheck.message);return;}
+    var checkout3=await resolveCheckout(productKeyFor(mode,ST.players));
+    if(!checkout3.granted)return;
     genFromSpotify();
   }
 }
@@ -2960,7 +3043,7 @@ function resumeSession(){
 }
 
 window.onload=function(){
-  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();updLpCTA();
+  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();updLpCTA();checkOrderAccess();
   // Geef browser even tijd om URL te lezen na redirect
   checkSpotifyAuth();
   var taps=0;
