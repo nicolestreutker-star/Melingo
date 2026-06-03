@@ -33,7 +33,7 @@ html,body{height:100%;background:var(--bg);font-family:'Plus Jakarta Sans',sans-
 .bar-actions{display:flex;gap:.4rem;flex-wrap:wrap}
 
 /* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.3rem;padding:.5rem 1rem;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s;border:none;white-space:nowrap;user-select:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.3rem;padding:.5rem 1rem;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s;border:none;white-space:nowrap;user-select:none;touch-action:manipulation}
 .btn:active{transform:scale(.97)}
 .bp{background:linear-gradient(135deg,var(--s),var(--a));color:#fff;box-shadow:0 6px 20px rgba(155,109,255,.3)}
 .bp:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(155,109,255,.4)}
@@ -2835,8 +2835,43 @@ function startGen(){
   }
 }
 
+function saveSession(){
+  try{
+    localStorage.setItem('melo_session',JSON.stringify({
+      songs:ST.songs,cards:ST.cards,players:ST.players,
+      shuffled:ST.shuffled,pidx:ST.pidx,
+      wonCategories:ST.wonCategories,bingoHistory:ST.bingoHistory,
+      saved:new Date().toISOString()
+    }));
+  }catch(e){}
+}
+
+function checkResume(){
+  try{
+    var s=JSON.parse(localStorage.getItem('melo_session')||'null');
+    if(!s||!s.cards||!s.cards.length)return;
+    var bar=document.getElementById('resume-bar');
+    var meta=document.getElementById('resume-meta');
+    if(bar)bar.style.display='flex';
+    if(meta)meta.textContent=s.cards.length+' kaarten · nr. '+(s.pidx+1)+' gespeeld';
+  }catch(e){}
+}
+
+function resumeSession(){
+  try{
+    var s=JSON.parse(localStorage.getItem('melo_session')||'null');
+    if(!s||!s.cards||!s.cards.length){toast('Geen sessie gevonden.');return;}
+    ST.songs=s.songs;ST.cards=s.cards;ST.players=s.players;
+    ST.shuffled=s.shuffled;ST.pidx=s.pidx;
+    ST.wonCategories=s.wonCategories||{};
+    ST.bingoHistory=s.bingoHistory||[];
+    ST.missedChecked={};
+    go('host');
+  }catch(e){toast('Fout bij herstellen.');}
+}
+
 window.onload=function(){
-  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();
+  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();updLpCTA();
   // Geef browser even tijd om URL te lezen na redirect
   checkSpotifyAuth();
   var taps=0;
