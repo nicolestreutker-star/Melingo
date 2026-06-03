@@ -574,6 +574,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   <!-- CONFIGURATOR -->
   <div class="lp-cfg-outer">
     <div class="lp-cfg-label">Hoe wil je spelen?</div>
+    <!-- Spotify connect banner — toont als niet ingelogd en Spotify nodig is -->
+    <div id="lp-spotify-cta-top" style="display:none;background:rgba(29,185,84,.06);border:1px solid rgba(29,185,84,.2);border-radius:16px;padding:1rem 1.25rem;margin-bottom:1rem;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div style="flex:1;min-width:180px">
+        <div style="font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.2rem">🎵 Verbind eerst met Spotify</div>
+        <div style="font-size:.75rem;color:var(--mt);line-height:1.5">Daarna kies je je eigen playlist of een kant-en-klaar thema.</div>
+      </div>
+      <button class="btn bp" style="min-height:44px;white-space:nowrap;flex-shrink:0" onclick="startSpotifyLogin()">Verbinden met Spotify</button>
+    </div>
     <div class="lp-cfg-card">
 
       <!-- MODES — Spotify eerst als beste keuze -->
@@ -667,8 +675,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
           <!-- THEMA -->
           <div id="lp-inp-thema" style="display:none">
-            <div class="lp-tgrid" id="lp-tgrid"></div>
-            <div class="lp-hint">40 nummers · max. 20 spelers · <button class="lp-lnk" onclick="setType('spotify')">meer dan 20 spelers?</button></div>
+            <!-- Niet verbonden: Spotify login vereist -->
+            <div id="lp-thema-sp-conn" class="lp-sp-box" style="display:none">
+              <div class="lp-sp-title">Spotify nodig voor dit thema</div>
+              <div class="lp-sp-sub">Kant-en-klare thema's spelen automatisch af via Spotify. De playlist staat al klaar — jij hoeft alleen te verbinden om af te spelen.</div>
+              <button class="btn bp" style="width:100%;min-height:44px" onclick="startSpotifyLogin()">Verbinden met Spotify</button>
+            </div>
+            <!-- Verbonden: toon themakiezer -->
+            <div id="lp-thema-sp-ok" style="display:none">
+              <div class="lp-sp-user" id="lp-thema-sp-user" style="margin-bottom:.6rem"></div>
+              <div class="lp-sec-label" style="margin-bottom:.5rem">Kies een kant-en-klaar thema</div>
+              <div class="lp-tgrid" id="lp-tgrid"></div>
+              <div id="lp-thema-selected" style="display:none;margin-top:.6rem;padding:.5rem .75rem;background:rgba(29,185,84,.08);border:1px solid rgba(29,185,84,.22);border-radius:10px;font-size:.78rem;color:var(--green);font-weight:600"></div>
+              <div class="lp-hint" style="margin-top:.5rem">40 nummers · max. 20 spelers · <button class="lp-lnk" onclick="setType('spotify')">meer dan 20 spelers?</button></div>
+            </div>
           </div>
 
           <!-- SPOTIFY -->
@@ -947,7 +967,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="sp-panel" id="sp-panel" style="margin:0;border-radius:0;border:none;border-top:1px solid var(--bd)">
           <div class="sp-body" id="sp-body" style="padding:.85rem 1rem">
             <div id="sp-connect-view">
-              <div id="sp-theme-optional-note" style="display:none;font-size:.75rem;color:var(--mt);background:rgba(106,171,247,.06);border:1px solid rgba(106,171,247,.15);border-radius:10px;padding:.55rem .75rem;margin-bottom:.75rem;line-height:1.5"><strong style="color:var(--m)">Optioneel:</strong> Verbind Spotify voor automatisch afspelen. Zonder Spotify speel je zelf muziek af.</div>
+              <!-- Thema-specifieke toelichting (toont als thema mode) -->
+              <div id="sp-theme-connect-note" style="display:none;font-size:.78rem;color:var(--mt);background:rgba(29,185,84,.05);border:1px solid rgba(29,185,84,.18);border-radius:10px;padding:.6rem .85rem;margin-bottom:.75rem;line-height:1.55">
+                <strong style="color:var(--green)">Kant-en-klaar thema:</strong> Verbind Spotify om de playlist automatisch af te spelen. De playlist staat al klaar — jij hoeft alleen in te loggen.
+              </div>
               <div style="color:var(--mt);font-size:.82rem;margin-bottom:.85rem;line-height:1.6">Verbind Spotify om muziek automatisch af te spelen. Je hebt <strong style="color:var(--tx)">Spotify Premium</strong> nodig.</div>
               <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" onclick="spotifyLogin()">
                 Verbinden met Spotify
@@ -1291,9 +1314,38 @@ function setType(mode){
     var el=document.getElementById(id);if(el)el.style.display='none';
   });
   var lbl=document.getElementById('lp-step2-lbl');
-  if(mode==='eigen'){if(lbl)lbl.textContent='Jouw nummers';document.getElementById('lp-inp-eigen').style.display='block';}
-  else if(mode==='thema'){if(lbl)lbl.textContent='Kies je thema';document.getElementById('lp-inp-thema').style.display='block';buildLpTgrid();}
-  else if(mode==='spotify'){if(lbl)lbl.textContent='Jouw Spotify-playlist';document.getElementById('lp-inp-spotify').style.display='block';if(SP.accessToken)showLpSpOk();}
+  if(mode==='eigen'){
+    if(lbl)lbl.textContent='Jouw nummers';
+    document.getElementById('lp-inp-eigen').style.display='block';
+  } else if(mode==='thema'){
+    if(lbl)lbl.textContent='Kies je thema';
+    document.getElementById('lp-inp-thema').style.display='block';
+    var themaConn=document.getElementById('lp-thema-sp-conn');
+    var themaOk=document.getElementById('lp-thema-sp-ok');
+    if(SP.accessToken){
+      // Verbonden: toon themakiezer
+      if(themaConn)themaConn.style.display='none';
+      if(themaOk)themaOk.style.display='block';
+      buildLpTgrid();
+      // Toon gebruikersnaam
+      var uEl=document.getElementById('lp-thema-sp-user');
+      if(uEl){
+        if(SP.me&&SP.me.display_name){uEl.textContent='Ingelogd als '+SP.me.display_name;}
+        else{spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){if(uEl&&d.display_name)uEl.textContent='Ingelogd als '+d.display_name;}).catch(function(){});}
+      }
+    } else {
+      // Niet verbonden: toon Spotify login prompt
+      if(themaConn)themaConn.style.display='block';
+      if(themaOk)themaOk.style.display='none';
+    }
+    // Toon de top-banner als nog niet verbonden
+    updSpotifyCtaBanner();
+  } else if(mode==='spotify'){
+    if(lbl)lbl.textContent='Jouw Spotify-playlist';
+    document.getElementById('lp-inp-spotify').style.display='block';
+    if(SP.accessToken)showLpSpOk();
+    updSpotifyCtaBanner();
+  }
   updLpPlayers();updLpCTA();
   setTimeout(function(){var s2=document.getElementById('lp-step2');if(s2)s2.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 }
@@ -1313,16 +1365,38 @@ async function selLpTheme(el){
   document.querySelectorAll('.lp-tc').forEach(function(c){c.classList.remove('sel');});
   el.classList.add('sel');
   var th=THEMES.find(function(t){return t.id===ST.theme;});
-  if(th&&th.spotifyId&&SP.accessToken){
+
+  // Spotify is vereist voor thema-playback
+  if(!SP.accessToken){
+    toast('Verbind eerst met Spotify om dit thema af te spelen.');
+    var themaConn=document.getElementById('lp-thema-sp-conn');
+    var themaOk=document.getElementById('lp-thema-sp-ok');
+    if(themaConn)themaConn.style.display='block';
+    if(themaOk)themaOk.style.display='none';
+    updLpCTA();
+    return;
+  }
+
+  // Verbonden: haal track-count op
+  if(th&&th.spotifyId){
     try{
       var result=await fetchPlaylistTrackCount(th.spotifyId);
-      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:result.cnt||0};
+      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:result.cnt||40};
     }catch(e){
-      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:0};
+      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:40};
     }
   }
+
+  // Toon "thema geselecteerd" indicator
+  var selEl=document.getElementById('lp-thema-selected');
+  if(selEl&&th){
+    selEl.style.display='block';
+    var cnt=SP.selectedPlaylist&&SP.selectedPlaylist._count?SP.selectedPlaylist._count:40;
+    selEl.textContent='✓ '+th.name+' gekozen · '+cnt+' nummers · playlist staat klaar';
+  }
+
   updLpPlayers();updLpCTA();
-  setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3)s3.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
+  setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3&&s3.style.display!=='none')s3.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 }
 
 function onEigenInput(){
@@ -1333,6 +1407,15 @@ function onEigenInput(){
   else if(n<25){el.style.display='block';el.className='lp-fmsg lp-fmsg-warn';el.textContent=n+' nummers · voeg nog '+(25-n)+' toe.';}
   else{el.style.display='block';el.className='lp-fmsg lp-fmsg-ok';el.textContent='✓ '+n+' nummers gevonden';}
   updLpPlayers();updLpCTA();
+}
+
+/* Toon/verberg de Spotify-connect top-banner afhankelijk van login-status en modus */
+function updSpotifyCtaBanner(){
+  var banner=document.getElementById('lp-spotify-cta-top');
+  if(!banner)return;
+  // Toon alleen als niet verbonden én Spotify/thema modus geselecteerd of nog geen modus
+  var needsSpotify=!ST.mode||ST.mode==='spotify'||ST.mode==='thema';
+  banner.style.display=(!SP.accessToken&&needsSpotify)?'flex':'none';
 }
 
 function showLpSpOk(){
@@ -1380,6 +1463,9 @@ function showLpSpOk(){
 
   // Stap 9: laad playlists
   loadLpPlaylists();
+
+  // Verberg top-banner (nu verbonden)
+  updSpotifyCtaBanner();
 
   // Stap 10: scroll naar stap 2
   setTimeout(function(){
@@ -1493,6 +1579,10 @@ function updLpCTA(){
   if(!mode){btn.disabled=true;btn.textContent='Kies eerst je speelmodus';if(sum)sum.style.display='none';return;}
 
   if(mode==='thema'){
+    // Spotify is vereist — zonder login kan de playlist niet worden afgespeeld
+    if(!SP.accessToken){
+      btn.disabled=true;btn.textContent='Verbind eerst met Spotify';if(sum)sum.style.display='none';return;
+    }
     if(!ST.theme){btn.disabled=true;btn.textContent='Kies een thema';if(sum)sum.style.display='none';return;}
     var th=THEMES.find(function(t){return t.id===ST.theme;});
     var pkg=LP_PRODUCTS.ready_made_theme;
@@ -2466,11 +2556,12 @@ function syncSpotifyHostPanel(){
       var cv0=document.getElementById('sp-connect-view');
       var pv0=document.getElementById('sp-playlist-view');
       var playing0=document.getElementById('sp-playing-view');
-      var optNote=document.getElementById('sp-theme-optional-note');
       if(cv0)cv0.style.display='block';
       if(pv0)pv0.style.display='none';
       if(playing0)playing0.style.display='none';
-      if(optNote)optNote.style.display='block'; // "Optioneel" label
+      // Toon thema-toelichting: Spotify vereist (niet optioneel)
+      var themeConnNote=document.getElementById('sp-theme-connect-note');
+      if(themeConnNote)themeConnNote.style.display='block';
       return;
     }
   }
@@ -3180,12 +3271,25 @@ function checkSpotifyAuth(){
   spConnectedUI();
   if(window.Spotify&&window.Spotify.Player)initPlayer();
   updMobileAudioBanner();
+  // Verberg top-banner (nu verbonden)
+  updSpotifyCtaBanner();
   if(gotNew){
     var returnScreen='start';
     try{returnScreen=localStorage.getItem('sp_return_screen')||'start';}catch(e){}
     if(returnScreen==='host'&&ST.cards&&ST.cards.length>0){go('host');return;}
-    // Altijd: toon spotify sectie na login
-    showLpSpOk();
+    // Herstel vorige modus als die was opgeslagen vóór login-redirect
+    var preMode=null;
+    try{preMode=localStorage.getItem('sp_pre_mode');}catch(e){}
+    if(preMode==='thema'){
+      // Gebruiker was op kant-en-klaar thema → herstel die flow
+      localStorage.removeItem('sp_pre_mode');
+      setType('thema');
+      var step2=document.getElementById('lp-step2');
+      if(step2)setTimeout(function(){step2.scrollIntoView({behavior:'smooth',block:'start'});},200);
+    } else {
+      // Standaard: spotify flow
+      showLpSpOk();
+    }
   }
 }
 
@@ -3396,6 +3500,8 @@ window.onload=function(){
   updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();updLpCTA();checkOrderAccess();
   // Geef browser even tijd om URL te lezen na redirect
   checkSpotifyAuth();
+  // Top-banner: toon Spotify-connect hint als niet verbonden
+  updSpotifyCtaBanner();
   var taps=0;
   document.querySelectorAll('.bar-logo').forEach(function(el){
     el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
