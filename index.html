@@ -954,54 +954,55 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <!-- Won status chips -->
     <div id="won-status" style="display:none;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:14px;padding:.75rem 1rem;margin-bottom:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem"></div>
 
-    <!-- ══ INKLAPBAAR: SPOTIFY ══ -->
+    <!-- ══ INKLAPBAAR: GEKOZEN MUZIEK ══ -->
     <div class="collapsible-panel" id="col-spotify">
       <button class="col-toggle" onclick="toggleCol('spotify')">
         <span style="display:flex;align-items:center;gap:.5rem">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--green)"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          Spotify &amp; playlist
+          Gekozen muziek
         </span>
         <span class="col-arrow" id="col-arrow-spotify">▼</span>
       </button>
       <div class="col-body" id="col-body-spotify" style="display:none">
         <div class="sp-panel" id="sp-panel" style="margin:0;border-radius:0;border:none;border-top:1px solid var(--bd)">
           <div class="sp-body" id="sp-body" style="padding:.85rem 1rem">
+
+            <!-- Niet verbonden -->
             <div id="sp-connect-view">
-              <!-- Thema-specifieke toelichting (toont als thema mode) -->
               <div id="sp-theme-connect-note" style="display:none;font-size:.78rem;color:var(--mt);background:rgba(29,185,84,.05);border:1px solid rgba(29,185,84,.18);border-radius:10px;padding:.6rem .85rem;margin-bottom:.75rem;line-height:1.55">
                 <strong style="color:var(--green)">Kant-en-klaar thema:</strong> Verbind Spotify om de playlist automatisch af te spelen. De playlist staat al klaar — jij hoeft alleen in te loggen.
               </div>
               <div style="color:var(--mt);font-size:.82rem;margin-bottom:.85rem;line-height:1.6">Verbind Spotify om muziek automatisch af te spelen. Je hebt <strong style="color:var(--tx)">Spotify Premium</strong> nodig.</div>
-              <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" onclick="spotifyLogin()">
-                Verbinden met Spotify
-              </button>
+              <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" onclick="spotifyLogin()">Verbinden met Spotify</button>
             </div>
-            <div id="sp-playlist-view" style="display:none">
-              <div style="color:var(--green);font-size:.8rem;font-weight:600;margin-bottom:.75rem" id="sp-user-name"></div>
-              <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:.5rem">Kies een playlist</div>
-              <div id="sp-playlists" style="max-height:200px;overflow-y:auto;margin-bottom:.75rem"></div>
-              <div id="sp-loading-playlists" style="color:var(--mt);font-size:.8rem;padding:.5rem 0;display:none">Playlists laden...</div>
-              <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:44px" id="sp-load-btn" onclick="loadSelectedPlaylist()" disabled>Laad playlist in Melingo</button>
+
+            <!-- Geen game config (fout / directe URL) -->
+            <div id="sp-no-config-view" style="display:none;padding:.5rem 0">
+              <div style="font-size:.82rem;color:var(--mt);line-height:1.6;margin-bottom:.75rem">Geen playlist gekozen. Ga terug naar de startpagina en kies eerst een thema of playlist.</div>
+              <button class="sp-btn" style="width:100%;justify-content:center" onclick="go('start')">← Terug naar start</button>
             </div>
+
+            <!-- Gekozen muziek — verbonden + playlist geladen -->
             <div id="sp-playing-view" style="display:none">
-              <!-- Thema info — toont alleen als via kant-en-klaar thema -->
-              <div id="sp-theme-info" style="display:none;background:rgba(29,185,84,.06);border:1px solid rgba(29,185,84,.18);border-radius:10px;padding:.55rem .85rem;margin-bottom:.75rem">
-                <div style="font-size:.65rem;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.15rem">Gekozen thema</div>
-                <div id="sp-theme-name" style="font-size:.88rem;font-weight:700;color:var(--tx)">—</div>
-                <div id="sp-theme-track-count" style="font-size:.7rem;color:var(--green);margin-top:.1rem"></div>
-              </div>
-              <!-- Playlist info -->
-              <div id="sp-playlist-info" style="display:flex;align-items:center;gap:.75rem;padding:.6rem 0 .85rem;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:.85rem">
-                <img id="sp-pl-img" src="" alt="" style="width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,.08)"/>
-                <div>
-                  <div style="font-size:.65rem;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.15rem">Gekozen playlist</div>
-                  <div id="sp-pl-name" style="font-size:.88rem;font-weight:700;color:var(--tx)">—</div>
-                  <div id="sp-pl-count" style="font-size:.7rem;color:var(--mt)"></div>
+              <!-- Bron info: thema of eigen playlist -->
+              <div id="sp-source-row" style="margin-bottom:.75rem;padding:.6rem .85rem;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--bd)">
+                <div id="sp-source-badge" style="font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mt);margin-bottom:.2rem">Kant-en-klaar thema</div>
+                <div id="sp-pl-name" style="font-size:.9rem;font-weight:700;color:var(--tx);margin-bottom:.15rem">—</div>
+                <div style="display:flex;flex-wrap:wrap;gap:.4rem;align-items:center">
+                  <span id="sp-pl-count" style="font-size:.72rem;color:var(--mt)"></span>
+                  <span style="font-size:.72rem;color:var(--green);font-weight:600" id="sp-status-badge">Spotify verbonden</span>
+                  <span id="sp-user-name" style="font-size:.72rem;color:var(--mt)"></span>
                 </div>
-                <button class="sp-btn" onclick="showPlaylistPicker()" style="margin-left:auto;font-size:.72rem;white-space:nowrap">Andere playlist</button>
               </div>
+              <!-- Thema extra info (verborgen IDs voor JS compatibiliteit) -->
+              <div id="sp-theme-info" style="display:none">
+                <div id="sp-theme-name" style="display:none"></div>
+                <div id="sp-theme-track-count" style="display:none"></div>
+              </div>
+              <!-- Verborgen playlist img ID (voor JS compatibiliteit) -->
+              <img id="sp-pl-img" src="" alt="" style="display:none"/>
               <!-- Nu spelend -->
-              <div class="sp-now">
+              <div class="sp-now" style="margin-bottom:.5rem">
                 <div class="sp-art"><img id="sp-art-img" src="" alt=""/></div>
                 <div>
                   <div class="sp-track-title" id="sp-track-title">—</div>
@@ -1012,12 +1013,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               <div class="sp-controls">
                 <button class="sp-btn primary" onclick="spPlay()" id="sp-play-btn" style="flex:1;justify-content:center;min-height:40px">▶ Afspelen</button>
                 <button class="sp-btn" onclick="spPause()" style="min-height:40px">⏸</button>
-                <button class="sp-btn" onclick="spNext()" style="min-height:40px">⏭</button>
               </div>
               <div style="margin-top:.65rem;font-size:.72rem;color:var(--mt)">
-                Gespeeld via Spotify: <span id="sp-played-count" style="color:var(--a);font-weight:700">0</span> / <span id="sp-total-count">0</span>
+                Gespeeld: <span id="sp-played-count" style="color:var(--a);font-weight:700">0</span> / <span id="sp-total-count">0</span>
+              </div>
+              <!-- Nummers accordion -->
+              <div style="margin-top:.85rem;border-top:1px solid rgba(255,255,255,.06);padding-top:.75rem">
+                <button id="sp-tracklist-toggle" class="sp-btn" style="width:100%;justify-content:center;font-size:.75rem" onclick="toggleSpTrackList()">▸ Bekijk nummers in dit spel</button>
+                <div id="sp-track-list" style="display:none;margin-top:.65rem;max-height:240px;overflow-y:auto"></div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -1844,21 +1850,27 @@ async function genFromSpotify(){
   try{
     var tracks=await fetchAllPlaylistTracks(SP.selectedPlaylist.id);
     if(!tracks.length){toast('Geen afspeelbare nummers gevonden in deze playlist.');unload();return;}
-    // Store tracks in SP for playback sync
+    // Shuffle eenmalig — volgorde wordt bewaard in SP.tracks EN ST.songs (nooit opnieuw shufflen)
     SP.tracks=shuf(tracks);
     SP.trackIdx=-1;
-    // Convert to Melingo format
+    // Songs met URI's + id zodat nextSong() exact de juiste track afspeelt
     ST.songs=SP.tracks.map(function(t){
-      return{t:t.name,a:t.artists.map(function(ar){return ar.name;}).join(', '),uri:t.uri};
+      return{t:t.name,a:t.artists.map(function(ar){return ar.name;}).join(', '),uri:t.uri,id:t.id||t.uri};
     });
-    ST.shuffled=ST.songs.slice();
+    ST.shuffled=ST.songs.slice(); // zelfde volgorde — NIET opnieuw shufflen
     ST.pidx=-1;
-    // Sla playlist op zodat hostscherm hem kent
+    var img=SP.selectedPlaylist.images&&SP.selectedPlaylist.images[0]?SP.selectedPlaylist.images[0].url:'';
     ST.spotifyPlaylist={
       id:SP.selectedPlaylist.id,
       name:SP.selectedPlaylist.name,
-      img:SP.selectedPlaylist.images&&SP.selectedPlaylist.images[0]?SP.selectedPlaylist.images[0].url:''
+      img:img
     };
+    // Vul centrale game config
+    populateActiveGameConfig({
+      source:'custom_spotify',
+      playlistId:SP.selectedPlaylist.id,
+      playlistName:SP.selectedPlaylist.name,
+    });
     trackAnalytics('Spotify: '+SP.selectedPlaylist.name);
     mkCards();buildPreviews();saveSession();
     unload();
@@ -2056,7 +2068,10 @@ function resetHost(){
 }
 
 function initHost(){
-  if(ST.pidx===-1)ST.shuffled=shuf(ST.songs);
+  // Niet opnieuw shufflen als de nummers URI's hebben (Spotify-bron) — URI's moeten in vaste volgorde blijven
+  var hasuris=ST.songs&&ST.songs.length>0&&!!ST.songs[0].uri;
+  if(ST.pidx===-1&&!hasuris)ST.shuffled=shuf(ST.songs);
+  else if(ST.pidx===-1&&hasuris&&(!ST.shuffled||ST.shuffled.length!==ST.songs.length))ST.shuffled=ST.songs.slice();
   ST.paused=false;clearInterval(ST.tint);ST.tint=null;
   ST.wonCategories={};
   ST.bingoHistory=[];
@@ -2129,12 +2144,9 @@ function nextSong(){
   saveSession();
   // Check for missed bingos after each song
   if(ST.missedBingoAlert)checkAllMissedBingos();
-  // Sync Spotify: play the matching track if connected
-  if(SP.accessToken&&SP.tracks&&SP.tracks.length>0){
-    var spTrack=SP.tracks[ST.pidx];
-    if(spTrack&&spTrack.uri&&SP.deviceId){
-      spPlayTrack(spTrack.uri);
-    }
+  // Sync Spotify: speel exact het nummer dat de UI toont (URI uit ST.shuffled — single source of truth)
+  if(SP.accessToken&&SP.deviceId){
+    playTrackByIndex(ST.pidx);
   }
 }
 
@@ -2146,11 +2158,145 @@ async function spPlayTrack(uri){
       headers:{'Authorization':'Bearer '+SP.accessToken,'Content-Type':'application/json'},
       body:JSON.stringify({uris:[uri],position_ms:posMs})
     });
-    // Update Spotify played counter
     var el=document.getElementById('sp-played-count');
     if(el)el.textContent=ST.pidx+1;
-    console.log('Spotify speelt:', uri);
-  }catch(e){console.error('Spotify play fout:',e);}
+    console.log('[Melingo] spPlayTrack | uri:'+uri+' | pidx:'+ST.pidx);
+  }catch(e){console.error('[Melingo] spPlayTrack fout:',e);}
+}
+
+/* ── Centrale playback via activeGameConfig (single source of truth) ── */
+async function spotifyPlayUri(uri){
+  if(!SP.accessToken||!SP.deviceId){
+    console.warn('[Melingo] spotifyPlayUri | geen token of device | uri:'+uri);
+    return false;
+  }
+  try{
+    var posMs=(ST.startPos||0)*1000;
+    await spFetch('https://api.spotify.com/v1/me/player/play?device_id='+SP.deviceId,{
+      method:'PUT',
+      headers:{'Authorization':'Bearer '+SP.accessToken,'Content-Type':'application/json'},
+      body:JSON.stringify({uris:[uri],position_ms:posMs})
+    });
+    console.log('[Melingo] spotifyPlayUri | requested:'+uri);
+    // Optioneel: verifieer na 800ms of Spotify ook echt dit nummer speelt
+    setTimeout(function(){
+      spFetch('https://api.spotify.com/v1/me/player/currently-playing').then(function(r){
+        if(r.status===200)return r.json();
+      }).then(function(d){
+        if(!d||!d.item)return;
+        var match=(d.item.uri===uri);
+        console.log('[Melingo] playback verify | UI uri:'+uri+' | Spotify uri:'+d.item.uri+' | match:'+match);
+        if(!match){
+          console.warn('[Melingo] Playback mismatch! UI track differs from Spotify current track — retrying');
+          spFetch('https://api.spotify.com/v1/me/player/play?device_id='+SP.deviceId,{
+            method:'PUT',
+            headers:{'Authorization':'Bearer '+SP.accessToken,'Content-Type':'application/json'},
+            body:JSON.stringify({uris:[uri]})
+          }).catch(function(){});
+        }
+      }).catch(function(){});
+    },800);
+    return true;
+  }catch(e){
+    console.error('[Melingo] spotifyPlayUri fout:',e.message);
+    return false;
+  }
+}
+
+async function playTrackByIndex(index){
+  // Gebruik ST.shuffled als bron (bevat .uri per nummer)
+  var song=ST.shuffled[index];
+  if(!song){
+    console.warn('[Melingo] playTrackByIndex | geen song op index '+index);
+    return;
+  }
+  var uri=song.uri||(activeGameConfig.tracks[index]&&activeGameConfig.tracks[index].uri);
+  if(!uri){
+    console.warn('[Melingo] playTrackByIndex | geen URI voor index '+index+' | song:'+song.t);
+    return;
+  }
+  playbackState.currentIndex=index;
+  playbackState.currentTrack=song;
+
+  console.log('[Melingo] playTrackByIndex | index:'+index+' | UI track:'+song.t+' | uri:'+uri
+    +' | source:'+activeGameConfig.source+' | playlistId:'+activeGameConfig.playlistId
+    +' | trackCount:'+activeGameConfig.trackCount);
+
+  if(!SP.accessToken||!SP.deviceId){return;}
+
+  // Shuffle UIT zodat Spotify niet zelf van volgorde wisselt
+  spFetch('https://api.spotify.com/v1/me/player/shuffle?state=false&device_id='+SP.deviceId,{method:'PUT'}).catch(function(){});
+
+  var ok=await spotifyPlayUri(uri);
+  if(ok){
+    playbackState.isPlaying=true;
+    if(song.id&&!playbackState.playedTrackIds.includes(song.id)){
+      playbackState.playedTrackIds.push(song.id);
+    }
+    var el=document.getElementById('sp-played-count');
+    if(el)el.textContent=index+1;
+  }
+}
+
+function populateActiveGameConfig(opts){
+  activeGameConfig.source=opts.source||null;
+  activeGameConfig.playlistId=opts.playlistId||null;
+  activeGameConfig.playlistName=opts.playlistName||null;
+  activeGameConfig.themeId=opts.themeId||null;
+  activeGameConfig.themeName=opts.themeName||null;
+  activeGameConfig.players=opts.players||ST.players||0;
+  activeGameConfig.mode=opts.mode||ST.mode||null;
+  // Bouw tracks array uit SP.tracks (rijk object met .uri, .name, .artists, .album)
+  if(SP.tracks&&SP.tracks.length){
+    activeGameConfig.tracks=SP.tracks.map(function(t){
+      return{
+        id:t.id||t.uri,
+        uri:t.uri,
+        name:t.name,
+        artist:t.artists?t.artists.map(function(a){return a.name;}).join(', '):'',
+        image:t.album&&t.album.images&&t.album.images[0]?t.album.images[0].url:'',
+        duration_ms:t.duration_ms||0
+      };
+    });
+    activeGameConfig.trackCount=activeGameConfig.tracks.length;
+  } else {
+    activeGameConfig.tracks=[];
+    activeGameConfig.trackCount=0;
+  }
+  console.log('[Melingo] activeGameConfig gevuld | source:'+activeGameConfig.source+' | playlistId:'+activeGameConfig.playlistId
+    +' | name:'+(activeGameConfig.themeName||activeGameConfig.playlistName)
+    +' | trackCount:'+activeGameConfig.trackCount);
+}
+
+function toggleSpTrackList(){
+  var list=document.getElementById('sp-track-list');
+  var btn=document.getElementById('sp-tracklist-toggle');
+  if(!list)return;
+  var open=list.style.display!=='none';
+  list.style.display=open?'none':'block';
+  if(btn)btn.textContent=(open?'▸':'▾')+' Bekijk nummers in dit spel';
+  if(!open)renderSpTrackList();
+}
+
+function renderSpTrackList(){
+  var list=document.getElementById('sp-track-list');
+  if(!list||list.style.display==='none')return;
+  var tracks=activeGameConfig.tracks;
+  if(!tracks||!tracks.length){
+    list.innerHTML='<div style="color:var(--mt);font-size:.78rem;padding:.35rem 0">Geen nummers beschikbaar.</div>';
+    return;
+  }
+  list.innerHTML=tracks.map(function(t,i){
+    var played=playbackState.playedTrackIds.includes(t.id);
+    var isCurrent=(playbackState.currentIndex===i);
+    return'<div style="display:flex;align-items:center;gap:.5rem;padding:.3rem .1rem;border-bottom:1px solid rgba(255,255,255,.04);opacity:'+(played?'.5':'1')+'">'
+      +(t.image?'<img src="'+t.image+'" style="width:28px;height:28px;border-radius:4px;object-fit:cover;flex-shrink:0"/>':'<div style="width:28px;height:28px;border-radius:4px;background:rgba(255,255,255,.07);flex-shrink:0"></div>')
+      +'<div style="flex:1;min-width:0"><div style="font-size:.75rem;font-weight:'+(isCurrent?'700':'500')+';color:'+(isCurrent?'var(--green)':'var(--tx)')+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'
+      +(isCurrent?'▶ ':'')+esc(t.name)+'</div>'
+      +'<div style="font-size:.65rem;color:var(--mt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(t.artist)+'</div></div>'
+      +(played?'<span style="font-size:.6rem;color:var(--green);font-weight:700">✓</span>':'')
+      +'</div>';
+  }).join('');
 }
 function togglePause(){
   ST.paused=!ST.paused;
@@ -2546,79 +2692,91 @@ function deleteNamedSession(name){
 function syncSpotifyHostPanel(){
   var body=document.getElementById('col-body-spotify');
   var arrow=document.getElementById('col-arrow-spotify');
-
-  // Case 1: thema geselecteerd maar Spotify niet verbonden — toon connect prompt (optioneel)
-  if(!SP.accessToken&&ST.theme){
-    var th0=THEMES.filter(function(t){return t.id===ST.theme;})[0];
-    if(th0&&th0.spotifyId){
-      if(body)body.style.display='block';
-      if(arrow)arrow.classList.add('open');
-      var cv0=document.getElementById('sp-connect-view');
-      var pv0=document.getElementById('sp-playlist-view');
-      var playing0=document.getElementById('sp-playing-view');
-      if(cv0)cv0.style.display='block';
-      if(pv0)pv0.style.display='none';
-      if(playing0)playing0.style.display='none';
-      // Toon thema-toelichting: Spotify vereist (niet optioneel)
-      var themeConnNote=document.getElementById('sp-theme-connect-note');
-      if(themeConnNote)themeConnNote.style.display='block';
-      return;
-    }
-  }
-
-  // Case 2: thema geselecteerd, Spotify verbonden, playlist nog NIET geladen → auto-load
-  if(SP.accessToken&&ST.theme&&!ST.spotifyPlaylist){
-    var th=THEMES.filter(function(t){return t.id===ST.theme;})[0];
-    if(th&&th.spotifyId){
-      if(body)body.style.display='block';
-      if(arrow)arrow.classList.add('open');
-      // Laad thema playlist op de achtergrond, sync daarna opnieuw
-      loadSpotifyPlaylistForTheme(th.spotifyId,th.name).then(function(){
-        syncSpotifyHostPanel();
-      });
-      return;
-    }
-  }
-
-  if(!ST.spotifyPlaylist||!SP.accessToken)return;
-
-  // Case 3: playlist geladen (eigen of thema) → toon playing view direct
-  if(body)body.style.display='block';
-  if(arrow)arrow.classList.add('open');
   var cv=document.getElementById('sp-connect-view');
-  var pv=document.getElementById('sp-playlist-view');
-  var playing=document.getElementById('sp-playing-view');
-  if(cv)cv.style.display='none';
-  if(pv)pv.style.display='none';
-  if(playing)playing.style.display='block';
+  var pv=document.getElementById('sp-playing-view');
+  var nc=document.getElementById('sp-no-config-view');
 
-  // Vul playlist info in
-  var plImg=document.getElementById('sp-pl-img');
-  var plName=document.getElementById('sp-pl-name');
-  var plCount=document.getElementById('sp-pl-count');
-  if(plImg)plImg.src=ST.spotifyPlaylist.img||'';
-  if(plName)plName.textContent=ST.spotifyPlaylist.name;
-  if(plCount)plCount.textContent=(SP.tracks&&SP.tracks.length?SP.tracks.length:'?')+' nummers';
-  if(!SP.selectedPlaylist)SP.selectedPlaylist={id:ST.spotifyPlaylist.id,name:ST.spotifyPlaylist.name};
-  var tot=document.getElementById('sp-total-count');
-  if(tot)tot.textContent=SP.tracks&&SP.tracks.length?SP.tracks.length:'?';
+  function showOnly(which){
+    if(cv)cv.style.display=(which==='connect')?'block':'none';
+    if(pv)pv.style.display=(which==='playing')?'block':'none';
+    if(nc)nc.style.display=(which==='noconfig')?'block':'none';
+    if(body)body.style.display='block';
+    if(arrow)arrow.classList.add('open');
+  }
+
+  // Case 1: Spotify niet verbonden
+  if(!SP.accessToken){
+    // Thema flow: toon connect prompt met uitleg
+    var themeConnNote=document.getElementById('sp-theme-connect-note');
+    if(themeConnNote)themeConnNote.style.display=ST.theme?'block':'none';
+    showOnly('connect');
+    console.log('[Melingo] hostpanel | Spotify niet verbonden | usesExistingGameConfig:false | playlistPickerVisible:false');
+    return;
+  }
+
+  // Case 2: Spotify verbonden, activeGameConfig heeft tracks → toon gekozen muziek
+  if(activeGameConfig.tracks&&activeGameConfig.tracks.length>0){
+    renderChosenMusicPanel();
+    showOnly('playing');
+    console.log('[Melingo] hostpanel | source:'+activeGameConfig.source+' | playlistId:'+activeGameConfig.playlistId
+      +' | name:'+(activeGameConfig.themeName||activeGameConfig.playlistName)
+      +' | trackCount:'+activeGameConfig.trackCount+' | usesExistingGameConfig:true | playlistPickerVisible:false');
+    return;
+  }
+
+  // Case 3: Spotify verbonden, geen activeGameConfig tracks, maar ST.spotifyPlaylist beschikbaar → auto-load
+  if(ST.spotifyPlaylist&&ST.spotifyPlaylist.id){
+    var plId=ST.spotifyPlaylist.id;
+    var plName=ST.spotifyPlaylist.name||'Playlist';
+    var isTheme=!!ST.theme;
+    var th=isTheme?THEMES.filter(function(t){return t.id===ST.theme;})[0]:null;
+    // Auto-load tracks
+    loadSpotifyPlaylistForTheme(plId,plName).then(function(){
+      syncSpotifyHostPanel();
+    });
+    console.log('[Melingo] hostpanel | auto-loading playlist | id:'+plId+' | usesExistingGameConfig:true | playlistPickerVisible:false');
+    return;
+  }
+
+  // Case 4: Spotify verbonden, maar geen playlist bekend → foutmelding (geen picker!)
+  showOnly('noconfig');
+  console.log('[Melingo] hostpanel | geen playlist geconfigureerd | usesExistingGameConfig:false | playlistPickerVisible:false');
+}
+
+function renderChosenMusicPanel(){
+  var cfg=activeGameConfig;
+  var trackCount=cfg.trackCount||(SP.tracks&&SP.tracks.length)||0;
+  var displayName=SP.me&&SP.me.display_name?SP.me.display_name:'';
+
+  // Source badge
+  var srcBadge=document.getElementById('sp-source-badge');
+  if(srcBadge){
+    srcBadge.textContent=cfg.source==='ready_made_theme'?'Kant-en-klaar thema':'Eigen Spotify-playlist';
+    srcBadge.style.color=cfg.source==='ready_made_theme'?'var(--green)':'var(--a)';
+  }
+
+  // Naam
+  var nameEl=document.getElementById('sp-pl-name');
+  if(nameEl)nameEl.textContent=cfg.themeName||cfg.playlistName||ST.spotifyPlaylist&&ST.spotifyPlaylist.name||'—';
+
+  // Aantal nummers
+  var countEl=document.getElementById('sp-pl-count');
+  if(countEl)countEl.textContent=trackCount+' nummers in dit spel';
+
+  // Spotify user
+  var userEl=document.getElementById('sp-user-name');
+  if(userEl)userEl.textContent=displayName?'als '+displayName:'';
+
+  // Status badge
   var badge=document.getElementById('sp-status-badge');
   if(badge){badge.textContent='Spotify verbonden';badge.style.color='var(--green)';}
 
-  // Thema-info panel: toon bij thema-flow
-  var themeInfo=document.getElementById('sp-theme-info');
-  var themeNameEl=document.getElementById('sp-theme-name');
-  var themeCountEl=document.getElementById('sp-theme-track-count');
-  if(themeInfo){
-    if(ST.theme){
-      var th2=THEMES.filter(function(t){return t.id===ST.theme;})[0];
-      themeInfo.style.display='block';
-      if(themeNameEl)themeNameEl.textContent=th2?th2.name:ST.theme;
-      if(themeCountEl)themeCountEl.textContent='Playlist geladen: '+(SP.tracks&&SP.tracks.length?SP.tracks.length:'40')+' nummers';
-    }else{
-      themeInfo.style.display='none';
-    }
-  }
+  // Totaal teller
+  var tot=document.getElementById('sp-total-count');
+  if(tot)tot.textContent=trackCount||'?';
+
+  // Track list vullen
+  renderSpTrackList();
 }
 
 function toggleCol(id){
@@ -2683,15 +2841,25 @@ async function loadSpotifyPlaylistForTheme(playlistId, themeName){
     if(!tracks.length)return;
     SP.tracks=shuf(tracks);
     SP.trackIdx=-1;
+    // Songs met URI's zodat nextSong() exact de juiste track kan afspelen
     ST.songs=SP.tracks.map(function(t){
-      return{t:t.name,a:t.artists.map(function(ar){return ar.name;}).join(', '),uri:t.uri};
+      return{t:t.name,a:t.artists.map(function(ar){return ar.name;}).join(', '),uri:t.uri,id:t.id||t.uri};
     });
+    ST.shuffled=ST.songs.slice(); // zelfde volgorde als SP.tracks — NIET opnieuw shufflen
     var plResp=await spFetch('https://api.spotify.com/v1/playlists/'+playlistId+'?fields=images');
     var plData=await plResp.json();
     var img=plData.images&&plData.images[0]?plData.images[0].url:'';
     ST.spotifyPlaylist={id:playlistId,name:themeName,img:img};
     SP.selectedPlaylist={id:playlistId,name:themeName,images:[{url:img}]};
-    console.log('[Melingo] loadSpotifyPlaylistForTheme klaar | "'+themeName+'" | '+SP.tracks.length+' nummers');
+    // Vul centrale game config
+    populateActiveGameConfig({
+      source: ST.theme?'ready_made_theme':'custom_spotify',
+      playlistId: playlistId,
+      playlistName: themeName,
+      themeId: ST.theme||null,
+      themeName: ST.theme?(THEMES.filter(function(t){return t.id===ST.theme;})[0]||{}).name||themeName:null,
+    });
+    console.log('[Melingo] loadSpotifyPlaylistForTheme klaar | "'+themeName+'" | '+SP.tracks.length+' nummers | source:'+activeGameConfig.source);
   }catch(e){console.warn('[Melingo] loadSpotifyPlaylistForTheme mislukt:',e.message);}
 }
 
@@ -2914,11 +3082,33 @@ var SP = {
   deviceId: null,
   playlists: [],
   selectedPlaylist: null,
-  tracks: [],        // full track list from playlist
+  tracks: [],        // full track list from playlist (with .uri, .name, .artists)
   trackIdx: -1,      // current track index
   playing: false,
   progressTimer: null,
   audioActivated: false, // mobiel: expliciete gebruikersactie nodig voor audio
+  me: null,          // Spotify user profile
+};
+
+// Centrale game config — gevuld vóór het hostscherm, NOOIT opnieuw gevraagd in hostscherm
+var activeGameConfig = {
+  source: null,         // 'ready_made_theme' | 'custom_spotify' | 'eigen' | null
+  playlistId: null,
+  playlistName: null,
+  themeId: null,
+  themeName: null,
+  tracks: [],           // [{id, uri, name, artist, image, duration_ms}] — SINGLE SOURCE OF TRUTH
+  trackCount: 0,
+  players: 0,
+  mode: null,
+};
+
+// Playback state — UI track en Spotify audio moeten altijd synchroon zijn
+var playbackState = {
+  currentIndex: -1,
+  currentTrack: null,   // activeGameConfig.tracks[currentIndex]
+  isPlaying: false,
+  playedTrackIds: [],
 };
 
 /* ── Auth ── */
@@ -2929,13 +3119,16 @@ function spotifyLogin(){
 }
 
 function spotifyLogout(){
-  SP.accessToken=null;SP.refreshToken=null;SP.player=null;SP.deviceId=null;
+  SP.accessToken=null;SP.refreshToken=null;SP.player=null;SP.deviceId=null;SP.me=null;
   if(SP.progressTimer)clearInterval(SP.progressTimer);
-  document.getElementById('sp-connect-view').style.display='block';
-  document.getElementById('sp-playlist-view').style.display='none';
-  document.getElementById('sp-playing-view').style.display='none';
-  document.getElementById('sp-status-badge').textContent='Niet verbonden';
-  document.getElementById('sp-status-badge').style.color='var(--mt)';
+  var cv=document.getElementById('sp-connect-view');
+  var pv=document.getElementById('sp-playing-view');
+  var nc=document.getElementById('sp-no-config-view');
+  if(cv)cv.style.display='block';
+  if(pv)pv.style.display='none';
+  if(nc)nc.style.display='none';
+  var badge=document.getElementById('sp-status-badge');
+  if(badge){badge.textContent='Niet verbonden';badge.style.color='var(--mt)';}
   try{localStorage.removeItem('sp_tokens');}catch(e){}
 }
 
@@ -3041,23 +3234,20 @@ function initPlayer(){
 }
 
 function spConnectedUI(){
-  // Open the Spotify collapsible panel so user can see it
+  // Open the Spotify collapsible panel
   var body=document.getElementById('col-body-spotify');
   var arrow=document.getElementById('col-arrow-spotify');
   if(body&&body.style.display==='none'){body.style.display='block';if(arrow)arrow.classList.add('open');}
-  var badge=document.getElementById('sp-status-badge');
-  if(badge){badge.textContent='Spotify verbonden';badge.style.color='var(--green)';}
   var panel=document.getElementById('sp-panel');
   if(panel)panel.classList.add('sp-connected');
-  var cv=document.getElementById('sp-connect-view');
-  var pv=document.getElementById('sp-playlist-view');
-  if(cv)cv.style.display='none';
-  if(pv)pv.style.display='block';
-  // Load user name + playlists immediately
+  // Haal Spotify profiel op voor displayName
   spFetch('https://api.spotify.com/v1/me').then(function(r){return r.json();}).then(function(d){
-    document.getElementById('sp-user-name').textContent='Ingelogd als '+d.display_name;
-  });
-  loadPlaylists();
+    SP.me=d;
+    var unEl=document.getElementById('sp-user-name');
+    if(unEl&&d.display_name)unEl.textContent='als '+d.display_name;
+  }).catch(function(){});
+  // Laat syncSpotifyHostPanel beslissen welke view te tonen — NOOIT playlist picker in hostscherm
+  syncSpotifyHostPanel();
 }
 
 function showSpError(msg){
@@ -3189,8 +3379,8 @@ async function loadSelectedPlaylist(){
       img:SP.selectedPlaylist.images&&SP.selectedPlaylist.images[0]?SP.selectedPlaylist.images[0].url:''
     };
     saveSession();
-    // Switch to playing view
-    document.getElementById('sp-playlist-view').style.display='none';
+    // Switch to playing view (sp-playlist-view bestaat niet meer in hostscherm)
+    var _pv=document.getElementById('sp-playlist-view');if(_pv)_pv.style.display='none';
     document.getElementById('sp-playing-view').style.display='block';
     document.getElementById('sp-total-count').textContent=SP.tracks.length;
     // Toon playlist info
@@ -3213,18 +3403,12 @@ async function loadSelectedPlaylist(){
 /* ── Playback ── */
 async function spPlay(){
   if(!SP.deviceId){showSpError('Geen actief apparaat. Herlaad de pagina.');return;}
-  if(SP.trackIdx===-1)SP.trackIdx=0;
-  var track=SP.tracks[SP.trackIdx];
-  if(!track)return;
-  try{
-    await spFetch('https://api.spotify.com/v1/me/player/play?device_id='+SP.deviceId,{
-      method:'PUT',
-      headers:{'Authorization':'Bearer '+SP.accessToken,'Content-Type':'application/json'},
-      body:JSON.stringify({uris:[track.uri]})
-    });
-    SP.playing=true;
-    document.getElementById('sp-play-btn').textContent='▶ Speelt';
-  }catch(e){showSpError('Kon niet afspelen: '+e.message);}
+  // Gebruik ST.pidx als index — ST.shuffled en activeGameConfig.tracks zijn de single source of truth
+  var idx=ST.pidx>=0?ST.pidx:0;
+  await playTrackByIndex(idx);
+  SP.playing=true;
+  var btn=document.getElementById('sp-play-btn');
+  if(btn)btn.textContent='▶ Speelt';
 }
 
 async function spPause(){
@@ -3235,13 +3419,8 @@ async function spPause(){
 }
 
 async function spNext(){
-  // Move to next track in SP.tracks and trigger nextSong in Melingo
-  SP.trackIdx++;
-  if(SP.trackIdx>=SP.tracks.length){
-    toast('Alle nummers gespeeld!');return;
-  }
-  await spPlay();
-  nextSong();  // advance Melingo host screen
+  // spNext is nu gealiasd aan nextSong() — de hostscherm knop is de enige bron van waarheid
+  nextSong();
 }
 
 function updateNowPlaying(state){
@@ -3429,11 +3608,14 @@ async function startGen(){
       ST.spotifyPlaylist={id:th.spotifyId,name:th.name,img:''};
       var existingCount=SP.selectedPlaylist&&SP.selectedPlaylist.id===th.spotifyId?SP.selectedPlaylist._count:0;
       SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:existingCount||0};
-      // Awaiten zodat SP.tracks klaar is als het hostscherm opent
+      // loadSpotifyPlaylistForTheme vult ook ST.songs/ST.shuffled/activeGameConfig
       await loadSpotifyPlaylistForTheme(th.spotifyId,th.name);
+      // ST.songs/shuffled zijn nu gezet door loadSpotifyPlaylistForTheme (met URI's, correcte volgorde)
+    } else {
+      // Geen Spotify: gebruik embedded songs (zonder URI's, shuffle OK)
+      ST.songs=shuf(th.songs.map(function(s){return{t:s.t,a:s.a};}));
+      ST.shuffled=ST.songs.slice();
     }
-    ST.songs=shuf(th.songs.map(function(s){return{t:s.t,a:s.a};}));
-    ST.shuffled=ST.songs.slice();
     ST.pidx=-1;
     trackAnalytics('Thema:'+th.id);
     mkCards();buildPreviews();saveSession();go('cards');
