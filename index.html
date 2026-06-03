@@ -825,7 +825,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <button class="btn bs" onclick="reshuffle()">Schud opnieuw</button>
       <button class="btn bgr keep" onclick="dlPDF(true)">Eco PDF</button>
       <button class="btn bpu keep" onclick="dlPDF(false)">Kleur PDF</button>
-      <button class="btn bp keep" onclick="go('host')">Host-scherm</button>
+      <button class="btn bp keep" id="cards-host-btn" onclick="go('host')">Host-scherm</button>
     </div>
   </div>
   <div class="scroll">
@@ -954,86 +954,38 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <!-- Won status chips -->
     <div id="won-status" style="display:none;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:14px;padding:.75rem 1rem;margin-bottom:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem"></div>
 
-    <!-- ══ INKLAPBAAR: GEKOZEN MUZIEK ══ -->
-    <div class="collapsible-panel" id="col-spotify">
-      <button class="col-toggle" onclick="toggleCol('spotify')">
-        <span style="display:flex;align-items:center;gap:.5rem">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--green)"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          Gekozen muziek
-        </span>
-        <span class="col-arrow" id="col-arrow-spotify">▼</span>
-      </button>
-      <div class="col-body" id="col-body-spotify" style="display:none">
-        <div class="sp-panel" id="sp-panel" style="margin:0;border-radius:0;border:none;border-top:1px solid var(--bd)">
-          <div class="sp-body" id="sp-body" style="padding:.85rem 1rem">
-
-            <!-- Echt geen muziek: alleen tonen als er helemaal geen songs zijn -->
-            <div id="sp-no-config-view" style="display:none;padding:.5rem 0">
-              <div style="font-size:.82rem;color:var(--mt);line-height:1.6;margin-bottom:.75rem">Geen muziek gevonden. Ga terug naar de startpagina en kies eerst een thema of playlist.</div>
-              <button class="sp-btn" style="width:100%;justify-content:center" onclick="go('start')">← Terug naar start</button>
-            </div>
-
-            <!-- Gekozen muziek — altijd tonen zodra er songs zijn -->
-            <div id="sp-playing-view" style="display:none">
-
-              <!-- Bron info: thema of eigen playlist -->
-              <div id="sp-source-row" style="margin-bottom:.75rem;padding:.6rem .85rem;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--bd)">
-                <div id="sp-source-badge" style="font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mt);margin-bottom:.2rem">Gekozen muziek</div>
-                <div id="sp-pl-name" style="font-size:.9rem;font-weight:700;color:var(--tx);margin-bottom:.15rem">—</div>
-                <div id="sp-pl-count" style="font-size:.72rem;color:var(--mt);margin-bottom:.15rem"></div>
-                <div style="font-size:.68rem;color:rgba(29,185,84,.85);font-style:italic">Deze muziek is geladen vanaf het startscherm</div>
-              </div>
-
-              <!-- Spotify: verbonden status of inline connect prompt -->
-              <div id="sp-spotify-status-row" style="display:none;margin-bottom:.75rem;padding:.5rem .85rem;border-radius:10px;background:rgba(29,185,84,.05);border:1px solid rgba(29,185,84,.18)">
-                <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
-                  <span id="sp-status-badge" style="font-size:.75rem;color:var(--green);font-weight:600">Spotify verbonden</span>
-                  <span id="sp-user-name" style="font-size:.72rem;color:var(--mt)"></span>
-                </div>
-              </div>
-              <div id="sp-connect-inline" style="display:none;margin-bottom:.75rem;padding:.6rem .85rem;border-radius:10px;background:rgba(242,64,106,.05);border:1px solid rgba(242,64,106,.2)">
-                <div id="sp-theme-connect-note" style="display:none;font-size:.75rem;color:var(--mt);margin-bottom:.45rem;line-height:1.5">
-                  <strong style="color:var(--green)">Kant-en-klaar thema:</strong> Verbind Spotify voor audio-afspelen. De playlist staat al klaar.
-                </div>
-                <div style="font-size:.75rem;color:var(--mt);margin-bottom:.55rem;line-height:1.5">Verbind Spotify om de nummers automatisch af te spelen tijdens het bingo.</div>
-                <button class="sp-btn primary" style="width:100%;justify-content:center;min-height:40px" onclick="spotifyLogin()">Verbinden met Spotify</button>
-              </div>
-
-              <!-- Verborgen IDs voor JS-compatibiliteit -->
-              <div id="sp-connect-view" style="display:none"></div>
-              <div id="sp-theme-info" style="display:none"><div id="sp-theme-name"></div><div id="sp-theme-track-count"></div></div>
-              <img id="sp-pl-img" src="" alt="" style="display:none"/>
-
-              <!-- Spotify audio sectie: alleen tonen als verbonden -->
-              <div id="sp-audio-section" style="display:none">
-                <div class="sp-now" style="margin-bottom:.5rem">
-                  <div class="sp-art"><img id="sp-art-img" src="" alt=""/></div>
-                  <div>
-                    <div class="sp-track-title" id="sp-track-title">—</div>
-                    <div class="sp-track-artist" id="sp-track-artist"></div>
-                  </div>
-                </div>
-                <div class="sp-progress"><div class="sp-progress-fill" id="sp-prog" style="width:0%"></div></div>
-                <div class="sp-controls">
-                  <button class="sp-btn primary" onclick="spPlay()" id="sp-play-btn" style="flex:1;justify-content:center;min-height:40px">▶ Afspelen</button>
-                  <button class="sp-btn" onclick="spPause()" style="min-height:40px">⏸</button>
-                </div>
-                <div style="margin-top:.65rem;font-size:.72rem;color:var(--mt)">
-                  Gespeeld: <span id="sp-played-count" style="color:var(--a);font-weight:700">0</span> / <span id="sp-total-count">0</span>
-                </div>
-              </div>
-
-              <!-- Nummers accordion — altijd tonen -->
-              <div style="margin-top:.85rem;border-top:1px solid rgba(255,255,255,.06);padding-top:.75rem">
-                <button id="sp-tracklist-toggle" class="sp-btn" style="width:100%;justify-content:center;font-size:.75rem" onclick="toggleSpTrackList()">▸ Bekijk nummers in dit spel</button>
-                <div id="sp-track-list" style="display:none;margin-top:.65rem;max-height:280px;overflow-y:auto"></div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
+    <!-- Verborgen Spotify-elementen — geen zichtbare UI, alleen voor JS-compatibiliteit -->
+    <div style="display:none" aria-hidden="true">
+      <div id="col-body-spotify"></div>
+      <div id="col-arrow-spotify"></div>
+      <div id="sp-panel"></div>
+      <div id="sp-body"></div>
+      <div id="sp-no-config-view"></div>
+      <div id="sp-playing-view"></div>
+      <div id="sp-connect-view"></div>
+      <div id="sp-source-row"></div>
+      <div id="sp-source-badge"></div>
+      <div id="sp-pl-name"></div>
+      <div id="sp-pl-count"></div>
+      <div id="sp-spotify-status-row"></div>
+      <div id="sp-status-badge"></div>
+      <div id="sp-user-name"></div>
+      <div id="sp-connect-inline"></div>
+      <div id="sp-theme-connect-note"></div>
+      <div id="sp-theme-info"></div>
+      <div id="sp-theme-name"></div>
+      <div id="sp-theme-track-count"></div>
+      <img id="sp-pl-img" src="" alt=""/>
+      <div id="sp-audio-section"></div>
+      <div id="sp-art-img-wrap"><img id="sp-art-img" src="" alt=""/></div>
+      <div id="sp-track-title"></div>
+      <div id="sp-track-artist"></div>
+      <div id="sp-prog"></div>
+      <div id="sp-play-btn"></div>
+      <div id="sp-played-count"></div>
+      <div id="sp-total-count"></div>
+      <div id="sp-tracklist-toggle"></div>
+      <div id="sp-track-list"></div>
     </div>
 
     <!-- ══ INKLAPBAAR: BINGO-INSTELLINGEN ══ -->
@@ -1273,7 +1225,14 @@ function toast(m){var t=document.getElementById('toast');t.textContent=m;t.class
 function load(t,p){document.getElementById('ltxt').textContent=t||'Even geduld...';document.getElementById('load').classList.add('on');if(p!==undefined)document.getElementById('lprogf').style.width=p+'%';}
 function setLP(p){document.getElementById('lprogf').style.width=p+'%';}
 function unload(){document.getElementById('load').classList.remove('on');document.getElementById('lprogf').style.width='0%';}
-function go(s){document.querySelectorAll('.screen').forEach(function(x){x.classList.remove('active');});document.getElementById('screen-'+s).classList.add('active');if(s==='host'){initHost();setTimeout(syncSpotifyHostPanel,100);}if(s==='admin')buildAdmin();window.scrollTo(0,0);}
+function go(s){
+  document.querySelectorAll('.screen').forEach(function(x){x.classList.remove('active');});
+  document.getElementById('screen-'+s).classList.add('active');
+  if(s==='host'){initHost();setTimeout(syncSpotifyHostPanel,100);}
+  if(s==='cards'){updCardsScreen();}
+  if(s==='admin')buildAdmin();
+  window.scrollTo(0,0);
+}
 
 /* ══ REVIEWS CAROUSEL ══ */
 var _rIdx=0, _rTimer=null, _rAll=[];
@@ -1330,6 +1289,8 @@ function setType(mode){
   if(mode==='eigen'){
     if(lbl)lbl.textContent='Jouw nummers';
     document.getElementById('lp-inp-eigen').style.display='block';
+    // Alleen PDF: geen Spotify nodig, verberg top-banner
+    updSpotifyCtaBanner();
   } else if(mode==='thema'){
     if(lbl)lbl.textContent='Kies je thema';
     document.getElementById('lp-inp-thema').style.display='block';
@@ -1915,6 +1876,12 @@ function vinylSVG(bg,acc,sz){
     +'<circle cx="50" cy="50" r="3.5" fill="#111"/>'
     +'</svg>';
 }
+function updCardsScreen(){
+  // Host-scherm knop verbergen bij Alleen PDF (mode==='eigen')
+  var hostBtn=document.getElementById('cards-host-btn');
+  if(hostBtn)hostBtn.style.display=(ST.mode==='eigen')?'none':'';
+}
+
 function buildPreviews(){
   var out=document.getElementById('cards-out');out.innerHTML='';
   var show=Math.min(4,ST.cards.length);
@@ -2735,66 +2702,24 @@ function rebuildActiveGameConfigFromState(){
 }
 
 function syncSpotifyHostPanel(){
-  // Stap 0: herstel activeGameConfig als die leeg is (bijv. na navigatie)
+  // Het "Gekozen muziek" paneel is verwijderd uit de host-UI.
+  // Deze functie blijft bestaan voor Spotify-state beheer (auto-load tracks, debug logs).
   rebuildActiveGameConfigFromState();
-
-  var body=document.getElementById('col-body-spotify');
-  var arrow=document.getElementById('col-arrow-spotify');
-  var pv=document.getElementById('sp-playing-view');
-  var nc=document.getElementById('sp-no-config-view');
-
-  // Geval A: Écht geen muziek beschikbaar
-  if(!ST.songs||!ST.songs.length){
-    if(body)body.style.display='block';
-    if(arrow)arrow.classList.add('open');
-    if(pv)pv.style.display='none';
-    if(nc)nc.style.display='block';
-    console.log('[Melingo] hostpanel | geen songs | noconfig | playlistPickerVisible:false');
-    return;
-  }
-
-  // Geval B: Muziek beschikbaar — toon altijd de gekozen muziek view
-  if(body)body.style.display='block';
-  if(arrow)arrow.classList.add('open');
-  if(nc)nc.style.display='none';
-  if(pv)pv.style.display='block';
-
-  renderChosenMusicPanel();
-
-  // Spotify audio sectie — toon alleen als verbonden
-  var audioSec=document.getElementById('sp-audio-section');
-  var spStatusRow=document.getElementById('sp-spotify-status-row');
-  var connInline=document.getElementById('sp-connect-inline');
-  var themeConnNote=document.getElementById('sp-theme-connect-note');
 
   var needsSpotify=(activeGameConfig.source==='ready_made_theme'||activeGameConfig.source==='custom_spotify'||!!ST.spotifyPlaylist);
 
-  if(SP.accessToken){
-    if(audioSec)audioSec.style.display='block';
-    if(spStatusRow)spStatusRow.style.display='block';
-    if(connInline)connInline.style.display='none';
-    // Als Spotify verbonden maar tracks nog geen URI's → auto-load
-    if(needsSpotify&&ST.spotifyPlaylist&&ST.spotifyPlaylist.id&&!activeGameConfig.tracks.some(function(t){return!!t.uri;})){
-      loadSpotifyPlaylistForTheme(ST.spotifyPlaylist.id,ST.spotifyPlaylist.name||'Playlist').then(function(){
-        renderChosenMusicPanel();
-      });
+  if(SP.accessToken&&needsSpotify){
+    // Auto-load tracks als Spotify verbonden maar nog geen URI's in songs
+    if(ST.spotifyPlaylist&&ST.spotifyPlaylist.id&&!activeGameConfig.tracks.some(function(t){return!!t.uri;})){
+      loadSpotifyPlaylistForTheme(ST.spotifyPlaylist.id,ST.spotifyPlaylist.name||'Playlist').catch(function(){});
     }
-    console.log('[Melingo] hostpanel | Spotify verbonden | source:'+activeGameConfig.source
-      +' | trackCount:'+activeGameConfig.trackCount+' | usesExistingGameConfig:true | playlistPickerVisible:false');
-  } else if(needsSpotify){
-    // Spotify vereist maar niet verbonden — toon inline connect prompt (muziek info blijft zichtbaar)
-    if(audioSec)audioSec.style.display='none';
-    if(spStatusRow)spStatusRow.style.display='none';
-    if(connInline)connInline.style.display='block';
-    if(themeConnNote)themeConnNote.style.display=ST.theme?'block':'none';
-    console.log('[Melingo] hostpanel | Spotify niet verbonden | muziek wel geladen | needsSpotify:true | playlistPickerVisible:false');
-  } else {
-    // Eigen/handmatig — geen Spotify nodig
-    if(audioSec)audioSec.style.display='none';
-    if(spStatusRow)spStatusRow.style.display='none';
-    if(connInline)connInline.style.display='none';
-    console.log('[Melingo] hostpanel | geen Spotify nodig | source:'+activeGameConfig.source+' | playlistPickerVisible:false');
   }
+
+  console.log('[Melingo] syncSpotifyHostPanel | source:'+activeGameConfig.source
+    +' | trackCount:'+activeGameConfig.trackCount
+    +' | SP.connected:'+!!SP.accessToken
+    +' | needsSpotify:'+needsSpotify
+    +' | songs:'+((ST.songs&&ST.songs.length)||0));
 }
 
 function renderChosenMusicPanel(){
