@@ -386,6 +386,29 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .lp-cta:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
 .lp-cta:disabled{background:rgba(255,255,255,.07);color:rgba(255,255,255,.2);cursor:not-allowed;box-shadow:none;transform:none}
 
+/* PRICING */
+.lp-mode-price{font-size:1.1rem;font-weight:800;color:var(--tx);margin:.55rem 0 .3rem;letter-spacing:-.3px}
+.lp-mode-price em{font-size:.7rem;font-weight:600;color:var(--mt);font-style:normal;margin-right:.2rem}
+.lp-price-tiers{display:flex;flex-direction:column;gap:.22rem;margin:.4rem 0 .3rem}
+.lp-price-tier{display:flex;align-items:center;justify-content:space-between;font-size:.72rem;gap:.5rem;padding:.22rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.lp-price-tier:last-child{border:none}
+.lp-tier-label{color:var(--mt);flex:1}
+.lp-tier-price{font-weight:700;color:var(--tx);white-space:nowrap}
+.lp-tier-badge{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.1rem .35rem;border-radius:4px;background:linear-gradient(135deg,var(--s),var(--a));color:#fff;white-space:nowrap}
+
+/* PKG SUMMARY (na spelers-keuze) */
+.lp-pkg-box{background:rgba(155,109,255,.06);border:1px solid rgba(155,109,255,.2);border-radius:12px;padding:.85rem 1rem;margin-top:.75rem}
+.lp-pkg-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+.lp-pkg-name{font-size:.82rem;font-weight:700;color:var(--tx)}
+.lp-pkg-meta{font-size:.7rem;color:var(--mt);margin-top:.2rem}
+.lp-pkg-amount{font-size:1.15rem;font-weight:800;color:var(--a);white-space:nowrap}
+.lp-pkg-admin-note{font-size:.7rem;color:var(--green);margin-top:.35rem;display:flex;align-items:center;gap:.35rem}
+.lp-pkg-admin-note::before{content:'✓';font-weight:800}
+.lp-pkg-normal-price{font-size:.68rem;color:var(--mt);text-decoration:line-through}
+.lp-contact-box{background:rgba(106,171,247,.06);border:1px solid rgba(106,171,247,.18);border-radius:12px;padding:1rem;text-align:center;margin-top:.75rem}
+.lp-contact-title{font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.3rem}
+.lp-contact-sub{font-size:.75rem;color:var(--mt);margin-bottom:.75rem;line-height:1.5}
+
 /* THEMA'S SECTIE */
 .lp-section-hd{font-size:1.4rem;font-weight:800;color:var(--tx);text-align:center;margin-bottom:.4rem}
 .lp-section-sub{font-size:.8rem;color:var(--mt);text-align:center;margin-bottom:1.5rem}
@@ -433,6 +456,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .lp-th-line{font-size:.65rem}
   .lp-rev-grid{grid-template-columns:1fr}
   .lp-body{padding:1.5rem 1rem 3rem;gap:3rem}
+  .lp-mode-price{font-size:1rem}
+  .lp-pkg-amount{font-size:1.05rem}
+  .lp-price-tier{font-size:.7rem}
 }
 
 /* USP GRID */
@@ -551,13 +577,29 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <!-- SPOTIFY — beste keuze, prominent bovenaan/eerst -->
           <div class="lp-mode lp-mode-spotify" id="lm-spotify" onclick="setType('spotify')">
             <div class="lp-mode-badge lp-mb-prem">★ Aanbevolen</div>
-            <div class="lp-mode-name">Spotify Bingo</div>
-            <div class="lp-mode-desc">Gebruik je eigen Spotify-playlist. Jij bepaalt de muziek, Melingo regelt de rest — unieke kaarten, host-scherm en automatische bingo-controle.</div>
+            <div class="lp-mode-name">Eigen Spotify-bingo</div>
+            <div class="lp-mode-desc">Gebruik je eigen playlist met het slimme hostscherm. Automatische bingo-controle inbegrepen.</div>
+            <div class="lp-mode-price"><em>Vanaf</em>€14,95</div>
+            <div class="lp-price-tiers">
+              <div class="lp-price-tier">
+                <span class="lp-tier-label">Klein gezelschap · t/m 25 spelers</span>
+                <span class="lp-tier-price">€14,95</span>
+              </div>
+              <div class="lp-price-tier">
+                <span class="lp-tier-label">Feest · t/m 75 spelers</span>
+                <span class="lp-tier-price">€19,95</span>
+                <span class="lp-tier-badge">Meest gekozen</span>
+              </div>
+              <div class="lp-price-tier">
+                <span class="lp-tier-label">Evenement · t/m 200 spelers</span>
+                <span class="lp-tier-price">€29,95</span>
+              </div>
+            </div>
             <ul class="lp-mode-ul">
               <li>Koppel je eigen Spotify-playlist</li>
-              <li>Unieke kaarten tot wel 200 spelers</li>
               <li>Hostscherm houdt alles bij</li>
               <li>Automatische bingo-controle</li>
+              <li>PDF-kaarten inbegrepen</li>
             </ul>
           </div>
 
@@ -565,20 +607,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div class="lp-modes-col">
 
             <div class="lp-mode lp-mode-sm" id="lm-thema" onclick="setType('thema')">
-              <div class="lp-mode-badge lp-mb-mid">⚡ Populair</div>
+              <div class="lp-mode-badge lp-mb-mid">⚡ Snel starten</div>
               <div class="lp-mode-name">Kant-en-klaar thema</div>
-              <div class="lp-mode-desc">Kies een thema en speel direct. Inclusief host-scherm.</div>
+              <div class="lp-mode-desc">Kies een thema en speel direct. Inclusief hostscherm.</div>
+              <div class="lp-mode-price" style="font-size:.95rem">€9,95</div>
               <div class="lp-mode-tags">
-                <span>40 nummers</span><span>Max. 20 spelers</span><span>Host-scherm ✓</span>
+                <span>40 nummers</span><span>t/m 20 spelers</span><span>Hostscherm ✓</span><span>PDF ✓</span>
               </div>
             </div>
 
             <div class="lp-mode lp-mode-sm" id="lm-eigen" onclick="setType('eigen')">
-              <div class="lp-mode-badge lp-mb-low">Goedkoopst</div>
-              <div class="lp-mode-name">Eigen nummers</div>
-              <div class="lp-mode-desc">Plak je eigen lijst en download PDF-kaarten. Jij speelt de muziek zelf af.</div>
-              <div class="lp-mode-tags">
-                <span>Alleen PDF</span><span>Geen host-scherm</span>
+              <div class="lp-mode-badge lp-mb-low">💰 Voordeligst</div>
+              <div class="lp-mode-name">Alleen bingokaarten</div>
+              <div class="lp-mode-desc">Maak printbare kaarten. Jij speelt muziek zelf af.</div>
+              <div class="lp-mode-price" style="font-size:.88rem"><em>Vanaf</em>€7,95</div>
+              <div class="lp-price-tiers" style="margin:.25rem 0 0">
+                <div class="lp-price-tier"><span class="lp-tier-label">t/m 25 spelers</span><span class="lp-tier-price">€7,95</span></div>
+                <div class="lp-price-tier"><span class="lp-tier-label">t/m 75 spelers</span><span class="lp-tier-price">€12,95</span><span class="lp-tier-badge">Meest gekozen</span></div>
+                <div class="lp-price-tier"><span class="lp-tier-label">t/m 200 spelers</span><span class="lp-tier-price">€19,95</span></div>
               </div>
             </div>
 
@@ -646,6 +692,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div class="lp-upsell" id="lp-p-upsell" style="display:none">
             Max. 20 spelers met kant-en-klaar. <button class="lp-lnk" onclick="setType('spotify')">Meer spelers? Kies Spotify →</button>
           </div>
+          <!-- PAKKET-SAMENVATTING -->
+          <div id="lp-pkg-box" class="lp-pkg-box" style="display:none">
+            <div class="lp-pkg-row">
+              <div>
+                <div class="lp-pkg-name" id="lp-pkg-name"></div>
+                <div class="lp-pkg-meta" id="lp-pkg-meta"></div>
+              </div>
+              <div>
+                <div class="lp-pkg-amount" id="lp-pkg-amount"></div>
+                <div class="lp-pkg-normal-price" id="lp-pkg-normal-price" style="display:none"></div>
+              </div>
+            </div>
+            <div class="lp-pkg-admin-note" id="lp-pkg-admin-note" style="display:none">Admin testmodus actief — betaling overgeslagen.</div>
+          </div>
         </div>
       </div>
 
@@ -657,6 +717,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div id="lp-sum-m" class="lp-sum-m"></div>
         </div>
         <button class="lp-cta" id="lp-cta" onclick="startGen()" disabled>Kies eerst je speelmodus</button>
+        <!-- MAATWERK (201+ spelers) -->
+        <div id="lp-contact-box" class="lp-contact-box" style="display:none">
+          <div class="lp-contact-title">Meer dan 200 spelers?</div>
+          <div class="lp-contact-sub">Voor meer dan 200 spelers maken we graag een oplossing op maat.</div>
+          <a href="mailto:hallo@melingo.nl" class="btn bp" style="min-height:44px;padding:.65rem 1.5rem;font-size:.88rem;text-decoration:none">Neem contact op</a>
+        </div>
         <div style="text-align:center;margin-top:.5rem">
           <button onclick="showSaved()" style="background:none;border:none;color:rgba(255,255,255,.2);font-size:.7rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Opgeslagen bingo's</button>
         </div>
@@ -1081,6 +1147,32 @@ var THEMES=[
 ];
 
 /* ══ STATE ══ */
+/* ── Frontend product config (display-only — backend is source of truth for checkout) ──
+ * Must stay in sync with api/lib/products.js.
+ * Frontend checks zijn alleen UI, nooit beveiliging. */
+var LP_PRODUCTS={
+  ready_made_theme:{name:'Kant-en-klaar thema',maxPlayers:20,priceCents:995,mode:'ready_made',includesHost:true},
+  spotify_host_small:{name:'Klein gezelschap',maxPlayers:25,priceCents:1495,mode:'spotify_host',includesHost:true},
+  spotify_host_party:{name:'Feest',maxPlayers:75,priceCents:1995,mode:'spotify_host',includesHost:true},
+  spotify_host_event:{name:'Evenement',maxPlayers:200,priceCents:2995,mode:'spotify_host',includesHost:true},
+  cards_only_small:{name:'Klein gezelschap',maxPlayers:25,priceCents:795,mode:'cards_only',includesHost:false},
+  cards_only_party:{name:'Feest',maxPlayers:75,priceCents:1295,mode:'cards_only',includesHost:false},
+  cards_only_event:{name:'Evenement',maxPlayers:200,priceCents:1995,mode:'cards_only',includesHost:false},
+};
+
+function formatEuro(cents){
+  return new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(cents/100);
+}
+
+function getPackageByPlayers(players,mode){
+  var key=productKeyFor(mode,players);
+  return LP_PRODUCTS[key]||null;
+}
+
+/* UI-only admin check — only for display, never for access control */
+var LP_ADMIN_IDS=['21tbvinvqpc4rog4elcjp5uxa'];
+function isAdminDisplay(){return !!(SP.me&&SP.me.id&&LP_ADMIN_IDS.includes(SP.me.id));}
+
 var ST={
   mode:'thema',selTheme:null,selSaved:null,
   songs:[],players:20,cards:[],shuffled:[],pidx:-1,
@@ -1274,6 +1366,7 @@ function updLpPlayers(){
     if(!cap.blocked){show=true;maxP=cap.maxPlayers;}
   }
   var s3=document.getElementById('lp-step3');if(s3)s3.style.display=show?'block':'none';
+  var pkgBox=document.getElementById('lp-pkg-box');
   if(show){
     if(ST.players>maxP)ST.players=maxP;if(ST.players<1)ST.players=1;
     updLpPNum();
@@ -1295,6 +1388,26 @@ function updLpPlayers(){
     }
     var u=document.getElementById('lp-p-upsell');
     if(u)u.style.display=(mode==='thema'&&ST.players>=20)?'block':'none';
+    // Pakket-samenvatting
+    if(pkgBox){
+      var pkg=getPackageByPlayers(ST.players,mode);
+      if(pkg){
+        var admin=isAdminDisplay();
+        var nameEl=document.getElementById('lp-pkg-name');
+        var metaEl=document.getElementById('lp-pkg-meta');
+        var amtEl=document.getElementById('lp-pkg-amount');
+        var normEl=document.getElementById('lp-pkg-normal-price');
+        var noteEl=document.getElementById('lp-pkg-admin-note');
+        if(nameEl)nameEl.textContent='Gekozen pakket: '+pkg.name;
+        if(metaEl)metaEl.textContent='Geschikt voor t/m '+pkg.maxPlayers+' spelers'+(pkg.includesHost?' · hostscherm inbegrepen':' · alleen PDF-kaarten');
+        if(amtEl)amtEl.textContent=admin?'Gratis':formatEuro(pkg.priceCents);
+        if(normEl){normEl.style.display=admin?'block':'none';normEl.textContent='Normale prijs: '+formatEuro(pkg.priceCents);}
+        if(noteEl)noteEl.style.display=admin?'flex':'none';
+        pkgBox.style.display='block';
+      }else{pkgBox.style.display='none';}
+    }
+  }else{
+    if(pkgBox)pkgBox.style.display='none';
   }
 }
 
@@ -1315,21 +1428,43 @@ function setP(n){ST.players=n;adjP(0);}
 function updLpCTA(){
   var btn=document.getElementById('lp-cta'),sum=document.getElementById('lp-summary');
   var st=document.getElementById('lp-sum-t'),sm=document.getElementById('lp-sum-m');
+  var contactBox=document.getElementById('lp-contact-box');
   if(!btn)return;
+
+  // 201+ spelers: maatwerk
+  if(ST.players>200){
+    btn.style.display='none';
+    if(contactBox)contactBox.style.display='block';
+    if(sum)sum.style.display='none';
+    return;
+  }
+  btn.style.display='';
+  if(contactBox)contactBox.style.display='none';
+
   var mode=ST.mode;
+  var admin=isAdminDisplay();
+
+  function btnLabel(pkg){
+    if(!pkg)return'Ga verder →';
+    return admin?'Test gratis als admin':'Ga verder — '+formatEuro(pkg.priceCents);
+  }
+
   if(!mode){btn.disabled=true;btn.textContent='Kies eerst je speelmodus';if(sum)sum.style.display='none';return;}
+
   if(mode==='thema'){
     if(!ST.theme){btn.disabled=true;btn.textContent='Kies een thema';if(sum)sum.style.display='none';return;}
     var th=THEMES.find(function(t){return t.id===ST.theme;});
-    btn.disabled=false;btn.textContent='Maak '+ST.players+' bingokaarten →';
-    if(sum){sum.style.display='block';if(st)st.textContent=th?th.name:'Thema';if(sm)sm.textContent='40 nummers · '+ST.players+' spelers · host-scherm';}
+    var pkg=LP_PRODUCTS.ready_made_theme;
+    btn.disabled=false;btn.textContent=btnLabel(pkg);
+    if(sum){sum.style.display='block';if(st)st.textContent=(th?th.name:'Kant-en-klaar thema')+' · '+formatEuro(pkg.priceCents);if(sm)sm.textContent='40 nummers · '+ST.players+' spelers · hostscherm inbegrepen';}
     return;
   }
   if(mode==='eigen'){
     var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
     if(songs.length<25){btn.disabled=true;btn.textContent='Voeg nog '+(25-songs.length)+' nummers toe';if(sum)sum.style.display='none';return;}
-    btn.disabled=false;btn.textContent='Maak PDF-kaarten →';
-    if(sum){sum.style.display='block';if(st)st.textContent='Eigen nummers';if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
+    var pkg2=getPackageByPlayers(ST.players,'eigen');
+    btn.disabled=false;btn.textContent=btnLabel(pkg2);
+    if(sum){sum.style.display='block';if(st)st.textContent='Alleen bingokaarten'+(pkg2?' · '+formatEuro(pkg2.priceCents):'');if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
     return;
   }
   if(mode==='spotify'){
@@ -1337,9 +1472,9 @@ function updLpCTA(){
     var cnt=SP.selectedPlaylist._count||0;
     var cap=getPlaylistCapacity(cnt);
     if(cap.blocked){btn.disabled=true;btn.textContent='Playlist heeft te weinig nummers (min. 25)';if(sum)sum.style.display='none';return;}
-    btn.disabled=false;
-    btn.textContent=ST.players>cap.maxPlayers?'Maak '+ST.players+' kaarten (meer dan aanbevolen) →':'Maak Spotify-bingo →';
-    if(sum){sum.style.display='block';if(st)st.textContent='Spotify · '+cap.label;if(sm)sm.textContent=cnt+' nummers · '+ST.players+' spelers · max. aanbevolen '+cap.maxPlayers+'.';}
+    var pkg3=getPackageByPlayers(ST.players,'spotify');
+    btn.disabled=false;btn.textContent=btnLabel(pkg3);
+    if(sum){sum.style.display='block';if(st)st.textContent='Eigen Spotify-bingo'+(pkg3?' · '+formatEuro(pkg3.priceCents):'');if(sm)sm.textContent=cnt+' nummers · '+ST.players+' spelers · hostscherm inbegrepen';}
   }
 }
 
