@@ -1446,7 +1446,7 @@ async function selLpPlaylist(el){
     if(fb){
       if(cnt===0){
         fb.className='lp-fmsg lp-fmsg-warn';
-        fb.textContent='Geen nummers gevonden. Controleer of de playlist openbaar is.';
+        fb.textContent='Geen nummers gevonden. Is de playlist openbaar?';
       } else if(cnt<35){
         fb.className='lp-fmsg lp-fmsg-warn';
         fb.textContent=cnt+' nummers gevonden — minimaal 35 nodig.';
@@ -1455,11 +1455,9 @@ async function selLpPlaylist(el){
         fb.textContent='✓ '+cnt+' nummers gevonden · max. '+maxP+' spelers';
       }
     }
-    // Laad tracks voor playback op de achtergrond
     loadSpotifyPlaylistForTheme(SP.selectedPlaylist.id,SP.selectedPlaylist.name);
   }catch(e){
     if(fb){fb.className='lp-fmsg lp-fmsg-warn';fb.textContent='Fout bij laden. Probeer opnieuw.';}
-    console.error('Playlist laden mislukt:',e);
   }
   updLpPlayers();updLpCTA();
   setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3&&s3.style.display!=='none')s3.scrollIntoView({behavior:'smooth',block:'nearest'});},300);
