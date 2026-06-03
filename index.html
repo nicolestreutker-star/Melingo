@@ -1429,6 +1429,73 @@ function renderLpPlaylists(){
   }).join('');
 }
 
+/* Parse playlist ID from URL, URI or raw ID */
+function parsePlaylistId(input){
+  if(!input)return null;
+  input=input.trim();
+  var m=input.match(/spotify:playlist:([A-Za-z0-9]+)/);
+  if(m)return m[1];
+  m=input.match(/open\.spotify\.com\/playlist\/([A-Za-z0-9]+)/);
+  if(m)return m[1];
+  if(/^[A-Za-z0-9]{22}$/.test(input))return input;
+  return null;
+}
+
+/* Cache current Spotify user so we only fetch once */
+async function ensureSpMe(){
+  if(SP.me)return SP.me;
+  try{
+    var r=await spFetch('https://api.spotify.com/v1/me');
+    SP.me=await r.json();
+  }catch(e){SP.me={};}
+  return SP.me;
+}
+
+/*
+ * Fetch track count for a playlist.
+ * Returns {cnt, status, errMsg} where errMsg is set on failure.
+ * Tries /tracks endpoint (old + new Spotify API both return .total here).
+ */
+async function fetchPlaylistTrackCount(plId){
+  var r=await spFetch('https://api.spotify.com/v1/playlists/'+plId+'/tracks?limit=1&market=NL');
+  var status=r.status;
+  var d=await r.json();
+  console.log('[Melingo] /tracks response | id:'+plId+' | status:'+status+' | total:'+d.total+' | items:'+(d.items&&d.items.length)+' | error:'+(d.error&&d.error.message));
+  if(status===401)return{cnt:0,status:401,errMsg:'Sessie verlopen — koppel Spotify opnieuw.'};
+  if(status===403)return{cnt:0,status:403,errMsg:'Geen toegang tot deze playlist (403). Controleer je Spotify-rechten.'};
+  if(status===404)return{cnt:0,status:404,errMsg:'Playlist niet gevonden. Controleer of de playlist nog bestaat.'};
+  if(status===429)return{cnt:0,status:429,errMsg:'Te veel verzoeken aan Spotify — wacht even en probeer opnieuw.'};
+  if(d.error)return{cnt:0,status:status,errMsg:'Spotify fout: '+d.error.message};
+  return{cnt:d.total||0,status:200,errMsg:null};
+}
+
+/*
+ * Fetch all tracks from a playlist via pagination.
+ * Handles both old field (item.track) and new field (item.item).
+ */
+async function fetchAllPlaylistTracks(plId){
+  var tracks=[];
+  var url='https://api.spotify.com/v1/playlists/'+plId+'/items?limit=100&market=NL';
+  while(url){
+    var resp=await spFetch(url);
+    var data=await resp.json();
+    if(data.error){
+      console.warn('[Melingo] fetchAllPlaylistTracks fout | id:'+plId+' | status:'+resp.status+' | msg:'+data.error.message);
+      break;
+    }
+    var items=data.items||[];
+    console.log('[Melingo] page items:'+items.length+' | next:'+(data.next?'ja':'nee')+' | offset:'+data.offset);
+    var valid=items.filter(function(item){
+      var t=item.item||item.track;
+      return t&&t.name&&t.artists&&t.artists.length;
+    });
+    tracks=tracks.concat(valid.map(function(item){return item.item||item.track;}));
+    url=data.next||null;
+  }
+  console.log('[Melingo] fetchAllPlaylistTracks klaar | id:'+plId+' | tracks:'+tracks.length);
+  return tracks;
+}
+
 async function selLpPlaylist(el){
   var idx=parseInt(el.dataset.idx);
   SP.selectedPlaylist=SP.playlists[idx];
@@ -1437,27 +1504,49 @@ async function selLpPlaylist(el){
   el.style.background='rgba(155,109,255,.12)';
   var fb=document.getElementById('lp-sp-fb');
   if(fb){fb.style.display='block';fb.className='lp-fmsg lp-fmsg-ok';fb.textContent='Playlist analyseren...';}
+
+  var setFbWarn=function(msg){if(fb){fb.className='lp-fmsg lp-fmsg-warn';fb.textContent=msg;}};
+  var setFbOk=function(msg){if(fb){fb.className='lp-fmsg lp-fmsg-ok';fb.textContent=msg;}};
+
   try{
-    var r=await spFetch('https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/tracks?limit=1&market=NL');
-    var d=await r.json();
-    var cnt=d.total||0;
-    SP.selectedPlaylist._count=cnt;
-    var maxP=getMaxPlayers(cnt);
-    if(fb){
-      if(cnt===0){
-        fb.className='lp-fmsg lp-fmsg-warn';
-        fb.textContent='Geen nummers gevonden. Is de playlist openbaar?';
-      } else if(cnt<35){
-        fb.className='lp-fmsg lp-fmsg-warn';
-        fb.textContent=cnt+' nummers gevonden — minimaal 35 nodig.';
-      } else {
-        fb.className='lp-fmsg lp-fmsg-ok';
-        fb.textContent='✓ '+cnt+' nummers gevonden · max. '+maxP+' spelers';
-      }
+    var plId=SP.selectedPlaylist.id;
+
+    // Check ownership (Spotify 2026: items only accessible for owned/collaborative playlists)
+    var me=await ensureSpMe();
+    var ownerId=SP.selectedPlaylist.owner&&SP.selectedPlaylist.owner.id;
+    var isOwner=me.id&&ownerId&&me.id===ownerId;
+    var isCollab=!!SP.selectedPlaylist.collaborative;
+    console.log('[Melingo] selLpPlaylist | id:'+plId+' | owner:'+ownerId+' | me:'+me.id+' | eigenaar:'+isOwner+' | collab:'+isCollab);
+
+    if(!isOwner&&!isCollab){
+      setFbWarn('Deze playlist is openbaar, maar Spotify geeft alleen nummers vrij van playlists die van jouw account zijn of waar je collaborator van bent. Maak een kopie van de playlist in je eigen Spotify-account en probeer opnieuw.');
+      updLpPlayers();updLpCTA();return;
     }
-    loadSpotifyPlaylistForTheme(SP.selectedPlaylist.id,SP.selectedPlaylist.name);
+
+    // Fetch track count
+    var result=await fetchPlaylistTrackCount(plId);
+    if(result.errMsg){setFbWarn(result.errMsg);updLpPlayers();updLpCTA();return;}
+
+    var cnt=result.cnt;
+    SP.selectedPlaylist._count=cnt;
+
+    if(cnt===0){
+      setFbWarn('Geen nummers gevonden. Controleer of de playlist nummers bevat.');
+      updLpPlayers();updLpCTA();return;
+    }
+
+    var maxP=getMaxPlayers(cnt);
+    if(cnt<35){
+      setFbWarn(cnt+' nummers gevonden — minimaal 35 nodig.');
+    } else {
+      setFbOk('✓ '+cnt+' nummers gevonden · max. '+maxP+' spelers');
+    }
+
+    // Load tracks for playback in the background
+    loadSpotifyPlaylistForTheme(plId,SP.selectedPlaylist.name);
   }catch(e){
-    if(fb){fb.className='lp-fmsg lp-fmsg-warn';fb.textContent='Fout bij laden. Probeer opnieuw.';}
+    console.warn('[Melingo] selLpPlaylist onverwachte fout:',e.message);
+    setFbWarn('Onverwachte fout bij laden. Probeer opnieuw.');
   }
   updLpPlayers();updLpCTA();
   setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3&&s3.style.display!=='none')s3.scrollIntoView({behavior:'smooth',block:'nearest'});},300);
@@ -1467,18 +1556,7 @@ async function selLpPlaylist(el){
 async function genFromSpotify(){
   load('Spotify playlist laden...',0);
   try{
-    var tracks=[];
-    var url='https://api.spotify.com/v1/playlists/'+SP.selectedPlaylist.id+'/items?limit=100';
-    while(url){
-      var resp=await spFetch(url);
-      var data=await resp.json();
-      if(data.error){toast('Spotify fout: '+data.error.message);unload();return;}
-      var valid=(data.items||[]).filter(function(item){
-        var t=item.item||item.track;return t&&t.name&&t.artists&&t.artists.length;
-      });
-      tracks=tracks.concat(valid.map(function(item){return item.item||item.track;}));
-      url=data.next||null;
-    }
+    var tracks=await fetchAllPlaylistTracks(SP.selectedPlaylist.id);
     if(!tracks.length){toast('Geen afspeelbare nummers gevonden in deze playlist.');unload();return;}
     // Store tracks in SP for playback sync
     SP.tracks=shuf(tracks);
@@ -2276,33 +2354,20 @@ function closeBingoGoFeedback(){closeBingoModal();go('feedback');}
 async function loadSpotifyPlaylistForTheme(playlistId, themeName){
   if(!SP.accessToken)return;
   try{
-    var tracks=[];
-    var url='https://api.spotify.com/v1/playlists/'+playlistId+'/items?limit=100';
-    while(url){
-      var resp=await spFetch(url);
-      var data=await resp.json();
-      if(data.error)break;
-      var valid=(data.items||[]).filter(function(item){
-        var t=item.item||item.track;return t&&t.name&&t.artists&&t.artists.length;
-      });
-      tracks=tracks.concat(valid.map(function(item){return item.item||item.track;}));
-      url=data.next||null;
-    }
+    var tracks=await fetchAllPlaylistTracks(playlistId);
     if(!tracks.length)return;
     SP.tracks=shuf(tracks);
     SP.trackIdx=-1;
-    // Update ST.songs met Spotify volgorde
     ST.songs=SP.tracks.map(function(t){
       return{t:t.name,a:t.artists.map(function(ar){return ar.name;}).join(', '),uri:t.uri};
     });
-    // Haal playlist cover op
     var plResp=await spFetch('https://api.spotify.com/v1/playlists/'+playlistId+'?fields=images');
     var plData=await plResp.json();
     var img=plData.images&&plData.images[0]?plData.images[0].url:'';
     ST.spotifyPlaylist={id:playlistId,name:themeName,img:img};
     SP.selectedPlaylist={id:playlistId,name:themeName,images:[{url:img}]};
-    console.log('Spotify playlist gekoppeld aan thema "'+themeName+'": '+SP.tracks.length+' nummers');
-  }catch(e){console.warn('Spotify thema koppeling mislukt:',e);}
+    console.log('[Melingo] loadSpotifyPlaylistForTheme klaar | "'+themeName+'" | '+SP.tracks.length+' nummers');
+  }catch(e){console.warn('[Melingo] loadSpotifyPlaylistForTheme mislukt:',e.message);}
 }
 
 /* ══ SPOTIFY START SCREEN ══ */
