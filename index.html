@@ -1267,7 +1267,7 @@ function updLpPlayers(){
     cap=getPlaylistCapacity(cnt);maxP=cap.maxPlayers||20;
   } else if(mode==='eigen'){
     var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;
-    if(n>=25){show=true;cap=getPlaylistCapacity(n);maxP=cap.maxPlayers||100;}
+    if(n>=25){show=true;cap=getPlaylistCapacity(n);maxP=cap.maxPlayers||200;}
   } else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count!==undefined){
     var cnt2=SP.selectedPlaylist._count||0;
     cap=getPlaylistCapacity(cnt2);
@@ -1300,7 +1300,7 @@ function updLpPlayers(){
 
 function adjP(d){
   var mode=ST.mode,maxP=200;
-  if(mode==='eigen'){var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;maxP=getMaxPlayers(n)||100;}
+  if(mode==='eigen'){var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;maxP=getMaxPlayers(n)||200;}
   if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count)maxP=getPlaylistCapacity(SP.selectedPlaylist._count).maxPlayers||200;
   if(mode==='thema')maxP=SP.selectedPlaylist&&SP.selectedPlaylist._count>0?getMaxPlayers(SP.selectedPlaylist._count):20;
   ST.players=Math.max(1,Math.min(maxP,ST.players+d));
