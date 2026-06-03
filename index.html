@@ -1176,9 +1176,8 @@ async function selLpTheme(el){
   var th=THEMES.find(function(t){return t.id===ST.theme;});
   if(th&&th.spotifyId&&SP.accessToken){
     try{
-      var r=await spFetch('https://api.spotify.com/v1/playlists/'+th.spotifyId+'/tracks?limit=1&market=NL');
-      var d=await r.json();
-      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:d.total||0};
+      var result=await fetchPlaylistTrackCount(th.spotifyId);
+      SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:result.cnt||0};
     }catch(e){
       SP.selectedPlaylist={id:th.spotifyId,name:th.name,images:[],_count:0};
     }
@@ -1452,21 +1451,21 @@ async function ensureSpMe(){
 }
 
 /*
- * Fetch track count for a playlist.
- * Returns {cnt, status, errMsg} where errMsg is set on failure.
- * Tries /tracks endpoint (old + new Spotify API both return .total here).
+ * Fetch track count for a playlist via /items (2026 API — /tracks geeft 403).
+ * Returns {cnt, status, errMsg}.
  */
 async function fetchPlaylistTrackCount(plId){
-  var r=await spFetch('https://api.spotify.com/v1/playlists/'+plId+'/tracks?limit=1&market=NL');
+  var r=await spFetch('https://api.spotify.com/v1/playlists/'+plId+'/items?limit=1&market=NL');
   var status=r.status;
   var d=await r.json();
-  console.log('[Melingo] /tracks response | id:'+plId+' | status:'+status+' | total:'+d.total+' | items:'+(d.items&&d.items.length)+' | error:'+(d.error&&d.error.message));
+  console.log('[Melingo] /items response | id:'+plId+' | status:'+status+' | total:'+d.total+' | items:'+(d.items&&d.items.length)+' | error:'+(d.error&&d.error.message));
   if(status===401)return{cnt:0,status:401,errMsg:'Sessie verlopen — koppel Spotify opnieuw.'};
   if(status===403)return{cnt:0,status:403,errMsg:'Geen toegang tot deze playlist (403). Controleer je Spotify-rechten.'};
   if(status===404)return{cnt:0,status:404,errMsg:'Playlist niet gevonden. Controleer of de playlist nog bestaat.'};
   if(status===429)return{cnt:0,status:429,errMsg:'Te veel verzoeken aan Spotify — wacht even en probeer opnieuw.'};
   if(d.error)return{cnt:0,status:status,errMsg:'Spotify fout: '+d.error.message};
-  return{cnt:d.total||0,status:200,errMsg:null};
+  var cnt=typeof d.total==='number'?d.total:(d.items&&d.items.length)||0;
+  return{cnt:cnt,status:200,errMsg:null};
 }
 
 /*
@@ -1523,11 +1522,9 @@ async function selLpPlaylist(el){
       updLpPlayers();updLpCTA();return;
     }
 
-    // Fetch track count
-    var result=await fetchPlaylistTrackCount(plId);
-    if(result.errMsg){setFbWarn(result.errMsg);updLpPlayers();updLpCTA();return;}
-
-    var cnt=result.cnt;
+    // Fetch all tracks via /items (eigenaar bevestigd, /tracks geeft 403)
+    var tracks=await fetchAllPlaylistTracks(plId);
+    var cnt=tracks.length;
     SP.selectedPlaylist._count=cnt;
 
     if(cnt===0){
@@ -1542,8 +1539,9 @@ async function selLpPlaylist(el){
       setFbOk('✓ '+cnt+' nummers gevonden · max. '+maxP+' spelers');
     }
 
-    // Load tracks for playback in the background
-    loadSpotifyPlaylistForTheme(plId,SP.selectedPlaylist.name);
+    // Tracks alvast in SP zetten zodat genFromSpotify ze niet opnieuw hoeft te laden
+    SP.tracks=tracks;
+    SP.trackIdx=-1;
   }catch(e){
     console.warn('[Melingo] selLpPlaylist onverwachte fout:',e.message);
     setFbWarn('Onverwachte fout bij laden. Probeer opnieuw.');
