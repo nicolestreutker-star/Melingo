@@ -387,14 +387,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .lp-cta:disabled{background:rgba(255,255,255,.07);color:rgba(255,255,255,.2);cursor:not-allowed;box-shadow:none;transform:none}
 
 /* PRICING */
-.lp-mode-price{font-size:1.1rem;font-weight:800;color:var(--tx);margin:.55rem 0 .3rem;letter-spacing:-.3px}
-.lp-mode-price em{font-size:.7rem;font-weight:600;color:var(--mt);font-style:normal;margin-right:.2rem}
-.lp-price-tiers{display:flex;flex-direction:column;gap:.22rem;margin:.4rem 0 .3rem}
-.lp-price-tier{display:flex;align-items:center;justify-content:space-between;font-size:.72rem;gap:.5rem;padding:.22rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.lp-price-tier:last-child{border:none}
-.lp-tier-label{color:var(--mt);flex:1}
-.lp-tier-price{font-weight:700;color:var(--tx);white-space:nowrap}
-.lp-tier-badge{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.1rem .35rem;border-radius:4px;background:linear-gradient(135deg,var(--s),var(--a));color:#fff;white-space:nowrap}
+/* Prijsregel — bewust kleiner dan de titel, zichtbaar maar niet dominant */
+.lp-mode-price{font-size:.95rem;font-weight:700;color:var(--tx);margin:.5rem 0 .5rem;letter-spacing:-.1px}
+.lp-mode-price em{font-size:.75rem;font-weight:500;color:var(--mt);font-style:normal;margin-right:.25rem}
+.lp-mode-price strong{font-size:1.05rem;font-weight:800}
+/* Tabel-layout voor pakketregels: 3 kolommen, rustig en scanbaar */
+.lp-price-tiers{display:table;width:100%;border-collapse:collapse;margin:.3rem 0 .6rem}
+.lp-price-tier{display:table-row}
+.lp-price-tier:not(:last-child) .lp-tier-label,.lp-price-tier:not(:last-child) .lp-tier-players,.lp-price-tier:not(:last-child) .lp-tier-price{border-bottom:1px solid rgba(255,255,255,.05)}
+.lp-tier-label,.lp-tier-players,.lp-tier-price{display:table-cell;padding:.28rem 0;font-size:.71rem;vertical-align:middle}
+.lp-tier-label{color:var(--mt);padding-right:.5rem;white-space:nowrap}
+.lp-tier-players{color:rgba(240,238,248,.4);white-space:nowrap;padding-right:.5rem}
+.lp-tier-price{font-weight:700;color:var(--tx);white-space:nowrap;text-align:right}
+/* Badge-stijl — unified voor alle drie de kaarten */
+.lp-mode-badge-top{display:inline-flex;align-items:center;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;padding:.22rem .65rem;border-radius:99px;margin-bottom:.6rem;border:1px solid rgba(155,109,255,.35);background:rgba(155,109,255,.1);color:rgba(200,180,255,.9)}
 
 /* PKG SUMMARY (na spelers-keuze) */
 .lp-pkg-box{background:rgba(155,109,255,.06);border:1px solid rgba(155,109,255,.2);border-radius:12px;padding:.85rem 1rem;margin-top:.75rem}
@@ -456,9 +462,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .lp-th-line{font-size:.65rem}
   .lp-rev-grid{grid-template-columns:1fr}
   .lp-body{padding:1.5rem 1rem 3rem;gap:3rem}
-  .lp-mode-price{font-size:1rem}
+  .lp-mode-price{font-size:.9rem}
   .lp-pkg-amount{font-size:1.05rem}
-  .lp-price-tier{font-size:.7rem}
+  .lp-tier-label,.lp-tier-players,.lp-tier-price{font-size:.68rem;padding:.25rem 0}
 }
 
 /* USP GRID */
@@ -576,22 +582,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
           <!-- SPOTIFY — beste keuze, prominent bovenaan/eerst -->
           <div class="lp-mode lp-mode-spotify" id="lm-spotify" onclick="setType('spotify')">
-            <div class="lp-mode-badge lp-mb-prem">★ Aanbevolen</div>
+            <div class="lp-mode-badge-top">★ Meest gekozen</div>
             <div class="lp-mode-name">Eigen Spotify-bingo</div>
             <div class="lp-mode-desc">Gebruik je eigen playlist met het slimme hostscherm. Automatische bingo-controle inbegrepen.</div>
-            <div class="lp-mode-price"><em>Vanaf</em>€14,95</div>
+            <div class="lp-mode-price"><em>Vanaf</em><strong>€14,95</strong></div>
             <div class="lp-price-tiers">
               <div class="lp-price-tier">
-                <span class="lp-tier-label">Klein gezelschap · t/m 25 spelers</span>
+                <span class="lp-tier-label">Klein gezelschap</span>
+                <span class="lp-tier-players">t/m 25 spelers</span>
                 <span class="lp-tier-price">€14,95</span>
               </div>
               <div class="lp-price-tier">
-                <span class="lp-tier-label">Feest · t/m 75 spelers</span>
+                <span class="lp-tier-label">Feest</span>
+                <span class="lp-tier-players">t/m 75 spelers</span>
                 <span class="lp-tier-price">€19,95</span>
-                <span class="lp-tier-badge">Meest gekozen</span>
               </div>
               <div class="lp-price-tier">
-                <span class="lp-tier-label">Evenement · t/m 200 spelers</span>
+                <span class="lp-tier-label">Evenement</span>
+                <span class="lp-tier-players">t/m 200 spelers</span>
                 <span class="lp-tier-price">€29,95</span>
               </div>
             </div>
@@ -607,24 +615,36 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div class="lp-modes-col">
 
             <div class="lp-mode lp-mode-sm" id="lm-thema" onclick="setType('thema')">
-              <div class="lp-mode-badge lp-mb-mid">⚡ Snel starten</div>
+              <div class="lp-mode-badge-top">⚡ Snel starten</div>
               <div class="lp-mode-name">Kant-en-klaar thema</div>
               <div class="lp-mode-desc">Kies een thema en speel direct. Inclusief hostscherm.</div>
-              <div class="lp-mode-price" style="font-size:.95rem">€9,95</div>
+              <div class="lp-mode-price"><strong>€9,95</strong></div>
               <div class="lp-mode-tags">
                 <span>40 nummers</span><span>t/m 20 spelers</span><span>Hostscherm ✓</span><span>PDF ✓</span>
               </div>
             </div>
 
             <div class="lp-mode lp-mode-sm" id="lm-eigen" onclick="setType('eigen')">
-              <div class="lp-mode-badge lp-mb-low">💰 Voordeligst</div>
+              <div class="lp-mode-badge-top">💰 Voordeligst</div>
               <div class="lp-mode-name">Alleen bingokaarten</div>
               <div class="lp-mode-desc">Maak printbare kaarten. Jij speelt muziek zelf af.</div>
-              <div class="lp-mode-price" style="font-size:.88rem"><em>Vanaf</em>€7,95</div>
-              <div class="lp-price-tiers" style="margin:.25rem 0 0">
-                <div class="lp-price-tier"><span class="lp-tier-label">t/m 25 spelers</span><span class="lp-tier-price">€7,95</span></div>
-                <div class="lp-price-tier"><span class="lp-tier-label">t/m 75 spelers</span><span class="lp-tier-price">€12,95</span><span class="lp-tier-badge">Meest gekozen</span></div>
-                <div class="lp-price-tier"><span class="lp-tier-label">t/m 200 spelers</span><span class="lp-tier-price">€19,95</span></div>
+              <div class="lp-mode-price"><em>Vanaf</em><strong>€7,95</strong></div>
+              <div class="lp-price-tiers">
+                <div class="lp-price-tier">
+                  <span class="lp-tier-label">Klein gezelschap</span>
+                  <span class="lp-tier-players">t/m 25 spelers</span>
+                  <span class="lp-tier-price">€7,95</span>
+                </div>
+                <div class="lp-price-tier">
+                  <span class="lp-tier-label">Feest</span>
+                  <span class="lp-tier-players">t/m 75 spelers</span>
+                  <span class="lp-tier-price">€12,95</span>
+                </div>
+                <div class="lp-price-tier">
+                  <span class="lp-tier-label">Evenement</span>
+                  <span class="lp-tier-players">t/m 200 spelers</span>
+                  <span class="lp-tier-price">€19,95</span>
+                </div>
               </div>
             </div>
 
