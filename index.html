@@ -1565,11 +1565,11 @@ function updLpCTA(){
     return;
   }
   if(mode==='eigen'){
+    // Eigen/PDF-only: geen Spotify, geen checkout — knop direct inschakelen als genoeg nummers
     var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
     if(songs.length<25){btn.disabled=true;btn.textContent='Voeg nog '+(25-songs.length)+' nummers toe';if(sum)sum.style.display='none';return;}
-    var pkg2=getPackageByPlayers(ST.players,'eigen');
-    btn.disabled=false;btn.textContent=btnLabel(pkg2);
-    if(sum){sum.style.display='block';if(st)st.textContent='Alleen bingokaarten'+(pkg2?' · '+formatEuro(pkg2.priceCents):'');if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
+    btn.disabled=false;btn.textContent='Kaarten genereren →';
+    if(sum){sum.style.display='block';if(st)st.textContent='Alleen bingokaarten';if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
     return;
   }
   if(mode==='spotify'){
@@ -3600,11 +3600,11 @@ async function startGen(){
     trackAnalytics('Thema:'+th.id);
     mkCards();buildPreviews();saveSession();go('cards');
   } else if(mode==='eigen'){
+    // Eigen/PDF-only: geen Spotify, geen checkout, geen playlist — direct kaarten genereren
     var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
-    if(songs.length<25){toast('Minimaal 25 nummers nodig.');return;}
-    var checkout2=await resolveCheckout(productKeyFor(mode,ST.players));
-    if(!checkout2.granted)return;
+    if(songs.length<25){toast('Minimaal 25 nummers nodig (nu: '+songs.length+').');return;}
     ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
+    ST.mode='eigen'; // bewaar mode zodat hostscherm-knop verborgen blijft
     trackAnalytics('Eigen nummers');mkCards();buildPreviews();saveSession();go('cards');
   } else if(mode==='spotify'){
     if(!SP.selectedPlaylist){toast('Kies eerst een playlist.');return;}
@@ -3629,6 +3629,7 @@ function saveSession(){
       songs:ST.songs,cards:ST.cards,players:ST.players,
       shuffled:ST.shuffled,pidx:ST.pidx,
       wonCategories:ST.wonCategories,bingoHistory:ST.bingoHistory,
+      mode:ST.mode||null,
       saved:new Date().toISOString()
     }));
   }catch(e){}
@@ -3654,6 +3655,9 @@ function resumeSession(){
     ST.wonCategories=s.wonCategories||{};
     ST.bingoHistory=s.bingoHistory||[];
     ST.missedChecked={};
+    if(s.mode)ST.mode=s.mode; // herstel modus zodat eigen-modus host-knop verborgen blijft
+    // Eigen/PDF-only: geen hostscherm, ga naar kaartenscherm
+    if(ST.mode==='eigen'){go('cards');return;}
     go('host');
   }catch(e){toast('Fout bij herstellen.');}
 }
