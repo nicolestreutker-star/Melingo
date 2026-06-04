@@ -1393,7 +1393,13 @@ function updSpotifyCtaBanner(){
 }
 
 function showLpSpOk(){
-  // Stap 1: zet mode
+  // Stap 1: zet mode — ALLEEN als gebruiker nog geen andere modus heeft gekozen
+  // (voorkomt dat Spotify-login de eigen/thema keuze overschrijft)
+  if(ST.mode&&ST.mode!=='spotify'){
+    // Gebruiker heeft eigen of thema modus al gekozen — Spotify verbonden maar mode intact laten
+    updSpotifyCtaBanner();
+    return;
+  }
   ST.mode='spotify';
 
   // Stap 2: highlight spotify card
@@ -1565,11 +1571,12 @@ function updLpCTA(){
     return;
   }
   if(mode==='eigen'){
-    // Eigen/PDF-only: geen Spotify, geen checkout — knop direct inschakelen als genoeg nummers
+    // Eigen/PDF-only: betaald product — prijs tonen, GEEN Spotify/playlist-check
     var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
     if(songs.length<25){btn.disabled=true;btn.textContent='Voeg nog '+(25-songs.length)+' nummers toe';if(sum)sum.style.display='none';return;}
-    btn.disabled=false;btn.textContent='Kaarten genereren →';
-    if(sum){sum.style.display='block';if(st)st.textContent='Alleen bingokaarten';if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
+    var pkg2=getPackageByPlayers(ST.players,'eigen');
+    btn.disabled=false;btn.textContent=btnLabel(pkg2);
+    if(sum){sum.style.display='block';if(st)st.textContent='Alleen bingokaarten'+(pkg2?' · '+formatEuro(pkg2.priceCents):'');if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
     return;
   }
   if(mode==='spotify'){
@@ -3577,6 +3584,20 @@ async function checkOrderAccess(){
 }
 
 async function startGen(){
+  // ── Eigen/PDF-only: betaald product, geen Spotify, geen playlist, geen hostscherm ──
+  var isPdfOnly=ST.mode==='eigen';
+  if(isPdfOnly){
+    var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
+    if(songs.length<25){toast('Minimaal 25 nummers nodig (nu: '+songs.length+').');return;}
+    // WEL betaalflow — Alleen PDF is een betaald product
+    var checkout2=await resolveCheckout(productKeyFor('eigen',ST.players));
+    if(!checkout2.granted)return;
+    ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
+    ST.mode='eigen'; // bewaar modus — hostscherm-knop moet verborgen blijven
+    trackAnalytics('Eigen nummers');mkCards();buildPreviews();saveSession();go('cards');
+    return; // harde stop — nooit doorgaan naar Spotify/playlist/thema checks
+  }
+
   var mode=ST.mode;
   if(mode==='thema'){
     if(!ST.theme){toast('Kies eerst een thema.');return;}
@@ -3599,13 +3620,6 @@ async function startGen(){
     ST.pidx=-1;
     trackAnalytics('Thema:'+th.id);
     mkCards();buildPreviews();saveSession();go('cards');
-  } else if(mode==='eigen'){
-    // Eigen/PDF-only: geen Spotify, geen checkout, geen playlist — direct kaarten genereren
-    var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
-    if(songs.length<25){toast('Minimaal 25 nummers nodig (nu: '+songs.length+').');return;}
-    ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
-    ST.mode='eigen'; // bewaar mode zodat hostscherm-knop verborgen blijft
-    trackAnalytics('Eigen nummers');mkCards();buildPreviews();saveSession();go('cards');
   } else if(mode==='spotify'){
     if(!SP.selectedPlaylist){toast('Kies eerst een playlist.');return;}
     var cnt=SP.selectedPlaylist._count||0;
