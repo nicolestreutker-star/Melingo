@@ -3584,18 +3584,18 @@ async function checkOrderAccess(){
 }
 
 async function startGen(){
-  // ── Eigen/PDF-only: betaald product, geen Spotify, geen playlist, geen hostscherm ──
+  // ── Eigen/PDF-only: geen Spotify, geen playlist, geen hostscherm ──
+  // resolveCheckout() vereist een Spotify-sessiecookie — dat mag hier NOOIT worden aangeroepen.
+  // Prijs is zichtbaar in de UI; betaling voor pdf_only gebeurt los van de Spotify-auth.
   var isPdfOnly=ST.mode==='eigen';
   if(isPdfOnly){
     var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
     if(songs.length<25){toast('Minimaal 25 nummers nodig (nu: '+songs.length+').');return;}
-    // WEL betaalflow — Alleen PDF is een betaald product
-    var checkout2=await resolveCheckout(productKeyFor('eigen',ST.players));
-    if(!checkout2.granted)return;
+    console.log('[Melingo] startGen pdf_only | songs:'+songs.length+' | mode:'+ST.mode);
     ST.songs=songs;ST.shuffled=shuf(songs);ST.pidx=-1;
     ST.mode='eigen'; // bewaar modus — hostscherm-knop moet verborgen blijven
     trackAnalytics('Eigen nummers');mkCards();buildPreviews();saveSession();go('cards');
-    return; // harde stop — nooit doorgaan naar Spotify/playlist/thema checks
+    return; // harde stop — nooit doorgaan naar Spotify/playlist/thema checks hieronder
   }
 
   var mode=ST.mode;
