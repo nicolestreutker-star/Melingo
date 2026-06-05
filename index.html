@@ -1374,6 +1374,8 @@ async function selLpTheme(el){
 }
 
 function onEigenInput(){
+  // Zorg dat mode altijd 'eigen' is als de gebruiker in het eigen-veld typt
+  if(ST.mode!=='eigen')ST.mode='eigen';
   var val=(document.getElementById('lp-ta')||{}).value||'';
   var n=parseSongs(val).length;
   var el=document.getElementById('lp-eigen-st');
@@ -1556,10 +1558,23 @@ function updLpCTA(){
     return admin?'Test gratis als admin':'Ga verder — '+formatEuro(pkg.priceCents);
   }
 
+  // ══ EIGEN/PDF-ONLY: allereerste check — nooit door Spotify/thema/playlist ══
+  // Staat bewust VÓÓR de !mode-check en VÓÓR alle andere modi.
+  // "Alleen bingokaarten" mag nooit de Spotify-branch raken, ongeacht andere state.
+  if(mode==='eigen'){
+    var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
+    console.log('[Melingo] updLpCTA eigen | songs:'+songs.length+' | SP.accessToken:'+!!SP.accessToken);
+    if(songs.length<25){btn.disabled=true;btn.textContent='Voeg nog '+(25-songs.length)+' nummers toe';if(sum)sum.style.display='none';return;}
+    var pkg2=getPackageByPlayers(ST.players,'eigen');
+    btn.disabled=false;btn.textContent=btnLabel(pkg2);
+    if(sum){sum.style.display='block';if(st)st.textContent='Alleen bingokaarten'+(pkg2?' · '+formatEuro(pkg2.priceCents):'');if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
+    return; // harde stop — nooit verder
+  }
+
   if(!mode){btn.disabled=true;btn.textContent='Kies eerst je speelmodus';if(sum)sum.style.display='none';return;}
 
   if(mode==='thema'){
-    // Spotify is vereist — zonder login kan de playlist niet worden afgespeeld
+    // Spotify is vereist voor thema-playback
     if(!SP.accessToken){
       btn.disabled=true;btn.textContent='Verbind eerst met Spotify';if(sum)sum.style.display='none';return;
     }
@@ -1568,15 +1583,6 @@ function updLpCTA(){
     var pkg=LP_PRODUCTS.ready_made_theme;
     btn.disabled=false;btn.textContent=btnLabel(pkg);
     if(sum){sum.style.display='block';if(st)st.textContent=(th?th.name:'Kant-en-klaar thema')+' · '+formatEuro(pkg.priceCents);if(sm)sm.textContent='40 nummers · '+ST.players+' spelers · hostscherm inbegrepen';}
-    return;
-  }
-  if(mode==='eigen'){
-    // Eigen/PDF-only: betaald product — prijs tonen, GEEN Spotify/playlist-check
-    var songs=parseSongs((document.getElementById('lp-ta')||{}).value||'');
-    if(songs.length<25){btn.disabled=true;btn.textContent='Voeg nog '+(25-songs.length)+' nummers toe';if(sum)sum.style.display='none';return;}
-    var pkg2=getPackageByPlayers(ST.players,'eigen');
-    btn.disabled=false;btn.textContent=btnLabel(pkg2);
-    if(sum){sum.style.display='block';if(st)st.textContent='Alleen bingokaarten'+(pkg2?' · '+formatEuro(pkg2.priceCents):'');if(sm)sm.textContent=songs.length+' nummers · '+ST.players+' spelers · alleen PDF';}
     return;
   }
   if(mode==='spotify'){
