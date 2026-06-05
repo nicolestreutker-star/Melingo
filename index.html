@@ -881,30 +881,39 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             <div class="hw-so">
 
               <!-- Slide 1: Kies hoe je wilt spelen -->
-              <div class="hw-slide active" data-hw="0" style="background:linear-gradient(160deg,#0D0D1E,#0F0F22);display:flex;align-items:center;justify-content:center;padding:1.25rem 1.1rem">
+              <div class="hw-slide active" data-hw="0" style="background:linear-gradient(160deg,#0D0D1E,#0F0F22);display:flex;align-items:center;justify-content:center;padding:1.1rem .9rem">
                 <div style="width:100%">
-                  <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,238,248,.33);text-align:center;margin-bottom:.75rem">Kies je speelmodus</div>
-                  <div style="display:flex;gap:.55rem">
-                    <div class="hw-mc sel" style="flex:1">
-                      <div style="font-size:.44rem;font-weight:700;text-transform:uppercase;color:rgba(200,170,255,.9);background:rgba(155,109,255,.2);border-radius:99px;padding:.12rem .42rem;display:inline-block;margin-bottom:.38rem">★ Meest gekozen</div>
-                      <div style="font-size:.63rem;font-weight:800;color:#F0EEF8;margin-bottom:.12rem;line-height:1.25">Eigen Spotify-bingo</div>
-                      <div style="font-size:.49rem;color:rgba(240,238,248,.38);line-height:1.4;margin-bottom:.45rem">Eigen playlist · hostscherm · auto bingo-check</div>
-                      <div style="font-size:.82rem;font-weight:800;color:#9B6DFF;margin-bottom:.35rem">€14,95</div>
-                      <div style="font-size:.43rem;color:rgba(29,185,84,.9);background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.25);border-radius:99px;padding:.11rem .4rem;display:inline-block">🎵 Spotify Premium</div>
+                  <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,238,248,.33);text-align:center;margin-bottom:.65rem">Kies je speelmodus</div>
+                  <div style="display:flex;gap:.45rem">
+                    <!-- Eigen Spotify-bingo — geselecteerd, glow -->
+                    <div class="hw-mc sel" style="flex:1.18;display:flex;flex-direction:column">
+                      <div style="display:flex;flex-wrap:wrap;gap:.22rem;margin-bottom:.38rem">
+                        <div style="font-size:.41rem;font-weight:700;text-transform:uppercase;color:rgba(200,170,255,.9);background:rgba(155,109,255,.2);border:1px solid rgba(155,109,255,.35);border-radius:99px;padding:.1rem .38rem;display:inline-block;white-space:nowrap">★ Meest gekozen</div>
+                        <div style="font-size:.41rem;font-weight:700;text-transform:uppercase;color:rgba(120,220,140,.9);background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.3);border-radius:99px;padding:.1rem .38rem;display:inline-block;white-space:nowrap">Spotify Premium</div>
+                      </div>
+                      <div style="font-size:.59rem;font-weight:800;color:#F0EEF8;margin-bottom:.1rem;line-height:1.2">Eigen Spotify-bingo</div>
+                      <div style="font-size:.46rem;color:rgba(240,238,248,.38);line-height:1.35;margin-bottom:.42rem">Eigen playlist · hostscherm · bingo-check</div>
+                      <div style="font-size:.78rem;font-weight:800;color:#9B6DFF">€14,95</div>
                     </div>
-                    <div class="hw-mc" style="flex:1">
-                      <div style="font-size:.44rem;font-weight:700;text-transform:uppercase;color:rgba(240,238,248,.33);background:rgba(255,255,255,.06);border-radius:99px;padding:.12rem .42rem;display:inline-block;margin-bottom:.38rem">⚡ Snel starten</div>
-                      <div style="font-size:.63rem;font-weight:800;color:#F0EEF8;margin-bottom:.12rem;line-height:1.25">Kant-en-klaar thema</div>
-                      <div style="font-size:.49rem;color:rgba(240,238,248,.38);line-height:1.4;margin-bottom:.45rem">40 nummers · max. 20 spelers</div>
-                      <div style="font-size:.82rem;font-weight:800;color:#F0EEF8;margin-bottom:.35rem">€9,95</div>
-                      <div style="font-size:.43rem;color:rgba(29,185,84,.9);background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.25);border-radius:99px;padding:.11rem .4rem;display:inline-block">🎵 Spotify Premium</div>
+                    <!-- Kant-en-klaar thema -->
+                    <div class="hw-mc" style="flex:1;display:flex;flex-direction:column">
+                      <div style="display:flex;flex-wrap:wrap;gap:.22rem;margin-bottom:.38rem">
+                        <div style="font-size:.41rem;font-weight:700;text-transform:uppercase;color:rgba(240,238,248,.5);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:.1rem .38rem;display:inline-block;white-space:nowrap">⚡ Snel starten</div>
+                        <div style="font-size:.41rem;font-weight:700;text-transform:uppercase;color:rgba(120,220,140,.9);background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.3);border-radius:99px;padding:.1rem .38rem;display:inline-block;white-space:nowrap">Spotify Premium</div>
+                      </div>
+                      <div style="font-size:.59rem;font-weight:800;color:#F0EEF8;margin-bottom:.1rem;line-height:1.2">Kant-en-klaar thema</div>
+                      <div style="font-size:.46rem;color:rgba(240,238,248,.38);line-height:1.35;margin-bottom:.42rem">40 nummers · max. 20 spelers</div>
+                      <div style="font-size:.78rem;font-weight:800;color:#F0EEF8">€9,95</div>
                     </div>
-                    <div class="hw-mc" style="flex:1">
-                      <div style="font-size:.44rem;font-weight:700;text-transform:uppercase;color:rgba(240,238,248,.33);background:rgba(255,255,255,.06);border-radius:99px;padding:.12rem .42rem;display:inline-block;margin-bottom:.38rem">💰 Voordeligst</div>
-                      <div style="font-size:.63rem;font-weight:800;color:#F0EEF8;margin-bottom:.12rem;line-height:1.25">Alleen bingokaarten</div>
-                      <div style="font-size:.49rem;color:rgba(240,238,248,.38);line-height:1.4;margin-bottom:.45rem">Geen Spotify nodig</div>
-                      <div style="font-size:.82rem;font-weight:800;color:#F0EEF8;margin-bottom:.35rem">Vanaf €7,95</div>
-                      <div style="font-size:.43rem;color:rgba(200,170,255,.85);background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.25);border-radius:99px;padding:.11rem .4rem;display:inline-block">✓ Geen Spotify</div>
+                    <!-- Alleen bingokaarten -->
+                    <div class="hw-mc" style="flex:1;display:flex;flex-direction:column">
+                      <div style="display:flex;flex-wrap:wrap;gap:.22rem;margin-bottom:.38rem">
+                        <div style="font-size:.41rem;font-weight:700;text-transform:uppercase;color:rgba(240,238,248,.5);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:.1rem .38rem;display:inline-block;white-space:nowrap">💰 Voordeligst</div>
+                        <div style="font-size:.41rem;font-weight:700;text-transform:uppercase;color:rgba(200,170,255,.85);background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.25);border-radius:99px;padding:.1rem .38rem;display:inline-block;white-space:nowrap">Geen Spotify</div>
+                      </div>
+                      <div style="font-size:.59rem;font-weight:800;color:#F0EEF8;margin-bottom:.1rem;line-height:1.2">Alleen bingokaarten</div>
+                      <div style="font-size:.46rem;color:rgba(240,238,248,.38);line-height:1.35;margin-bottom:.42rem">Print zelf · geen hostscherm nodig</div>
+                      <div style="font-size:.78rem;font-weight:800;color:#F0EEF8">Vanaf €7,95</div>
                     </div>
                   </div>
                 </div>
@@ -917,23 +926,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
                   </div>
                   <div>
-                    <div style="font-size:.56rem;font-weight:700;color:rgba(29,185,84,.95)">✓ Verbonden als Emma S.</div>
+                    <div style="font-size:.56rem;font-weight:700;color:rgba(29,185,84,.95)">✓ Verbonden als Melingo</div>
                     <div style="font-size:.47rem;color:rgba(240,238,248,.36)">Spotify Premium actief</div>
                   </div>
                 </div>
                 <div style="font-size:.53rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.35);margin-bottom:.48rem">Kies een playlist</div>
                 <div class="hw-fup d1" style="display:flex;align-items:center;gap:.52rem;padding:.46rem .58rem;background:rgba(29,185,84,.07);border:1.5px solid rgba(29,185,84,.35);border-radius:9px;margin-bottom:.32rem">
                   <div style="width:27px;height:27px;background:linear-gradient(135deg,#1DB954,#0d8a3e);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem">🎉</div>
-                  <div style="flex:1;min-width:0"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Feestmix 2024</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">43 nummers</div></div>
+                  <div style="flex:1;min-width:0"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Guilty Pleasures</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">43 nummers</div></div>
                   <div style="width:15px;height:15px;background:#1DB954;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
                 </div>
                 <div class="hw-fup d2" style="display:flex;align-items:center;gap:.52rem;padding:.46rem .58rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:9px;margin-bottom:.32rem">
                   <div style="width:27px;height:27px;background:linear-gradient(135deg,#9B6DFF,#5030cc);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem">🎸</div>
-                  <div style="flex:1"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8">Rock Classics</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">38 nummers</div></div>
+                  <div style="flex:1"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8">Foute Muziek</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">38 nummers</div></div>
                 </div>
                 <div class="hw-fup d3" style="display:flex;align-items:center;gap:.52rem;padding:.46rem .58rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:9px;margin-bottom:.48rem">
                   <div style="width:27px;height:27px;background:linear-gradient(135deg,#F2406A,#c01d47);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem">🎤</div>
-                  <div style="flex:1"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8">Jaren 90 Hits</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">55 nummers</div></div>
+                  <div style="flex:1"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8">R&amp;B &amp; Soul</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">55 nummers</div></div>
                 </div>
                 <div class="hw-fup d4" style="padding:.38rem .58rem;background:rgba(29,185,84,.08);border:1px solid rgba(29,185,84,.2);border-radius:7px;font-size:.5rem;color:rgba(29,185,84,.9);font-weight:600">✓ 43 nummers gevonden — kies je pakket hieronder.</div>
               </div>
@@ -943,17 +952,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
                 <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">Aantal spelers</div>
                 <div style="display:flex;align-items:center;gap:1rem">
                   <button style="width:33px;height:33px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:8px;color:rgba(240,238,248,.65);font-size:.9rem;display:flex;align-items:center;justify-content:center;cursor:default">−</button>
-                  <div style="font-size:2.8rem;font-weight:800;color:#F0EEF8;min-width:3.2rem;text-align:center;line-height:1">25</div>
+                  <div style="font-size:2.8rem;font-weight:800;background:linear-gradient(135deg,#F2406A,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;min-width:3.2rem;text-align:center;line-height:1">20</div>
                   <button style="width:33px;height:33px;background:rgba(155,109,255,.15);border:1px solid rgba(155,109,255,.35);border-radius:8px;color:#9B6DFF;font-size:.9rem;display:flex;align-items:center;justify-content:center;cursor:default">+</button>
                 </div>
                 <div style="display:flex;gap:.3rem;flex-wrap:wrap;justify-content:center">
                   <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">5</span>
                   <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">10</span>
-                  <span style="padding:.19rem .46rem;background:rgba(155,109,255,.25);border:1px solid rgba(155,109,255,.42);border-radius:6px;font-size:.49rem;color:#d4b8ff;font-weight:700">25</span>
+                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">15</span>
+                  <span style="padding:.19rem .46rem;background:rgba(155,109,255,.25);border:1px solid rgba(155,109,255,.42);border-radius:6px;font-size:.49rem;color:#d4b8ff;font-weight:700">20</span>
+                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">25</span>
                   <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">50</span>
                   <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">75</span>
-                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">100</span>
-                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">200</span>
                 </div>
                 <div style="width:100%;max-width:310px;padding:.62rem .78rem;background:rgba(155,109,255,.07);border:1px solid rgba(155,109,255,.22);border-radius:10px;display:flex;justify-content:space-between;align-items:center">
                   <div>
@@ -964,161 +973,268 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
                 </div>
               </div>
 
-              <!-- Slide 4: Unieke kaarten -->
-              <div class="hw-slide" data-hw="3" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem">
-                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33);margin-bottom:.75rem">25 unieke kaarten gegenereerd</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.55rem;width:100%;max-width:310px">
-                  <!-- Kaart 1: kolom N -->
-                  <div class="hw-fup d1" style="background:#16162A;border:1.5px solid rgba(155,109,255,.3);border-radius:8px;overflow:hidden">
-                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:flex;justify-content:space-around;padding:.18rem 0"><span style="font-size:.37rem;font-weight:900;color:white">B</span><span style="font-size:.37rem;font-weight:900;color:white">I</span><span style="font-size:.37rem;font-weight:900;color:white">N</span><span style="font-size:.37rem;font-weight:900;color:white">G</span><span style="font-size:.37rem;font-weight:900;color:white">O</span></div>
-                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,.4);padding:1.5px">
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(155,109,255,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+              <!-- Slide 4: Unieke kaarten — echte Melingo kaartstijl -->
+              <div class="hw-slide" data-hw="3" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem .9rem">
+                <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33);margin-bottom:.65rem">20 unieke kaarten gegenereerd</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.52rem;width:100%;max-width:310px">
+                  <!-- Kaart 1 -->
+                  <div class="hw-fup d1" style="background:#fff;border-radius:7px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.4)">
+                    <div style="background:linear-gradient(90deg,#F2406A,#9B6DFF);padding:.22rem .4rem;display:flex;align-items:center;justify-content:space-between">
+                      <span style="font-size:.45rem;font-weight:800;color:white;letter-spacing:.04em">Melingo</span>
+                      <span style="font-size:.38rem;font-weight:700;background:rgba(255,255,255,.25);color:white;border-radius:99px;padding:.06rem .28rem">Kaart 1</span>
                     </div>
-                    <div style="text-align:center;font-size:.38rem;color:rgba(240,238,248,.27);padding:.16rem 0">K-03</div>
+                    <div style="background:linear-gradient(90deg,#F2406A,#9B6DFF);display:grid;grid-template-columns:repeat(5,1fr);gap:1px;padding:.0rem">
+                      <span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">B</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">I</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">N</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">G</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">O</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#e8e0f0;padding:1px">
+                      <div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><span style="font-size:.28rem;color:#555;text-align:center;line-height:1.1">I'm Yours</span></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 100 100" width="11" height="11"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="7" fill="#9B6DFF"/></svg></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                    </div>
                   </div>
-                  <!-- Kaart 2: diagonaal -->
-                  <div class="hw-fup d2" style="background:#16162A;border:1.5px solid rgba(242,64,106,.25);border-radius:8px;overflow:hidden">
-                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:flex;justify-content:space-around;padding:.18rem 0"><span style="font-size:.37rem;font-weight:900;color:white">B</span><span style="font-size:.37rem;font-weight:900;color:white">I</span><span style="font-size:.37rem;font-weight:900;color:white">N</span><span style="font-size:.37rem;font-weight:900;color:white">G</span><span style="font-size:.37rem;font-weight:900;color:white">O</span></div>
-                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,.4);padding:1.5px">
-                      <div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(155,109,255,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div>
+                  <!-- Kaart 2 -->
+                  <div class="hw-fup d2" style="background:#fff;border-radius:7px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.4)">
+                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);padding:.22rem .4rem;display:flex;align-items:center;justify-content:space-between">
+                      <span style="font-size:.45rem;font-weight:800;color:white;letter-spacing:.04em">Melingo</span>
+                      <span style="font-size:.38rem;font-weight:700;background:rgba(255,255,255,.25);color:white;border-radius:99px;padding:.06rem .28rem">Kaart 2</span>
                     </div>
-                    <div style="text-align:center;font-size:.38rem;color:rgba(240,238,248,.27);padding:.16rem 0">K-07</div>
+                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:grid;grid-template-columns:repeat(5,1fr);gap:1px;padding:.0rem">
+                      <span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">B</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">I</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">N</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">G</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">O</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#e8e0f0;padding:1px">
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><span style="font-size:.28rem;color:#555;text-align:center;line-height:1.1">Crazy</span></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 100 100" width="11" height="11"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="7" fill="#9B6DFF"/></svg></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><span style="font-size:.28rem;color:#555;text-align:center;line-height:1.1">Toxic</span></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><span style="font-size:.28rem;color:#555;text-align:center;line-height:1.1">Rehab</span></div>
+                    </div>
                   </div>
-                  <!-- Kaart 3: horizontale rij -->
-                  <div class="hw-fup d3" style="background:#16162A;border:1.5px solid rgba(106,171,247,.22);border-radius:8px;overflow:hidden">
-                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:flex;justify-content:space-around;padding:.18rem 0"><span style="font-size:.37rem;font-weight:900;color:white">B</span><span style="font-size:.37rem;font-weight:900;color:white">I</span><span style="font-size:.37rem;font-weight:900;color:white">N</span><span style="font-size:.37rem;font-weight:900;color:white">G</span><span style="font-size:.37rem;font-weight:900;color:white">O</span></div>
-                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,.4);padding:1.5px">
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(155,109,255,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                  <!-- Kaart 3 -->
+                  <div class="hw-fup d3" style="background:#fff;border-radius:7px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.4)">
+                    <div style="background:linear-gradient(90deg,#F2406A,#9B6DFF);padding:.22rem .4rem;display:flex;align-items:center;justify-content:space-between">
+                      <span style="font-size:.45rem;font-weight:800;color:white;letter-spacing:.04em">Melingo</span>
+                      <span style="font-size:.38rem;font-weight:700;background:rgba(255,255,255,.25);color:white;border-radius:99px;padding:.06rem .28rem">Kaart 3</span>
                     </div>
-                    <div style="text-align:center;font-size:.38rem;color:rgba(240,238,248,.27);padding:.16rem 0">K-12</div>
+                    <div style="background:linear-gradient(90deg,#F2406A,#9B6DFF);display:grid;grid-template-columns:repeat(5,1fr);gap:1px">
+                      <span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">B</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">I</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">N</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">G</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">O</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#e8e0f0;padding:1px">
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><span style="font-size:.28rem;color:#555;text-align:center;line-height:1.1">Gold Digger</span></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 100 100" width="11" height="11"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="7" fill="#9B6DFF"/></svg></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><span style="font-size:.28rem;color:#555;text-align:center;line-height:1.1">Hey Ya</span></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                    </div>
                   </div>
-                  <!-- Kaart 4: andere diagonaal -->
-                  <div class="hw-fup d4" style="background:#16162A;border:1.5px solid rgba(29,185,84,.2);border-radius:8px;overflow:hidden">
-                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:flex;justify-content:space-around;padding:.18rem 0"><span style="font-size:.37rem;font-weight:900;color:white">B</span><span style="font-size:.37rem;font-weight:900;color:white">I</span><span style="font-size:.37rem;font-weight:900;color:white">N</span><span style="font-size:.37rem;font-weight:900;color:white">G</span><span style="font-size:.37rem;font-weight:900;color:white">O</span></div>
-                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,.4);padding:1.5px">
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(155,109,255,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
-                      <div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                  <!-- Kaart 4 -->
+                  <div class="hw-fup d4" style="background:#fff;border-radius:7px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.4)">
+                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);padding:.22rem .4rem;display:flex;align-items:center;justify-content:space-between">
+                      <span style="font-size:.45rem;font-weight:800;color:white;letter-spacing:.04em">Melingo</span>
+                      <span style="font-size:.38rem;font-weight:700;background:rgba(255,255,255,.25);color:white;border-radius:99px;padding:.06rem .28rem">Kaart 4</span>
                     </div>
-                    <div style="text-align:center;font-size:.38rem;color:rgba(240,238,248,.27);padding:.16rem 0">K-19</div>
+                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:grid;grid-template-columns:repeat(5,1fr);gap:1px">
+                      <span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">B</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">I</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">N</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">G</span><span style="font-size:.34rem;font-weight:900;color:white;text-align:center;padding:.1rem 0">O</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#e8e0f0;padding:1px">
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><span style="font-size:.28rem;color:#555;text-align:center;line-height:1.1">Smack That</span></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 100 100" width="11" height="11"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="7" fill="#9B6DFF"/></svg></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1;display:flex;align-items:center;justify-content:center"><span style="font-size:.28rem;color:#555;text-align:center;line-height:1.1">This Love</span></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                      <div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div><div style="background:#fdf8ff;aspect-ratio:1"></div>
+                    </div>
                   </div>
                 </div>
-                <div style="margin-top:.7rem;font-size:.5rem;color:rgba(240,238,248,.35);text-align:center">Elke kaart is uniek en willekeurig gegenereerd</div>
               </div>
 
-              <!-- Slide 5: Download en print -->
-              <div class="hw-slide" data-hw="4" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;gap:.7rem">
-                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">25 kaarten klaar om te downloaden</div>
-                <div style="width:52px;height:52px;background:rgba(155,109,255,.12);border:1.5px solid rgba(155,109,255,.28);border-radius:13px;display:flex;align-items:center;justify-content:center">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9B6DFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+              <!-- Slide 5: Kies kleur of eco, download en print -->
+              <div class="hw-slide" data-hw="4" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;gap:.65rem">
+                <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">20 kaarten klaar</div>
+                <div style="display:flex;gap:.38rem;align-items:center;margin:.1rem 0">
+                  <div style="width:44px;height:44px;background:rgba(155,109,255,.12);border:1.5px solid rgba(155,109,255,.28);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B6DFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-size:.6rem;font-weight:700;color:#F0EEF8">Kies je PDF-stijl</div>
+                    <div style="font-size:.49rem;color:rgba(240,238,248,.42);margin-top:.08rem">Download en print zelf uit — A4 formaat</div>
+                  </div>
                 </div>
-                <div style="display:flex;gap:.6rem;width:100%;max-width:295px">
-                  <button style="flex:1;padding:.62rem .5rem;background:linear-gradient(135deg,#9B6DFF,#7040ee);border:none;border-radius:10px;color:white;font-size:.55rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.32rem">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <div style="display:flex;gap:.55rem;width:100%;max-width:285px">
+                  <button style="flex:1;padding:.6rem .5rem;background:linear-gradient(135deg,#9B6DFF,#7040ee);border:none;border-radius:10px;color:white;font-size:.54rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.3rem">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Kleur PDF
                   </button>
-                  <button style="flex:1;padding:.62rem .5rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);border-radius:10px;color:rgba(240,238,248,.75);font-size:.55rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.32rem">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <button style="flex:1;padding:.6rem .5rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:10px;color:rgba(240,238,248,.75);font-size:.54rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.3rem">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Eco PDF
                   </button>
                 </div>
-                <div style="display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center">
-                  <span style="font-size:.48rem;color:rgba(240,238,248,.38);background:rgba(255,255,255,.05);padding:.17rem .42rem;border-radius:5px">A4 formaat</span>
-                  <span style="font-size:.48rem;color:rgba(240,238,248,.38);background:rgba(255,255,255,.05);padding:.17rem .42rem;border-radius:5px">Direct printen</span>
-                  <span style="font-size:.48rem;color:rgba(240,238,248,.38);background:rgba(255,255,255,.05);padding:.17rem .42rem;border-radius:5px">Uniek kaartnummer</span>
+                <div style="width:100%;max-width:285px;padding:.45rem .62rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:9px;display:flex;align-items:center;gap:.5rem">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(240,238,248,.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                  <div style="font-size:.49rem;color:rgba(240,238,248,.42)">Download je PDF en print zelf uit op A4</div>
+                </div>
+                <div style="display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center">
+                  <span style="font-size:.46rem;color:rgba(240,238,248,.36);background:rgba(255,255,255,.05);padding:.15rem .38rem;border-radius:5px">Uniek kaartnummer</span>
+                  <span style="font-size:.46rem;color:rgba(240,238,248,.36);background:rgba(255,255,255,.05);padding:.15rem .38rem;border-radius:5px">Kleur of eco</span>
+                  <span style="font-size:.46rem;color:rgba(240,238,248,.36);background:rgba(255,255,255,.05);padding:.15rem .38rem;border-radius:5px">Direct printen</span>
                 </div>
               </div>
 
-              <!-- Slide 6: Host-scherm -->
-              <div class="hw-slide" data-hw="5" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;gap:.5rem">
-                <div style="width:100%;max-width:310px;background:#13132A;border:1px solid rgba(155,109,255,.2);border-radius:14px;padding:1rem;text-align:center;position:relative;overflow:hidden">
-                  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:100px;height:100px;background:radial-gradient(circle,rgba(155,109,255,.18),transparent 70%);pointer-events:none"></div>
-                  <div style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,238,248,.35);margin-bottom:.6rem">Nu speelt</div>
-                  <div style="margin:0 auto .6rem;width:60px;height:60px">
-                    <svg class="hw-vspin" viewBox="0 0 100 100" width="60" height="60">
+              <!-- Slide 6: Open het host-scherm -->
+              <div class="hw-slide" data-hw="5" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.1rem;gap:.5rem">
+                <!-- Mini topbar -->
+                <div style="width:100%;max-width:310px;background:#0E0E1C;border:1px solid rgba(255,255,255,.06);border-radius:9px 9px 0 0;padding:.32rem .65rem;display:flex;align-items:center;justify-content:space-between">
+                  <div style="font-size:.46rem;color:rgba(240,238,248,.38)">← Kaarten</div>
+                  <div style="font-size:.52rem;font-weight:700;color:#F0EEF8">Host</div>
+                  <div style="font-size:.46rem;color:rgba(240,238,248,.38)">Feedback</div>
+                </div>
+                <div style="width:100%;max-width:310px;background:#13132A;border:1px solid rgba(155,109,255,.18);border-top:none;border-radius:0 0 9px 9px;padding:.85rem .9rem;text-align:center">
+                  <div style="position:relative;display:inline-block;margin-bottom:.5rem">
+                    <svg class="hw-vspin" viewBox="0 0 100 100" width="52" height="52">
                       <circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/>
                     </svg>
                   </div>
-                  <div style="font-size:.7rem;font-weight:800;color:#F0EEF8;margin-bottom:.18rem">Don't Stop Me Now</div>
-                  <div style="font-size:.53rem;color:rgba(240,238,248,.48);margin-bottom:.55rem">Queen</div>
-                  <div style="height:3px;background:rgba(255,255,255,.09);border-radius:99px;margin-bottom:.5rem;overflow:hidden"><div style="height:100%;width:62%;background:linear-gradient(90deg,#9B6DFF,#F2406A);border-radius:99px"></div></div>
-                  <div style="font-size:.48rem;color:rgba(240,238,248,.35)">7 van 43 nummers gespeeld</div>
-                </div>
-                <div style="display:flex;gap:.48rem;margin-top:.3rem">
-                  <button style="padding:.42rem .72rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:8px;color:rgba(240,238,248,.65);font-size:.5rem;cursor:default">⏸ Pauze</button>
-                  <button style="padding:.42rem .72rem;background:linear-gradient(135deg,#9B6DFF,#F2406A);border:none;border-radius:8px;color:white;font-size:.5rem;font-weight:700;cursor:default">Volgend nummer →</button>
+                  <div style="font-size:.44rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(240,238,248,.35);margin-bottom:.22rem">Nu speelt</div>
+                  <div style="font-size:.68rem;font-weight:800;color:#F0EEF8;margin-bottom:.14rem;line-height:1.2">Crazy</div>
+                  <div style="font-size:.5rem;color:rgba(240,238,248,.46);margin-bottom:.48rem">Gnarls Barkley · 11 van 40</div>
+                  <div style="height:2.5px;background:rgba(255,255,255,.09);border-radius:99px;margin-bottom:.55rem;overflow:hidden"><div style="height:100%;width:38%;background:linear-gradient(90deg,#9B6DFF,#F2406A);border-radius:99px"></div></div>
+                  <div style="display:flex;gap:.4rem;justify-content:center">
+                    <button style="padding:.36rem .65rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:7px;color:rgba(240,238,248,.65);font-size:.48rem;cursor:default">⏸</button>
+                    <button style="padding:.36rem .9rem;background:linear-gradient(135deg,#F2406A,#9B6DFF);border:none;border-radius:7px;color:white;font-size:.48rem;font-weight:700;cursor:default">Volgend nummer →</button>
+                  </div>
                 </div>
               </div>
 
-              <!-- Slide 7: Bingo checker -->
-              <div class="hw-slide" data-hw="6" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;gap:.7rem">
-                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">Bingo checker</div>
-                <div style="width:100%;max-width:295px;background:#13132A;border:1px solid rgba(155,109,255,.2);border-radius:12px;padding:.9rem">
-                  <div style="margin-bottom:.6rem">
-                    <div style="font-size:.5rem;color:rgba(240,238,248,.42);margin-bottom:.28rem">Kaartnummer</div>
-                    <div style="padding:.42rem .58rem;background:rgba(255,255,255,.055);border:1.5px solid rgba(155,109,255,.4);border-radius:8px;font-size:.63rem;font-weight:700;color:#F0EEF8;display:flex;align-items:center;justify-content:space-between"><span>K-07</span><span style="font-size:.48rem;color:rgba(240,238,248,.38)">Rij 2 bingo</span></div>
-                  </div>
-                  <div style="padding:.6rem;background:rgba(29,185,84,.08);border:1.5px solid rgba(29,185,84,.28);border-radius:10px;text-align:center">
-                    <div style="margin-bottom:.3rem">
-                      <svg width="30" height="30" viewBox="0 0 32 32">
-                        <circle cx="16" cy="16" r="14" fill="rgba(29,185,84,.12)" stroke="rgba(29,185,84,.55)" stroke-width="1.5"/>
-                        <path class="hw-cp" d="M9 16.5l5 5 9-10" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                      </svg>
+              <!-- Slide 7: Kies hoe je wilt afspelen -->
+              <div class="hw-slide" data-hw="6" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;gap:.5rem">
+                <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33);margin-bottom:.1rem">Afspeelinstelling</div>
+                <div style="width:100%;max-width:295px;display:flex;flex-direction:column;gap:.42rem">
+                  <!-- Handmatig/Automatisch -->
+                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .7rem">
+                    <div style="font-size:.48rem;color:rgba(240,238,248,.4);margin-bottom:.38rem;font-weight:600">Afspeelmodus</div>
+                    <div style="display:flex;gap:.28rem">
+                      <button style="flex:1;padding:.34rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:7px;color:rgba(240,238,248,.45);font-size:.48rem;cursor:default">Handmatig</button>
+                      <button style="flex:1;padding:.34rem;background:rgba(155,109,255,.18);border:1.5px solid rgba(155,109,255,.42);border-radius:7px;color:#d4b8ff;font-size:.48rem;font-weight:700;cursor:default">✓ Automatisch</button>
                     </div>
-                    <div style="font-size:.63rem;font-weight:800;color:rgba(29,185,84,.95)">Bingo klopt!</div>
-                    <div style="font-size:.48rem;color:rgba(240,238,248,.42);margin-top:.18rem">Rij 2 is volledig aangevinkt</div>
                   </div>
-                </div>
-                <div style="display:flex;gap:.3rem;flex-wrap:wrap;justify-content:center">
-                  <span style="font-size:.46rem;color:rgba(240,238,248,.42);background:rgba(255,255,255,.05);border-radius:5px;padding:.16rem .4rem">Horizontale rij</span>
-                  <span style="font-size:.46rem;color:rgba(240,238,248,.42);background:rgba(255,255,255,.05);border-radius:5px;padding:.16rem .4rem">Verticale rij</span>
-                  <span style="font-size:.46rem;color:rgba(240,238,248,.42);background:rgba(255,255,255,.05);border-radius:5px;padding:.16rem .4rem">Diagonaal</span>
-                  <span style="font-size:.46rem;color:rgba(240,238,248,.42);background:rgba(255,255,255,.05);border-radius:5px;padding:.16rem .4rem">Volle kaart</span>
+                  <!-- Start nummer vanaf -->
+                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .7rem">
+                    <div style="font-size:.48rem;color:rgba(240,238,248,.4);margin-bottom:.38rem;font-weight:600">Start nummer vanaf</div>
+                    <div style="display:flex;gap:.28rem">
+                      <span style="padding:.28rem .42rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.46rem;color:rgba(240,238,248,.4)">Begin</span>
+                      <span style="padding:.28rem .42rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.46rem;color:rgba(240,238,248,.4)">15 sec</span>
+                      <span style="padding:.28rem .42rem;background:rgba(155,109,255,.18);border:1px solid rgba(155,109,255,.38);border-radius:6px;font-size:.46rem;color:#d4b8ff;font-weight:700">30 sec ✓</span>
+                      <span style="padding:.28rem .42rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.46rem;color:rgba(240,238,248,.4)">60 sec</span>
+                    </div>
+                  </div>
+                  <!-- Duur per nummer -->
+                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .7rem">
+                    <div style="font-size:.48rem;color:rgba(240,238,248,.4);margin-bottom:.38rem;font-weight:600">Duur per nummer</div>
+                    <div style="display:flex;gap:.28rem">
+                      <span style="padding:.28rem .42rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.46rem;color:rgba(240,238,248,.4)">15 sec</span>
+                      <span style="padding:.28rem .42rem;background:rgba(106,171,247,.18);border:1px solid rgba(106,171,247,.38);border-radius:6px;font-size:.46rem;color:#6AABF7;font-weight:700">30 sec ✓</span>
+                      <span style="padding:.28rem .42rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.46rem;color:rgba(240,238,248,.4)">45 sec</span>
+                      <span style="padding:.28rem .42rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.46rem;color:rgba(240,238,248,.4)">60 sec</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <!-- Slide 8: Instellingen -->
-              <div class="hw-slide" data-hw="7" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;gap:.7rem">
-                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">Instellingen</div>
-                <div style="width:100%;max-width:295px;display:flex;flex-direction:column;gap:.5rem">
-                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.65rem .75rem">
-                    <div style="font-size:.5rem;color:rgba(240,238,248,.4);margin-bottom:.42rem">Afspeelmodus</div>
-                    <div style="display:flex;gap:.32rem">
-                      <button style="flex:1;padding:.36rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:7px;color:rgba(240,238,248,.5);font-size:.5rem;cursor:default">Handmatig</button>
-                      <button style="flex:1;padding:.36rem;background:rgba(155,109,255,.2);border:1.5px solid rgba(155,109,255,.44);border-radius:7px;color:#d4b8ff;font-size:.5rem;font-weight:700;cursor:default">✓ Automatisch</button>
+              <!-- Slide 8: Houd overzicht tijdens het spel -->
+              <div class="hw-slide" data-hw="7" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;padding:1.1rem;gap:.48rem;justify-content:center">
+                <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33);text-align:center;margin-bottom:.05rem">Overzicht</div>
+                <div style="width:100%;background:#13132A;border:1px solid rgba(155,109,255,.18);border-radius:10px;padding:.65rem .75rem;text-align:center">
+                  <div style="font-size:.44rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(240,238,248,.32);margin-bottom:.28rem">Nu speelt</div>
+                  <div style="font-size:.72rem;font-weight:800;color:#F0EEF8;line-height:1.15">Crazy</div>
+                  <div style="font-size:.48rem;color:rgba(240,238,248,.44);margin-bottom:.42rem">Gnarls Barkley, CeeLo Green, Danger Mouse</div>
+                  <div style="display:flex;align-items:center;justify-content:center;gap:.55rem;margin-bottom:.42rem">
+                    <div style="font-size:.58rem;font-weight:800;color:#9B6DFF">11 van 40</div>
+                    <div style="height:3px;flex:1;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden"><div style="height:100%;width:27%;background:linear-gradient(90deg,#9B6DFF,#F2406A)"></div></div>
+                  </div>
+                </div>
+                <!-- Gespeelde nummers lijst -->
+                <div style="background:#13132A;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.55rem .7rem">
+                  <div style="font-size:.46rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(240,238,248,.3);margin-bottom:.38rem;display:flex;justify-content:space-between"><span>Gespeeld</span><span style="color:#9B6DFF">11</span></div>
+                  <div class="hw-fup d1" style="display:flex;align-items:center;gap:.42rem;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">
+                    <div style="width:14px;height:14px;background:rgba(155,109,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.38rem;color:#9B6DFF;font-weight:700">11</div>
+                    <div><div style="font-size:.5rem;font-weight:700;color:#F0EEF8">Crazy</div><div style="font-size:.42rem;color:rgba(240,238,248,.38)">Gnarls Barkley</div></div>
+                  </div>
+                  <div class="hw-fup d2" style="display:flex;align-items:center;gap:.42rem;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">
+                    <div style="width:14px;height:14px;background:rgba(255,255,255,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.38rem;color:rgba(240,238,248,.4);font-weight:700">10</div>
+                    <div><div style="font-size:.5rem;font-weight:700;color:rgba(240,238,248,.65)">Temperature</div><div style="font-size:.42rem;color:rgba(240,238,248,.35)">Sean Paul</div></div>
+                  </div>
+                  <div class="hw-fup d3" style="display:flex;align-items:center;gap:.42rem;padding:.3rem 0">
+                    <div style="width:14px;height:14px;background:rgba(255,255,255,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.38rem;color:rgba(240,238,248,.4);font-weight:700">9</div>
+                    <div><div style="font-size:.5rem;font-weight:700;color:rgba(240,238,248,.65)">This Love</div><div style="font-size:.42rem;color:rgba(240,238,248,.35)">Maroon 5</div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 9: Gebruik slimme host-tools -->
+              <div class="hw-slide" data-hw="8" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;padding:1.1rem;gap:.4rem;justify-content:center">
+                <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33);text-align:center;margin-bottom:.05rem">Host-tools</div>
+                <!-- Bingo-instellingen -->
+                <div class="hw-fup d1" style="background:#13132A;border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.55rem .7rem">
+                  <div style="font-size:.48rem;font-weight:700;color:rgba(240,238,248,.55);margin-bottom:.35rem">Bingo-instellingen</div>
+                  <div style="display:flex;gap:.25rem;flex-wrap:wrap">
+                    <div style="display:flex;align-items:center;gap:.22rem;font-size:.44rem;color:rgba(240,238,248,.55)"><span style="width:9px;height:9px;background:rgba(155,109,255,.6);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="6" height="6" viewBox="0 0 10 10" fill="white"><path d="M1.5 5l3 3 4-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span> Horizontale rij</div>
+                    <div style="display:flex;align-items:center;gap:.22rem;font-size:.44rem;color:rgba(240,238,248,.55)"><span style="width:9px;height:9px;background:rgba(155,109,255,.6);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="6" height="6" viewBox="0 0 10 10" fill="white"><path d="M1.5 5l3 3 4-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span> Verticale rij</div>
+                    <div style="display:flex;align-items:center;gap:.22rem;font-size:.44rem;color:rgba(240,238,248,.55)"><span style="width:9px;height:9px;background:rgba(155,109,255,.6);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="6" height="6" viewBox="0 0 10 10" fill="white"><path d="M1.5 5l3 3 4-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span> Diagonale rij</div>
+                    <div style="display:flex;align-items:center;gap:.22rem;font-size:.44rem;color:rgba(240,238,248,.38)"><span style="width:9px;height:9px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:2px;flex-shrink:0"></span> Volle kaart</div>
+                  </div>
+                </div>
+                <!-- Gemiste bingo -->
+                <div class="hw-fup d2" style="background:#13132A;border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.55rem .7rem;display:flex;align-items:center;gap:.52rem">
+                  <span style="width:12px;height:12px;background:rgba(155,109,255,.5);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="8" height="8" viewBox="0 0 10 10" fill="white"><path d="M1.5 5l3 3 4-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
+                  <div><div style="font-size:.48rem;font-weight:700;color:rgba(240,238,248,.7)">Gemiste bingo detectie</div><div style="font-size:.42rem;color:rgba(240,238,248,.38);margin-top:.1rem">Popup als iemand bingo had maar niet riep</div></div>
+                </div>
+                <!-- Handmatig nummer toevoegen -->
+                <div class="hw-fup d3" style="background:#13132A;border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.55rem .7rem">
+                  <div style="font-size:.48rem;font-weight:700;color:rgba(240,238,248,.55);margin-bottom:.32rem">Handmatig nummer toevoegen</div>
+                  <div style="display:flex;gap:.32rem">
+                    <div style="flex:1;padding:.3rem .48rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:7px;font-size:.46rem;color:rgba(240,238,248,.35)">Artiest of titel...</div>
+                    <button style="padding:.3rem .55rem;background:linear-gradient(135deg,#9B6DFF,#F2406A);border:none;border-radius:7px;color:white;font-size:.46rem;font-weight:700;cursor:default">Zoek</button>
+                  </div>
+                </div>
+                <!-- Sessie opslaan -->
+                <div class="hw-fup d4" style="background:#13132A;border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.5rem .7rem;display:flex;align-items:center;justify-content:space-between">
+                  <div>
+                    <div style="font-size:.48rem;font-weight:700;color:rgba(240,238,248,.55)">Sessie opslaan &amp; herstel</div>
+                    <div style="font-size:.42rem;color:rgba(240,238,248,.35);margin-top:.08rem">Ga later verder waar je gebleven bent</div>
+                  </div>
+                  <button style="padding:.28rem .52rem;background:rgba(155,109,255,.15);border:1px solid rgba(155,109,255,.3);border-radius:7px;color:#c4a8ff;font-size:.44rem;font-weight:700;cursor:default">Opslaan</button>
+                </div>
+              </div>
+
+              <!-- Slide 10: Controleer bingo's eenvoudig -->
+              <div class="hw-slide" data-hw="9" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;gap:.55rem">
+                <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">Bingo controleren</div>
+                <div style="width:100%;max-width:295px;background:#13132A;border:1px solid rgba(155,109,255,.2);border-radius:12px;padding:.8rem">
+                  <!-- Input + knop -->
+                  <div style="font-size:.48rem;color:rgba(240,238,248,.42);margin-bottom:.24rem">Kaartnummer</div>
+                  <div style="display:flex;gap:.32rem;margin-bottom:.55rem">
+                    <div style="flex:1;padding:.38rem .52rem;background:rgba(255,255,255,.055);border:1.5px solid rgba(155,109,255,.4);border-radius:8px;font-size:.6rem;font-weight:700;color:#F0EEF8">15</div>
+                    <button style="padding:.38rem .65rem;background:linear-gradient(135deg,#9B6DFF,#F2406A);border:none;border-radius:8px;color:white;font-size:.52rem;font-weight:700;cursor:default">Controleer</button>
+                  </div>
+                  <!-- Resultaat -->
+                  <div style="padding:.5rem .6rem;background:rgba(29,185,84,.08);border:1.5px solid rgba(29,185,84,.28);border-radius:9px;margin-bottom:.42rem;display:flex;align-items:flex-start;gap:.48rem">
+                    <svg width="26" height="26" viewBox="0 0 32 32" style="flex-shrink:0;margin-top:.05rem">
+                      <circle cx="16" cy="16" r="14" fill="rgba(29,185,84,.12)" stroke="rgba(29,185,84,.55)" stroke-width="1.5"/>
+                      <path class="hw-cp" d="M9 16.5l5 5 9-10" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <div>
+                      <div style="font-size:.56rem;font-weight:800;color:rgba(29,185,84,.95)">BINGO! Kaart 15 wint.</div>
+                      <div style="font-size:.44rem;color:rgba(240,238,248,.5);margin-top:.1rem;line-height:1.4">Verticale rij · nog te winnen: horizontale rij, diagonale rij, volle kaart</div>
                     </div>
                   </div>
-                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.65rem .75rem">
-                    <div style="font-size:.5rem;color:rgba(240,238,248,.4);margin-bottom:.42rem">Timer duur</div>
-                    <div style="display:flex;gap:.3rem">
-                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">15s</span>
-                      <span style="padding:.3rem .45rem;background:rgba(155,109,255,.2);border:1px solid rgba(155,109,255,.35);border-radius:6px;font-size:.48rem;color:#d4b8ff;font-weight:700">30s ✓</span>
-                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">45s</span>
-                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">60s</span>
-                    </div>
-                  </div>
-                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.65rem .75rem">
-                    <div style="font-size:.5rem;color:rgba(240,238,248,.4);margin-bottom:.42rem">Starten vanaf</div>
-                    <div style="display:flex;gap:.3rem">
-                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">0s</span>
-                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">5s</span>
-                      <span style="padding:.3rem .45rem;background:rgba(106,171,247,.2);border:1px solid rgba(106,171,247,.35);border-radius:6px;font-size:.48rem;color:#6AABF7;font-weight:700">20s ✓</span>
-                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">30s</span>
-                    </div>
+                  <!-- Kaart visualisatie: 5x5 grid met groen gemarkeerde kolom -->
+                  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px">
+                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
+                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
+                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(155,109,255,.5);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
+                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
+                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
                   </div>
                 </div>
               </div>
@@ -1130,7 +1246,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
         <!-- ── Right: stap info + navigatie ── -->
         <div class="hw-rp" id="hw-rp">
-          <div class="hw-badge">Stap <span id="hw-snum">1</span> van 8</div>
+          <div class="hw-badge">Stap <span id="hw-snum">1</span> van 10</div>
           <div class="hw-stitle" id="hw-stitle">Kies hoe je wilt spelen</div>
           <div class="hw-sdesc" id="hw-sdesc">Ga voor je eigen Spotify-bingo, een kant-en-klaar thema of alleen printbare bingokaarten.</div>
           <div class="hw-dots2" id="hw-dots2"></div>
@@ -4117,16 +4233,18 @@ function resumeSession(){
 }
 
 // ══ HOE WERKT MELINGO — walkthrough ══
-var hwCur=0,hwPlaying=true,hwTimer=null,hwTotal=8,hwDur=5000;
+var hwCur=0,hwPlaying=true,hwTimer=null,hwTotal=10,hwDur=5000;
 var hwSteps=[
   {t:'Kies hoe je wilt spelen',d:'Ga voor je eigen Spotify-bingo, een kant-en-klaar thema of alleen printbare bingokaarten.'},
   {t:'Kies je playlist of thema',d:'Gebruik je eigen Spotify-playlist of start direct met een kant-en-klaar thema.'},
   {t:'Selecteer het aantal spelers',d:'Van klein gezelschap tot groot evenement — Melingo schaalt automatisch met je mee.'},
-  {t:'Genereer unieke kaarten',d:'Elke speler krijgt een andere kaart. Wel zo eerlijk, en veel makkelijker tijdens het spel.'},
-  {t:'Download en print direct',d:'Kies een kleur-PDF of eco-PDF en print je kaarten meteen uit.'},
-  {t:'Gebruik het host-scherm',d:'Zie welk nummer speelt, houd overzicht en speel de bingo soepel en professioneel.'},
-  {t:'Controleer bingo\'s eenvoudig',d:'Check kaartnummers direct en controleer snel of iemand echt bingo heeft.'},
-  {t:'Speel zoals jij wilt',d:'Handmatig of automatisch, met slimme instellingen die passen bij jouw groep.'}
+  {t:'Genereer unieke kaarten',d:'Elke speler krijgt een andere kaart. Wel zo eerlijk en veel makkelijker tijdens het spel.'},
+  {t:'Kies kleur of eco, download en print',d:'Kies een kleur-PDF of eco-PDF, download je kaarten en print ze direct zelf uit.'},
+  {t:'Open het host-scherm',d:'Gebruik het host-scherm om de muziekbingo soepel en overzichtelijk te begeleiden.'},
+  {t:'Kies hoe je wilt afspelen',d:'Speel handmatig of automatisch, kies waar het nummer start en bepaal de duur per fragment.'},
+  {t:'Houd overzicht tijdens het spel',d:'Zie welk nummer speelt, welke nummers al geweest zijn en ga makkelijk door naar het volgende.'},
+  {t:'Gebruik slimme host-tools',d:'Pas bingo-instellingen aan, voeg handmatig nummers toe en sla je sessie op om later verder te gaan.'},
+  {t:'Controleer bingo\'s eenvoudig',d:'Check kaartnummers direct en controleer snel of iemand echt bingo heeft.'}
 ];
 function hwInit(){
   var dots=document.getElementById('hw-dots2');
