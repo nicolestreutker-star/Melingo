@@ -2168,7 +2168,20 @@ function setStartPos(p){
 }
 function setHM(m){ST.hmode=m;document.getElementById('sm').classList.toggle('on',m==='manual');document.getElementById('sa').classList.toggle('on',m==='auto');var srow=document.getElementById('srow');if(srow)srow.style.display=m==='auto'?'block':'none';document.getElementById('twrap').style.display='none';clearInterval(ST.tint);ST.tint=null;}
 function nextSong(){
-  if(ST.paused)return;clearInterval(ST.tint);ST.tint=null;ST.pidx++;
+  if(ST.paused)return;
+
+  // ── Mobiel: blokkeer als audio niet geactiveerd is ──
+  // Op iOS/Android moet de gebruiker eerst "Activeer geluid" tikken.
+  // Zonder activateElement() speelt Spotify SDK niets en staat de timer
+  // verkeerd — scherm zegt "speelt" maar je hoort niets.
+  if(isMobile()&&SP.accessToken&&!SP.audioActivated){
+    toast('Tik eerst op "Activeer geluid" om audio te starten.');
+    var banner=document.getElementById('mobile-audio-banner');
+    if(banner)banner.style.display='block';
+    return;
+  }
+
+  clearInterval(ST.tint);ST.tint=null;ST.pidx++;
   if(ST.pidx>=ST.shuffled.length){document.getElementById('htitle').textContent='Alle nummers gespeeld!';document.getElementById('hartist').textContent='Einde van de ronde';document.getElementById('twrap').style.display='none';var v=document.getElementById('hvinyl');if(v)v.classList.remove('spin');return;}
   var s=ST.shuffled[ST.pidx];
   document.getElementById('htitle').textContent=s.t;document.getElementById('hartist').textContent=s.a;
@@ -2181,13 +2194,23 @@ function nextSong(){
   r.innerHTML='<div class="pidx">'+(ST.pidx+1)+'</div><div><div class="ptit">'+esc(s.t)+'</div><div class="part">'+esc(s.a)+'</div></div>';
   pl.insertBefore(r,pl.firstChild);
   var v=document.getElementById('hvinyl');if(v)v.classList.add('spin');
-  if(ST.hmode==='auto')startTimer();
   saveSession();
   // Check for missed bingos after each song
   if(ST.missedBingoAlert)checkAllMissedBingos();
-  // Sync Spotify: speel exact het nummer dat de UI toont (URI uit ST.shuffled — single source of truth)
+  // ── Sync Spotify: speel exact het nummer dat de UI toont ──
+  // Timer start pas nadat playTrackByIndex() is gestart, zodat de timer
+  // niet loopt terwijl audio geblokkeerd is.
   if(SP.accessToken&&SP.deviceId){
-    playTrackByIndex(ST.pidx);
+    playTrackByIndex(ST.pidx).then(function(){
+      // Start auto-timer pas NA succesvolle playback-aanvraag
+      if(ST.hmode==='auto')startTimer();
+    }).catch(function(e){
+      console.error('[Melingo] nextSong playback failed:',e&&e.message);
+      if(ST.hmode==='auto')startTimer(); // start toch bij niet-Spotify (eigen nummers)
+    });
+  } else {
+    // Geen Spotify (eigen nummers) — timer direct starten
+    if(ST.hmode==='auto')startTimer();
   }
 }
 
@@ -2936,18 +2959,31 @@ async function activateAudio(){
   if(btn){btn.disabled=true;btn.textContent='Verbinden met Spotify...';}
 
   try{
-    // Stap 1: initialiseer player als nog niet gedaan (binnen user gesture → iOS toestaan)
+    // ── Stap 1: maak player BINNEN deze user gesture (synchrone aanmaak) ──
     if(!SP.player&&SP.accessToken){
       initPlayer();
     }
 
-    // Wacht tot device_id beschikbaar is (max 6 sec)
+    // ── Stap 2: activateElement() VERPLICHT vóór elke await voor iOS Safari ──
+    // Dit is de officiële Spotify SDK-methode om iOS audio te unblocken.
+    // Moet synchroon (of direct awaited) worden aangeroepen vóór elke andere
+    // asynchrone operatie, anders verliest iOS de user-gesture context.
+    if(SP.player&&typeof SP.player.activateElement==='function'){
+      try{
+        await SP.player.activateElement();
+        console.log('[Melingo] activateElement succeeded — iOS audio unlocked');
+      }catch(ae){
+        console.warn('[Melingo] activateElement failed (non-fatal):',ae&&ae.message);
+      }
+    }
+
+    // ── Stap 3: wacht tot device_id beschikbaar is (max 8 sec) ──
     if(!SP.deviceId){
       await new Promise(function(resolve){
         var check=setInterval(function(){
           if(SP.deviceId){clearInterval(check);resolve();}
         },250);
-        setTimeout(function(){clearInterval(check);resolve();},6000);
+        setTimeout(function(){clearInterval(check);resolve();},8000);
       });
     }
 
