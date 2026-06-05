@@ -531,6 +531,70 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .start-layout{gap:2rem}
   .start-left{max-width:420px}
 }
+
+/* ══ HOE WERKT MELINGO — geanimeerde walkthrough ══ */
+.hw-sec{padding:2rem 0 2.5rem}
+.hw-hd{text-align:center;margin-bottom:2.2rem;padding:0 1.5rem}
+.hw-pill2{display:inline-flex;align-items:center;background:rgba(155,109,255,.11);border:1px solid rgba(155,109,255,.28);border-radius:99px;font-size:.68rem;font-weight:700;color:rgba(200,170,255,.85);padding:.26rem .82rem;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.7rem}
+.hw-h2{font-size:1.85rem;font-weight:800;margin-bottom:.45rem;color:var(--tx);line-height:1.2}
+.hw-h2 em{font-style:normal;background:linear-gradient(135deg,#9B6DFF,#F2406A);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hw-sub2{font-size:.83rem;color:var(--mt);line-height:1.7;max-width:460px;margin:0 auto}
+.hw-body{display:flex;gap:2.25rem;align-items:flex-start;padding:0 1.5rem;max-width:1100px;margin:0 auto}
+.hw-fw{flex:1.15;min-width:0}
+.hw-frame{background:#08080F;border-radius:14px;border:1px solid rgba(155,109,255,.18);overflow:hidden;box-shadow:0 0 0 1px rgba(155,109,255,.06),0 22px 58px rgba(0,0,0,.6),0 0 80px rgba(155,109,255,.08)}
+.hw-ftop{background:#0E0E1C;border-bottom:1px solid rgba(255,255,255,.055);padding:.5rem 1rem;display:flex;align-items:center;gap:.38rem}
+.hw-fdot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+.hw-fdot.r{background:#ff5f57}.hw-fdot.y{background:#febc2e}.hw-fdot.g{background:#28c840}
+.hw-furl{margin-left:.5rem;flex:1;text-align:center;font-size:.63rem;color:rgba(240,238,248,.22);font-weight:500}
+.hw-so{height:315px;position:relative;overflow:hidden}
+.hw-slide{position:absolute;inset:0;opacity:0;transition:opacity .35s ease,transform .35s cubic-bezier(.25,.46,.45,.94);transform:translateX(28px);pointer-events:none;will-change:opacity,transform}
+.hw-slide.active{opacity:1;transform:translateX(0)!important;pointer-events:auto}
+.hw-slide.hw-out{opacity:0!important;transform:translateX(-28px)!important}
+.hw-pt{height:3px;background:rgba(255,255,255,.05)}
+.hw-pf{height:100%;background:linear-gradient(90deg,#9B6DFF,#F2406A);width:0}
+.hw-pf.run{animation:hwprog var(--hwd,5s) linear forwards}
+@keyframes hwprog{from{width:0}to{width:100%}}
+.hw-rp{flex:.82;min-width:0;padding-top:.1rem;display:flex;flex-direction:column;gap:.75rem}
+.hw-badge{display:inline-flex;font-size:.65rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(155,109,255,.85);background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.22);border-radius:99px;padding:.22rem .68rem;align-self:flex-start}
+.hw-stitle{font-size:1.2rem;font-weight:800;line-height:1.3;color:var(--tx);min-height:2.8rem;transition:opacity .22s}
+.hw-sdesc{font-size:.81rem;color:var(--mt);line-height:1.75;min-height:4.2rem;transition:opacity .22s}
+.hw-dots2{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap;margin-top:.1rem}
+.hw-d{width:7px;height:7px;border-radius:50%;border:none;background:rgba(255,255,255,.14);cursor:pointer;padding:0;transition:all .2s ease;flex-shrink:0}
+.hw-d.on{background:var(--a);width:18px;border-radius:3.5px}
+.hw-ctrl{display:flex;gap:.45rem;align-items:center}
+.hw-bico{width:37px;height:37px;border-radius:10px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);color:var(--tx);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .17s}
+.hw-bico:hover{background:rgba(155,109,255,.13);border-color:rgba(155,109,255,.26)}
+.hw-bico svg{width:16px;height:16px}
+.hw-bplay{background:rgba(155,109,255,.13)!important;border-color:rgba(155,109,255,.28)!important}
+.hw-cta2{background:linear-gradient(135deg,#9B6DFF,#F2406A);color:#fff;font-size:.84rem;font-weight:700;border:none;border-radius:11px;padding:.7rem 1.35rem;cursor:pointer;transition:opacity .2s,transform .18s;width:100%;text-align:center;margin-top:.1rem}
+.hw-cta2:hover{opacity:.88;transform:translateY(-1px)}
+.hw-mc{background:#16162A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.7rem .6rem}
+.hw-mc.sel{border-color:rgba(155,109,255,.5)!important}
+@keyframes hwGlow{0%,100%{box-shadow:0 0 0 1px rgba(155,109,255,.18),0 0 20px rgba(155,109,255,.14)}50%{box-shadow:0 0 0 2px rgba(155,109,255,.38),0 0 36px rgba(155,109,255,.28)}}
+.hw-mc.sel{animation:hwGlow 2.8s ease-in-out infinite}
+@keyframes hwVinylSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.hw-vspin{animation:hwVinylSpin 4s linear infinite;transform-origin:50% 50%}
+.hw-slide:not(.active) .hw-vspin{animation-play-state:paused}
+@keyframes hwCheckDraw{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+.hw-cp{stroke-dasharray:40;stroke-dashoffset:40}
+.hw-slide.active .hw-cp{animation:hwCheckDraw .55s .35s ease forwards}
+.hw-slide:not(.active) .hw-cp{animation:none!important;stroke-dashoffset:40}
+@keyframes hwFadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.hw-slide.active .hw-fup{opacity:0;animation:hwFadeUp .4s ease forwards}
+.hw-slide.active .hw-fup.d1{animation-delay:.05s}
+.hw-slide.active .hw-fup.d2{animation-delay:.15s}
+.hw-slide.active .hw-fup.d3{animation-delay:.25s}
+.hw-slide.active .hw-fup.d4{animation-delay:.35s}
+.hw-slide:not(.active) .hw-fup{opacity:0;animation:none}
+@media(max-width:820px){
+  .hw-body{flex-direction:column;gap:1.5rem}
+  .hw-fw{width:100%}
+  .hw-so{height:280px}
+  .hw-h2{font-size:1.45rem}
+  .hw-stitle{min-height:auto;font-size:1.05rem}
+  .hw-sdesc{min-height:auto}
+}
+@media(max-width:480px){.hw-so{height:240px}}
 </style>
 </head>
 <body>
@@ -798,14 +862,294 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   <!-- SOCIAL PROOF -->
   <div class="lp-reviews-sec">
     <div class="lp-proof-bar"><span class="lp-stars">★★★★★</span><span class="lp-proof-txt">4.8/5 gemiddeld · meer dan 500 muziekbingo's gespeeld</span></div>
-    <div class="lp-usp-grid">
-      <div class="lp-usp-item"><div class="lp-usp-icon">🎴</div><div class="lp-usp-t">Unieke kaarten</div><div class="lp-usp-d">Elke speler krijgt een andere kaart. Nooit meer discussie over wie wint.</div></div>
-      <div class="lp-usp-item"><div class="lp-usp-icon">🎛️</div><div class="lp-usp-t">Hostscherm houdt overzicht</div><div class="lp-usp-d">Zie welke nummers al gespeeld zijn en controleer bingo's direct op kaartnummer.</div></div>
-      <div class="lp-usp-item"><div class="lp-usp-icon">🎵</div><div class="lp-usp-t">Eigen playlist</div><div class="lp-usp-d">Koppel je Spotify-playlist en maak een persoonlijke bingo voor je groep.</div></div>
-      <div class="lp-usp-item"><div class="lp-usp-icon">👥</div><div class="lp-usp-t">Tot 200 spelers</div><div class="lp-usp-d">Van een intiem feestje tot een grote bedrijfsborrel — Melingo schaalt mee.</div></div>
-      <div class="lp-usp-item"><div class="lp-usp-icon">⚡</div><div class="lp-usp-t">In 5 minuten klaar</div><div class="lp-usp-d">Kaarten genereren, PDF downloaden en spelen. Geen installatie nodig.</div></div>
-      <div class="lp-usp-item"><div class="lp-usp-icon">✅</div><div class="lp-usp-t">Geen gedoe</div><div class="lp-usp-d">Geen zelf knippen, plakken of handmatig bijhouden. Melingo regelt het.</div></div>
-    </div>
+    <!-- ══ HOE WERKT MELINGO — geanimeerde walkthrough ══ -->
+    <div class="hw-sec" id="hw-sec">
+      <div class="hw-hd">
+        <div class="hw-pill2">✦ Stap voor stap</div>
+        <h2 class="hw-h2">Hoe werkt <em>Melingo</em>?</h2>
+        <p class="hw-sub2">Van playlist tot bingokaarten en host-scherm — in een paar simpele stappen.</p>
+      </div>
+      <div class="hw-body">
+
+        <!-- ── Left: browser frame met slides ── -->
+        <div class="hw-fw">
+          <div class="hw-frame">
+            <div class="hw-ftop">
+              <span class="hw-fdot r"></span><span class="hw-fdot y"></span><span class="hw-fdot g"></span>
+              <span class="hw-furl">melingo.vercel.app</span>
+            </div>
+            <div class="hw-so">
+
+              <!-- Slide 1: Kies hoe je wilt spelen -->
+              <div class="hw-slide active" data-hw="0" style="background:linear-gradient(160deg,#0D0D1E,#0F0F22);display:flex;align-items:center;justify-content:center;padding:1.25rem 1.1rem">
+                <div style="width:100%">
+                  <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,238,248,.33);text-align:center;margin-bottom:.75rem">Kies je speelmodus</div>
+                  <div style="display:flex;gap:.55rem">
+                    <div class="hw-mc sel" style="flex:1">
+                      <div style="font-size:.44rem;font-weight:700;text-transform:uppercase;color:rgba(200,170,255,.9);background:rgba(155,109,255,.2);border-radius:99px;padding:.12rem .42rem;display:inline-block;margin-bottom:.38rem">★ Meest gekozen</div>
+                      <div style="font-size:.63rem;font-weight:800;color:#F0EEF8;margin-bottom:.12rem;line-height:1.25">Eigen Spotify-bingo</div>
+                      <div style="font-size:.49rem;color:rgba(240,238,248,.38);line-height:1.4;margin-bottom:.45rem">Eigen playlist · hostscherm · auto bingo-check</div>
+                      <div style="font-size:.82rem;font-weight:800;color:#9B6DFF;margin-bottom:.35rem">€14,95</div>
+                      <div style="font-size:.43rem;color:rgba(29,185,84,.9);background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.25);border-radius:99px;padding:.11rem .4rem;display:inline-block">🎵 Spotify Premium</div>
+                    </div>
+                    <div class="hw-mc" style="flex:1">
+                      <div style="font-size:.44rem;font-weight:700;text-transform:uppercase;color:rgba(240,238,248,.33);background:rgba(255,255,255,.06);border-radius:99px;padding:.12rem .42rem;display:inline-block;margin-bottom:.38rem">⚡ Snel starten</div>
+                      <div style="font-size:.63rem;font-weight:800;color:#F0EEF8;margin-bottom:.12rem;line-height:1.25">Kant-en-klaar thema</div>
+                      <div style="font-size:.49rem;color:rgba(240,238,248,.38);line-height:1.4;margin-bottom:.45rem">40 nummers · max. 20 spelers</div>
+                      <div style="font-size:.82rem;font-weight:800;color:#F0EEF8;margin-bottom:.35rem">€9,95</div>
+                      <div style="font-size:.43rem;color:rgba(29,185,84,.9);background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.25);border-radius:99px;padding:.11rem .4rem;display:inline-block">🎵 Spotify Premium</div>
+                    </div>
+                    <div class="hw-mc" style="flex:1">
+                      <div style="font-size:.44rem;font-weight:700;text-transform:uppercase;color:rgba(240,238,248,.33);background:rgba(255,255,255,.06);border-radius:99px;padding:.12rem .42rem;display:inline-block;margin-bottom:.38rem">💰 Voordeligst</div>
+                      <div style="font-size:.63rem;font-weight:800;color:#F0EEF8;margin-bottom:.12rem;line-height:1.25">Alleen bingokaarten</div>
+                      <div style="font-size:.49rem;color:rgba(240,238,248,.38);line-height:1.4;margin-bottom:.45rem">Geen Spotify nodig</div>
+                      <div style="font-size:.82rem;font-weight:800;color:#F0EEF8;margin-bottom:.35rem">Vanaf €7,95</div>
+                      <div style="font-size:.43rem;color:rgba(200,170,255,.85);background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.25);border-radius:99px;padding:.11rem .4rem;display:inline-block">✓ Geen Spotify</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2: Kies je playlist -->
+              <div class="hw-slide" data-hw="1" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);padding:1.1rem;overflow:hidden;display:flex;flex-direction:column;justify-content:center">
+                <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.7rem;padding:.46rem .62rem;background:rgba(29,185,84,.07);border:1px solid rgba(29,185,84,.2);border-radius:9px">
+                  <div style="width:23px;height:23px;background:#1DB954;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-size:.56rem;font-weight:700;color:rgba(29,185,84,.95)">✓ Verbonden als Emma S.</div>
+                    <div style="font-size:.47rem;color:rgba(240,238,248,.36)">Spotify Premium actief</div>
+                  </div>
+                </div>
+                <div style="font-size:.53rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.35);margin-bottom:.48rem">Kies een playlist</div>
+                <div class="hw-fup d1" style="display:flex;align-items:center;gap:.52rem;padding:.46rem .58rem;background:rgba(29,185,84,.07);border:1.5px solid rgba(29,185,84,.35);border-radius:9px;margin-bottom:.32rem">
+                  <div style="width:27px;height:27px;background:linear-gradient(135deg,#1DB954,#0d8a3e);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem">🎉</div>
+                  <div style="flex:1;min-width:0"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Feestmix 2024</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">43 nummers</div></div>
+                  <div style="width:15px;height:15px;background:#1DB954;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                </div>
+                <div class="hw-fup d2" style="display:flex;align-items:center;gap:.52rem;padding:.46rem .58rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:9px;margin-bottom:.32rem">
+                  <div style="width:27px;height:27px;background:linear-gradient(135deg,#9B6DFF,#5030cc);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem">🎸</div>
+                  <div style="flex:1"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8">Rock Classics</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">38 nummers</div></div>
+                </div>
+                <div class="hw-fup d3" style="display:flex;align-items:center;gap:.52rem;padding:.46rem .58rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:9px;margin-bottom:.48rem">
+                  <div style="width:27px;height:27px;background:linear-gradient(135deg,#F2406A,#c01d47);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem">🎤</div>
+                  <div style="flex:1"><div style="font-size:.58rem;font-weight:700;color:#F0EEF8">Jaren 90 Hits</div><div style="font-size:.47rem;color:rgba(240,238,248,.4)">55 nummers</div></div>
+                </div>
+                <div class="hw-fup d4" style="padding:.38rem .58rem;background:rgba(29,185,84,.08);border:1px solid rgba(29,185,84,.2);border-radius:7px;font-size:.5rem;color:rgba(29,185,84,.9);font-weight:600">✓ 43 nummers gevonden — kies je pakket hieronder.</div>
+              </div>
+
+              <!-- Slide 3: Selecteer aantal spelers -->
+              <div class="hw-slide" data-hw="2" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem 1.25rem;gap:.65rem">
+                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">Aantal spelers</div>
+                <div style="display:flex;align-items:center;gap:1rem">
+                  <button style="width:33px;height:33px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:8px;color:rgba(240,238,248,.65);font-size:.9rem;display:flex;align-items:center;justify-content:center;cursor:default">−</button>
+                  <div style="font-size:2.8rem;font-weight:800;color:#F0EEF8;min-width:3.2rem;text-align:center;line-height:1">25</div>
+                  <button style="width:33px;height:33px;background:rgba(155,109,255,.15);border:1px solid rgba(155,109,255,.35);border-radius:8px;color:#9B6DFF;font-size:.9rem;display:flex;align-items:center;justify-content:center;cursor:default">+</button>
+                </div>
+                <div style="display:flex;gap:.3rem;flex-wrap:wrap;justify-content:center">
+                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">5</span>
+                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">10</span>
+                  <span style="padding:.19rem .46rem;background:rgba(155,109,255,.25);border:1px solid rgba(155,109,255,.42);border-radius:6px;font-size:.49rem;color:#d4b8ff;font-weight:700">25</span>
+                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">50</span>
+                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">75</span>
+                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">100</span>
+                  <span style="padding:.19rem .46rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.49rem;color:rgba(240,238,248,.42)">200</span>
+                </div>
+                <div style="width:100%;max-width:310px;padding:.62rem .78rem;background:rgba(155,109,255,.07);border:1px solid rgba(155,109,255,.22);border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-size:.6rem;font-weight:700;color:#F0EEF8">Gekozen pakket: Klein gezelschap</div>
+                    <div style="font-size:.49rem;color:rgba(240,238,248,.43);margin-top:.1rem">t/m 25 spelers · hostscherm inbegrepen</div>
+                  </div>
+                  <div style="font-size:1.05rem;font-weight:800;color:#9B6DFF;flex-shrink:0;margin-left:.55rem">€14,95</div>
+                </div>
+              </div>
+
+              <!-- Slide 4: Unieke kaarten -->
+              <div class="hw-slide" data-hw="3" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem">
+                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33);margin-bottom:.75rem">25 unieke kaarten gegenereerd</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.55rem;width:100%;max-width:310px">
+                  <!-- Kaart 1: kolom N -->
+                  <div class="hw-fup d1" style="background:#16162A;border:1.5px solid rgba(155,109,255,.3);border-radius:8px;overflow:hidden">
+                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:flex;justify-content:space-around;padding:.18rem 0"><span style="font-size:.37rem;font-weight:900;color:white">B</span><span style="font-size:.37rem;font-weight:900;color:white">I</span><span style="font-size:.37rem;font-weight:900;color:white">N</span><span style="font-size:.37rem;font-weight:900;color:white">G</span><span style="font-size:.37rem;font-weight:900;color:white">O</span></div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,.4);padding:1.5px">
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(155,109,255,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                    </div>
+                    <div style="text-align:center;font-size:.38rem;color:rgba(240,238,248,.27);padding:.16rem 0">K-03</div>
+                  </div>
+                  <!-- Kaart 2: diagonaal -->
+                  <div class="hw-fup d2" style="background:#16162A;border:1.5px solid rgba(242,64,106,.25);border-radius:8px;overflow:hidden">
+                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:flex;justify-content:space-around;padding:.18rem 0"><span style="font-size:.37rem;font-weight:900;color:white">B</span><span style="font-size:.37rem;font-weight:900;color:white">I</span><span style="font-size:.37rem;font-weight:900;color:white">N</span><span style="font-size:.37rem;font-weight:900;color:white">G</span><span style="font-size:.37rem;font-weight:900;color:white">O</span></div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,.4);padding:1.5px">
+                      <div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(155,109,255,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div>
+                    </div>
+                    <div style="text-align:center;font-size:.38rem;color:rgba(240,238,248,.27);padding:.16rem 0">K-07</div>
+                  </div>
+                  <!-- Kaart 3: horizontale rij -->
+                  <div class="hw-fup d3" style="background:#16162A;border:1.5px solid rgba(106,171,247,.22);border-radius:8px;overflow:hidden">
+                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:flex;justify-content:space-around;padding:.18rem 0"><span style="font-size:.37rem;font-weight:900;color:white">B</span><span style="font-size:.37rem;font-weight:900;color:white">I</span><span style="font-size:.37rem;font-weight:900;color:white">N</span><span style="font-size:.37rem;font-weight:900;color:white">G</span><span style="font-size:.37rem;font-weight:900;color:white">O</span></div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,.4);padding:1.5px">
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(155,109,255,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                    </div>
+                    <div style="text-align:center;font-size:.38rem;color:rgba(240,238,248,.27);padding:.16rem 0">K-12</div>
+                  </div>
+                  <!-- Kaart 4: andere diagonaal -->
+                  <div class="hw-fup d4" style="background:#16162A;border:1.5px solid rgba(29,185,84,.2);border-radius:8px;overflow:hidden">
+                    <div style="background:linear-gradient(90deg,#9B6DFF,#F2406A);display:flex;justify-content:space-around;padding:.18rem 0"><span style="font-size:.37rem;font-weight:900;color:white">B</span><span style="font-size:.37rem;font-weight:900;color:white">I</span><span style="font-size:.37rem;font-weight:900;color:white">N</span><span style="font-size:.37rem;font-weight:900;color:white">G</span><span style="font-size:.37rem;font-weight:900;color:white">O</span></div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,.4);padding:1.5px">
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(155,109,255,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                      <div style="background:rgba(242,64,106,.55);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div><div style="background:rgba(255,255,255,.08);aspect-ratio:1;border-radius:1px"></div>
+                    </div>
+                    <div style="text-align:center;font-size:.38rem;color:rgba(240,238,248,.27);padding:.16rem 0">K-19</div>
+                  </div>
+                </div>
+                <div style="margin-top:.7rem;font-size:.5rem;color:rgba(240,238,248,.35);text-align:center">Elke kaart is uniek en willekeurig gegenereerd</div>
+              </div>
+
+              <!-- Slide 5: Download en print -->
+              <div class="hw-slide" data-hw="4" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;gap:.7rem">
+                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">25 kaarten klaar om te downloaden</div>
+                <div style="width:52px;height:52px;background:rgba(155,109,255,.12);border:1.5px solid rgba(155,109,255,.28);border-radius:13px;display:flex;align-items:center;justify-content:center">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9B6DFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                </div>
+                <div style="display:flex;gap:.6rem;width:100%;max-width:295px">
+                  <button style="flex:1;padding:.62rem .5rem;background:linear-gradient(135deg,#9B6DFF,#7040ee);border:none;border-radius:10px;color:white;font-size:.55rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.32rem">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Kleur PDF
+                  </button>
+                  <button style="flex:1;padding:.62rem .5rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);border-radius:10px;color:rgba(240,238,248,.75);font-size:.55rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.32rem">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Eco PDF
+                  </button>
+                </div>
+                <div style="display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center">
+                  <span style="font-size:.48rem;color:rgba(240,238,248,.38);background:rgba(255,255,255,.05);padding:.17rem .42rem;border-radius:5px">A4 formaat</span>
+                  <span style="font-size:.48rem;color:rgba(240,238,248,.38);background:rgba(255,255,255,.05);padding:.17rem .42rem;border-radius:5px">Direct printen</span>
+                  <span style="font-size:.48rem;color:rgba(240,238,248,.38);background:rgba(255,255,255,.05);padding:.17rem .42rem;border-radius:5px">Uniek kaartnummer</span>
+                </div>
+              </div>
+
+              <!-- Slide 6: Host-scherm -->
+              <div class="hw-slide" data-hw="5" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;gap:.5rem">
+                <div style="width:100%;max-width:310px;background:#13132A;border:1px solid rgba(155,109,255,.2);border-radius:14px;padding:1rem;text-align:center;position:relative;overflow:hidden">
+                  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:100px;height:100px;background:radial-gradient(circle,rgba(155,109,255,.18),transparent 70%);pointer-events:none"></div>
+                  <div style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,238,248,.35);margin-bottom:.6rem">Nu speelt</div>
+                  <div style="margin:0 auto .6rem;width:60px;height:60px">
+                    <svg class="hw-vspin" viewBox="0 0 100 100" width="60" height="60">
+                      <circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/>
+                    </svg>
+                  </div>
+                  <div style="font-size:.7rem;font-weight:800;color:#F0EEF8;margin-bottom:.18rem">Don't Stop Me Now</div>
+                  <div style="font-size:.53rem;color:rgba(240,238,248,.48);margin-bottom:.55rem">Queen</div>
+                  <div style="height:3px;background:rgba(255,255,255,.09);border-radius:99px;margin-bottom:.5rem;overflow:hidden"><div style="height:100%;width:62%;background:linear-gradient(90deg,#9B6DFF,#F2406A);border-radius:99px"></div></div>
+                  <div style="font-size:.48rem;color:rgba(240,238,248,.35)">7 van 43 nummers gespeeld</div>
+                </div>
+                <div style="display:flex;gap:.48rem;margin-top:.3rem">
+                  <button style="padding:.42rem .72rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:8px;color:rgba(240,238,248,.65);font-size:.5rem;cursor:default">⏸ Pauze</button>
+                  <button style="padding:.42rem .72rem;background:linear-gradient(135deg,#9B6DFF,#F2406A);border:none;border-radius:8px;color:white;font-size:.5rem;font-weight:700;cursor:default">Volgend nummer →</button>
+                </div>
+              </div>
+
+              <!-- Slide 7: Bingo checker -->
+              <div class="hw-slide" data-hw="6" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;gap:.7rem">
+                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">Bingo checker</div>
+                <div style="width:100%;max-width:295px;background:#13132A;border:1px solid rgba(155,109,255,.2);border-radius:12px;padding:.9rem">
+                  <div style="margin-bottom:.6rem">
+                    <div style="font-size:.5rem;color:rgba(240,238,248,.42);margin-bottom:.28rem">Kaartnummer</div>
+                    <div style="padding:.42rem .58rem;background:rgba(255,255,255,.055);border:1.5px solid rgba(155,109,255,.4);border-radius:8px;font-size:.63rem;font-weight:700;color:#F0EEF8;display:flex;align-items:center;justify-content:space-between"><span>K-07</span><span style="font-size:.48rem;color:rgba(240,238,248,.38)">Rij 2 bingo</span></div>
+                  </div>
+                  <div style="padding:.6rem;background:rgba(29,185,84,.08);border:1.5px solid rgba(29,185,84,.28);border-radius:10px;text-align:center">
+                    <div style="margin-bottom:.3rem">
+                      <svg width="30" height="30" viewBox="0 0 32 32">
+                        <circle cx="16" cy="16" r="14" fill="rgba(29,185,84,.12)" stroke="rgba(29,185,84,.55)" stroke-width="1.5"/>
+                        <path class="hw-cp" d="M9 16.5l5 5 9-10" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                      </svg>
+                    </div>
+                    <div style="font-size:.63rem;font-weight:800;color:rgba(29,185,84,.95)">Bingo klopt!</div>
+                    <div style="font-size:.48rem;color:rgba(240,238,248,.42);margin-top:.18rem">Rij 2 is volledig aangevinkt</div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:.3rem;flex-wrap:wrap;justify-content:center">
+                  <span style="font-size:.46rem;color:rgba(240,238,248,.42);background:rgba(255,255,255,.05);border-radius:5px;padding:.16rem .4rem">Horizontale rij</span>
+                  <span style="font-size:.46rem;color:rgba(240,238,248,.42);background:rgba(255,255,255,.05);border-radius:5px;padding:.16rem .4rem">Verticale rij</span>
+                  <span style="font-size:.46rem;color:rgba(240,238,248,.42);background:rgba(255,255,255,.05);border-radius:5px;padding:.16rem .4rem">Diagonaal</span>
+                  <span style="font-size:.46rem;color:rgba(240,238,248,.42);background:rgba(255,255,255,.05);border-radius:5px;padding:.16rem .4rem">Volle kaart</span>
+                </div>
+              </div>
+
+              <!-- Slide 8: Instellingen -->
+              <div class="hw-slide" data-hw="7" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;gap:.7rem">
+                <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">Instellingen</div>
+                <div style="width:100%;max-width:295px;display:flex;flex-direction:column;gap:.5rem">
+                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.65rem .75rem">
+                    <div style="font-size:.5rem;color:rgba(240,238,248,.4);margin-bottom:.42rem">Afspeelmodus</div>
+                    <div style="display:flex;gap:.32rem">
+                      <button style="flex:1;padding:.36rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:7px;color:rgba(240,238,248,.5);font-size:.5rem;cursor:default">Handmatig</button>
+                      <button style="flex:1;padding:.36rem;background:rgba(155,109,255,.2);border:1.5px solid rgba(155,109,255,.44);border-radius:7px;color:#d4b8ff;font-size:.5rem;font-weight:700;cursor:default">✓ Automatisch</button>
+                    </div>
+                  </div>
+                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.65rem .75rem">
+                    <div style="font-size:.5rem;color:rgba(240,238,248,.4);margin-bottom:.42rem">Timer duur</div>
+                    <div style="display:flex;gap:.3rem">
+                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">15s</span>
+                      <span style="padding:.3rem .45rem;background:rgba(155,109,255,.2);border:1px solid rgba(155,109,255,.35);border-radius:6px;font-size:.48rem;color:#d4b8ff;font-weight:700">30s ✓</span>
+                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">45s</span>
+                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">60s</span>
+                    </div>
+                  </div>
+                  <div style="background:#13132A;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.65rem .75rem">
+                    <div style="font-size:.5rem;color:rgba(240,238,248,.4);margin-bottom:.42rem">Starten vanaf</div>
+                    <div style="display:flex;gap:.3rem">
+                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">0s</span>
+                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">5s</span>
+                      <span style="padding:.3rem .45rem;background:rgba(106,171,247,.2);border:1px solid rgba(106,171,247,.35);border-radius:6px;font-size:.48rem;color:#6AABF7;font-weight:700">20s ✓</span>
+                      <span style="padding:.3rem .45rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.48rem;color:rgba(240,238,248,.42)">30s</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /.hw-so -->
+            <div class="hw-pt"><div class="hw-pf" id="hw-pf"></div></div>
+          </div><!-- /.hw-frame -->
+        </div><!-- /.hw-fw -->
+
+        <!-- ── Right: stap info + navigatie ── -->
+        <div class="hw-rp" id="hw-rp">
+          <div class="hw-badge">Stap <span id="hw-snum">1</span> van 8</div>
+          <div class="hw-stitle" id="hw-stitle">Kies hoe je wilt spelen</div>
+          <div class="hw-sdesc" id="hw-sdesc">Ga voor je eigen Spotify-bingo, een kant-en-klaar thema of alleen printbare bingokaarten.</div>
+          <div class="hw-dots2" id="hw-dots2"></div>
+          <div class="hw-ctrl">
+            <button class="hw-bico" onclick="hwPrev()" aria-label="Vorige stap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="hw-bico hw-bplay" id="hw-pbtn" onclick="hwToggle()" aria-label="Afspelen of pauzeren">
+              <svg id="hw-pico" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <button class="hw-bico" onclick="hwNext()" aria-label="Volgende stap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+          <button class="hw-cta2" onclick="document.querySelector('.lp-cfg-outer').scrollIntoView({behavior:'smooth'})">Zelf proberen →</button>
+        </div><!-- /.hw-rp -->
+
+      </div><!-- /.hw-body -->
+    </div><!-- /.hw-sec -->
   </div>
 
   <!-- FAQ -->
@@ -3772,8 +4116,100 @@ function resumeSession(){
   }catch(e){toast('Fout bij herstellen.');}
 }
 
+// ══ HOE WERKT MELINGO — walkthrough ══
+var hwCur=0,hwPlaying=true,hwTimer=null,hwTotal=8,hwDur=5000;
+var hwSteps=[
+  {t:'Kies hoe je wilt spelen',d:'Ga voor je eigen Spotify-bingo, een kant-en-klaar thema of alleen printbare bingokaarten.'},
+  {t:'Kies je playlist of thema',d:'Gebruik je eigen Spotify-playlist of start direct met een kant-en-klaar thema.'},
+  {t:'Selecteer het aantal spelers',d:'Van klein gezelschap tot groot evenement — Melingo schaalt automatisch met je mee.'},
+  {t:'Genereer unieke kaarten',d:'Elke speler krijgt een andere kaart. Wel zo eerlijk, en veel makkelijker tijdens het spel.'},
+  {t:'Download en print direct',d:'Kies een kleur-PDF of eco-PDF en print je kaarten meteen uit.'},
+  {t:'Gebruik het host-scherm',d:'Zie welk nummer speelt, houd overzicht en speel de bingo soepel en professioneel.'},
+  {t:'Controleer bingo\'s eenvoudig',d:'Check kaartnummers direct en controleer snel of iemand echt bingo heeft.'},
+  {t:'Speel zoals jij wilt',d:'Handmatig of automatisch, met slimme instellingen die passen bij jouw groep.'}
+];
+function hwInit(){
+  var dots=document.getElementById('hw-dots2');
+  if(!dots)return;
+  dots.innerHTML='';
+  for(var i=0;i<hwTotal;i++){
+    (function(idx){
+      var b=document.createElement('button');
+      b.className='hw-d'+(idx===0?' on':'');
+      b.setAttribute('aria-label','Stap '+(idx+1));
+      b.onclick=function(){hwGo(idx);if(hwPlaying){hwPauseTimer();hwStartTimer();}};
+      dots.appendChild(b);
+    })(i);
+  }
+  hwGo(0,true);
+  hwStartTimer();
+  var fw=document.querySelector('.hw-fw');
+  if(fw){
+    fw.addEventListener('mouseenter',function(){if(hwPlaying)hwPauseTimer();});
+    fw.addEventListener('mouseleave',function(){if(hwPlaying)hwStartTimer();});
+  }
+}
+function hwGo(idx,init){
+  var slides=document.querySelectorAll('.hw-slide');
+  var prev=hwCur;
+  hwCur=idx;
+  slides.forEach(function(s,i){
+    if(i===prev&&!init){
+      s.classList.add('hw-out');
+      s.classList.remove('active');
+      setTimeout(function(){s.classList.remove('hw-out');},380);
+    }else if(i!==idx){
+      s.classList.remove('active','hw-out');
+    }
+  });
+  var ns=slides[idx];
+  if(ns){
+    if(!init){ns.style.transform='translateX(28px)';ns.style.opacity='0';void ns.offsetWidth;}
+    ns.classList.add('active');
+    ns.style.transform='';ns.style.opacity='';
+  }
+  var step=hwSteps[idx];
+  var snum=document.getElementById('hw-snum');
+  var stitle=document.getElementById('hw-stitle');
+  var sdesc=document.getElementById('hw-sdesc');
+  if(snum)snum.textContent=idx+1;
+  if(stitle){stitle.style.opacity='0';setTimeout(function(){stitle.textContent=step.t;stitle.style.opacity='1';},175);}
+  if(sdesc){sdesc.style.opacity='0';setTimeout(function(){sdesc.textContent=step.d;sdesc.style.opacity='1';},210);}
+  document.querySelectorAll('.hw-d').forEach(function(d,i){d.classList.toggle('on',i===idx);});
+  hwResetProg();
+}
+function hwResetProg(){
+  var pf=document.getElementById('hw-pf');
+  if(!pf)return;
+  pf.classList.remove('run');
+  pf.style.setProperty('--hwd',(hwDur/1000)+'s');
+  void pf.offsetWidth;
+  if(hwPlaying)pf.classList.add('run');
+}
+function hwStartTimer(){
+  hwPauseTimer();hwPlaying=true;
+  var ico=document.getElementById('hw-pico');
+  if(ico)ico.innerHTML='<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  hwResetProg();
+  hwTimer=setInterval(function(){hwNext();},hwDur);
+}
+function hwPauseTimer(){
+  clearInterval(hwTimer);hwTimer=null;
+  var pf=document.getElementById('hw-pf');
+  if(pf)pf.classList.remove('run');
+}
+function hwToggle(){
+  if(hwPlaying){
+    hwPlaying=false;hwPauseTimer();
+    var ico=document.getElementById('hw-pico');
+    if(ico)ico.innerHTML='<path d="M8 5v14l11-7z"/>';
+  }else{hwStartTimer();}
+}
+function hwNext(){hwGo((hwCur+1)%hwTotal);if(hwPlaying){hwPauseTimer();hwStartTimer();}}
+function hwPrev(){hwGo((hwCur-1+hwTotal)%hwTotal);if(hwPlaying){hwPauseTimer();hwStartTimer();}}
+
 window.onload=function(){
-  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();updLpCTA();checkOrderAccess();
+  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();updLpCTA();checkOrderAccess();hwInit();
   // Geef browser even tijd om URL te lezen na redirect
   checkSpotifyAuth();
   // Top-banner: toon Spotify-connect hint als niet verbonden
