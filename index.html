@@ -1373,6 +1373,26 @@ async function selLpTheme(el){
   setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3&&s3.style.display!=='none')s3.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 }
 
+/**
+ * parseSongs(text) — parse handmatig ingevoerde nummers uit textarea
+ * Ondersteunt: "Artiest - Titel", "Artiest – Titel", of gewoon "Titel"
+ * Geeft array van {t, a} objecten (zelfde structuur als thema-songs).
+ */
+function parseSongs(text){
+  if(!text)return[];
+  return text.split('\n')
+    .map(function(l){return l.trim();})
+    .filter(function(l){return l.length>2;}) // minimaal 3 tekens
+    .map(function(l){
+      var sep=l.indexOf(' - ');
+      if(sep<0)sep=l.indexOf(' – '); // em-dash
+      if(sep>=0){
+        return{t:l.slice(sep+3).trim(),a:l.slice(0,sep).trim()};
+      }
+      return{t:l,a:''};
+    });
+}
+
 function onEigenInput(){
   // Zorg dat mode altijd 'eigen' is als de gebruiker in het eigen-veld typt
   if(ST.mode!=='eigen')ST.mode='eigen';
