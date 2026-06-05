@@ -574,11 +574,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   <!-- CONFIGURATOR -->
   <div class="lp-cfg-outer">
     <div class="lp-cfg-label">Hoe wil je spelen?</div>
-    <!-- Spotify connect banner — toont als niet ingelogd en Spotify nodig is -->
+    <!-- Spotify connect banner — toont alleen als gebruiker actief spotify/thema-modus heeft gekozen en nog niet verbonden is -->
     <div id="lp-spotify-cta-top" style="display:none;background:rgba(29,185,84,.06);border:1px solid rgba(29,185,84,.2);border-radius:16px;padding:1rem 1.25rem;margin-bottom:1rem;align-items:center;gap:1rem;flex-wrap:wrap">
       <div style="flex:1;min-width:180px">
-        <div style="font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.2rem">🎵 Verbind eerst met Spotify</div>
-        <div style="font-size:.75rem;color:var(--mt);line-height:1.5">Daarna kies je je eigen playlist of een kant-en-klaar thema.</div>
+        <div style="font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:.2rem">Spotify Premium nodig voor deze optie</div>
+        <div style="font-size:.75rem;color:var(--mt);line-height:1.5">Verbind je Spotify-account om door te gaan met deze speelmodus.</div>
       </div>
       <button class="btn bp" style="min-height:44px;white-space:nowrap;flex-shrink:0" onclick="startSpotifyLogin()">Verbinden met Spotify</button>
     </div>
@@ -1418,8 +1418,9 @@ function onEigenInput(){
 function updSpotifyCtaBanner(){
   var banner=document.getElementById('lp-spotify-cta-top');
   if(!banner)return;
-  // Toon alleen als niet verbonden én Spotify/thema modus geselecteerd of nog geen modus
-  var needsSpotify=!ST.mode||ST.mode==='spotify'||ST.mode==='thema';
+  // Toon alleen als gebruiker actief spotify/thema heeft gekozen én nog niet verbonden is
+  // NIET bij !ST.mode (paginaload) en NIET bij eigen modus
+  var needsSpotify=ST.mode==='spotify'||ST.mode==='thema';
   banner.style.display=(!SP.accessToken&&needsSpotify)?'flex':'none';
 }
 
