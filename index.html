@@ -1518,7 +1518,9 @@ function updLpPlayers(){
   } else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count!==undefined){
     var cnt2=SP.selectedPlaylist._count||0;
     cap=getPlaylistCapacity(cnt2);
-    if(!cap.blocked){show=true;maxP=cap.maxPlayers;}
+    // Spotify-bingo: pakketkeuze (25/75/200) bepaalt de limiet, NIET songcount
+    // getPlaylistCapacity is alleen advisering — mag nooit hard-cappen bij spotify mode
+    if(!cap.blocked){show=true;maxP=200;}
   }
   var s3=document.getElementById('lp-step3');if(s3)s3.style.display=show?'block':'none';
   var pkgBox=document.getElementById('lp-pkg-box');
@@ -1538,11 +1540,9 @@ function updLpPlayers(){
         info.innerHTML='Alleen PDF-kaarten · geen host-scherm · max. 200 spelers'+eigenAdvies;
       } else if(mode==='spotify'&&cap){
         var trackCnt=SP.selectedPlaylist._count;
-        var overWarn=ST.players>cap.maxPlayers?'<br><span style="color:var(--s)">⚠ Meer spelers dan aanbevolen voor '+trackCnt+' nummers.</span>':'';
-        info.innerHTML='Je playlist bevat <strong>'+trackCnt+' nummers</strong>.<br>'
-          +'Aanbevolen: max. <strong>'+cap.maxPlayers+' spelers</strong>.<br>'
-          +'Advies: '+cap.label+'.'
-          +(cap.warning?'<br><span style="color:var(--s)">⚠ '+cap.warning+'</span>':'')
+        var overWarn=ST.players>cap.maxPlayers?'<br><span style="color:var(--warn,#f59e0b)">Tip: met '+trackCnt+' nummers is het gezelligst tot ~'+cap.maxPlayers+' spelers. Voeg extra nummers toe voor meer variatie.</span>':'';
+        info.innerHTML='Je playlist bevat <strong>'+trackCnt+' nummers</strong>.'
+          +(cap.warning?'<br><span style="color:var(--warn,#f59e0b)">⚠ '+cap.warning+'</span>':'')
           +overWarn;
       } else {
         info.textContent='';
@@ -1577,7 +1577,7 @@ function adjP(d){
   var mode=ST.mode,maxP=200;
   // Eigen/PDF-only: altijd max 200 — getMaxPlayers NIET gebruiken als harde cap
   if(mode==='eigen'){maxP=200;}
-  if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count)maxP=getPlaylistCapacity(SP.selectedPlaylist._count).maxPlayers||200;
+  if(mode==='spotify')maxP=200; // pakketkeuze bepaalt limiet, niet songcount
   if(mode==='thema')maxP=SP.selectedPlaylist&&SP.selectedPlaylist._count>0?getMaxPlayers(SP.selectedPlaylist._count):20;
   ST.players=Math.max(1,Math.min(maxP,ST.players+d));
   updLpPNum();
@@ -1863,9 +1863,9 @@ async function selLpPlaylist(el){
     if(cap2.blocked){
       setFbWarn(cap2.message);
     } else if(cap2.warning){
-      setFbWarn('✓ '+cnt+' nummers · '+cap2.label+' · max. '+cap2.maxPlayers+' spelers. ⚠ '+cap2.warning);
+      setFbWarn('✓ '+cnt+' nummers. ⚠ '+cap2.warning);
     } else {
-      setFbOk('✓ '+cnt+' nummers gevonden · '+cap2.label+' · max. '+cap2.maxPlayers+' spelers');
+      setFbOk('✓ '+cnt+' nummers gevonden — kies je pakket hieronder.');
     }
 
     // Tracks alvast in SP zetten zodat genFromSpotify ze niet opnieuw hoeft te laden
