@@ -721,7 +721,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               <button class="lp-pq" onclick="adjP(1)">+</button>
               <button class="lp-pq" onclick="adjP(5)">+5</button>
             </div>
-            <div class="lp-pquick">
+            <div class="lp-pquick" id="lp-pquick">
               <button class="lp-pqk" onclick="setP(5)">5</button>
               <button class="lp-pqk" onclick="setP(10)">10</button>
               <button class="lp-pqk" onclick="setP(15)">15</button>
@@ -1203,8 +1203,8 @@ var LP_ADMIN_IDS=['21tbvinvqpc4rog4elcjp5uxa'];
 function isAdminDisplay(){return !!(SP.me&&SP.me.id&&LP_ADMIN_IDS.includes(SP.me.id));}
 
 var ST={
-  mode:'thema',selTheme:null,selSaved:null,
-  songs:[],players:20,cards:[],shuffled:[],pidx:-1,
+  mode:null,selTheme:null,selSaved:null,
+  songs:[],players:10,cards:[],shuffled:[],pidx:-1,
   hmode:'manual',speed:30,paused:false,tint:null,
   bmodes:{row:true,col:true,diag:true,full:false},
   startPos:30,
@@ -1480,7 +1480,19 @@ function updLpPNum(){
   document.querySelectorAll('.lp-pqk').forEach(function(b){b.classList.toggle('sel',parseInt(b.textContent)===ST.players);});
 }
 
+function updLpPresets(){
+  var wrap=document.getElementById('lp-pquick');if(!wrap)return;
+  var mode=ST.mode;
+  var presets=(mode==='eigen'||mode==='spotify')
+    ?[5,10,15,20,25,50,75,100,150,200]
+    :[5,10,15,20]; // thema en default: max 20
+  wrap.innerHTML=presets.map(function(n){
+    return'<button class="lp-pqk'+(ST.players===n?' sel':'')+'" onclick="setP('+n+')">'+n+'</button>';
+  }).join('');
+}
+
 function updLpPlayers(){
+  updLpPresets(); // preset-knoppen aanpassen aan huidige modus
   var mode=ST.mode,show=false,maxP=20,cap=null;
   if(mode==='thema'&&ST.theme){
     show=true;
@@ -1488,7 +1500,11 @@ function updLpPlayers(){
     cap=getPlaylistCapacity(cnt);maxP=cap.maxPlayers||20;
   } else if(mode==='eigen'){
     var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;
-    if(n>=25){show=true;cap=getPlaylistCapacity(n);maxP=cap.maxPlayers||200;}
+    if(n>=25){
+      show=true;
+      maxP=200; // Eigen/PDF-only: altijd max 200 spelers — getPlaylistCapacity niet gebruiken als harde limiet
+      cap=getPlaylistCapacity(n); // alleen voor advisering, niet voor cappen
+    }
   } else if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count!==undefined){
     var cnt2=SP.selectedPlaylist._count||0;
     cap=getPlaylistCapacity(cnt2);
@@ -1502,7 +1518,14 @@ function updLpPlayers(){
     var info=document.getElementById('lp-pinfo');
     if(info){
       if(mode==='eigen'){
-        info.innerHTML='Alleen PDF-kaarten · geen host-scherm'+(cap&&cap.warning?'<br><span style="color:var(--s)">⚠ '+cap.warning+'</span>':'');
+        // Advies op basis van songcount — mag de gebruiker NIET blokkeren, alleen informeren
+        var eigenN=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;
+        var recMax=eigenN<30?10:eigenN<40?15:eigenN<50?20:eigenN<60?25:eigenN<80?50:eigenN<100?75:200;
+        var eigenAdvies='';
+        if(ST.players>recMax&&ST.players>20){
+          eigenAdvies='<br><span style="color:var(--warn,#f59e0b)">Tip: met '+eigenN+' nummers is het gezelligst tot ~'+recMax+' spelers. Voeg extra nummers toe voor meer variatie.</span>';
+        }
+        info.innerHTML='Alleen PDF-kaarten · geen host-scherm · max. 200 spelers'+eigenAdvies;
       } else if(mode==='spotify'&&cap){
         var trackCnt=SP.selectedPlaylist._count;
         var overWarn=ST.players>cap.maxPlayers?'<br><span style="color:var(--s)">⚠ Meer spelers dan aanbevolen voor '+trackCnt+' nummers.</span>':'';
@@ -1542,7 +1565,8 @@ function updLpPlayers(){
 
 function adjP(d){
   var mode=ST.mode,maxP=200;
-  if(mode==='eigen'){var n=parseSongs((document.getElementById('lp-ta')||{}).value||'').length;maxP=getMaxPlayers(n)||200;}
+  // Eigen/PDF-only: altijd max 200 — getMaxPlayers NIET gebruiken als harde cap
+  if(mode==='eigen'){maxP=200;}
   if(mode==='spotify'&&SP.selectedPlaylist&&SP.selectedPlaylist._count)maxP=getPlaylistCapacity(SP.selectedPlaylist._count).maxPlayers||200;
   if(mode==='thema')maxP=SP.selectedPlaylist&&SP.selectedPlaylist._count>0?getMaxPlayers(SP.selectedPlaylist._count):20;
   ST.players=Math.max(1,Math.min(maxP,ST.players+d));
