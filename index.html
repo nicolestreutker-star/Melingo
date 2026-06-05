@@ -555,7 +555,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .hw-pf.run{animation:hwprog var(--hwd,5s) linear forwards}
 @keyframes hwprog{from{width:0}to{width:100%}}
 .hw-rp{flex:.82;min-width:0;padding-top:.1rem;display:flex;flex-direction:column;gap:.75rem}
-.hw-badge{display:inline-flex;font-size:.65rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(155,109,255,.85);background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.22);border-radius:99px;padding:.22rem .68rem;align-self:flex-start}
+.hw-badge{display:inline-flex;font-size:.65rem;font-weight:700;letter-spacing:.09em;word-spacing:.28em;text-transform:uppercase;color:rgba(155,109,255,.85);background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.22);border-radius:99px;padding:.22rem .78rem;align-self:flex-start}
 .hw-stitle{font-size:1.2rem;font-weight:800;line-height:1.3;color:var(--tx);min-height:2.8rem;transition:opacity .22s}
 .hw-sdesc{font-size:.81rem;color:var(--mt);line-height:1.75;min-height:4.2rem;transition:opacity .22s}
 .hw-dots2{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap;margin-top:.1rem}
@@ -1207,35 +1207,51 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
                 </div>
               </div>
 
-              <!-- Slide 10: Controleer bingo's eenvoudig -->
-              <div class="hw-slide" data-hw="9" style="background:linear-gradient(160deg,#0C0C1A,#0E101E);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;gap:.55rem">
-                <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(240,238,248,.33)">Bingo controleren</div>
-                <div style="width:100%;max-width:295px;background:#13132A;border:1px solid rgba(155,109,255,.2);border-radius:12px;padding:.8rem">
-                  <!-- Input + knop -->
-                  <div style="font-size:.48rem;color:rgba(240,238,248,.42);margin-bottom:.24rem">Kaartnummer</div>
-                  <div style="display:flex;gap:.32rem;margin-bottom:.55rem">
-                    <div style="flex:1;padding:.38rem .52rem;background:rgba(255,255,255,.055);border:1.5px solid rgba(155,109,255,.4);border-radius:8px;font-size:.6rem;font-weight:700;color:#F0EEF8">15</div>
-                    <button style="padding:.38rem .65rem;background:linear-gradient(135deg,#9B6DFF,#F2406A);border:none;border-radius:8px;color:white;font-size:.52rem;font-weight:700;cursor:default">Controleer</button>
-                  </div>
-                  <!-- Resultaat -->
-                  <div style="padding:.5rem .6rem;background:rgba(29,185,84,.08);border:1.5px solid rgba(29,185,84,.28);border-radius:9px;margin-bottom:.42rem;display:flex;align-items:flex-start;gap:.48rem">
-                    <svg width="26" height="26" viewBox="0 0 32 32" style="flex-shrink:0;margin-top:.05rem">
-                      <circle cx="16" cy="16" r="14" fill="rgba(29,185,84,.12)" stroke="rgba(29,185,84,.55)" stroke-width="1.5"/>
-                      <path class="hw-cp" d="M9 16.5l5 5 9-10" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    </svg>
-                    <div>
-                      <div style="font-size:.56rem;font-weight:800;color:rgba(29,185,84,.95)">BINGO! Kaart 15 wint.</div>
-                      <div style="font-size:.44rem;color:rgba(240,238,248,.5);margin-top:.1rem;line-height:1.4">Verticale rij · nog te winnen: horizontale rij, diagonale rij, volle kaart</div>
-                    </div>
-                  </div>
-                  <!-- Kaart visualisatie: 5x5 grid met groen gemarkeerde kolom -->
-                  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px">
-                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
-                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
-                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(155,109,255,.5);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
-                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
-                    <div style="background:rgba(29,185,84,.55);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div><div style="background:rgba(255,255,255,.06);aspect-ratio:1;border-radius:2px"></div>
-                  </div>
+              <!-- Slide 10: Controleer bingo's eenvoudig — echte checker layout -->
+              <div class="hw-slide" data-hw="9" style="background:#0D0D18;display:flex;flex-direction:column;padding:.62rem .7rem .55rem;gap:.32rem;overflow:hidden">
+                <!-- Header label -->
+                <div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,238,248,.28);margin-bottom:.04rem">Bingo controleren</div>
+                <!-- Input rij -->
+                <div style="display:flex;gap:.38rem">
+                  <div style="flex:1;padding:.35rem .52rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;font-size:.6rem;color:#F0EEF8">1</div>
+                  <button style="padding:.35rem .72rem;background:linear-gradient(135deg,#F2406A,#9B6DFF);border:none;border-radius:8px;color:white;font-size:.56rem;font-weight:700;cursor:default;white-space:nowrap">Controleer</button>
+                </div>
+                <!-- Groene succesmelding -->
+                <div style="padding:.32rem .52rem;background:rgba(29,185,84,.1);border:1.5px solid rgba(29,185,84,.35);border-radius:8px;font-size:.5rem;font-weight:700;color:rgba(29,185,84,.95);line-height:1.45">BINGO! Kaart 1 wint: verticale rij &amp; diagonale rij. Nog te winnen: horizontale rij</div>
+                <!-- Oranje waarschuwing gemiste bingo -->
+                <div style="padding:.3rem .5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.32);border-radius:8px;font-size:.46rem;color:rgba(245,158,11,.9);line-height:1.45">⚠ Deze kaart had al bingo kunnen hebben na nummer 12 ("When Love Takes Over"). Iemand heeft niet opgelet!</div>
+                <!-- 5×5 kaartgrid — echte stijl -->
+                <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;flex:1">
+                  <!-- Rij 1: kolom 1 groen (verticale bingo), kolom 2 groen (ook aangevinkt) -->
+                  <div style="background:rgba(29,185,84,.28);border:1.5px solid rgba(29,185,84,.65);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.33rem;color:rgba(29,185,84,.9);text-align:center;line-height:1.2;font-weight:600">I'm Yours</span></div>
+                  <div style="background:rgba(29,185,84,.18);border:1px solid rgba(29,185,84,.4);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(242,64,106,.85);text-align:center;line-height:1.2">Where Is The Love?</span></div>
+                  <div style="background:rgba(29,185,84,.18);border:1px solid rgba(29,185,84,.4);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(29,185,84,.85);text-align:center;line-height:1.2">In the End</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Rehab</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">I Gotta Feeling</span></div>
+                  <!-- Rij 2 -->
+                  <div style="background:rgba(29,185,84,.28);border:1.5px solid rgba(29,185,84,.65);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(29,185,84,.9);text-align:center;line-height:1.2;font-weight:600">Hollaback Girl</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Don't Cha</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(242,64,106,.75);text-align:center;line-height:1.2">Hey Ya!</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(242,64,106,.75);text-align:center;line-height:1.2">Crazy In Love</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Crazy</span></div>
+                  <!-- Rij 3: midden = VRIJ (paars) -->
+                  <div style="background:rgba(29,185,84,.28);border:1.5px solid rgba(29,185,84,.65);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(29,185,84,.9);text-align:center;line-height:1.2;font-weight:600">The Way I Are</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(242,64,106,.75);text-align:center;line-height:1.2">Smack That</span></div>
+                  <div style="background:rgba(155,109,255,.35);border:1.5px solid rgba(155,109,255,.65);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.36rem;font-weight:800;color:white;text-align:center">VRIJ</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Without Me</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Low</span></div>
+                  <!-- Rij 4 -->
+                  <div style="background:rgba(29,185,84,.28);border:1.5px solid rgba(29,185,84,.65);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(29,185,84,.9);text-align:center;line-height:1.2;font-weight:600">You're Beautiful</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Yeah!</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">When Love Takes...</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Mr. Brightside</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Gold Digger</span></div>
+                  <!-- Rij 5 -->
+                  <div style="background:rgba(29,185,84,.28);border:1.5px solid rgba(29,185,84,.65);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(29,185,84,.9);text-align:center;line-height:1.2;font-weight:600">Bring Me To Life</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Maneater</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Sk8er Boi</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(242,64,106,.75);text-align:center;line-height:1.2">This Love</span></div>
+                  <div style="background:rgba(20,10,35,.7);border:1px solid rgba(255,255,255,.07);border-radius:3px;display:flex;align-items:center;justify-content:center;padding:.06rem"><span style="font-size:.3rem;color:rgba(240,238,248,.45);text-align:center;line-height:1.2">Hot In Herre</span></div>
                 </div>
               </div>
 
