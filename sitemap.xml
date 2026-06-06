@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Hoofdpagina -->
+  <url>
+    <loc>https://melingo.vercel.app/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- SEO-landingspagina's -->
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-maken</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/spotify-muziekbingo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-kaarten-maken</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/kant-en-klare-muziekbingo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- FAQ en Blog -->
+  <url>
+    <loc>https://melingo.vercel.app/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Thema-pagina's -->
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-jaren-80</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-jaren-90</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-foute-muziek</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-kerst</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-nederlandstalig</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-guilty-pleasures</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-rock</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Doelgroep-pagina's -->
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-feestje</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-bedrijfsborrel</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-familiefeest</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/muziekbingo-evenement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Blogposts -->
+  <url>
+    <loc>https://melingo.vercel.app/blog/hoe-organiseer-je-een-muziekbingo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/blog/muziekbingo-ideeen-voor-feestje</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/blog/muziekbingo-voor-bedrijfsborrel</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/blog/muziekbingo-met-spotify</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/blog/muziekbingo-kaarten-printen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/blog/kerst-muziekbingo-organiseren</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://melingo.vercel.app/blog/foute-muziekbingo-ideeen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

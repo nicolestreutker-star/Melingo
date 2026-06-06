@@ -1,12 +1,29 @@
 {
   "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+
+    { "source": "/faq",                         "destination": "/faq.html" },
+    { "source": "/blog",                         "destination": "/blog.html" },
+    { "source": "/blog/:slug",                   "destination": "/blog/:slug.html" },
+
+    { "source": "/muziekbingo-maken",            "destination": "/muziekbingo-maken.html" },
+    { "source": "/spotify-muziekbingo",          "destination": "/spotify-muziekbingo.html" },
+    { "source": "/muziekbingo-kaarten-maken",    "destination": "/muziekbingo-kaarten-maken.html" },
+    { "source": "/kant-en-klare-muziekbingo",    "destination": "/kant-en-klare-muziekbingo.html" },
+
+    { "source": "/muziekbingo-jaren-80",         "destination": "/muziekbingo-jaren-80.html" },
+    { "source": "/muziekbingo-jaren-90",         "destination": "/muziekbingo-jaren-90.html" },
+    { "source": "/muziekbingo-foute-muziek",     "destination": "/muziekbingo-foute-muziek.html" },
+    { "source": "/muziekbingo-kerst",            "destination": "/muziekbingo-kerst.html" },
+    { "source": "/muziekbingo-nederlandstalig",  "destination": "/muziekbingo-nederlandstalig.html" },
+    { "source": "/muziekbingo-guilty-pleasures", "destination": "/muziekbingo-guilty-pleasures.html" },
+    { "source": "/muziekbingo-rock",             "destination": "/muziekbingo-rock.html" },
+
+    { "source": "/muziekbingo-feestje",          "destination": "/muziekbingo-feestje.html" },
+    { "source": "/muziekbingo-bedrijfsborrel",   "destination": "/muziekbingo-bedrijfsborrel.html" },
+    { "source": "/muziekbingo-familiefeest",     "destination": "/muziekbingo-familiefeest.html" },
+    { "source": "/muziekbingo-evenement",        "destination": "/muziekbingo-evenement.html" },
+
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

@@ -6,7 +6,24 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-<title>Melingo — Where Melody Meets Bingo</title>
+<title>Melingo — Muziekbingo maken met Spotify</title>
+<meta name="description" content="Maak je eigen muziekbingo met Spotify in minuten. Unieke bingokaarten, slim host-scherm en automatische bingo-controle. Kies een kant-en-klaar thema of gebruik je eigen playlist."/>
+<link rel="canonical" href="https://melingo.vercel.app/"/>
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Melingo — Muziekbingo maken met Spotify"/>
+<meta property="og:description" content="Maak je eigen muziekbingo met Spotify in minuten. Unieke bingokaarten, slim host-scherm en automatische bingo-controle."/>
+<meta property="og:url" content="https://melingo.vercel.app/"/>
+<meta property="og:site_name" content="Melingo"/>
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Melingo — Muziekbingo maken met Spotify"/>
+<meta name="twitter:description" content="Koppel je Spotify-playlist, genereer unieke bingokaarten en speel met een slim host-scherm."/>
+<!-- Structured Data: WebApplication -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Melingo","url":"https://melingo.vercel.app","description":"Muziekbingo maken met Spotify. Unieke bingokaarten genereren, host-scherm en automatische bingo-controle.","applicationCategory":"EntertainmentApplication","operatingSystem":"Web","offers":{"@type":"AggregateOffer","lowPrice":"14.95","highPrice":"29.95","priceCurrency":"EUR"}}
+</script>
+<link rel="stylesheet" href="/site.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <style>
@@ -803,6 +820,37 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <!-- ═══ SCREEN 1 — START ═══ v1780429438 -->
 <div id="screen-start" class="screen active">
 <div class="scroll">
+
+<!-- SITE NAVBAR (alleen zichtbaar op startscherm) -->
+<nav class="site-nav" id="siteNav">
+  <div class="sn-inner">
+    <a href="/" class="sn-logo">
+      <svg width="20" height="20" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
+      Melingo
+    </a>
+    <button class="sn-burger" id="snBurger" aria-label="Menu openen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="sn-links" id="snLinks" role="list">
+      <li><a href="#hoe-werkt-het" class="sn-link">Hoe werkt het</a></li>
+      <li class="sn-drop">
+        <a href="/kant-en-klare-muziekbingo" class="sn-link">Thema's ▾</a>
+        <ul class="sn-sub">
+          <li><a href="/muziekbingo-jaren-80">🕺 Jaren 80</a></li>
+          <li><a href="/muziekbingo-jaren-90">💿 Jaren 90</a></li>
+          <li><a href="/muziekbingo-foute-muziek">🎉 Foute muziek</a></li>
+          <li><a href="/muziekbingo-kerst">🎄 Kerst</a></li>
+          <li><a href="/muziekbingo-nederlandstalig">🇳🇱 Nederlandstalig</a></li>
+          <li><a href="/muziekbingo-guilty-pleasures">😅 Guilty pleasures</a></li>
+          <li><a href="/muziekbingo-rock">🤘 Rock</a></li>
+        </ul>
+      </li>
+      <li><a href="/blog" class="sn-link">Blog</a></li>
+      <li><a href="/faq" class="sn-link">FAQ</a></li>
+      <li><a href="/" class="sn-cta">Start nu ✦</a></li>
+    </ul>
+  </div>
+</nav>
 
 <!-- HERO -->
 <div class="lp-hero-banner">
@@ -4609,6 +4657,28 @@ window.onload=function(){
   document.querySelectorAll('.bar-logo').forEach(function(el){
     el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
   });
+
+  /* ── Site navbar hamburger toggle ── */
+  (function(){
+    var burger=document.getElementById('snBurger');
+    var links=document.getElementById('snLinks');
+    if(!burger||!links)return;
+    burger.addEventListener('click',function(){
+      var open=links.classList.toggle('open');
+      burger.classList.toggle('open',open);
+      burger.setAttribute('aria-expanded',open?'true':'false');
+      document.body.style.overflow=open?'hidden':'';
+    });
+    /* sluit menu bij klikken op een link */
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        links.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded','false');
+        document.body.style.overflow='';
+      });
+    });
+  })();
 };
 </script>
 
