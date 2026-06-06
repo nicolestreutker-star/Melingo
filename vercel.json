@@ -11,6 +11,10 @@
     { "source": "/muziekbingo-kaarten-maken",    "destination": "/muziekbingo-kaarten-maken.html" },
     { "source": "/kant-en-klare-muziekbingo",    "destination": "/kant-en-klare-muziekbingo.html" },
 
+    { "source": "/muziekbingo-00s-bangers",        "destination": "/muziekbingo-00s-bangers.html" },
+    { "source": "/muziekbingo-pop-hits",           "destination": "/muziekbingo-pop-hits.html" },
+    { "source": "/muziekbingo-rnb-soul",           "destination": "/muziekbingo-rnb-soul.html" },
+
     { "source": "/muziekbingo-jaren-80",         "destination": "/muziekbingo-jaren-80.html" },
     { "source": "/muziekbingo-jaren-90",         "destination": "/muziekbingo-jaren-90.html" },
     { "source": "/muziekbingo-foute-muziek",     "destination": "/muziekbingo-foute-muziek.html" },
