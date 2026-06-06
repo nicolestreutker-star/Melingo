@@ -595,6 +595,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .hw-sdesc{min-height:auto}
 }
 @media(max-width:480px){.hw-so{height:240px}}
+/* ── Mobiel: swipe-navigatie, pijlen verbergen ── */
+.hw-swipe-hint{display:none}
+@media(max-width:820px){
+  /* Verberg vorige/volgende pijlen — play/pause blijft zichtbaar */
+  .hw-bico:not(.hw-bplay){display:none}
+  /* Subtiele swipe-hint onder de mockup */
+  .hw-swipe-hint{
+    display:flex;align-items:center;gap:.38rem;justify-content:center;
+    font-size:.67rem;color:rgba(240,238,248,.32);font-weight:500;
+    letter-spacing:.03em;padding:.38rem 0 .1rem;
+    pointer-events:none;user-select:none;
+  }
+  .hw-swipe-hint svg{opacity:.45;flex-shrink:0}
+  /* Verberg hint zodra gebruiker heeft geswiped (via JS: .hw-swiped op .hw-sec) */
+  .hw-sec.hw-swiped .hw-swipe-hint{display:none}
+}
 
 /* ══ DESKTOP SCALING — min-width:1024px ══ */
 @media(min-width:1024px){
@@ -1424,6 +1440,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             </div><!-- /.hw-so -->
             <div class="hw-pt"><div class="hw-pf" id="hw-pf"></div></div>
           </div><!-- /.hw-frame -->
+          <!-- Swipe-hint: alleen zichtbaar op mobiel, verdwijnt na eerste swipe -->
+          <div class="hw-swipe-hint" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+            Swipe door de stappen
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
         </div><!-- /.hw-fw -->
 
         <!-- ── Right: stap info + navigatie ── -->
@@ -4516,6 +4538,66 @@ function hwToggle(){
 }
 function hwNext(){hwGo((hwCur+1)%hwTotal);if(hwPlaying){hwPauseTimer();hwStartTimer();}}
 function hwPrev(){hwGo((hwCur-1+hwTotal)%hwTotal);if(hwPlaying){hwPauseTimer();hwStartTimer();}}
+
+/* ── Swipe-navigatie op mobiel ── */
+(function(){
+  var soEl=null;          // .hw-so element
+  var tx0=0,ty0=0;        // touch start coördinaten
+  var locked=null;        // 'h' horizontaal, 'v' verticaal, null onbeslist
+  var THRESHOLD=50;       // min px horizontale swipe
+  var RATIO=1.2;          // horizontaal moet RATIO× groter zijn dan verticaal
+
+  function hwSwipeInit(){
+    soEl=document.querySelector('.hw-so');
+    if(!soEl)return;
+    soEl.addEventListener('touchstart',onStart,{passive:true});
+    soEl.addEventListener('touchmove',onMove,{passive:false});
+    soEl.addEventListener('touchend',onEnd,{passive:true});
+  }
+
+  function onStart(e){
+    var t=e.touches[0];
+    tx0=t.clientX; ty0=t.clientY; locked=null;
+  }
+
+  function onMove(e){
+    if(!e.touches.length)return;
+    var t=e.touches[0];
+    var dx=t.clientX-tx0;
+    var dy=t.clientY-ty0;
+    /* Bepaal richting als nog niet vast */
+    if(locked===null){
+      if(Math.abs(dx)>8||Math.abs(dy)>8){
+        locked=Math.abs(dx)>Math.abs(dy)?'h':'v';
+      }
+    }
+    /* Blokkeer alleen native scroll bij duidelijk horizontale swipe */
+    if(locked==='h')e.preventDefault();
+  }
+
+  function onEnd(e){
+    if(!e.changedTouches.length)return;
+    var t=e.changedTouches[0];
+    var dx=t.clientX-tx0;
+    var dy=t.clientY-ty0;
+    var adx=Math.abs(dx),ady=Math.abs(dy);
+    /* Alleen navigeren als: horizontaal genoeg + duidelijk horizontaler dan verticaal */
+    if(adx>=THRESHOLD&&adx>=ady*RATIO){
+      /* Verberg swipe-hint na eerste gebruik */
+      var sec=document.querySelector('.hw-sec');
+      if(sec)sec.classList.add('hw-swiped');
+      if(dx<0){hwNext();}else{hwPrev();}
+    }
+    locked=null;
+  }
+
+  /* Init na DOM-ready (hwInit wordt al aangeroepen via window.onload) */
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',hwSwipeInit);
+  }else{
+    hwSwipeInit();
+  }
+})();
 
 window.onload=function(){
   updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();updLpCTA();checkOrderAccess();hwInit();
