@@ -821,58 +821,27 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <div id="screen-start" class="screen active">
 <div class="scroll">
 
-<!-- SITE NAVBAR (alleen zichtbaar op startscherm) -->
-<nav class="site-nav" id="siteNav">
-  <div class="sn-inner">
-    <a href="/app" class="sn-logo">
-      <svg width="20" height="20" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
-      Melingo
+<!-- APP HEADER — compacte configurator-header (marketing-navbar en hero staan op /) -->
+<div class="lp-hero-banner" style="padding-bottom:1.4rem">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap">
+    <a href="/" class="lp-hero-logo" style="text-decoration:none;cursor:pointer">
+      <svg width="24" height="24" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
+      <span class="lp-hero-brand bar-logo">Melingo</span>
     </a>
-    <button class="sn-burger" id="snBurger" aria-label="Menu openen" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="sn-links" id="snLinks" role="list">
-      <li><a href="#hoe-werkt-melingo" class="sn-link">Hoe werkt Melingo</a></li>
-      <li class="sn-drop">
-        <a href="/kant-en-klare-muziekbingo" class="sn-link">Thema's ▾</a>
-        <ul class="sn-sub">
-          <li><a href="/muziekbingo-jaren-80">🕺 80s Classics</a></li>
-          <li><a href="/muziekbingo-jaren-90">💿 90s Hits</a></li>
-          <li><a href="/muziekbingo-00s-bangers">🎵 00s Bangers</a></li>
-          <li><a href="/muziekbingo-nederlandstalig">🇳🇱 Nederlandstalig</a></li>
-          <li><a href="/muziekbingo-rock">🤘 Rock Legends</a></li>
-          <li><a href="/muziekbingo-pop-hits">🎤 Pop Hits</a></li>
-          <li><a href="/muziekbingo-rnb-soul">🎷 R&amp;B &amp; Soul</a></li>
-          <li><a href="/muziekbingo-foute-muziek">🎉 Foute Muziek</a></li>
-          <li><a href="/muziekbingo-guilty-pleasures">😅 Guilty Pleasures</a></li>
-          <li><a href="/muziekbingo-kerst">🎄 Kerstmuziek</a></li>
-        </ul>
-      </li>
-      <li><a href="/blog" class="sn-link">Blog</a></li>
-      <li><a href="/faq" class="sn-link">FAQ</a></li>
-      <li><a href="/app" class="sn-cta">Start nu ✦</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="lp-hero-banner">
-  <div class="lp-hero-logo">
-    <svg width="24" height="24" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
-    <span class="lp-hero-brand">Melingo</span>
+    <div style="display:flex;align-items:center;gap:.45rem;flex-wrap:wrap">
+      <button class="btn bs" style="font-size:.72rem;min-height:32px;padding:.3rem .7rem" onclick="appRestart()">Opnieuw beginnen</button>
+      <button class="btn bs" style="font-size:.72rem;min-height:32px;padding:.3rem .7rem" onclick="openAppHelp()">Hulp</button>
+      <a href="/" class="btn bs" style="font-size:.72rem;min-height:32px;padding:.3rem .7rem;text-decoration:none">Terug naar website</a>
+    </div>
   </div>
   <div id="resume-bar" style="display:none" class="lp-resume-chip">
     <span id="resume-meta" style="font-size:.7rem;color:rgba(255,255,255,.7)"></span>
     <button class="btn bp" onclick="resumeSession()" style="font-size:.68rem;min-height:26px;padding:.2rem .6rem">Verdergaan</button>
     <button onclick="dismissResume()" style="background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:.9rem;line-height:1;padding:0">×</button>
   </div>
-  <div class="lp-hero-content">
-    <div class="lp-hero-pill">where melody meets bingo</div>
-    <div class="lp-hero-textbox">
-      <h1 class="lp-hero-h1">Maak je eigen muziekbingo<br>met Spotify in minuten</h1>
-      <p class="lp-hero-sub">Koppel je Spotify-playlist, genereer unieke bingokaarten en speel met een slim host-scherm dat nummers en bingo's voor je bijhoudt.</p>
-    </div>
-    <div class="lp-hero-proof"><span style="color:rgba(255,255,255,.55);font-size:.78rem">Geen geknip of geplak. Jij kiest de muziek, Melingo regelt de rest.</span></div>
+  <div class="lp-hero-content" style="padding-top:.5rem">
+    <h1 class="lp-hero-h1" style="font-size:1.6rem">Maak je muziekbingo</h1>
+    <p class="lp-hero-sub" style="margin-top:.4rem">Kies hoe je wilt spelen en stel je bingo stap voor stap samen.</p>
   </div>
 </div>
 
@@ -1093,8 +1062,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
   </div>
 
-  <!-- ══ HOE WERKT MELINGO — geanimeerde walkthrough ══ -->
-  <div class="hw-sec" id="hoe-werkt-melingo">
+  <!-- ══ HOE WERKT MELINGO — walkthrough verborgen in de app; marketinguitleg staat op / (hwInit wordt niet meer aangeroepen) ══ -->
+  <div class="hw-sec" id="hoe-werkt-melingo" style="display:none">
       <div class="hw-hd">
         <div class="hw-pill2">✦ Stap voor stap</div>
         <h2 class="hw-h2">Hoe werkt <em>Melingo</em>?</h2>
@@ -1522,28 +1491,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div><!-- /.hw-body -->
     </div><!-- /.hw-sec -->
 
-  <!-- THEMA'S -->
-  <div class="lp-themes-sec">
-    <div class="lp-section-hd">Kant-en-klare thema's</div>
-    <div class="lp-section-sub">40 nummers per thema · max. 20 spelers · host-scherm inbegrepen</div>
-    <div class="lp-themes-grid" id="lp-themes-grid"></div>
-    <div style="text-align:center;margin-top:1.5rem">
-      <button class="btn bp" onclick="setType('thema');document.querySelector('.lp-cfg-outer').scrollIntoView({behavior:'smooth'})" style="min-height:44px;padding:.65rem 2rem;font-size:.88rem">Kies een thema en start →</button>
-    </div>
-  </div>
-
-  <!-- FAQ -->
-  <div class="lp-faq-sec">
-    <div class="lp-section-hd">Veelgestelde vragen</div>
-    <div id="lp-faq" class="lp-faq-list"></div>
-  </div>
-
-  <!-- FOOTER CTA -->
-  <div class="lp-footer-cta">
-    <div class="lp-footer-title">Klaar om te spelen?</div>
-    <div class="lp-footer-sub">Maak je eerste muziekbingo in minder dan 5 minuten.</div>
-    <button class="lp-cta" onclick="document.querySelector('.lp-cfg-outer').scrollIntoView({behavior:'smooth'})" style="max-width:280px;margin:0 auto;display:block">Maak mijn muziekbingo →</button>
-  </div>
+  <!-- Marketingsecties (thema-showcase, FAQ, footer-CTA) zijn verplaatst naar de landingpage (/). -->
 
 </div>
 </div>
@@ -4650,40 +4598,79 @@ function hwPrev(){hwGo((hwCur-1+hwTotal)%hwTotal);if(hwPlaying){hwPauseTimer();h
   }
 })();
 
+/* ══ APP NAV ══ */
+function appRestart(){
+  // Herstart de configurator zonder opgeslagen sessies of Spotify-tokens te wissen
+  window.location.href='/app';
+}
+function openAppHelp(){var m=document.getElementById('app-help-modal');if(m)m.style.display='flex';}
+function closeAppHelp(){var m=document.getElementById('app-help-modal');if(m)m.style.display='none';}
+function closeAppHelpOutside(e){if(e.target&&e.target.id==='app-help-modal')closeAppHelp();}
+
+/* ══ URL-PARAMETERS (mode / theme / package) ══
+   Loopt NA checkSpotifyAuth/checkOrderAccess; sp_at/sp_rt/spotify_error/order/payment
+   hebben voorrang en worden hier nooit overschreven. Ongeldige waarden worden stil
+   genegeerd: standaardweergave, geen fout, sessie blijft staan. */
+var THEME_SLUGS={
+  '80s-classics':'jaren80','90s-hits':'jaren90','00s-bangers':'jaren00',
+  'nederlandstalig':'nl','rock-legends':'rock','pop-hits':'pop',
+  'rnb-soul':'rnb','foute-muziek':'foute','guilty-pleasures':'guilty','kerstmuziek':'kerst'
+};
+function applyUrlParams(){
+  try{
+    var q=new URLSearchParams(window.location.search);
+    // OAuth-/checkout-returns hebben voorrang; raak die flows niet aan
+    if(q.get('sp_at')||q.get('sp_rt')||q.get('spotify_error')||q.get('order'))return;
+    var mode=q.get('mode'),theme=q.get('theme'),pkg=q.get('package');
+    var MODE_MAP={spotify:'spotify',theme:'thema',cards:'eigen'};
+    // Pakketten vertalen naar een passend spelersaantal binnen de bestaande tiers
+    var PKG_MAP={small:10,party:50,event:100};
+    if(pkg&&PKG_MAP[pkg]){ST.players=PKG_MAP[pkg];updLpPNum();}
+    if(mode&&MODE_MAP[mode]){
+      setType(MODE_MAP[mode]);
+      if(MODE_MAP[mode]==='thema'&&theme){
+        var tid=null;
+        if(THEMES.some(function(t){return t.id===theme;}))tid=theme;
+        else if(THEME_SLUGS[theme])tid=THEME_SLUGS[theme];
+        if(tid){
+          ST.theme=tid;buildLpTgrid();updLpPlayers();updLpCTA();
+          setTimeout(function(){var s3=document.getElementById('lp-step3');if(s3&&s3.style.display!=='none')s3.scrollIntoView({behavior:'smooth',block:'nearest'});},150);
+        }
+      }
+    } else if(pkg&&PKG_MAP[pkg]){updLpPlayers();updLpCTA();}
+  }catch(e){/* ongeldige parameters: stil negeren */}
+}
+
 window.onload=function(){
-  updLpPNum();checkResume();buildLpThemeShowcase();buildFAQ();updLpCTA();checkOrderAccess();hwInit();
+  updLpPNum();checkResume();updLpCTA();checkOrderAccess();
   // Geef browser even tijd om URL te lezen na redirect
   checkSpotifyAuth();
   // Top-banner: toon Spotify-connect hint als niet verbonden
   updSpotifyCtaBanner();
+  applyUrlParams();
   var taps=0;
   document.querySelectorAll('.bar-logo').forEach(function(el){
     el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
   });
-
-  /* ── Site navbar hamburger toggle ── */
-  (function(){
-    var burger=document.getElementById('snBurger');
-    var links=document.getElementById('snLinks');
-    if(!burger||!links)return;
-    burger.addEventListener('click',function(){
-      var open=links.classList.toggle('open');
-      burger.classList.toggle('open',open);
-      burger.setAttribute('aria-expanded',open?'true':'false');
-      document.body.style.overflow=open?'hidden':'';
-    });
-    /* sluit menu bij klikken op een link */
-    links.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click',function(){
-        links.classList.remove('open');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded','false');
-        document.body.style.overflow='';
-      });
-    });
-  })();
 };
 </script>
+
+<!-- APP HELP MODAL -->
+<div id="app-help-modal" style="display:none;position:fixed;inset:0;background:rgba(10,8,24,.88);z-index:600;align-items:flex-start;justify-content:center;padding:1.5rem 1rem;overflow-y:auto;backdrop-filter:blur(12px)" onclick="closeAppHelpOutside(event)" role="dialog" aria-modal="true" aria-labelledby="app-help-title">
+  <div style="width:100%;max-width:560px;background:rgba(22,18,42,.98);border:1px solid rgba(155,109,255,.25);border-radius:24px;overflow:hidden;margin:auto">
+    <div style="padding:1.5rem 1.5rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:1.15rem;font-weight:800;color:var(--tx)" id="app-help-title">Hulp bij het maken</div>
+      <button onclick="closeAppHelp()" aria-label="Sluiten" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--mt);font-size:1rem;cursor:pointer;flex-shrink:0;margin-left:1rem;display:flex;align-items:center;justify-content:center">✕</button>
+    </div>
+    <div style="padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.85rem;font-size:.82rem;color:var(--mt);line-height:1.6">
+      <div><strong style="color:var(--tx)">1. Kies je speelmodus.</strong> Eigen Spotify-bingo gebruikt je eigen playlist (Spotify Premium nodig), Kant-en-klaar thema speelt direct met 40 nummers via Spotify, Alleen bingokaarten maakt PDF-kaarten van je eigen lijst — zonder Spotify.</div>
+      <div><strong style="color:var(--tx)">2. Kies je muziek.</strong> Verbind Spotify en kies een playlist of thema, of plak minimaal 25 nummers (één per regel, bijv. "ABBA – Dancing Queen").</div>
+      <div><strong style="color:var(--tx)">3. Kies het aantal spelers.</strong> Het maximum en de prijs hangen af van je speelmodus en het aantal nummers; je ziet het bijpassende pakket direct onder de spelerskeuze.</div>
+      <div><strong style="color:var(--tx)">4. Maak je kaarten.</strong> Na de betaling download je de unieke kaarten als PDF en start je het host-scherm om te spelen. Op het host-scherm vind je een eigen hulpknop.</div>
+      <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:.85rem">Tussentijds gestopt? Je sessie wordt automatisch bewaard — bovenaan verschijnt een "Verdergaan"-knop. Algemene vragen? <a href="/faq" style="color:var(--a)">Bekijk de FAQ op de website</a>.</div>
+    </div>
+  </div>
+</div>
 
 <!-- HOST HELP MODAL -->
 <div id="host-help-modal" style="display:none;position:fixed;inset:0;background:rgba(10,8,24,.88);z-index:600;align-items:flex-start;justify-content:center;padding:1.5rem 1rem;overflow-y:auto;backdrop-filter:blur(12px)" onclick="closeHostHelpOutside(event)" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">

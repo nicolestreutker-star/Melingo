@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Melingo — Muziekbingo voor thuis, feestjes en events</title>
 <meta name="description" content="Met Melingo maak je in minuten een muziekbingo. Koppel je Spotify-playlist of kies een kant-en-klaar thema, print unieke bingokaarten en speel direct samen."/>
+<script>
+/* Spotify OAuth-returns (m.n. foutpad van /api/callback) komen op / binnen — stuur ze door naar de app */
+(function(){
+  var s=window.location.search||'';
+  if(/[?&](sp_at|sp_rt|sp_ex|spotify_error|order)=/.test(s)){
+    window.location.replace('/app'+s+(window.location.hash||''));
+  }
+})();
+</script>
 <link rel="canonical" href="https://melingo.vercel.app/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Melingo — Muziekbingo voor thuis, feestjes en events"/>
@@ -769,7 +778,7 @@ footer{
           <li class="modi-sp">Spotify Premium vereist</li>
         </ul>
         <div class="modi-price"><em>Vanaf</em> €14,95</div>
-        <a href="/app" class="btn btn-primary">Eigen bingo starten</a>
+        <a href="/app?mode=spotify" class="btn btn-primary">Eigen bingo starten</a>
       </div>
 
       <!-- Kant-en-klaar thema -->
@@ -785,7 +794,7 @@ footer{
           <li class="modi-sp">Spotify Premium vereist</li>
         </ul>
         <div class="modi-price">€9,95 <em>t/m 20 spelers</em></div>
-        <a href="/app" class="btn btn-ghost">Thema kiezen</a>
+        <a href="/app?mode=theme" class="btn btn-ghost">Thema kiezen</a>
       </div>
 
       <!-- Alleen kaarten -->
@@ -801,7 +810,7 @@ footer{
           <li>Tot 200 spelers</li>
         </ul>
         <div class="modi-price"><em>Vanaf</em> €7,95</div>
-        <a href="/app" class="btn btn-ghost">Kaarten maken</a>
+        <a href="/app?mode=cards" class="btn btn-ghost">Kaarten maken</a>
       </div>
 
     </div>
@@ -912,7 +921,7 @@ footer{
             <li>Automatische bingo-controle</li>
           </ul>
           <div class="pakket-price">€14,95 <em>eenmalig</em></div>
-          <a href="/app" class="btn btn-ghost">Starten</a>
+          <a href="/app?mode=spotify&package=small" class="btn btn-ghost">Starten</a>
         </div>
         <div class="pakket-card best-pakket">
           <div class="pakket-badge">Meest gekozen</div>
@@ -926,7 +935,7 @@ footer{
             <li>Automatische bingo-controle</li>
           </ul>
           <div class="pakket-price">€19,95 <em>eenmalig</em></div>
-          <a href="/app" class="btn btn-primary">Starten</a>
+          <a href="/app?mode=spotify&package=party" class="btn btn-primary">Starten</a>
         </div>
         <div class="pakket-card">
           <div class="pakket-name">Evenement</div>
@@ -939,7 +948,7 @@ footer{
             <li>Automatische bingo-controle</li>
           </ul>
           <div class="pakket-price">€29,95 <em>eenmalig</em></div>
-          <a href="/app" class="btn btn-ghost">Starten</a>
+          <a href="/app?mode=spotify&package=event" class="btn btn-ghost">Starten</a>
         </div>
       </div>
     </div>
@@ -959,7 +968,7 @@ footer{
             <li>Host-scherm + bingo-controle</li>
           </ul>
           <div class="pakket-price">€9,95 <em>eenmalig</em></div>
-          <a href="/app" class="btn btn-primary">Thema kiezen</a>
+          <a href="/app?mode=theme" class="btn btn-primary">Thema kiezen</a>
         </div>
       </div>
     </div>
@@ -978,7 +987,7 @@ footer{
             <li>Geen Spotify nodig</li>
           </ul>
           <div class="pakket-price">€7,95 <em>eenmalig</em></div>
-          <a href="/app" class="btn btn-ghost">Starten</a>
+          <a href="/app?mode=cards&package=small" class="btn btn-ghost">Starten</a>
         </div>
         <div class="pakket-card best-pakket">
           <div class="pakket-badge">Meest gekozen</div>
@@ -992,7 +1001,7 @@ footer{
             <li>Geen Spotify nodig</li>
           </ul>
           <div class="pakket-price">€12,95 <em>eenmalig</em></div>
-          <a href="/app" class="btn btn-primary">Starten</a>
+          <a href="/app?mode=cards&package=party" class="btn btn-primary">Starten</a>
         </div>
         <div class="pakket-card">
           <div class="pakket-name">Evenement</div>
@@ -1005,7 +1014,7 @@ footer{
             <li>Geen Spotify nodig</li>
           </ul>
           <div class="pakket-price">€19,95 <em>eenmalig</em></div>
-          <a href="/app" class="btn btn-ghost">Starten</a>
+          <a href="/app?mode=cards&package=event" class="btn btn-ghost">Starten</a>
         </div>
       </div>
     </div>
