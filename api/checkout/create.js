@@ -103,7 +103,7 @@ export default async function handler(req, res) {
       message: 'Admin testmodus actief — betaling overgeslagen.',
       orderId: order.id,
       gameSessionId: gameSession.id,
-      accessUrl: `${BASE_URL}/?order=${order.id}`,
+      accessUrl: `${BASE_URL}/app?order=${order.id}`,
       product: {
         name: product.name,
         maxPlayers: product.maxPlayers,
@@ -156,8 +156,8 @@ export default async function handler(req, res) {
       players: String(numPlayers),
       playlistId: playlistId || '',
     },
-    success_url: `${BASE_URL}/?order=${order.id}&payment=success`,
-    cancel_url: `${BASE_URL}/?order=${order.id}&payment=cancelled`,
+    success_url: `${BASE_URL}/app?order=${order.id}&payment=success`,
+    cancel_url: `${BASE_URL}/app?order=${order.id}&payment=cancelled`,
     locale: 'nl',
   });
 

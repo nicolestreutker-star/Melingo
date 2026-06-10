@@ -76,7 +76,7 @@ try {
   var tokens = { accessToken: '${at}', refreshToken: '${rt}', expiresAt: Date.now() + ${ex} * 1000 };
   localStorage.setItem('sp_tokens', JSON.stringify(tokens));
 } catch(e) {}
-window.location.replace('/?sp_at=${encodeURIComponent(at)}&sp_rt=${encodeURIComponent(rt)}&sp_ex=${ex}');
+window.location.replace('/app?sp_at=${encodeURIComponent(at)}&sp_rt=${encodeURIComponent(rt)}&sp_ex=${ex}');
 </script>
 <p>Verbinden met Melingo...</p>
 </body>
