@@ -805,6 +805,217 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .hw-pill2{font-size:.76rem;padding:.32rem 1.1rem;margin-bottom:.85rem}
   .hw-pt{height:4px}
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   START-SCHERM REDESIGN — compacte app-bar, intro en premium configurator
+   (override-laag; latere regels winnen van eerdere gelijke selectors)
+═══════════════════════════════════════════════════════════════════════════ */
+/* — App-header — */
+.app-top{padding:.9rem 1.25rem 0}
+.app-top-in{
+  max-width:1160px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:.55rem .9rem;
+}
+.app-top-left{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+.app-logo{display:flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--tx);font-weight:800;font-size:.95rem;letter-spacing:-.01em}
+.app-logo:focus-visible{outline:2px solid var(--a);outline-offset:3px;border-radius:8px}
+.app-top-nav{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}
+.app-nav-btn{
+  display:inline-flex;align-items:center;min-height:34px;padding:.3rem .8rem;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:9px;
+  color:rgba(240,238,248,.78);font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.74rem;font-weight:600;cursor:pointer;text-decoration:none;
+  transition:all .18s ease;
+}
+.app-nav-btn:hover{background:rgba(155,109,255,.1);border-color:rgba(155,109,255,.4);color:var(--tx);transform:translateY(-1px)}
+.app-nav-btn:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.app-nav-ghost{background:transparent;border-color:transparent;color:rgba(240,238,248,.5)}
+.app-nav-ghost:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+/* hervat-indicator rechts */
+.app-resume{display:flex;align-items:center;gap:.55rem;background:rgba(155,109,255,.08);border:1px solid rgba(155,109,255,.25);border-radius:99px;padding:.3rem .4rem .3rem .85rem}
+.app-resume-meta{font-size:.72rem;font-weight:600;color:rgba(240,238,248,.8);white-space:nowrap}
+.app-resume-go{
+  min-height:30px;padding:.25rem .8rem;border:none;border-radius:99px;cursor:pointer;
+  background:linear-gradient(135deg,var(--s),var(--a));color:#fff;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:.72rem;font-weight:700;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.app-resume-go:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(155,109,255,.3)}
+.app-resume-go:focus-visible,.app-resume-x:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.app-resume-x{
+  width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+  background:none;border:none;border-radius:50%;cursor:pointer;
+  color:rgba(255,255,255,.55);font-size:1rem;line-height:1;transition:all .18s ease;
+}
+.app-resume-x:hover{background:rgba(255,255,255,.08);color:var(--tx)}
+
+/* — Intro — */
+.app-intro{text-align:center;padding:2.25rem 1.25rem 0;max-width:760px;margin:0 auto}
+.app-intro-h1{font-size:2rem;font-weight:800;letter-spacing:-.02em;line-height:1.15;color:var(--tx);margin:0 0 .55rem}
+.app-intro-sub{font-size:.95rem;color:rgba(240,238,248,.66);line-height:1.65;margin:0}
+
+/* — Body & configurator-container — */
+#screen-start .lp-body{max-width:1200px;padding:3rem 1.5rem 4rem;gap:3rem}
+.lp-cfg-outer{max-width:1160px;width:100%;margin:0 auto}
+.lp-cfg-label{
+  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(240,238,248,.45);text-align:left;margin-bottom:.8rem;
+}
+.lp-cfg-card{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  box-shadow:0 0 0 1px rgba(155,109,255,.06),0 18px 60px rgba(0,0,0,.4),0 0 60px rgba(155,109,255,.05);
+}
+#screen-start .lp-sec{padding:1.5rem 1.6rem}
+
+/* — Speelmodus-grid: 58/42 op desktop — */
+@media(min-width:861px){
+  .lp-modes{grid-template-columns:58fr 42fr;gap:18px}
+  .lp-modes-col{gap:18px}
+  .lp-modes-col .lp-mode{flex:1;display:flex;flex-direction:column}
+}
+
+/* — Kaarten: default / hover / geselecteerd / focus — */
+.lp-mode{
+  position:relative;
+  background:rgba(255,255,255,.035);
+  border:1.5px solid rgba(255,255,255,.09);
+  border-radius:18px;padding:1.4rem 1.5rem;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease;
+}
+.lp-mode:hover{
+  transform:translateY(-3px);
+  border-color:rgba(155,109,255,.45);
+  background:rgba(255,255,255,.055);
+  box-shadow:0 10px 32px rgba(0,0,0,.35),0 0 24px rgba(155,109,255,.1);
+}
+.lp-mode.sel{
+  transform:none;
+  border-color:var(--a);
+  background:rgba(155,109,255,.09);
+  box-shadow:0 0 0 1px rgba(155,109,255,.35),0 10px 36px rgba(155,109,255,.16);
+}
+.lp-mode:focus-visible{outline:2.5px solid var(--a);outline-offset:3px}
+.lp-mode-spotify{border-color:rgba(155,109,255,.28);background:rgba(155,109,255,.05)}
+.lp-mode-spotify:hover,.lp-mode-spotify.sel{box-shadow:0 0 0 1px rgba(155,109,255,.35),0 12px 40px rgba(155,109,255,.18)}
+.lp-mode-sm{padding:1.2rem 1.35rem}
+/* keuze-indicator (radio) rechtsboven — niet alleen kleur */
+.lp-mode::after{
+  content:'';position:absolute;top:.9rem;right:.9rem;
+  width:20px;height:20px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.22);
+  transition:all .2s ease;
+}
+.lp-mode.sel::after{
+  border-color:var(--a);
+  background-color:var(--a);
+  -webkit-mask:none;mask:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size:12px 12px;background-position:center;background-repeat:no-repeat;
+}
+
+/* — Typografie & informatiedichtheid — */
+.lp-mode-name{font-size:1.05rem;margin-bottom:.4rem;padding-right:1.8rem}
+.lp-mode-spotify .lp-mode-name{font-size:1.2rem}
+.lp-mode-desc{font-size:.94rem;color:rgba(240,238,248,.66);line-height:1.6;margin-bottom:.7rem}
+.lp-mode-sm .lp-mode-desc{font-size:.94rem}
+.lp-mode-price{margin:.6rem 0;display:flex;align-items:baseline;gap:.35rem}
+.lp-mode-price em{font-size:.8rem;color:rgba(240,238,248,.55)}
+.lp-mode-price strong{font-size:1.45rem;letter-spacing:-.02em}
+/* pakketregels: nette kolommen, prijs rechts */
+.lp-price-tiers{margin:.45rem 0 .7rem}
+.lp-tier-label,.lp-tier-players,.lp-tier-price{font-size:.875rem;padding:.42rem 0;line-height:1.4}
+.lp-tier-label{color:rgba(240,238,248,.8);font-weight:600}
+.lp-tier-players{color:rgba(240,238,248,.5)}
+.lp-tier-price{font-size:.92rem}
+.lp-price-tier:not(:last-child) .lp-tier-label,
+.lp-price-tier:not(:last-child) .lp-tier-players,
+.lp-price-tier:not(:last-child) .lp-tier-price{border-bottom:1px solid rgba(255,255,255,.06)}
+/* kenmerken: CSS-vinkjes in plaats van tekst-✓ */
+.lp-mode-ul{gap:.45rem;margin-top:.2rem}
+.lp-mode-ul li{font-size:.875rem;color:rgba(240,238,248,.62);gap:.5rem}
+.lp-mode-ul li::before{
+  content:'';width:13px;height:13px;flex-shrink:0;
+  background-color:var(--a);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.lp-mode.sel .lp-mode-ul li{color:rgba(255,255,255,.8)}
+/* compacte feature-lijst (thema-kaart) */
+.lp-mode-feats{
+  list-style:none;padding:0;margin:.2rem 0 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;
+}
+.lp-mode-feats li{font-size:.875rem;color:rgba(240,238,248,.62);display:flex;align-items:center;gap:.5rem}
+.lp-mode-feats li::before{
+  content:'';width:13px;height:13px;flex-shrink:0;
+  background-color:var(--a);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.lp-mode.sel .lp-mode-feats li{color:rgba(255,255,255,.8)}
+/* badges */
+.lp-mode-badge-top{font-size:.62rem;padding:.26rem .7rem}
+
+/* — CTA-zone — */
+#screen-start .lp-bottom{padding-top:1.1rem;padding-bottom:1.2rem}
+.lp-cta{
+  min-height:54px;font-size:1rem;border-radius:14px;
+  transition:transform .2s ease,box-shadow .2s ease,opacity .2s ease;
+}
+.lp-cta:hover:not(:disabled){opacity:1;transform:translateY(-2px);box-shadow:0 8px 30px rgba(155,109,255,.35)}
+.lp-cta:focus-visible{outline:2.5px solid #fff;outline-offset:3px}
+.lp-cta:disabled{
+  background:rgba(255,255,255,.06);
+  border:1px dashed rgba(255,255,255,.18);
+  color:rgba(240,238,248,.55);
+  cursor:not-allowed;box-shadow:none;
+}
+.lp-saved-link{
+  background:none;border:none;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.78rem;font-weight:600;color:rgba(240,238,248,.5);
+  text-decoration:underline;text-underline-offset:3px;
+  transition:color .18s ease;min-height:32px;
+}
+.lp-saved-link:hover{color:rgba(240,238,248,.85)}
+.lp-saved-link:focus-visible{outline:2px solid var(--a);outline-offset:2px;border-radius:6px}
+
+/* — Responsive — */
+@media(max-width:860px){
+  .app-top{padding:.75rem .9rem 0}
+  .app-top-in{padding:.5rem .65rem}
+  .app-top-nav{gap:.3rem}
+  .app-nav-btn{min-height:44px;font-size:.72rem;padding:.3rem .65rem}
+  .app-resume{width:100%;justify-content:space-between}
+  .app-intro{padding-top:1.6rem}
+  .app-intro-h1{font-size:1.55rem}
+  .app-intro-sub{font-size:.88rem}
+  #screen-start .lp-body{padding:1.9rem 1rem 3rem;gap:2.5rem}
+  #screen-start .lp-sec{padding:1.15rem 1.1rem}
+  .lp-mode{padding:1.2rem 1.15rem;min-height:44px}
+  .lp-mode-sm{padding:1.1rem 1.15rem}
+  .lp-mode-name{font-size:1rem}
+  .lp-mode-spotify .lp-mode-name{font-size:1.1rem}
+  .lp-mode-desc,.lp-mode-sm .lp-mode-desc{font-size:.9rem}
+  .lp-tier-label,.lp-tier-players,.lp-tier-price{font-size:.84rem;padding:.38rem 0}
+  .lp-mode-feats{grid-template-columns:1fr 1fr}
+  .lp-cta{min-height:52px;font-size:.95rem}
+}
+@media(min-width:1024px){
+  .app-intro-h1{font-size:2.3rem}
+  .app-intro-sub{font-size:1.02rem}
+  #screen-start .lp-body{padding-top:3.25rem}
+  .lp-mode{padding:1.6rem 1.7rem}
+  .lp-mode-sm{padding:1.35rem 1.5rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .lp-mode,.lp-cta,.app-nav-btn,.app-resume-go{transition:none}
+  .lp-mode:hover{transform:none}
+}
 </style>
 </head>
 <body>
@@ -821,28 +1032,32 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <div id="screen-start" class="screen active">
 <div class="scroll">
 
-<!-- APP HEADER — compacte configurator-header (marketing-navbar en hero staan op /) -->
-<div class="lp-hero-banner" style="padding-bottom:1.4rem">
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap">
-    <a href="/" class="lp-hero-logo" style="text-decoration:none;cursor:pointer">
-      <svg width="24" height="24" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
-      <span class="lp-hero-brand bar-logo">Melingo</span>
-    </a>
-    <div style="display:flex;align-items:center;gap:.45rem;flex-wrap:wrap">
-      <button class="btn bs" style="font-size:.72rem;min-height:32px;padding:.3rem .7rem" onclick="appRestart()">Opnieuw beginnen</button>
-      <button class="btn bs" style="font-size:.72rem;min-height:32px;padding:.3rem .7rem" onclick="openAppHelp()">Hulp</button>
-      <a href="/" class="btn bs" style="font-size:.72rem;min-height:32px;padding:.3rem .7rem;text-decoration:none">Terug naar website</a>
+<!-- APP HEADER — compacte app-bar (marketing-navbar en hero staan op /) -->
+<header class="app-top">
+  <div class="app-top-in">
+    <div class="app-top-left">
+      <a href="/" class="app-logo" aria-label="Melingo homepage">
+        <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
+        <span class="bar-logo">Melingo</span>
+      </a>
+      <nav class="app-top-nav" aria-label="App-navigatie">
+        <a href="/" class="app-nav-btn">Terug naar website</a>
+        <button class="app-nav-btn" onclick="openAppHelp()">Hulp</button>
+        <button class="app-nav-btn app-nav-ghost" onclick="appRestart()">Opnieuw beginnen</button>
+      </nav>
+    </div>
+    <div id="resume-bar" style="display:none" class="app-resume">
+      <span id="resume-meta" class="app-resume-meta"></span>
+      <button class="app-resume-go" onclick="resumeSession()">Verdergaan</button>
+      <button class="app-resume-x" onclick="dismissResume()" aria-label="Hervatten verbergen">&times;</button>
     </div>
   </div>
-  <div id="resume-bar" style="display:none" class="lp-resume-chip">
-    <span id="resume-meta" style="font-size:.7rem;color:rgba(255,255,255,.7)"></span>
-    <button class="btn bp" onclick="resumeSession()" style="font-size:.68rem;min-height:26px;padding:.2rem .6rem">Verdergaan</button>
-    <button onclick="dismissResume()" style="background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:.9rem;line-height:1;padding:0">×</button>
-  </div>
-  <div class="lp-hero-content" style="padding-top:.5rem">
-    <h1 class="lp-hero-h1" style="font-size:1.6rem">Maak je muziekbingo</h1>
-    <p class="lp-hero-sub" style="margin-top:.4rem">Kies hoe je wilt spelen en stel je bingo stap voor stap samen.</p>
-  </div>
+</header>
+
+<!-- INTRO -->
+<div class="app-intro">
+  <h1 class="app-intro-h1">Maak je muziekbingo</h1>
+  <p class="app-intro-sub">Kies hoe je wilt spelen. Daarna stellen we jouw muziekbingo stap voor stap samen.</p>
 </div>
 
 <!-- BODY -->
@@ -863,12 +1078,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
       <!-- MODES — Spotify eerst als beste keuze -->
       <div class="lp-sec">
-        <div class="lp-modes">
+        <div class="lp-modes" role="radiogroup" aria-label="Kies je speelmodus">
 
           <!-- SPOTIFY — beste keuze, prominent bovenaan/eerst -->
-          <div class="lp-mode lp-mode-spotify" id="lm-spotify" onclick="setType('spotify')">
+          <div class="lp-mode lp-mode-spotify" id="lm-spotify" onclick="setType('spotify')" role="radio" tabindex="0" aria-checked="false">
             <div style="display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.6rem">
-              <div class="lp-mode-badge-top" style="margin-bottom:0">★ Meest gekozen</div>
+              <div class="lp-mode-badge-top" style="margin-bottom:0">Meest gekozen</div>
               <div class="lp-mode-badge-top" style="margin-bottom:0;background:rgba(29,185,84,.1);border-color:rgba(29,185,84,.35);color:rgba(120,220,140,.95)">Spotify Premium vereist</div>
             </div>
             <div class="lp-mode-name">Eigen Spotify-bingo</div>
@@ -902,22 +1117,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <!-- RECHTERKOLOM: kant-en-klaar + eigen -->
           <div class="lp-modes-col">
 
-            <div class="lp-mode lp-mode-sm" id="lm-thema" onclick="setType('thema')">
+            <div class="lp-mode lp-mode-sm" id="lm-thema" onclick="setType('thema')" role="radio" tabindex="0" aria-checked="false">
               <div style="display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.6rem">
-                <div class="lp-mode-badge-top" style="margin-bottom:0">⚡ Snel starten</div>
+                <div class="lp-mode-badge-top" style="margin-bottom:0">Snel starten</div>
                 <div class="lp-mode-badge-top" style="margin-bottom:0;background:rgba(29,185,84,.1);border-color:rgba(29,185,84,.35);color:rgba(120,220,140,.95)">Spotify Premium vereist</div>
               </div>
               <div class="lp-mode-name">Kant-en-klaar thema</div>
               <div class="lp-mode-desc">Kies een thema en speel direct. Inclusief hostscherm.</div>
               <div class="lp-mode-price"><strong>€9,95</strong></div>
-              <div class="lp-mode-tags">
-                <span>40 nummers</span><span>t/m 20 spelers</span><span>Hostscherm ✓</span><span>PDF ✓</span>
-              </div>
+              <ul class="lp-mode-feats">
+                <li>40 nummers</li><li>t/m 20 spelers</li><li>Hostscherm</li><li>PDF-kaarten</li>
+              </ul>
             </div>
 
-            <div class="lp-mode lp-mode-sm" id="lm-eigen" onclick="setType('eigen')">
+            <div class="lp-mode lp-mode-sm" id="lm-eigen" onclick="setType('eigen')" role="radio" tabindex="0" aria-checked="false">
               <div style="display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.6rem">
-                <div class="lp-mode-badge-top" style="margin-bottom:0">💰 Voordeligst</div>
+                <div class="lp-mode-badge-top" style="margin-bottom:0">Voordeligst</div>
                 <div class="lp-mode-badge-top" style="margin-bottom:0">Geen Spotify nodig</div>
               </div>
               <div class="lp-mode-name">Alleen bingokaarten</div>
@@ -1042,7 +1257,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div id="lp-sum-t" class="lp-sum-t"></div>
           <div id="lp-sum-m" class="lp-sum-m"></div>
         </div>
-        <button class="lp-cta" id="lp-cta" onclick="startGen()" disabled>Kies eerst je speelmodus</button>
+        <button class="lp-cta" id="lp-cta" onclick="startGen()" disabled>Kies hierboven hoe je wilt spelen</button>
         <!-- MAATWERK (201+ spelers) -->
         <div id="lp-contact-box" class="lp-contact-box" style="display:none">
           <div class="lp-contact-title">Meer dan 200 spelers?</div>
@@ -1050,7 +1265,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <a href="mailto:hallo@melingo.nl" class="btn bp" style="min-height:44px;padding:.65rem 1.5rem;font-size:.88rem;text-decoration:none">Neem contact op</a>
         </div>
         <div style="text-align:center;margin-top:.5rem">
-          <button onclick="showSaved()" style="background:none;border:none;color:rgba(255,255,255,.2);font-size:.7rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Opgeslagen bingo's</button>
+          <button onclick="showSaved()" class="lp-saved-link">Opgeslagen bingo's</button>
         </div>
       </div>
 
@@ -1960,7 +2175,7 @@ function getMaxPlayers(n){var c=getPlaylistCapacity(n);return c.blocked?0:c.maxP
 function setType(mode){
   ST.mode=mode;
   ['eigen','thema','spotify'].forEach(function(m){
-    var el=document.getElementById('lm-'+m);if(el)el.classList.toggle('sel',m===mode);
+    var el=document.getElementById('lm-'+m);if(el){el.classList.toggle('sel',m===mode);el.setAttribute('aria-checked',m===mode?'true':'false');}
   });
   document.getElementById('lp-step2').style.display='block';
   ['lp-inp-eigen','lp-inp-thema','lp-inp-spotify'].forEach(function(id){
@@ -2297,7 +2512,7 @@ function updLpCTA(){
     return; // harde stop — nooit verder
   }
 
-  if(!mode){btn.disabled=true;btn.textContent='Kies eerst je speelmodus';if(sum)sum.style.display='none';return;}
+  if(!mode){btn.disabled=true;btn.textContent='Kies hierboven hoe je wilt spelen';if(sum)sum.style.display='none';return;}
 
   if(mode==='thema'){
     // Spotify is vereist voor thema-playback
@@ -4648,6 +4863,12 @@ window.onload=function(){
   // Top-banner: toon Spotify-connect hint als niet verbonden
   updSpotifyCtaBanner();
   applyUrlParams();
+  /* Toetsenbordbediening voor de speelmodus-kaarten (Enter/Spatie = kiezen) */
+  document.querySelectorAll('.lp-mode[role="radio"]').forEach(function(el){
+    el.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();el.click();}
+    });
+  });
   var taps=0;
   document.querySelectorAll('.bar-logo').forEach(function(el){
     el.addEventListener('click',function(){taps++;setTimeout(function(){taps=0;},700);if(taps>=3){go('admin');taps=0;}});
