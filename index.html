@@ -164,6 +164,51 @@ section{padding:4.5rem 0}
   .mock-card{width:128px;right:0;bottom:-.5rem}
   .mock-card .rc{font-size:3.2px}
 }
+/* desktop: hero-mockup iets royaler */
+@media(min-width:901px){
+  .rh.hero-rh{font-size:10px}
+  .mock-card{width:222px}
+  .mock-card .rc{font-size:5.5px}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MELINGO IN ACTIE — social proof grid (placeholders voor echte foto's)
+═══════════════════════════════════════════════════════════════════════════ */
+.actie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:768px){.actie-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}}
+.actie-tile{
+  position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;
+  border:1px solid var(--bd);background:var(--sf2);
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.actie-tile:hover{
+  transform:translateY(-3px);
+  border-color:rgba(155,109,255,.45);
+  box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 28px rgba(155,109,255,.14);
+}
+.actie-tile:focus-visible{outline:2.5px solid var(--secondary);outline-offset:3px}
+/* placeholder-vlak — vervang door <img loading="lazy" width="800" height="600"> */
+.actie-ph{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;
+  transition:transform .35s ease;
+}
+.actie-tile:hover .actie-ph{transform:scale(1.05)}
+.actie-ph::before{content:'';position:absolute;inset:0;opacity:.05;background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);background-size:28px 28px}
+.actie-ph.v1{background:linear-gradient(150deg,#221331,#131020)}
+.actie-ph.v2{background:linear-gradient(150deg,#2a1126,#140e1e)}
+.actie-ph.v3{background:linear-gradient(150deg,#101a2e,#100f1e)}
+.actie-ic{
+  width:42px;height:42px;border-radius:12px;position:relative;z-index:1;
+  background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.2);
+  display:flex;align-items:center;justify-content:center;color:var(--secondary);
+}
+.actie-ic .ic{width:20px;height:20px}
+.actie-lbl{position:relative;z-index:1;font-size:.74rem;font-weight:700;color:var(--mt)}
+@media(max-width:768px){
+  .actie-ic{width:34px;height:34px}
+  .actie-ic .ic{width:16px;height:16px}
+  .actie-lbl{font-size:.66rem}
+}
 .mock-card-hd{background:var(--grad);color:#fff;font-size:.52rem;font-weight:800;text-align:center;padding:.26rem}
 .mock-card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:5px}
 .mcc{aspect-ratio:1;background:#f0eef6;border-radius:2px}
@@ -256,6 +301,25 @@ section{padding:4.5rem 0}
 .hw-inp{display:flex;gap:.45rem}
 .hw-inp-f{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:8px;padding:.45rem .65rem;font-size:.6rem;color:var(--mt)}
 .hw-inp-b{background:var(--grad);color:#fff;border-radius:8px;font-size:.6rem;font-weight:800;padding:.45rem .75rem;display:flex;align-items:center}
+/* replica-maten: basis = mobiel (ongewijzigd t.o.v. eerdere inline waarden) */
+.rh.demo-rh{max-width:340px;font-size:8.5px}
+.rc.demo-rc{max-width:360px;font-size:7.5px}
+.rk.demo-rk{max-width:360px;font-size:7.5px}
+.rh.hero-rh{font-size:9px}
+/* premium tabwissel: fade + lichte scale op niet-actieve slides */
+.demo-slide{transition:opacity .4s ease,transform .4s ease}
+.demo-slide:not(.on){opacity:.35;transform:scale(.965)}
+/* desktop: demo groter, 40/60-verhouding, identieke paneelmaten */
+@media(min-width:861px){
+  .demo-panel{grid-template-columns:2fr 3fr;gap:2.75rem;padding:2.75rem;align-items:stretch}
+  .demo-info{align-self:center}
+  .demo-info h3{font-size:1.5rem}
+  .demo-info p{font-size:1rem}
+  .demo-stage{height:560px;min-height:560px;padding:1.5rem}
+  .rh.demo-rh{max-width:430px;font-size:10px}
+  .rc.demo-rc{max-width:500px;font-size:12.5px}
+  .rk.demo-rk{max-width:500px;font-size:13.5px}
+}
 .demo-dots{display:flex;justify-content:center;gap:.45rem;margin-top:1rem}
 .demo-dot{width:8px;height:8px;border-radius:99px;border:none;padding:0;cursor:pointer;background:rgba(255,255,255,.16);transition:all .25s ease}
 .demo-dot.on{width:22px;background:var(--grad)}
@@ -561,7 +625,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
           <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
           <span class="mock-url">melingo.vercel.app/app — hostscherm</span>
         </div>
-        <div class="rh" style="border:none;border-radius:0;font-size:9px">
+        <div class="rh hero-rh" style="border:none;border-radius:0">
           <div class="rh-now">
             <div class="rh-vinyl"></div>
             <div class="rh-label">Nu speelt</div>
@@ -685,7 +749,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
             <p>Speel nummers af, zie wat er al geweest is en houd het overzicht — alles vanaf één scherm op je laptop of tablet.</p>
           </div>
           <div class="demo-stage" aria-hidden="true" style="padding:.9rem">
-            <div class="rh" style="max-width:340px;font-size:8.5px">
+            <div class="rh demo-rh">
               <div class="rh-now">
                 <div class="rh-vinyl"></div>
                 <div class="rh-label">Nu speelt</div>
@@ -724,7 +788,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
             <p>Iedere speler krijgt een eigen kaart als printklare PDF — in kleur voor het feest of eco om zuinig te printen.</p>
           </div>
           <div class="demo-stage" aria-hidden="true" style="padding:.9rem">
-            <div class="rc rc-md rc-pinkfree" style="font-size:7.5px">
+            <div class="rc rc-pinkfree demo-rc">
               <div class="rc-hd">
                 <div><div class="rc-logo">Melingo</div><div class="rc-tagline">Where melody meets bingo</div></div>
                 <div class="rc-badge">Kaart 1</div>
@@ -744,7 +808,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
             <p>Iemand roept bingo? Voer het kaartnummer in en zie direct of de bingo geldig is. Geen discussie.</p>
           </div>
           <div class="demo-stage" aria-hidden="true" style="padding:.9rem">
-            <div class="rk" style="max-width:360px;font-size:7.5px">
+            <div class="rk demo-rk">
               <div class="rk-hd">Bingo controleren</div>
               <div class="rk-row"><span class="rk-inp">1</span><span class="rk-btn">Controleer</span></div>
               <div class="rk-ok">BINGO! Kaart 1 wint: horizontale rij &amp; verticale rij. Nog te winnen: diagonale rij</div>
@@ -757,6 +821,31 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
 
     </div>
     <div class="demo-dots" id="demoDots" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ══ MELINGO IN ACTIE — social proof (placeholders voor echte foto's) ═════ -->
+<section class="actie">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="label">Melingo in actie</p>
+      <h2>Melingo in actie</h2>
+      <p>Van woonkamer tot volle feestzaal.</p>
+    </div>
+    <div class="actie-grid">
+      <!-- Vervang per tegel de .actie-ph door:
+           <img src="/actie/<naam>.jpg" alt="..." loading="lazy" width="800" height="600"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"> -->
+      <div class="actie-tile" data-placeholder="actie-verjaardag.jpg"><div class="actie-ph v1"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-cake"/></svg></span><span class="actie-lbl">Verjaardag</span></div></div>
+      <div class="actie-tile" data-placeholder="actie-vriendenavond.jpg"><div class="actie-ph v2"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-friends"/></svg></span><span class="actie-lbl">Vriendenavond</span></div></div>
+      <div class="actie-tile" data-placeholder="actie-teamuitje.jpg"><div class="actie-ph v3"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-team"/></svg></span><span class="actie-lbl">Teamuitje</span></div></div>
+      <div class="actie-tile" data-placeholder="actie-bruiloft.jpg"><div class="actie-ph v2"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-rings"/></svg></span><span class="actie-lbl">Bruiloft</span></div></div>
+      <div class="actie-tile" data-placeholder="actie-familiefeest.jpg"><div class="actie-ph v3"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-players"/></svg></span><span class="actie-lbl">Familiefeest</span></div></div>
+      <div class="actie-tile" data-placeholder="actie-horeca.jpg"><div class="actie-ph v1"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-glass"/></svg></span><span class="actie-lbl">Horeca</span></div></div>
+      <div class="actie-tile" data-placeholder="actie-bedrijfsfeest.jpg"><div class="actie-ph v3"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-host"/></svg></span><span class="actie-lbl">Bedrijfsfeest</span></div></div>
+      <div class="actie-tile" data-placeholder="actie-kerstborrel.jpg"><div class="actie-ph v1"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-note"/></svg></span><span class="actie-lbl">Kerstborrel</span></div></div>
+      <div class="actie-tile" data-placeholder="actie-evenement.jpg"><div class="actie-ph v2"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-event"/></svg></span><span class="actie-lbl">Evenement</span></div></div>
+    </div>
   </div>
 </section>
 
@@ -1217,7 +1306,9 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
         t.setAttribute('aria-selected', j===i ? 'true' : 'false');
       });
       dots.forEach(function(d, j){ d.classList.toggle('on', j===i); });
+      slides.forEach(function(s, j){ s.classList.toggle('on', j===i); });
     }
+    setActive(0);
     function goTo(i){
       track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
       setActive(i);
