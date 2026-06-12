@@ -264,14 +264,44 @@ const NAV_JS = `var burger=document.getElementById('navBurger'),links=document.g
     });
   }`;
 
-/* mini-bingokaart (wit) */
-function miniCard(label, seed) {
-  const cells = [];
-  for (let i = 0; i < 25; i++) {
-    if (i === 12) { cells.push('<span class="bv-cc fr"></span>'); continue; }
-    cells.push('<span class="bv-cc' + (((i * 7 + seed) % 5) < 2 ? ' m' : '') + '"></span>');
+/* Echte Melingo-bingokaart (replica van de app-PDF) — statisch gegenereerd */
+const RC_SONGS = [
+  ['Heb Je Even Voor Mij', 'Frans Bauer'], ['Laat De Zon In Je Hart', 'Rene Schuurmans'], ['Links Rechts', 'Snollebollekes'], ['Alle Kleuren', 'K3'], ['Naar Voren, Naar Achter', 'De Alpenzusjes'],
+  ['Cotton Eye Joe', 'Rednex'], ['Wonderful Days Reloaded', 'Charly Lownoise'], ['Have You Ever Been Mellow', 'Party Animals'], ['Vrouwkes', 'Snollebollekes'], ['No Limit', '2 Unlimited'],
+  ['Met Romana op de scooter', 'Zanger Rinus'], ['Oya Lélé', 'K3'], ['Dragostea din tei', 'O-Zone'], ['Sex Met Die Kale', 'Lawineboys'],
+  ['Axel F', 'Crazy Frog'], ['Engelbewaarder', 'Marco Schuitmaker'], ['Boten Anna', 'Gebroeders Ko'], ['Country Roads', 'Hermes House Band'], ['Mambo No. 5', 'Lou Bega'],
+  ['Ik Neem Je Mee', 'Gers Pardoel'], ['Viben', 'K-Liber'], ['Schudden', 'Def Rhymz'], ['The Grease Megamix', 'John Travolta'], ['Als De Morgen Is Gekomen', 'Jan Smit'],
+  ['Y.M.C.A.', 'Village People'], ['Barbie Girl', 'Aqua'], ['We Like To Party!', 'Vengaboys'], ['Viva Hollandia', 'Wolter Kroes'],
+  ['Rasputin', 'Boney M.'], ['Wasmasjien', 'Trafassi'], ['Kabouterdans – Remix', 'Kabouter Plop'], ['Leef', 'André Hazes Jr.']
+];
+function rcCells(seed) {
+  const list = RC_SONGS.slice();
+  const picked = [];
+  let s = seed * 9301 + 49297;
+  while (picked.length < 24 && list.length) {
+    s = (s * 233280 + 49297) % 2147483647;
+    picked.push(list.splice(s % list.length, 1)[0]);
   }
-  return `<div class="ph-mini"><div class="bv-card-hd">${label}</div><div class="bv-card-grid">${cells.join('')}</div></div>`;
+  let html = '', si = 0;
+  for (let i = 0; i < 25; i++) {
+    if (i === 12) { html += '<div class="rc-cell rc-free"><span class="rc-vinyl"></span></div>'; continue; }
+    const sng = picked[si++];
+    const tint = ['', ' a', ' b'][(i * 7 + seed) % 3];
+    html += `<div class="rc-cell${tint}"><span class="rc-t">${sng[0]}</span><span class="rc-a">${sng[1]}</span></div>`;
+  }
+  return html;
+}
+function realCard(label, seed, variant) {
+  return `<div class="rc${variant ? ' ' + variant : ''}">
+    <div class="rc-hd"><div><div class="rc-logo">Melingo</div><div class="rc-tagline">Where melody meets bingo</div></div><div class="rc-badge">${label}</div></div>
+    <div class="rc-bingo"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
+    <div class="rc-grid">${rcCells(seed)}</div>
+    <div class="rc-ft">melingo.app — Where melody meets bingo</div>
+  </div>`;
+}
+function miniCard(label, seed) {
+  const variants = ['', 'rc-purple', 'rc-blue'];
+  return `<div class="ph-mini">${realCard(label, seed, variants[seed % 3])}</div>`;
 }
 
 /* placeholder-cover per categorie */
@@ -367,7 +397,7 @@ ${NAV}
     <div class="bhero-vis" aria-hidden="true">
       <div class="bhero-stack">
         <div class="bv-chip tl"><span class="eq"><i></i><i></i><i></i><i></i></span><span class="bv-chip-t">Dancing Queen<span>ABBA · nu te horen</span></span></div>
-        <div class="bv-card"><div class="bv-card-hd">90s HITS — KAART 7</div><div class="bv-card-grid">${Array.from({length:25},(_, i) => i===12 ? '<span class="bv-cc fr"></span>' : '<span class="bv-cc' + ((i*7+2)%5<2?' m':'') + '"></span>').join('')}</div></div>
+        <div class="bv-card">${realCard('Kaart 7', 7, '')}</div>
         <div class="bv-chip br"><svg class="ic"><use href="#i-host"/></svg><span class="bv-chip-t">Hostscherm actief<span>12 van 40 gespeeld</span></span></div>
       </div>
     </div>

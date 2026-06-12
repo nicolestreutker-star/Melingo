@@ -25,14 +25,11 @@
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Melingo","url":"https://melingo.vercel.app","description":"Muziekbingo maken met Spotify. Unieke bingokaarten genereren, hostscherm en automatische bingocontrole.","applicationCategory":"EntertainmentApplication","operatingSystem":"Web","offers":{"@type":"AggregateOffer","lowPrice":"7.95","highPrice":"29.95","priceCurrency":"EUR"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Heb ik Spotify Premium nodig?","acceptedAnswer":{"@type":"Answer","text":"Voor Eigen Spotify-bingo en Kant-en-klaar thema heb je Spotify Premium nodig, omdat de muziek via Spotify wordt afgespeeld. Met Alleen bingokaarten heb je geen Spotify nodig: je voert zelf nummers in en speelt de muziek zelf af."}},
-{"@type":"Question","name":"Kan ik de kaarten zelf printen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Melingo genereert een printklare PDF die je thuis of bij een printshop kunt afdrukken, in kleur of in een zuinige eco-uitvoering."}},
-{"@type":"Question","name":"Hoeveel spelers kunnen meedoen?","acceptedAnswer":{"@type":"Answer","text":"Van 1 tot 200 spelers. Er zijn drie pakketgroottes: Klein gezelschap (t/m 25), Feest (t/m 75) en Evenement (t/m 200). Voor kant-en-klare thema's geldt een maximum van 20 spelers."}},
-{"@type":"Question","name":"Wat krijg ik na betaling?","acceptedAnswer":{"@type":"Answer","text":"Direct toegang tot je muziekbingo: unieke bingokaarten als PDF-download en, afhankelijk van je speeloptie, het hostscherm met automatische bingocontrole."}},
+{"@type":"Question","name":"Heb ik Spotify Premium nodig?","acceptedAnswer":{"@type":"Answer","text":"Voor Eigen Spotify-bingo en Kant-en-klaar thema wel, omdat de muziek via Spotify wordt afgespeeld. Met Alleen bingokaarten heb je geen Spotify nodig."}},
 {"@type":"Question","name":"Krijg ik een abonnement?","acceptedAnswer":{"@type":"Answer","text":"Nee. Je betaalt eenmalig per muziekbingo. Er loopt daarna niets door."}},
-{"@type":"Question","name":"Zijn alle bingokaarten uniek?","acceptedAnswer":{"@type":"Answer","text":"Ja. Melingo verdeelt de nummers automatisch zodat iedere speler een andere kaart krijgt."}},
-{"@type":"Question","name":"Wat gebeurt er als iemand bingo roept?","acceptedAnswer":{"@type":"Answer","text":"Elke kaart heeft een uniek kaartnummer. Je voert dat nummer in op het hostscherm en Melingo laat direct zien of de bingo geldig is."}},
-{"@type":"Question","name":"Kan ik alleen kaarten maken zonder Spotify?","acceptedAnswer":{"@type":"Answer","text":"Ja. Met de optie Alleen bingokaarten plak of typ je je eigen nummers en download je de kaarten als PDF. Jij speelt de muziek zelf af."}}
+{"@type":"Question","name":"Hoeveel spelers kunnen meedoen?","acceptedAnswer":{"@type":"Answer","text":"Van 1 tot 200 spelers, in drie pakketgroottes: Klein gezelschap (t/m 25), Feest (t/m 75) en Evenement (t/m 200). Voor kant-en-klare thema's geldt een maximum van 20 spelers."}},
+{"@type":"Question","name":"Kan ik de kaarten zelf printen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Melingo genereert een printklare PDF, in kleur of een zuinige eco-uitvoering."}},
+{"@type":"Question","name":"Wat gebeurt er als iemand bingo roept?","acceptedAnswer":{"@type":"Answer","text":"Je voert het kaartnummer in op het hostscherm en Melingo laat direct zien of de bingo geldig is."}}
 ]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -43,108 +40,76 @@
 ═══════════════════════════════════════════════════════════════════════════ */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:   #0D0D18;
-  --sf1:  #121222;
-  --sf2:  #18182A;
-  --sf3:  #1E1E35;
-  --bd:   rgba(255,255,255,.08);
-  --bd-m: rgba(255,255,255,.14);
-  --primary:   #F2406A;
-  --secondary: #9B6DFF;
-  --grad: linear-gradient(135deg,#F2406A,#9B6DFF);
-  --spotify:   #1DB954;
-  --tx:  #F0EEF8;
-  --mt:  rgba(240,238,248,.66);
-  --mt2: rgba(240,238,248,.34);
-  --nav-h: 64px;
-  --r:     16px;
-  --r-sm:  10px;
-  --r-xs:  8px;
+  --bg:#0D0D18;--sf1:#121222;--sf2:#18182A;--sf3:#1E1E35;
+  --bd:rgba(255,255,255,.08);--bd-m:rgba(255,255,255,.14);
+  --primary:#F2406A;--secondary:#9B6DFF;
+  --grad:linear-gradient(135deg,#F2406A,#9B6DFF);
+  --spotify:#1DB954;
+  --tx:#F0EEF8;--mt:rgba(240,238,248,.66);--mt2:rgba(240,238,248,.34);
+  --nav-h:64px;--r:16px;--r-sm:10px;--r-xs:8px;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   TYPOGRAPHY
-═══════════════════════════════════════════════════════════════════════════ */
-.label{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--secondary)}
-h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.12;letter-spacing:-.035em;color:var(--tx)}
-h2{font-size:clamp(1.5rem,3.5vw,2.15rem);font-weight:800;line-height:1.2;letter-spacing:-.03em;color:var(--tx)}
+/* ── Typografie ── */
+.label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--secondary)}
+h1{font-size:clamp(1.9rem,4.8vw,3.2rem);font-weight:800;line-height:1.12;letter-spacing:-.035em;color:var(--tx)}
+h2{font-size:clamp(1.4rem,3.2vw,2rem);font-weight:800;line-height:1.2;letter-spacing:-.03em;color:var(--tx)}
 h3{font-size:.95rem;font-weight:700;color:var(--tx)}
-p{color:var(--mt);line-height:1.75}
+p{color:var(--mt);line-height:1.7}
 .grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   LAYOUT
-═══════════════════════════════════════════════════════════════════════════ */
-.wrap{max-width:1140px;margin:0 auto;padding:0 1.5rem}
-section{padding:5.5rem 0}
-@media(max-width:768px){section{padding:3.75rem 0}}
-.sec-hd{margin-bottom:3rem;text-align:center}
-.sec-hd .label{margin-bottom:.75rem}
-.sec-hd h2{margin-bottom:.75rem}
-.sec-hd p{font-size:1rem;max-width:560px;margin:0 auto}
+/* ── Layout: compact op mobiel ── */
+.wrap{max-width:1140px;margin:0 auto;padding:0 1.25rem}
+section{padding:4.5rem 0}
+@media(max-width:768px){section{padding:2.4rem 0}}
+.sec-hd{margin-bottom:2.25rem;text-align:center}
+@media(max-width:768px){.sec-hd{margin-bottom:1.3rem}}
+.sec-hd .label{margin-bottom:.55rem}
+.sec-hd h2{margin-bottom:.55rem}
+.sec-hd p{font-size:.95rem;max-width:540px;margin:0 auto}
+@media(max-width:768px){.sec-hd p{font-size:.85rem}}
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   BUTTONS & ICONS
-═══════════════════════════════════════════════════════════════════════════ */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
-  font-family:inherit;font-weight:700;font-size:.88rem;
-  border:none;border-radius:var(--r-sm);cursor:pointer;
-  transition:transform .18s,box-shadow .18s,opacity .18s;
-  text-decoration:none;white-space:nowrap;
-  padding:.7rem 1.5rem;min-height:46px;
-}
+/* ── Buttons & iconen ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;font-family:inherit;font-weight:700;font-size:.88rem;border:none;border-radius:var(--r-sm);cursor:pointer;transition:transform .18s,box-shadow .18s,opacity .18s;text-decoration:none;white-space:nowrap;padding:.7rem 1.5rem;min-height:46px}
 .btn:active{transform:scale(.97)!important}
 .btn:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
 .btn .ic{transition:transform .22s ease}
 .btn:hover .ic{transform:translateX(3px)}
-.btn-primary{
-  background:linear-gradient(120deg,#F2406A,#9B6DFF,#F2406A);
-  background-size:200% 100%;background-position:0% 50%;
-  color:#fff;box-shadow:0 4px 20px rgba(155,109,255,.25);
-  transition:transform .22s ease,box-shadow .22s ease,background-position .4s ease;
-}
+.btn-primary{background:linear-gradient(120deg,#F2406A,#9B6DFF,#F2406A);background-size:200% 100%;background-position:0% 50%;color:#fff;box-shadow:0 4px 20px rgba(155,109,255,.25);transition:transform .22s ease,box-shadow .22s ease,background-position .4s ease}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(155,109,255,.35);background-position:60% 50%}
 .btn-ghost{background:rgba(255,255,255,.06);border:1.5px solid var(--bd-m);color:var(--tx)}
 .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(155,109,255,.45);transform:translateY(-2px)}
 .btn-lg{font-size:.95rem;padding:.85rem 2rem;min-height:52px}
 .ic{width:1.1em;height:1.1em;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;vertical-align:-0.16em}
-.micro{font-size:.74rem;color:var(--mt2);margin-top:.85rem;font-weight:600}
-.arrow-link{
-  display:inline-flex;align-items:center;gap:.4rem;
-  font-size:.85rem;font-weight:600;color:var(--secondary);
-  position:relative;padding-bottom:2px;
-}
-.arrow-link::after{
-  content:'';position:absolute;left:0;right:0;bottom:0;height:1.5px;
-  background:var(--grad);border-radius:2px;
-  transform:scaleX(0);transform-origin:left;transition:transform .22s ease;
-}
+.arrow-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:600;color:var(--secondary);position:relative;padding-bottom:2px}
+.arrow-link::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--grad);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
 .arrow-link:hover::after,.arrow-link:focus-visible::after{transform:scaleX(1)}
 .arrow-link:hover .ic{transform:translateX(3px)}
 .arrow-link:hover{color:var(--tx)}
 .arrow-link:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
 
+/* ── Swipe-carousel (mobiel) — puur CSS scroll-snap ── */
+@media(max-width:768px){
+  .swipe{display:flex!important;grid-template-columns:none!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:.8rem!important;padding:0 1.25rem .6rem;margin:0 -1.25rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .swipe::-webkit-scrollbar{display:none}
+  .swipe>*{flex:0 0 82%;scroll-snap-align:center;min-width:0}
+  .swipe>.sw-sm{flex-basis:62%}
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
-   NAVIGATION
+   NAVIGATIE
 ═══════════════════════════════════════════════════════════════════════════ */
 .nav{position:sticky;top:0;z-index:500;background:rgba(13,13,24,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--bd);height:var(--nav-h)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;gap:1.5rem}
 .nav-logo{display:flex;align-items:center;gap:.5rem;font-size:.92rem;font-weight:800;color:var(--tx);letter-spacing:-.02em;flex-shrink:0}
-.nav-logo svg{flex-shrink:0}
-.nav-slogan{font-size:.6rem;font-weight:600;font-style:italic;color:var(--mt2);margin-left:.2rem;letter-spacing:.02em}
+.nav-slogan{font-size:.6rem;font-weight:600;font-style:italic;color:var(--mt2);margin-left:.2rem}
 @media(max-width:980px){.nav-slogan{display:none}}
 .nav-links{display:flex;align-items:center;gap:.2rem;list-style:none}
 .nav-links a{font-size:.82rem;font-weight:600;color:var(--mt);padding:.4rem .75rem;border-radius:var(--r-xs);transition:color .18s;position:relative}
-.nav-links a:not(.btn)::after{
-  content:'';position:absolute;left:.75rem;right:.75rem;bottom:.15rem;height:1.5px;
-  background:var(--grad);border-radius:2px;
-  transform:scaleX(0);transform-origin:left;transition:transform .22s ease;
-}
+.nav-links a:not(.btn)::after{content:'';position:absolute;left:.75rem;right:.75rem;bottom:.15rem;height:1.5px;background:var(--grad);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
 .nav-links a:not(.btn):hover::after,.nav-links a:not(.btn):focus-visible::after{transform:scaleX(1)}
 .nav-links a:hover{color:var(--tx)}
 .nav-links a:focus-visible{outline:2px solid var(--secondary);outline-offset:2px;color:var(--tx)}
@@ -156,7 +121,7 @@ section{padding:5.5rem 0}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .nav-burger:focus-visible{outline:2px solid var(--secondary);outline-offset:2px}
 @media(max-width:768px){
-  .nav-links{position:fixed;top:0;left:0;right:0;bottom:0;z-index:490;background:rgba(13,13,24,.98);flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;display:none;padding:2rem 1.5rem}
+  .nav-links{position:fixed;top:0;left:0;right:0;bottom:0;z-index:490;background:rgba(13,13,24,.98);flex-direction:column;align-items:center;justify-content:center;gap:1.1rem;display:none;padding:2rem 1.5rem}
   .nav-links.open{display:flex}
   .nav-links a{font-size:1.05rem;padding:.7rem 1rem}
   .nav-cta{margin-left:0;margin-top:.5rem}
@@ -164,189 +129,120 @@ section{padding:5.5rem 0}
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   HERO — tekst + gelaagde productcompositie
+   1. HERO — resultaat + grote interactieve mockup
 ═══════════════════════════════════════════════════════════════════════════ */
-.hero{padding:5rem 0 4rem;position:relative;overflow:hidden}
-.hero::before{
-  content:'';position:absolute;width:700px;height:700px;
-  background:radial-gradient(circle,rgba(155,109,255,.07) 0%,transparent 65%);
-  top:-150px;right:-100px;pointer-events:none;
-}
-@media(max-width:768px){.hero{padding:3.25rem 0 3rem}}
-.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:2.75rem}}
-.hero-label{margin-bottom:1.25rem}
-.hero h1{margin-bottom:1.2rem}
-.hero-sub{font-size:1.05rem;line-height:1.8;margin-bottom:1.8rem;color:var(--mt);max-width:520px}
-.hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.hero{padding:4.5rem 0 3.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(155,109,255,.08) 0%,transparent 65%);top:-150px;right:-100px;pointer-events:none}
+@media(max-width:768px){.hero{padding:2.25rem 0 2.25rem}}
+.hero-inner{display:grid;grid-template-columns:1fr 1.05fr;gap:3.5rem;align-items:center;position:relative;z-index:1}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:2rem}}
+.hero h1{margin:.9rem 0 .9rem}
+.hero-sub{font-size:1.02rem;line-height:1.75;margin-bottom:1.5rem;color:var(--mt);max-width:480px}
+@media(max-width:768px){.hero-sub{font-size:.92rem;margin-bottom:1.1rem}}
+.hero-actions{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.1rem}
+.chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:700;color:var(--mt);background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:99px;padding:.32rem .75rem}
+.chip .ic{width:13px;height:13px;color:var(--spotify)}
 
-/* compositie rechts: bingokaart + zwevende UI-chips */
-.hero-visual{position:relative;perspective:1100px;padding:1.25rem 0}
-.hero-card{
-  background:var(--sf2);
-  border:1.5px solid transparent;
-  background-image:linear-gradient(var(--sf2),var(--sf2)),linear-gradient(135deg,rgba(242,64,106,.55),rgba(155,109,255,.55));
-  background-origin:border-box;
-  -webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;
-  border-radius:var(--r);padding:1.6rem;
-  box-shadow:0 16px 60px rgba(0,0,0,.45);
-  transform:rotateY(-4deg) rotateX(2deg);
-  transition:transform .26s ease,box-shadow .26s ease;
-}
-@media(hover:hover) and (min-width:901px){
-  .hero-visual:hover .hero-card{transform:rotateY(-1deg) rotateX(0) translateY(-4px);box-shadow:0 22px 70px rgba(0,0,0,.5),0 8px 30px rgba(155,109,255,.12)}
-}
-@media(max-width:900px){.hero-card{transform:none}}
-.hero-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
-.hero-card-title{font-size:.72rem;font-weight:700;color:var(--tx);display:flex;flex-direction:column;gap:.15rem}
-.hero-card-title span{font-size:.6rem;font-weight:500;color:var(--mt)}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:.3rem;
-  font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  background:rgba(242,64,106,.12);color:#F2406A;border:1px solid rgba(242,64,106,.22);
-  padding:.25rem .65rem;border-radius:99px;
-}
-.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#F2406A;flex-shrink:0}
-.bingo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:1rem}
-.bc{aspect-ratio:1;background:var(--sf3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.52rem;font-weight:700;color:var(--mt2);text-align:center;line-height:1.25;padding:.2rem}
-.bc.h1{background:rgba(242,64,106,.18);color:#F2406A;border:1px solid rgba(242,64,106,.22)}
-.bc.h2{background:rgba(155,109,255,.18);color:#9B6DFF;border:1px solid rgba(155,109,255,.22)}
-.bc.fr{background:var(--sf3);color:var(--secondary);font-size:.58rem}
-/* afvink-animatie op één vakje */
-.bc.tick{animation:bcTick 6s ease-in-out infinite}
-@keyframes bcTick{0%,55%{background:var(--sf3);color:var(--mt2);border:none}65%,100%{background:rgba(155,109,255,.18);color:#9B6DFF;border:1px solid rgba(155,109,255,.22)}}
-.hero-card-footer{display:flex;align-items:center;justify-content:space-between;font-size:.67rem;color:var(--mt)}
-.hero-card-footer strong{color:var(--tx)}
-/* zwevende chips */
-.hero-chip{
-  position:absolute;display:flex;align-items:center;gap:.55rem;
-  background:rgba(18,18,34,.96);border:1px solid var(--bd-m);
-  border-radius:12px;padding:.55rem .85rem;
-  box-shadow:0 12px 36px rgba(0,0,0,.5);
-  animation:chipFloat 7s ease-in-out infinite;
-}
-.hero-chip-np{top:-.25rem;right:-.75rem}
-.hero-chip-host{bottom:.25rem;left:-1.25rem;animation-delay:-3.5s}
-@media(max-width:1100px){.hero-chip-np{right:0}.hero-chip-host{left:0}}
-@keyframes chipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.hero-chip-t{font-size:.62rem;font-weight:700;color:var(--tx);line-height:1.3}
-.hero-chip-t span{display:block;font-size:.54rem;font-weight:500;color:var(--mt)}
-/* equalizer "now playing" */
-.eq{display:flex;align-items:flex-end;gap:2px;height:14px;flex-shrink:0}
-.eq i{width:3px;background:var(--grad);border-radius:2px;animation:eqB 1s ease-in-out infinite}
-.eq i:nth-child(1){height:60%;animation-delay:0s}
-.eq i:nth-child(2){height:100%;animation-delay:.2s}
-.eq i:nth-child(3){height:45%;animation-delay:.4s}
-.eq i:nth-child(4){height:80%;animation-delay:.1s}
-@keyframes eqB{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1)}}
-.hero-chip .ic{color:var(--secondary);width:16px;height:16px}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   VERTROUWENSBALK
-═══════════════════════════════════════════════════════════════════════════ */
-.proof{padding:1.4rem 0;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);background:var(--sf1)}
-.proof-inner{display:flex;align-items:center;justify-content:center;gap:2.25rem;flex-wrap:wrap}
-.proof-item{display:flex;align-items:center;gap:.55rem;font-size:.8rem;font-weight:600;color:var(--mt)}
-.proof-item .ic{color:var(--secondary)}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   MEER DAN ALLEEN BINGOKAARTEN — split: tekst + voordelen | productvisual
-═══════════════════════════════════════════════════════════════════════════ */
-.meer{background:var(--bg)}
-.meer-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3.5rem;align-items:center}
-@media(max-width:900px){.meer-grid{grid-template-columns:1fr;gap:2.5rem}}
-.meer-tekst .label{margin-bottom:.75rem;display:block}
-.meer-tekst h2{margin-bottom:.9rem}
-.meer-tekst>p{font-size:1rem;max-width:52ch;margin-bottom:2rem}
-.meer-feats{display:flex;flex-direction:column;gap:1.1rem}
-.meer-feat{display:flex;gap:1rem;align-items:flex-start}
-.meer-ic{
-  width:46px;height:46px;border-radius:13px;flex-shrink:0;
-  background:rgba(155,109,255,.09);border:1px solid rgba(155,109,255,.18);
-  display:flex;align-items:center;justify-content:center;color:var(--secondary);
-  transition:transform .22s ease;
-}
-.meer-feat:hover .meer-ic{transform:scale(1.05)}
-.meer-ic .ic{width:22px;height:22px}
-.meer-feat h3{font-size:.95rem;margin-bottom:.25rem}
-.meer-feat p{font-size:.85rem}
-/* productvisual: hostscherm-mock met kaart ervoor */
-.meer-visual{position:relative}
-.mock-host{
-  background:var(--sf2);border:1px solid var(--bd-m);border-radius:var(--r);
-  overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.45);
-}
+/* hero-mockup: hostscherm + kaart + bingocontrole in één compositie */
+.hmock{position:relative;padding:.5rem 0 2.25rem}
+.mock-host{background:var(--sf2);border:1.5px solid transparent;background-image:linear-gradient(var(--sf2),var(--sf2)),linear-gradient(135deg,rgba(242,64,106,.45),rgba(155,109,255,.45));background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;border-radius:var(--r);overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.5)}
 .mock-bar{display:flex;align-items:center;gap:.4rem;padding:.6rem .9rem;border-bottom:1px solid var(--bd);background:var(--sf1)}
 .mock-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.12)}
 .mock-dot.r{background:rgba(242,64,106,.55)}.mock-dot.y{background:rgba(255,200,90,.45)}.mock-dot.g{background:rgba(29,185,84,.5)}
 .mock-url{margin-left:.5rem;font-size:.62rem;font-weight:600;color:var(--mt2);background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:6px;padding:.18rem .65rem}
-.mock-body{padding:1.4rem;display:flex;flex-direction:column;gap:.8rem;background:linear-gradient(160deg,#0D0D1E,#101024)}
-.mock-vinyl{width:64px;height:64px;border-radius:50%;margin:0 auto;background:radial-gradient(circle,#9B6DFF 0 18%,#16162a 19% 45%,#0D0D18 46% 100%);border:2px solid rgba(255,255,255,.08);animation:vinylSpin 9s linear infinite}
+.mock-body{padding:1.5rem 1.5rem 1.75rem;display:flex;flex-direction:column;gap:.8rem;background:linear-gradient(160deg,#0D0D1E,#101024)}
+.mock-vinyl{width:62px;height:62px;border-radius:50%;margin:0 auto;background:radial-gradient(circle,#9B6DFF 0 18%,#16162a 19% 45%,#0D0D18 46% 100%);border:2px solid rgba(255,255,255,.08);animation:vinylSpin 9s linear infinite}
 @keyframes vinylSpin{to{transform:rotate(360deg)}}
 .mock-track{text-align:center}
-.mock-track strong{font-size:.85rem;color:var(--tx);display:block}
+.mock-track strong{font-size:.88rem;color:var(--tx);display:block}
 .mock-track span{font-size:.66rem;color:var(--mt)}
-.mock-btn{background:var(--grad);color:#fff;border-radius:10px;text-align:center;font-size:.72rem;font-weight:800;padding:.6rem;max-width:220px;margin:0 auto;width:100%;box-shadow:0 6px 18px rgba(155,109,255,.25)}
-.mock-card-overlay{
-  position:absolute;right:-1rem;bottom:-1.5rem;width:150px;
-  background:#fff;border-radius:10px;overflow:hidden;
-  box-shadow:0 14px 44px rgba(0,0,0,.55);
-  transform:rotate(4deg);
+.mock-btn{background:var(--grad);color:#fff;border-radius:10px;text-align:center;font-size:.72rem;font-weight:800;padding:.6rem;max-width:200px;margin:0 auto;width:100%;box-shadow:0 6px 18px rgba(155,109,255,.25)}
+.mock-card{position:absolute;right:-.5rem;bottom:0;width:200px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 14px 44px rgba(0,0,0,.55);transform:rotate(4deg);animation:chipFloat 8s ease-in-out infinite}
+.mock-card .rc{font-size:5px}
+@media(max-width:600px){
+  .mock-card{width:128px;right:0;bottom:-.5rem}
+  .mock-card .rc{font-size:3.2px}
 }
-@media(max-width:900px){.mock-card-overlay{right:.5rem}}
 .mock-card-hd{background:var(--grad);color:#fff;font-size:.52rem;font-weight:800;text-align:center;padding:.26rem}
 .mock-card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:5px}
 .mcc{aspect-ratio:1;background:#f0eef6;border-radius:2px}
 .mcc.m{background:rgba(155,109,255,.35)}
+.mcc.tick{animation:mccTick 6s ease-in-out infinite}
+@keyframes mccTick{0%,55%{background:#f0eef6}65%,100%{background:rgba(155,109,255,.35)}}
 .mcc.fr{background:linear-gradient(135deg,#F2406A,#9B6DFF)}
+.mock-check{position:absolute;left:-.75rem;top:1.5rem;display:flex;align-items:center;gap:.5rem;background:rgba(15,30,22,.97);border:1px solid rgba(29,185,84,.4);color:#3ddc84;border-radius:11px;padding:.5rem .8rem;font-size:.62rem;font-weight:800;box-shadow:0 12px 36px rgba(0,0,0,.5);animation:chipFloat 7s ease-in-out infinite;animation-delay:-3s}
+@media(max-width:480px){.mock-card{right:0;width:120px}.mock-check{left:0}}
+@keyframes chipFloat{0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-7px) rotate(var(--rot,0deg))}}
+.mock-card{--rot:4deg}
+.eq{display:flex;align-items:flex-end;gap:2px;height:13px;flex-shrink:0}
+.eq i{width:3px;background:var(--grad);border-radius:2px;animation:eqB 1s ease-in-out infinite}
+.eq i:nth-child(1){height:60%}.eq i:nth-child(2){height:100%;animation-delay:.2s}
+.eq i:nth-child(3){height:45%;animation-delay:.4s}.eq i:nth-child(4){height:80%;animation-delay:.1s}
+@keyframes eqB{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1)}}
+.mock-np{display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:.6rem;font-weight:700;color:var(--mt)}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   ZO WERKT MELINGO — walkthrough (10 stappen)
+   2. SPEELOPTIES — compact, mobiel swipebaar
 ═══════════════════════════════════════════════════════════════════════════ */
-.how{background:var(--sf1)}
-.hw-body{display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:center}
-@media(max-width:860px){.hw-body{grid-template-columns:1fr;gap:1.75rem}}
-.hw-frame{
-  background:var(--sf2);border:1.5px solid transparent;
-  background-image:linear-gradient(var(--sf2),var(--sf2)),linear-gradient(135deg,rgba(242,64,106,.4),rgba(155,109,255,.4));
-  background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;
-  border-radius:var(--r);overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.45);
-}
-.hw-top{display:flex;align-items:center;gap:.4rem;padding:.6rem .9rem;border-bottom:1px solid var(--bd);background:var(--sf1)}
-.hw-stage{position:relative;height:380px;background:linear-gradient(160deg,#0D0D1E,#101024)}
-@media(max-width:860px){.hw-stage{height:320px}}
-.hw-slide{
-  position:absolute;inset:0;padding:1.4rem 1.6rem;
-  display:flex;flex-direction:column;justify-content:center;gap:.6rem;
-  opacity:0;transform:translateX(14px);visibility:hidden;
-  transition:opacity .32s ease,transform .32s ease,visibility .32s;
-}
-.hw-slide.active{opacity:1;transform:none;visibility:visible}
-.hw-cap{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mt2);text-align:center;margin-bottom:.2rem}
-.hwc{background:rgba(255,255,255,.04);border:1.5px solid var(--bd);border-radius:12px;padding:.75rem .85rem}
-.hwc.sel{
-  border-color:transparent;
-  background-image:linear-gradient(#191930,#191930),var(--grad);
-  background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;
-  box-shadow:0 6px 22px rgba(155,109,255,.18);
-}
-.hwc-t{font-size:.72rem;font-weight:800;color:var(--tx)}
-.hwc-s{font-size:.6rem;color:var(--mt);margin-top:.15rem;line-height:1.4}
-.hw-row{display:flex;gap:.55rem}
-.hw-row>*{flex:1}
-.hw-pill{display:inline-block;font-size:.52rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--grad);color:#fff;border-radius:99px;padding:.14rem .5rem;margin-bottom:.3rem}
-.hw-btnui{background:var(--grad);color:#fff;border-radius:10px;text-align:center;font-size:.64rem;font-weight:800;padding:.55rem;box-shadow:0 6px 18px rgba(155,109,255,.25)}
-.hw-pl{display:flex;align-items:center;gap:.55rem;padding:.55rem .7rem;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--bd)}
-.hw-pl.on{border-color:rgba(155,109,255,.5);background:rgba(155,109,255,.08)}
-.hw-pl-art{width:24px;height:24px;border-radius:5px;background:var(--grad);opacity:.85;flex-shrink:0}
-.hw-pl-art.b{background:linear-gradient(135deg,#6AABF7,#9B6DFF)}
-.hw-pl-art.c{background:linear-gradient(135deg,#1DB954,#6AABF7)}
-.hw-pl-name{font-size:.64rem;font-weight:700;color:var(--tx)}
-.hw-pl-meta{font-size:.54rem;color:var(--mt)}
-.hw-num{font-size:1.8rem;font-weight:800;color:var(--tx);text-align:center;min-width:2.6rem}
-.hw-step-btn{width:28px;height:28px;border-radius:8px;border:1px solid var(--bd-m);background:rgba(255,255,255,.06);color:var(--tx);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center}
-.hw-chip{font-size:.58rem;font-weight:700;color:var(--mt);border:1px solid var(--bd);border-radius:99px;padding:.2rem .6rem}
-.hw-chip.on{color:#fff;background:var(--grad);border-color:transparent}
+.modi{background:var(--sf1)}
+.modi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.modi-card{position:relative;display:flex;flex-direction:column;gap:.55rem;background:var(--sf2);border:1.5px solid var(--bd);border-radius:var(--r);padding:1.5rem;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+@media(max-width:768px){.modi-card{padding:1.15rem}}
+.modi-card:hover{transform:translateY(-4px);border-color:rgba(155,109,255,.45);box-shadow:0 14px 40px rgba(0,0,0,.4),0 0 26px rgba(155,109,255,.1)}
+.modi-card.featured{border:1.5px solid transparent;background-image:linear-gradient(var(--sf2),var(--sf2)),var(--grad);background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box}
+.modi-card .stretch::before{content:'';position:absolute;inset:0;border-radius:var(--r);cursor:pointer}
+.modi-card .stretch:focus-visible::before{outline:2.5px solid var(--secondary);outline-offset:3px}
+.modi-tag{display:inline-flex;align-items:center;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.24rem .65rem;border-radius:99px;width:fit-content}
+.modi-tag.best{background:rgba(155,109,255,.12);color:var(--secondary);border:1px solid rgba(155,109,255,.2)}
+.modi-tag.quick{background:rgba(242,64,106,.1);color:var(--primary);border:1px solid rgba(242,64,106,.2)}
+.modi-tag.eco{background:rgba(255,255,255,.05);color:var(--mt);border:1px solid var(--bd)}
+.modi-card h3{font-size:1.02rem;margin-top:.2rem}
+.modi-card p{font-size:.84rem;flex:1}
+@media(max-width:768px){.modi-card p{font-size:.8rem}}
+.modi-price{font-size:1.2rem;font-weight:800;color:var(--tx);padding-top:.5rem;border-top:1px solid var(--bd)}
+.modi-price em{font-size:.72rem;font-weight:500;font-style:normal;color:var(--mt)}
+.modi-sp{font-size:.68rem;font-weight:600;color:var(--spotify)}
+.modi-card .btn{margin-top:.4rem;position:relative;z-index:1;min-height:44px;font-size:.82rem;padding:.55rem 1rem}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3. WAAROM MELINGO — 4 USP's, mobiel 2×2
+═══════════════════════════════════════════════════════════════════════════ */
+.usp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:900px){.usp-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}}
+.usp{background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:1.4rem;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+@media(max-width:768px){.usp{padding:1rem}}
+.usp:hover{transform:translateY(-4px);border-color:rgba(155,109,255,.35);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.usp:hover .usp-ic{transform:scale(1.05)}
+.usp-ic{width:42px;height:42px;border-radius:11px;background:rgba(155,109,255,.09);border:1px solid rgba(155,109,255,.16);display:flex;align-items:center;justify-content:center;color:var(--secondary);margin-bottom:.7rem;transition:transform .22s ease}
+@media(max-width:768px){.usp-ic{width:34px;height:34px;margin-bottom:.5rem}}
+.usp-ic .ic{width:20px;height:20px}
+@media(max-width:768px){.usp-ic .ic{width:16px;height:16px}}
+.usp h3{font-size:.92rem;margin-bottom:.3rem}
+@media(max-width:768px){.usp h3{font-size:.82rem}}
+.usp p{font-size:.8rem}
+@media(max-width:768px){.usp p{font-size:.74rem}}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4. PRODUCTDEMO — tabs (desktop) + swipe (mobiel)
+═══════════════════════════════════════════════════════════════════════════ */
+.demo{background:var(--sf1)}
+.demo-tabs{display:flex;justify-content:center;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.demo-tab{padding:.5rem 1.15rem;border-radius:99px;min-height:44px;font-size:.8rem;font-weight:600;font-family:inherit;border:1.5px solid var(--bd);background:transparent;color:var(--mt);cursor:pointer;transition:all .18s;white-space:nowrap}
+.demo-tab:hover{border-color:rgba(155,109,255,.45);color:var(--tx)}
+.demo-tab:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
+.demo-tab.active{background:var(--sf3);border-color:var(--bd-m);color:var(--tx)}
+.demo-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;gap:1rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.demo-track::-webkit-scrollbar{display:none}
+.demo-slide{flex:0 0 100%;scroll-snap-align:center;min-width:0}
+.demo-panel{background:var(--sf2);border:1.5px solid transparent;background-image:linear-gradient(var(--sf2),var(--sf2)),linear-gradient(135deg,rgba(242,64,106,.35),rgba(155,109,255,.35));background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;border-radius:20px;padding:2rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;min-height:320px}
+@media(max-width:768px){.demo-panel{grid-template-columns:1fr;padding:1.25rem;gap:1.1rem;min-height:0}}
+.demo-info h3{font-size:1.25rem;margin-bottom:.5rem}
+@media(max-width:768px){.demo-info h3{font-size:1.05rem}}
+.demo-info p{font-size:.92rem;max-width:42ch}
+@media(max-width:768px){.demo-info p{font-size:.84rem}}
+.demo-stage{background:linear-gradient(160deg,#0D0D1E,#101024);border:1px solid var(--bd);border-radius:14px;padding:1.4rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;min-height:240px}
+@media(max-width:768px){.demo-stage{min-height:200px;padding:1rem}}
 .hw-card{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .hw-card.eco .hw-card-hd{background:#3a3a4a}
 .hw-card-hd{background:var(--grad);color:#fff;font-size:.52rem;font-weight:800;text-align:center;padding:.24rem}
@@ -356,367 +252,273 @@ section{padding:5.5rem 0}
 .hw-cc.m{background:rgba(155,109,255,.35)}
 .hw-cc.g{background:rgba(29,185,84,.45)}
 .hw-cc.fr{background:linear-gradient(135deg,#F2406A,#9B6DFF)}
-.hw-vinyl{width:58px;height:58px;border-radius:50%;margin:0 auto .4rem;background:radial-gradient(circle,#9B6DFF 0 18%,#16162a 19% 45%,#0D0D18 46% 100%);border:2px solid rgba(255,255,255,.08)}
-.hw-track-t{font-size:.74rem;font-weight:800;color:var(--tx);text-align:center}
-.hw-track-a{font-size:.6rem;color:var(--mt);text-align:center;margin-bottom:.45rem}
 .hw-ok{background:rgba(29,185,84,.12);border:1px solid rgba(29,185,84,.3);color:#3ddc84;border-radius:10px;font-size:.62rem;font-weight:700;text-align:center;padding:.5rem}
 .hw-inp{display:flex;gap:.45rem}
 .hw-inp-f{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:8px;padding:.45rem .65rem;font-size:.6rem;color:var(--mt)}
 .hw-inp-b{background:var(--grad);color:#fff;border-radius:8px;font-size:.6rem;font-weight:800;padding:.45rem .75rem;display:flex;align-items:center}
-.hw-file{display:flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:10px;padding:.55rem .75rem}
+.demo-dots{display:flex;justify-content:center;gap:.45rem;margin-top:1rem}
+.demo-dot{width:8px;height:8px;border-radius:99px;border:none;padding:0;cursor:pointer;background:rgba(255,255,255,.16);transition:all .25s ease}
+.demo-dot.on{width:22px;background:var(--grad)}
+.demo-dot:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ECHTE PRODUCT-UI — exacte replica's van kaart, hostscherm en bingocontrole
+   Schaal via font-size op de wrapper (.rc-md 9px, .rc-sm 6px, .rc-xs 4.6px).
+═══════════════════════════════════════════════════════════════════════════ */
+/* — Bingokaart (.rc) — */
+.rc{--rc:#F2406A;--ca:#fdeaf1;--cb:#f1ecfe;--cc2:#fdf7ff;background:#fff;border:3px solid var(--rc);border-radius:14px;padding:.8em .85em .6em;width:100%;box-shadow:0 14px 44px rgba(0,0,0,.5);font-size:9px}
+.rc-md{font-size:9px;max-width:360px}
+.rc-sm{font-size:6px;max-width:240px}
+.rc-xs{font-size:4.6px}
+.rc-purple{--rc:#9B6DFF}
+.rc-blue{--rc:#6AABF7}
+.rc-red{--rc:#EF3B55}
+.rc-eco{--rc:#4a4a58;--ca:#ececf0;--cb:#f4f4f7;--cc2:#fafafc}
+.rc-hd{display:flex;justify-content:space-between;align-items:flex-start}
+.rc-logo{font-weight:800;font-size:1.7em;line-height:1.1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.rc-eco .rc-logo{background:none;-webkit-text-fill-color:#3a3a4a;color:#3a3a4a}
+.rc-tagline{font-size:.74em;font-style:italic;color:#a39cc0;margin-top:.1em}
+.rc-badge{background:var(--rc);color:#fff;font-size:.78em;font-weight:800;border-radius:99px;padding:.3em .9em;white-space:nowrap}
+.rc-bingo{display:grid;grid-template-columns:repeat(5,1fr);gap:.4em;margin:.7em 0 .4em}
+.rc-bingo span{background:var(--rc);color:#fff;text-align:center;font-weight:800;font-size:1.05em;border-radius:.5em;padding:.28em 0}
+.rc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.4em}
+.rc-cell{border-radius:.55em;min-height:5.6em;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.4em .3em;background:var(--cc2)}
+.rc-cell.a{background:var(--ca)}
+.rc-cell.b{background:var(--cb)}
+.rc-t{font-size:.74em;font-weight:800;color:#241d3a;line-height:1.18;word-break:break-word}
+.rc-a{font-size:.58em;font-style:italic;color:var(--rc);margin-top:.18em;line-height:1.1}
+.rc-eco .rc-a{color:#6a6a78}
+.rc-free{background:var(--rc)!important}
+.rc-purple .rc-free,.rc-pinkfree .rc-free{background:#a78bfa!important}
+.rc-vinyl{width:3em;height:3em;border-radius:50%;background:radial-gradient(circle,#F2406A 0 16%,#fff 17% 26%,#171221 27% 100%)}
+.rc-ft{margin-top:.6em;text-align:center;font-size:.6em;font-style:italic;color:var(--rc);opacity:.85}
+
+/* — Hostscherm (.rh) — */
+.rh{background:#101019;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.1em;font-size:10px;width:100%;display:flex;flex-direction:column;gap:.9em}
+.rh-now{background:#16161f;border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:1.4em 1em;text-align:center}
+.rh-vinyl{width:4.4em;height:4.4em;border-radius:50%;margin:0 auto .8em;background:radial-gradient(circle,#F2406A 0 14%,#16161f 15% 30%,#fbeaf2 31% 42%,#16161f 43% 100%);animation:vinylSpin 9s linear infinite}
+.rh-label{font-size:.66em;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#F2406A;margin-bottom:.5em}
+.rh-title{font-size:1.5em;font-weight:800;color:#fff;line-height:1.2}
+.rh-artist{font-size:.92em;font-style:italic;color:rgba(240,238,248,.6);margin-top:.2em}
+.rh-count{font-size:.74em;color:rgba(240,238,248,.4);margin-top:.3em}
+.rh-row{display:flex;gap:.6em}
+.rh-next{flex:1;background:var(--grad);color:#fff;border-radius:10px;text-align:center;font-size:1em;font-weight:800;padding:.9em;box-shadow:0 6px 18px rgba(155,109,255,.25)}
+.rh-pause{width:3.4em;border-radius:10px;background:#1b1b26;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;gap:.25em}
+.rh-pause i{width:.28em;height:1.1em;background:#fff;border-radius:1px}
+.rh-panel{background:#16161f;border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:1em}
+.rh-seg{display:flex;background:#101019;border:1px solid rgba(255,255,255,.06);border-radius:9px;padding:.3em;margin-bottom:.9em}
+.rh-seg span{flex:1;text-align:center;font-size:.78em;font-weight:700;color:rgba(240,238,248,.55);padding:.55em;border-radius:7px}
+.rh-seg span.on{background:var(--grad);color:#fff}
+.rh-lbl{font-size:.6em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,238,248,.4);margin-bottom:.45em}
+.rh-chips{display:flex;gap:.45em;margin-bottom:.8em}
+.rh-chips:last-child{margin-bottom:0}
+.rh-chip{flex:1;text-align:center;font-size:.72em;font-weight:700;color:rgba(240,238,248,.6);background:#1b1b26;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.55em .2em}
+.rh-chip.on{border-color:rgba(155,109,255,.7);background:rgba(155,109,255,.14);color:#fff}
+.rh-prog{height:.4em;border-radius:99px;background:#1b1b26;overflow:hidden}
+.rh-prog i{display:block;height:100%;width:50%;background:var(--grad);border-radius:99px}
+.rh-played-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6em}
+.rh-played-hd b{font-size:.66em;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,238,248,.5)}
+.rh-played-hd em{font-style:normal;font-size:.66em;font-weight:800;color:#c4b1ff;background:rgba(155,109,255,.14);border-radius:99px;padding:.2em .7em}
+.rh-search{font-size:.74em;color:rgba(240,238,248,.3);background:#101019;border-radius:7px;padding:.6em .8em;margin-bottom:.5em}
+.rh-item{display:flex;gap:.8em;align-items:baseline;padding:.55em 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.rh-item:last-child{border-bottom:none;padding-bottom:0}
+.rh-item b{font-size:.72em;font-weight:800;color:#9B6DFF;min-width:1.6em}
+.rh-item-t{font-size:.82em;font-weight:800;color:#fff;line-height:1.25}
+.rh-item-a{display:block;font-size:.72em;font-style:italic;color:rgba(240,238,248,.45)}
+
+/* — Bingocontrole (.rk) — */
+.rk{background:#101019;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.1em;font-size:10px;width:100%}
+.rk-hd{font-size:.7em;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,238,248,.6);margin-bottom:.8em}
+.rk-row{display:flex;gap:.6em;margin-bottom:.9em}
+.rk-inp{flex:1;background:#1b1b26;border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:.7em .9em;font-size:.85em;font-weight:700;color:#fff}
+.rk-btn{background:var(--grad);color:#fff;border-radius:9px;font-size:.85em;font-weight:800;padding:.7em 1.3em;display:flex;align-items:center}
+.rk-ok{background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.45);color:#3ddc84;border-radius:9px;font-size:.74em;font-weight:700;padding:.7em .9em;margin-bottom:.7em;line-height:1.45}
+.rk-warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.4);color:#fbbf24;border-radius:9px;font-size:.7em;font-weight:700;padding:.7em .9em;margin-bottom:.9em;line-height:1.45}
+.rk-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.45em}
+.rk-cell{border-radius:.5em;min-height:5em;display:flex;align-items:center;justify-content:center;text-align:center;padding:.4em .3em;background:#221620;border:2px solid transparent;font-size:.62em;font-weight:700;color:#f2647f;line-height:1.25;word-break:break-word}
+.rk-cell.win{background:#10241a;border-color:#2ecc71;color:#3ddc84}
+.rk-cell.vrij{background:#a78bfa;color:#fff;font-weight:800;font-size:.8em}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5. HOE WERKT HET — geanimeerde walkthrough (10 stappen)
+═══════════════════════════════════════════════════════════════════════════ */
+.hw-body{display:grid;grid-template-columns:1.25fr 1fr;gap:2.5rem;align-items:center}
+@media(max-width:860px){.hw-body{grid-template-columns:1fr;gap:1.4rem}}
+.hw-frame{background:var(--sf2);border:1.5px solid transparent;background-image:linear-gradient(var(--sf2),var(--sf2)),linear-gradient(135deg,rgba(242,64,106,.4),rgba(155,109,255,.4));background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;border-radius:var(--r);overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.hw-stage{position:relative;height:350px;background:linear-gradient(160deg,#0D0D1E,#101024)}
+@media(max-width:860px){.hw-stage{height:300px}}
+.hw-slide{position:absolute;inset:0;padding:1.3rem 1.5rem;display:flex;flex-direction:column;justify-content:center;gap:.55rem;opacity:0;transform:translateX(14px);visibility:hidden;transition:opacity .32s ease,transform .32s ease,visibility .32s}
+.hw-slide.active{opacity:1;transform:none;visibility:visible}
+.hw-cap{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mt2);text-align:center;margin-bottom:.2rem}
+.hwc{background:rgba(255,255,255,.04);border:1.5px solid var(--bd);border-radius:12px;padding:.7rem .8rem}
+.hwc.sel{border-color:transparent;background-image:linear-gradient(#191930,#191930),var(--grad);background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;box-shadow:0 6px 22px rgba(155,109,255,.18)}
+.hwc-t{font-size:.7rem;font-weight:800;color:var(--tx)}
+.hwc-s{font-size:.58rem;color:var(--mt);margin-top:.15rem;line-height:1.4}
+.hw-row{display:flex;gap:.5rem}
+.hw-row>*{flex:1}
+.hw-pill{display:inline-block;font-size:.52rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--grad);color:#fff;border-radius:99px;padding:.14rem .5rem;margin-bottom:.3rem}
+.hw-btnui{background:var(--grad);color:#fff;border-radius:10px;text-align:center;font-size:.62rem;font-weight:800;padding:.5rem;box-shadow:0 6px 18px rgba(155,109,255,.25)}
+.hw-pl{display:flex;align-items:center;gap:.55rem;padding:.5rem .65rem;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--bd)}
+.hw-pl.on{border-color:rgba(155,109,255,.5);background:rgba(155,109,255,.08)}
+.hw-pl-art{width:22px;height:22px;border-radius:5px;background:var(--grad);opacity:.85;flex-shrink:0}
+.hw-pl-art.b{background:linear-gradient(135deg,#6AABF7,#9B6DFF)}
+.hw-pl-art.c{background:linear-gradient(135deg,#1DB954,#6AABF7)}
+.hw-pl-name{font-size:.62rem;font-weight:700;color:var(--tx)}
+.hw-pl-meta{font-size:.52rem;color:var(--mt)}
+.hw-num{font-size:1.7rem;font-weight:800;color:var(--tx);text-align:center;min-width:2.6rem}
+.hw-step-btn{width:26px;height:26px;border-radius:8px;border:1px solid var(--bd-m);background:rgba(255,255,255,.06);color:var(--tx);font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.hw-chip{font-size:.56rem;font-weight:700;color:var(--mt);border:1px solid var(--bd);border-radius:99px;padding:.18rem .55rem}
+.hw-chip.on{color:#fff;background:var(--grad);border-color:transparent}
+.hw-file{display:flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:10px;padding:.5rem .7rem}
 .hw-file .ic{color:var(--secondary);width:18px;height:18px}
-.hw-file-n{font-size:.64rem;font-weight:700;color:var(--tx)}
-.hw-file-m{font-size:.54rem;color:var(--mt)}
-.hw-played{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:10px;padding:.45rem .7rem;font-size:.62rem;color:var(--mt)}
+.hw-file-n{font-size:.62rem;font-weight:700;color:var(--tx)}
+.hw-file-m{font-size:.52rem;color:var(--mt)}
+.hw-played{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:10px;padding:.42rem .65rem;font-size:.6rem;color:var(--mt)}
 .hw-played strong{color:var(--tx);font-weight:700}
-.hw-played .ok{color:#3ddc84;font-weight:800;font-size:.58rem}
+.hw-played .ok{color:#3ddc84;font-weight:800;font-size:.56rem}
 .hw-progbar{height:4px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}
 .hw-progbar i{display:block;height:100%;width:64%;background:var(--grad);border-radius:2px}
 .hw-prog{height:3px;background:rgba(255,255,255,.06)}
 .hw-prog-f{height:100%;width:0;background:var(--grad);transition:width .25s linear}
-.hw-panel{display:flex;flex-direction:column;align-items:flex-start;gap:1rem}
-@media(max-width:860px){.hw-panel{align-items:center;text-align:center}}
+.hw-panel{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem}
+@media(max-width:860px){.hw-panel{align-items:center;text-align:center;gap:.65rem}}
 .hw-badge{font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary);background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.22);border-radius:99px;padding:.3rem .8rem}
-.hw-stitle{font-size:1.45rem;font-weight:800;letter-spacing:-.02em;color:var(--tx);min-height:2.2em}
-@media(max-width:860px){.hw-stitle{min-height:0;font-size:1.25rem}}
-.hw-sdesc{font-size:.9rem;color:var(--mt);line-height:1.75;max-width:42ch;min-height:4.5em}
-@media(max-width:860px){.hw-sdesc{min-height:0}}
+.hw-stitle{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;color:var(--tx);min-height:2.2em}
+@media(max-width:860px){.hw-stitle{min-height:0;font-size:1.1rem}}
+.hw-sdesc{font-size:.88rem;color:var(--mt);line-height:1.7;max-width:42ch;min-height:4em}
+@media(max-width:860px){.hw-sdesc{min-height:0;font-size:.82rem}}
+.hw-nav-row{display:flex;align-items:center;gap:.55rem}
+.tl-btn{width:44px;height:44px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.06);border:1.5px solid var(--bd-m);color:var(--tx);display:flex;align-items:center;justify-content:center;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.tl-btn:hover{transform:translateY(-2px);border-color:rgba(155,109,255,.5);background:rgba(155,109,255,.08)}
+.tl-btn:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
+.tl-btn .ic{width:16px;height:16px}
 .hw-dots{display:flex;gap:.4rem;flex-wrap:wrap}
-.hw-d{width:8px;height:8px;border-radius:99px;border:none;padding:0;cursor:pointer;background:rgba(255,255,255,.16);transition:all .25s ease}
-.hw-d.on{width:22px;background:var(--grad)}
-.hw-d:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
-.hw-ctrl{display:flex;align-items:center;gap:.55rem}
-.hw-nav{width:44px;height:44px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.06);border:1.5px solid var(--bd-m);color:var(--tx);display:flex;align-items:center;justify-content:center;transition:transform .2s ease,border-color .2s ease,background .2s ease}
-.hw-nav:hover{transform:translateY(-2px);border-color:rgba(155,109,255,.5);background:rgba(155,109,255,.08)}
-.hw-nav:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
-.hw-nav .ic{width:16px;height:16px}
-.how-cta{text-align:center;margin-top:2.75rem}
+@media(max-width:860px){.hw-dots{justify-content:center}}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SPEELOPTIES — drie cards, volledig klikbaar
+   6. VOOR WIE — 6 compacte kaarten
 ═══════════════════════════════════════════════════════════════════════════ */
-.modi{background:var(--bg)}
-.modi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-@media(max-width:800px){.modi-grid{grid-template-columns:1fr}}
-.modi-card{
-  position:relative;display:flex;flex-direction:column;gap:.7rem;
-  background:var(--sf2);border:1.5px solid var(--bd);border-radius:var(--r);padding:1.75rem;
-  transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease;
-}
-.modi-card:hover{
-  transform:translateY(-4px);
-  border-color:rgba(155,109,255,.45);
-  box-shadow:0 16px 44px rgba(0,0,0,.4),0 0 28px rgba(155,109,255,.1);
-}
-.modi-card:hover .modi-icon{transform:scale(1.05)}
-.modi-card:focus-within{border-color:rgba(155,109,255,.5)}
-.modi-card.featured{
-  background:var(--sf2);background-clip:padding-box;border:1.5px solid transparent;
-  background-image:linear-gradient(var(--sf2),var(--sf2)),var(--grad);
-  background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;
-}
-/* hele kaart klikbaar via stretched link */
-.modi-card .stretch::before{content:'';position:absolute;inset:0;border-radius:var(--r);cursor:pointer}
-.modi-card .stretch:focus-visible::before{outline:2.5px solid var(--secondary);outline-offset:3px}
-.modi-tags{display:flex;gap:.4rem;flex-wrap:wrap}
-.modi-tag{display:inline-flex;align-items:center;font-size:.63rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .7rem;border-radius:99px;width:fit-content}
-.modi-tag.best{background:rgba(155,109,255,.12);color:var(--secondary);border:1px solid rgba(155,109,255,.2)}
-.modi-tag.quick{background:rgba(242,64,106,.1);color:var(--primary);border:1px solid rgba(242,64,106,.2)}
-.modi-tag.eco{background:rgba(255,255,255,.05);color:var(--mt);border:1px solid var(--bd)}
-.modi-tag.sp{background:rgba(29,185,84,.1);color:var(--spotify);border:1px solid rgba(29,185,84,.25)}
-.modi-icon{
-  width:48px;height:48px;border-radius:12px;
-  background:rgba(155,109,255,.09);border:1px solid rgba(155,109,255,.16);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--secondary);transition:transform .24s ease;
-}
-.modi-icon .ic{width:24px;height:24px}
-.modi-card p{font-size:.85rem}
-.modi-ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.modi-ul li{font-size:.82rem;color:var(--mt);display:flex;align-items:flex-start;gap:.5rem}
-.modi-ul li::before{
-  content:'';width:13px;height:13px;flex-shrink:0;margin-top:.2rem;background-color:var(--secondary);
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
-  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-.modi-price{font-size:1.25rem;font-weight:800;color:var(--tx);margin-top:auto;padding-top:.6rem;border-top:1px solid var(--bd)}
-.modi-price em{font-size:.74rem;font-weight:500;font-style:normal;color:var(--mt)}
-.modi-card .btn{margin-top:.3rem;position:relative;z-index:1}
+.wie{background:var(--sf1)}
+.wie-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem}
+@media(max-width:1000px){.wie-grid{grid-template-columns:repeat(3,1fr)}}
+.wie-card{background:var(--sf2);border:1px solid var(--bd);border-radius:14px;padding:1.1rem .9rem;text-align:center;font-size:.78rem;font-weight:600;color:var(--mt);transition:transform .22s ease,border-color .22s ease,color .22s ease}
+.wie-card:hover{transform:translateY(-3px);border-color:rgba(155,109,255,.35);color:var(--tx)}
+.wie-ic{width:36px;height:36px;margin:0 auto .5rem;border-radius:10px;background:rgba(155,109,255,.08);border:1px solid rgba(155,109,255,.14);display:flex;align-items:center;justify-content:center;color:var(--secondary)}
+.wie-ic .ic{width:17px;height:17px}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   MOMENTEN — mozaïek met afwisselende grootte
+   7. PRIJZEN — 3 kolommen desktop, swipe mobiel
 ═══════════════════════════════════════════════════════════════════════════ */
-.momenten{background:var(--sf1)}
-.moz{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;grid-auto-rows:minmax(120px,auto)}
-@media(max-width:900px){.moz{grid-template-columns:repeat(2,1fr)}}
-.moz-card{
-  background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);
-  padding:1.4rem;display:flex;flex-direction:column;justify-content:flex-end;gap:.4rem;
-  position:relative;overflow:hidden;
-  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
-}
-.moz-card:hover{transform:translateY(-4px);border-color:rgba(155,109,255,.35);box-shadow:0 12px 32px rgba(0,0,0,.32)}
-.moz-card:hover .moz-ic{transform:translateY(-2px)}
-.moz-card.lg{grid-column:span 2;background-image:linear-gradient(150deg,rgba(155,109,255,.1),transparent 55%)}
-.moz-card.lg.alt{background-image:linear-gradient(150deg,rgba(242,64,106,.1),transparent 55%)}
-.moz-ic{
-  width:40px;height:40px;border-radius:11px;margin-bottom:auto;
-  background:rgba(155,109,255,.08);border:1px solid rgba(155,109,255,.14);
-  display:flex;align-items:center;justify-content:center;color:var(--secondary);
-  transition:transform .22s ease;
-}
-.moz-ic .ic{width:19px;height:19px}
-.moz-t{font-size:.92rem;font-weight:700;color:var(--tx)}
-.moz-d{font-size:.78rem;color:var(--mt);line-height:1.55}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   LIFESTYLE-STATEMENT — sfeersectie over volledige breedte
-═══════════════════════════════════════════════════════════════════════════ */
-.life{padding:0}
-.life-panel{
-  position:relative;overflow:hidden;border-radius:0;
-  background:
-    radial-gradient(900px 420px at 18% 30%,rgba(242,64,106,.14),transparent 60%),
-    radial-gradient(800px 420px at 85% 75%,rgba(155,109,255,.16),transparent 60%),
-    linear-gradient(165deg,#13101f,#0D0D18);
-  padding:5.5rem 0;
-}
-/* PLACEHOLDER: vervang dit panel door lifestyle-foto "placeholder-lifestyle-feest.jpg" —
-   vriendengroep rond een tafel met Melingo-bingokaarten, telefoon met playlist,
-   laptop met hostscherm, drankjes, warme avondverlichting. Donker genoeg voor witte tekst. */
-.life-grid{position:absolute;inset:0;opacity:.05;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
-  background-size:64px 64px;
-}
-.life-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 1.5rem;text-align:center}
-.life-inner .label{margin-bottom:.9rem;display:block}
-.life-inner h2{font-size:clamp(1.7rem,4vw,2.6rem);margin-bottom:1.2rem}
-.life-inner p{font-size:1.05rem;line-height:1.85;max-width:58ch;margin:0 auto}
-.life-np{
-  display:inline-flex;align-items:center;gap:.6rem;margin-top:2rem;
-  background:rgba(18,18,34,.85);border:1px solid var(--bd-m);border-radius:99px;
-  padding:.55rem 1.1rem;font-size:.72rem;font-weight:700;color:var(--tx);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   WAAROM MELINGO — horizontale USP-blokken (2 kolommen)
-═══════════════════════════════════════════════════════════════════════════ */
-.voordelen{background:var(--bg)}
-.voordelen-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-@media(max-width:700px){.voordelen-grid{grid-template-columns:1fr}}
-.voordeel{
-  display:flex;gap:1rem;align-items:flex-start;
-  background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:1.5rem;
-  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
-}
-.voordeel:hover{transform:translateY(-4px);border-color:rgba(242,64,106,.3);box-shadow:0 12px 30px rgba(0,0,0,.3)}
-.voordeel-ic{
-  width:40px;height:40px;border-radius:11px;flex-shrink:0;
-  background:rgba(155,109,255,.08);border:1px solid rgba(155,109,255,.14);
-  display:flex;align-items:center;justify-content:center;color:var(--secondary);
-}
-.voordeel-ic .ic{width:19px;height:19px}
-.voordeel-body h3{font-size:.92rem;margin-bottom:.3rem}
-.voordeel-body p{font-size:.82rem}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   PRODUCTBEWIJS — "Bekijk wat je krijgt"
-═══════════════════════════════════════════════════════════════════════════ */
-.bewijs{background:var(--sf1)}
-.bewijs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-@media(max-width:860px){.bewijs-grid{grid-template-columns:1fr}}
-.bewijs-card{
-  background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:1.4rem;
-  display:flex;flex-direction:column;gap:.9rem;
-  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
-}
-.bewijs-card:hover{transform:translateY(-4px);border-color:rgba(155,109,255,.35);box-shadow:0 12px 32px rgba(0,0,0,.32)}
-.bewijs-card h3{font-size:.92rem}
-.bewijs-card>p{font-size:.8rem}
-.bewijs-stage{background:linear-gradient(160deg,#0D0D1E,#101024);border:1px solid var(--bd);border-radius:12px;padding:1rem;display:flex;align-items:center;justify-content:center;gap:.8rem;min-height:170px}
-.bewijs-trust{display:flex;justify-content:center;gap:1.75rem;flex-wrap:wrap;margin-top:2.5rem}
-.bewijs-trust span{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;color:var(--mt)}
-.bewijs-trust .ic{color:var(--spotify)}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   URGENTIE-BAND
-═══════════════════════════════════════════════════════════════════════════ */
-.urgent{padding:0}
-.urgent-band{
-  background:var(--sf2);border:1.5px solid transparent;
-  background-image:linear-gradient(var(--sf2),var(--sf2)),linear-gradient(120deg,rgba(242,64,106,.5),rgba(155,109,255,.5));
-  background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;
-  border-radius:var(--r);padding:2.25rem 2.5rem;
-  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
-}
-.urgent-band h2{font-size:1.4rem;margin-bottom:.4rem}
-.urgent-band p{font-size:.9rem;max-width:52ch}
-@media(max-width:700px){.urgent-band{padding:1.75rem 1.4rem}}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   PAKKETTEN
-═══════════════════════════════════════════════════════════════════════════ */
-.pakketten{background:var(--bg)}
-.pakketten-intro{text-align:center;margin-bottom:2.5rem}
-.pakketten-intro p{font-size:.92rem;margin-top:.5rem}
-.pakket-tabs{display:flex;justify-content:center;gap:.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
-.pakket-tab{
-  padding:.5rem 1.2rem;border-radius:99px;min-height:44px;
-  font-size:.8rem;font-weight:600;font-family:inherit;
-  border:1.5px solid var(--bd);background:transparent;color:var(--mt);
-  cursor:pointer;transition:all .18s;
-}
-.pakket-tab:hover{border-color:rgba(155,109,255,.45);color:var(--tx);transform:translateY(-1px)}
+.pakket-tabs{display:flex;justify-content:center;gap:.5rem;margin-bottom:1.75rem;flex-wrap:wrap}
+.pakket-tab{padding:.5rem 1.15rem;border-radius:99px;min-height:44px;font-size:.78rem;font-weight:600;font-family:inherit;border:1.5px solid var(--bd);background:transparent;color:var(--mt);cursor:pointer;transition:all .18s;white-space:nowrap}
+.pakket-tab:hover{border-color:rgba(155,109,255,.45);color:var(--tx)}
 .pakket-tab:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
 .pakket-tab.active{background:var(--sf3);border-color:var(--bd-m);color:var(--tx)}
-.pakket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;align-items:stretch}
-@media(max-width:800px){.pakket-grid{grid-template-columns:1fr}}
-.pakket-card{
-  background:var(--sf2);border:1.5px solid var(--bd);border-radius:var(--r);padding:1.75rem;
-  display:flex;flex-direction:column;gap:.55rem;
-  transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease;
-}
-.pakket-card:hover{transform:translateY(-4px);border-color:rgba(155,109,255,.4);box-shadow:0 16px 44px rgba(0,0,0,.4)}
-.pakket-card.best-pakket{
-  background:var(--sf2);border:1.5px solid transparent;
-  background-image:linear-gradient(var(--sf2),var(--sf2)),var(--grad);
-  background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box;
-}
-@media(min-width:801px){
+.pakket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;align-items:stretch}
+.pakket-card{background:var(--sf2);border:1.5px solid var(--bd);border-radius:var(--r);padding:1.5rem;display:flex;flex-direction:column;gap:.45rem;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+@media(max-width:768px){.pakket-card{padding:1.15rem}}
+.pakket-card:hover{transform:translateY(-4px);border-color:rgba(155,109,255,.4);box-shadow:0 14px 40px rgba(0,0,0,.4)}
+.pakket-card.best-pakket{border:1.5px solid transparent;background-image:linear-gradient(var(--sf2),var(--sf2)),var(--grad);background-origin:border-box;-webkit-background-clip:padding-box,border-box;background-clip:padding-box,border-box}
+@media(min-width:769px){
   .pakket-card.best-pakket{transform:scale(1.02)}
-  .pakket-card.best-pakket:hover{transform:scale(1.02) translateY(-4px);box-shadow:0 18px 48px rgba(0,0,0,.45),0 6px 24px rgba(155,109,255,.12)}
+  .pakket-card.best-pakket:hover{transform:scale(1.02) translateY(-4px)}
 }
-.pakket-badge{display:inline-flex;align-items:center;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(155,109,255,.12);color:var(--secondary);border:1px solid rgba(155,109,255,.2);padding:.22rem .65rem;border-radius:99px;width:fit-content;margin-bottom:.2rem}
-.pakket-name{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mt)}
-.pakket-players{font-size:1.4rem;font-weight:800;color:var(--tx);line-height:1.15;margin:.1rem 0}
-.pakket-sep{height:1px;background:var(--bd);margin:.2rem 0}
-.pakket-features{list-style:none;display:flex;flex-direction:column;gap:.35rem}
-.pakket-features li{font-size:.82rem;color:var(--mt);display:flex;gap:.5rem;align-items:flex-start}
-.pakket-features li::before{content:'·';color:var(--secondary);font-weight:900;flex-shrink:0}
-.pakket-price{font-size:1.55rem;font-weight:800;color:var(--tx);margin-top:auto;padding-top:.7rem}
-.pakket-price em{font-size:.75rem;font-weight:500;font-style:normal;color:var(--mt);display:block;margin-top:.1rem}
-.pakket-pp{font-size:.72rem;color:var(--mt2);font-weight:600}
-.pakket-card .btn{margin-top:.4rem}
+.pakket-badge{display:inline-flex;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(155,109,255,.12);color:var(--secondary);border:1px solid rgba(155,109,255,.2);padding:.2rem .6rem;border-radius:99px;width:fit-content}
+.pakket-name{font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mt)}
+.pakket-players{font-size:1.3rem;font-weight:800;color:var(--tx);line-height:1.15}
+.pakket-feats{list-style:none;display:flex;flex-direction:column;gap:.32rem;margin:.3rem 0;flex:1}
+.pakket-feats li{font-size:.78rem;color:var(--mt);display:flex;gap:.45rem;align-items:flex-start}
+.pakket-feats li::before{content:'';width:12px;height:12px;flex-shrink:0;margin-top:.2rem;background-color:var(--secondary);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat}
+.pakket-price{font-size:1.5rem;font-weight:800;color:var(--tx)}
+.pakket-price em{font-size:.72rem;font-weight:500;font-style:normal;color:var(--mt);display:block}
+.pakket-pp{font-size:.7rem;color:var(--mt2);font-weight:600}
+.pakket-card .btn{margin-top:.4rem;min-height:44px;font-size:.82rem;padding:.55rem 1rem}
 .pakket-panel{display:none}
 .pakket-panel.active{display:block}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FAQ
+   8. FAQ — 5 vragen
 ═══════════════════════════════════════════════════════════════════════════ */
 .faq-lp{background:var(--sf1)}
-.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:.5rem}
+.faq-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:.45rem}
 .faq-item{background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r-sm);overflow:hidden;transition:border-color .2s ease,background .2s ease}
 .faq-item:hover{border-color:var(--bd-m);background:var(--sf3)}
-.faq-q{
-  width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;
-  padding:1.15rem 1.25rem;background:none;border:none;text-align:left;cursor:pointer;
-  font-family:inherit;font-size:.88rem;font-weight:600;color:var(--tx);line-height:1.4;min-height:44px;
-}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.2rem;background:none;border:none;text-align:left;cursor:pointer;font-family:inherit;font-size:.86rem;font-weight:600;color:var(--tx);line-height:1.4;min-height:44px}
 .faq-q:focus-visible{outline:2px solid var(--secondary);outline-offset:-2px;border-radius:var(--r-sm)}
-.faq-icon{
-  width:22px;height:22px;border-radius:50%;flex-shrink:0;
-  background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;color:var(--secondary);transition:background .2s,transform .3s;
-}
+.faq-icon{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.2);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--secondary);transition:background .2s,transform .3s}
 .faq-item.open .faq-icon{background:var(--secondary);color:#fff;transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.faq-item.open .faq-a{max-height:600px}
-.faq-a-inner{padding:.1rem 1.25rem 1.15rem;font-size:.85rem;color:var(--mt);line-height:1.8}
-.faq-meer{text-align:center;margin-top:2rem}
+.faq-item.open .faq-a{max-height:400px}
+.faq-a-inner{padding:.1rem 1.2rem 1rem;font-size:.84rem;color:var(--mt);line-height:1.75}
+.faq-meer{text-align:center;margin-top:1.5rem}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   EIND-CTA
+   9. SLOT-CTA
 ═══════════════════════════════════════════════════════════════════════════ */
-.einde{position:relative;overflow:hidden;padding:6rem 0;text-align:center;background:var(--bg)}
-.einde::before{
-  content:'';position:absolute;width:640px;height:640px;
-  background:radial-gradient(circle,rgba(155,109,255,.1) 0%,transparent 65%);
-  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
-}
-.einde-grid{position:absolute;inset:0;opacity:.045;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);
-  background-size:56px 56px;
-}
-.einde .label{margin-bottom:.9rem;display:block}
-.einde h2{margin-bottom:1rem}
-.einde p{color:var(--mt);margin-bottom:2rem;font-size:1rem;max-width:480px;margin-left:auto;margin-right:auto}
+.einde{position:relative;overflow:hidden;padding:5rem 0;text-align:center;background:var(--bg)}
+@media(max-width:768px){.einde{padding:3rem 0}}
+.einde::before{content:'';position:absolute;width:640px;height:640px;background:radial-gradient(circle,rgba(155,109,255,.1) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.einde-grid{position:absolute;inset:0;opacity:.045;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);background-size:56px 56px}
+.einde .label{margin-bottom:.8rem;display:block}
+.einde h2{margin-bottom:.7rem}
+.einde p{margin-bottom:1.75rem;font-size:.98rem;max-width:440px;margin-left:auto;margin-right:auto}
 .einde>.wrap{position:relative;z-index:1}
-.einde-card{
-  position:absolute;width:130px;border-radius:9px;overflow:hidden;
-  box-shadow:0 14px 44px rgba(0,0,0,.5);pointer-events:none;opacity:.9;
-  animation:chipFloat 8s ease-in-out infinite;
-}
-.einde-card.l{left:6%;top:22%;transform:rotate(-6deg)}
-.einde-card.r{right:6%;bottom:18%;transform:rotate(5deg);animation-delay:-4s}
-@media(max-width:900px){.einde-card{display:none}}
-.einde-acts{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.einde-acts{display:flex;flex-direction:column;align-items:center;gap:.9rem}
+.micro{font-size:.74rem;color:var(--mt2);font-weight:600}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════════════════════════════════════ */
-footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2rem}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
-@media(max-width:700px){.footer-grid{grid-template-columns:1fr;gap:1.75rem}}
-.footer-brand{display:flex;flex-direction:column;gap:.55rem}
+footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75rem}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.25rem;margin-bottom:2.25rem}
+@media(max-width:700px){.footer-grid{grid-template-columns:1fr;gap:1.5rem}}
+.footer-brand{display:flex;flex-direction:column;gap:.5rem}
 .footer-logo{display:flex;align-items:center;gap:.5rem;font-size:.95rem;font-weight:800;color:var(--tx)}
 .footer-slogan{font-size:.78rem;font-style:italic;color:var(--mt2)}
-.footer-col h3{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mt2);margin-bottom:.9rem}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.footer-col h3{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mt2);margin-bottom:.8rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
 .footer-col a{font-size:.82rem;color:var(--mt);transition:color .18s}
 .footer-col a:hover{color:var(--tx)}
 .footer-col a:focus-visible{outline:2px solid var(--secondary);outline-offset:2px}
-.footer-bottom{border-top:1px solid var(--bd);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-bottom{border-top:1px solid var(--bd);padding-top:1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .footer-copy{font-size:.72rem;color:var(--mt2)}
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   REDUCED MOTION
-═══════════════════════════════════════════════════════════════════════════ */
+/* ── Reduced motion ── */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}
   html{scroll-behavior:auto}
+  .tl,.demo-track{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ ICONENSET — één consistente lijnstijl (stroke 1.9, ronde caps) ═════════ -->
+<!-- ══ ICONENSET ═══════════════════════════════════════════════════════════ -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
   <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></symbol>
   <symbol id="i-playlist" viewBox="0 0 24 24"><path d="M3 6h12M3 10h12M3 14h7"/><path d="M17 14V7l4 1"/><circle cx="15" cy="16" r="2"/></symbol>
   <symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><path d="M6 17H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/></symbol>
-  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></symbol>
   <symbol id="i-players" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.4-5 6.5-5s5.7 1.6 6.5 5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14.6c2.5.3 4.3 1.7 5 4.4"/></symbol>
   <symbol id="i-cake" viewBox="0 0 24 24"><path d="M4 21h16M5 21v-6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6"/><path d="M5 17c1.5 1.2 3 1.2 4.5 0s3-1.2 4.5 0 3 1.2 4.5 0"/><path d="M12 9V7"/><path d="M12 4.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5Z"/></symbol>
   <symbol id="i-friends" viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2.5 20c.7-3 2.8-4.5 5.5-4.5S12.8 17 13.5 20"/><path d="M14.5 15.8c2.4.2 4.2 1.6 4.9 4.2"/></symbol>
-  <symbol id="i-family" viewBox="0 0 24 24"><circle cx="7" cy="7" r="2.6"/><circle cx="17" cy="7" r="2.6"/><circle cx="12" cy="12" r="2.2"/><path d="M2.5 19.5C3 17 4.8 15.5 7 15.5c1 0 1.9.3 2.7.8M21.5 19.5C21 17 19.2 15.5 17 15.5c-1 0-1.9.3-2.7.8"/><path d="M8.5 21c.5-2 1.8-3.2 3.5-3.2s3 1.2 3.5 3.2"/></symbol>
   <symbol id="i-team" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/><path d="M12 11v2"/></symbol>
   <symbol id="i-glass" viewBox="0 0 24 24"><path d="M8 3h8l-1 8a3 3 0 0 1-6 0L8 3Z"/><path d="M12 14v6M9 21h6"/><path d="M8.5 7h7"/></symbol>
   <symbol id="i-rings" viewBox="0 0 24 24"><circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="14" r="5.5"/><path d="M12 5.5 10.5 3h3L12 5.5Z"/></symbol>
   <symbol id="i-event" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><path d="M2 17h20"/><path d="M12 5V3"/><path d="M6.5 6.5 5 5M17.5 6.5 19 5"/></symbol>
-  <symbol id="i-party" viewBox="0 0 24 24"><path d="M5 11 3 21l10-2"/><path d="M5 11c2.5 1 5.5 4 6 8"/><path d="M13 3l.7 2.3L16 6l-2.3.7L13 9l-.7-2.3L10 6l2.3-.7L13 3Z"/><path d="M19 11l.5 1.5L21 13l-1.5.5L19 15l-.5-1.5L17 13l1.5-.5L19 11Z"/></symbol>
-  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
   <symbol id="i-cards" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="15" rx="2"/><path d="M8 3.5 18.5 3a2 2 0 0 1 2 2l.5 11"/><path d="M7 11h5M7 15h5"/></symbol>
   <symbol id="i-host" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M10 8.5v4l3.5-2-3.5-2Z"/></symbol>
-  <symbol id="i-pkg" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
   <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
   <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol>
-  <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></symbol>
-  <symbol id="i-speed" viewBox="0 0 24 24"><path d="M12 21a8.5 8.5 0 1 1 8.5-8.5"/><path d="m12 12.5 5-4"/><path d="M20.5 17.5 22 19"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8 7.5 9.5 4.4-1.5 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4.5"/></symbol>
-  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M14 3v6h6"/><path d="M8 14h8M8 17h5"/></symbol>
-  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 20c0-8 5-14 14-15-1 9-7 14-15 14"/><path d="M5 20c2-5 6-9 10-11"/></symbol>
 </svg>
 
-<!-- ══ 1. HEADER ═══════════════════════════════════════════════════════════ -->
+<!-- ══ NAVIGATIE ═══════════════════════════════════════════════════════════ -->
 <nav class="nav" id="mainNav">
   <div class="wrap nav-inner">
     <a href="/" class="nav-logo" aria-label="Melingo homepage">
-      <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true">
-        <circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/>
-      </svg>
+      <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
       Melingo
       <span class="nav-slogan">where melody meets bingo</span>
     </a>
@@ -734,131 +536,245 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
   </div>
 </nav>
 
-<!-- ══ 2. HERO ══════════════════════════════════════════════════════════════ -->
+<!-- ══ 1. HERO ═════════════════════════════════════════════════════════════ -->
 <section class="hero">
   <div class="wrap hero-inner">
 
-    <div class="hero-text">
-      <p class="label hero-label">Jouw muziek. Jouw kaarten. Jouw avond.</p>
-      <h1>Maak van je playlist het <span class="grad-text">spel van de avond.</span></h1>
-      <p class="hero-sub">Zet je eigen Spotify-playlist om in unieke bingokaarten en speel met een slim hostscherm dat de nummers én bingo voor je bijhoudt.</p>
+    <div>
+      <span class="label">Jouw muziek. Jouw kaarten. Jouw avond.</span>
+      <h1>Maak in een paar minuten een <span class="grad-text">muziekbingo</span> met je eigen playlist.</h1>
+      <p class="hero-sub">Unieke bingokaarten, een slim hostscherm en automatische bingocontrole — tot 200 spelers.</p>
       <div class="hero-actions">
         <a href="/app" class="btn btn-primary btn-lg">Maak mijn muziekbingo <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a href="#zo-werkt-het" class="btn btn-ghost btn-lg">Bekijk hoe het werkt</a>
+        <a href="#demo" class="btn btn-ghost btn-lg">Bekijk hoe het werkt</a>
       </div>
-      <p class="micro">Vanaf €7,95 · eenmalige betaling · direct klaar om te spelen</p>
-    </div>
-
-    <div class="hero-visual">
-      <div class="hero-chip hero-chip-np" aria-hidden="true">
-        <span class="eq"><i></i><i></i><i></i><i></i></span>
-        <span class="hero-chip-t">Dancing Queen<span>ABBA · nu te horen</span></span>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-header">
-          <div class="hero-card-title">90s Hits — Kaart #7 <span>Speler: Lisa</span></div>
-          <div class="hero-badge">Bezig met spelen</div>
-        </div>
-        <div class="bingo-grid" aria-hidden="true">
-          <div class="bc h1">Nirvana</div><div class="bc">Mariah</div><div class="bc h1">Alanis</div><div class="bc">TLC</div><div class="bc h2">Britney</div>
-          <div class="bc">Destiny</div><div class="bc h1">No Doubt</div><div class="bc h2">Spice Girls</div><div class="bc">Oasis</div><div class="bc h1">Green Day</div>
-          <div class="bc h1">R.Kelly</div><div class="bc h2">BSB</div><div class="bc fr">VRIJ</div><div class="bc h1">NSYNC</div><div class="bc h2">Eagle Eye</div>
-          <div class="bc">Cranb.</div><div class="bc h2">Aqua</div><div class="bc tick">Enya</div><div class="bc h1">Eminem</div><div class="bc">Pearl Jam</div>
-          <div class="bc">Blur</div><div class="bc h1">Fugees</div><div class="bc">Weezer</div><div class="bc h2">2Pac</div><div class="bc h1">Coolio</div>
-        </div>
-        <div class="hero-card-footer">
-          <span>14 vakjes aangekruist</span>
-          <strong style="color:var(--primary)">Bijna bingo!</strong>
-        </div>
-      </div>
-      <div class="hero-chip hero-chip-host" aria-hidden="true">
-        <svg class="ic"><use href="#i-host"/></svg>
-        <span class="hero-chip-t">Hostscherm actief<span>12 van 40 nummers gespeeld</span></span>
+      <div class="hero-chips">
+        <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> Geen abonnement</span>
+        <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> Tot 200 spelers</span>
+        <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> Direct toegang</span>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ══ 3. VERTROUWENSBALK ══════════════════════════════════════════════════ -->
-<div class="proof">
-  <div class="wrap proof-inner">
-    <div class="proof-item"><svg class="ic" aria-hidden="true"><use href="#i-note"/></svg> Werkt met Spotify Premium</div>
-    <div class="proof-item"><svg class="ic" aria-hidden="true"><use href="#i-printer"/></svg> PDF-kaarten inbegrepen</div>
-    <div class="proof-item"><svg class="ic" aria-hidden="true"><use href="#i-players"/></svg> Van 1 tot 200 spelers</div>
-    <div class="proof-item"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg> Klaar in enkele minuten</div>
-    <div class="proof-item"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg> Automatische bingocontrole</div>
-  </div>
-</div>
-
-<!-- ══ 4. MEER DAN ALLEEN BINGOKAARTEN ═════════════════════════════════════ -->
-<section class="meer">
-  <div class="wrap meer-grid">
-    <div class="meer-tekst">
-      <span class="label">Slimmer dan een losse PDF</span>
-      <h2>Meer dan alleen bingokaarten.</h2>
-      <p>Melingo maakt je kaarten, begeleidt het spel en controleert de bingo. Geen spreadsheets, geen handmatig zoeken en geen discussie over een winnende kaart.</p>
-      <div class="meer-feats">
-        <div class="meer-feat">
-          <div class="meer-ic"><svg class="ic" aria-hidden="true"><use href="#i-note"/></svg></div>
-          <div><h3>Je muziek wordt het spel</h3><p>Gebruik je eigen Spotify-playlist of kies een kant-en-klaar thema.</p></div>
-        </div>
-        <div class="meer-feat">
-          <div class="meer-ic"><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg></div>
-          <div><h3>Unieke kaarten voor iedere speler</h3><p>Melingo verdeelt de nummers automatisch over unieke printbare kaarten.</p></div>
-        </div>
-        <div class="meer-feat">
-          <div class="meer-ic"><svg class="ic" aria-hidden="true"><use href="#i-host"/></svg></div>
-          <div><h3>Slim hostscherm</h3><p>Zie welk nummer speelt, houd de voortgang bij en begeleid het spel vanaf één scherm.</p></div>
-        </div>
-        <div class="meer-feat">
-          <div class="meer-ic"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
-          <div><h3>Automatische bingocontrole</h3><p>Voer het kaartnummer in en controleer direct of de bingo geldig is.</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="meer-visual">
+    <div class="hmock" aria-hidden="true">
       <div class="mock-host">
-        <div class="mock-bar" aria-hidden="true">
+        <div class="mock-bar">
           <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
           <span class="mock-url">melingo.vercel.app/app — hostscherm</span>
         </div>
-        <div class="mock-body">
-          <div class="mock-vinyl" aria-hidden="true"></div>
-          <div class="mock-track"><strong>Don't Stop Believin'</strong><span>Journey · nummer 12 van 40</span></div>
-          <div class="mock-btn">Volgend nummer</div>
+        <div class="rh" style="border:none;border-radius:0;font-size:9px">
+          <div class="rh-now">
+            <div class="rh-vinyl"></div>
+            <div class="rh-label">Nu speelt</div>
+            <div class="rh-title">Kabouterdans – Remix</div>
+            <div class="rh-artist">Kabouter Plop</div>
+            <div class="rh-count">20 van 40</div>
+          </div>
+          <div class="rh-row">
+            <div class="rh-next">Volgend nummer</div>
+            <div class="rh-pause"><i></i><i></i></div>
+          </div>
         </div>
       </div>
-      <div class="mock-card-overlay" aria-hidden="true">
-        <div class="mock-card-hd">KAART 7</div>
-        <div class="mock-card-grid">
-          <span class="mcc m"></span><span class="mcc"></span><span class="mcc m"></span><span class="mcc"></span><span class="mcc"></span>
-          <span class="mcc"></span><span class="mcc m"></span><span class="mcc"></span><span class="mcc m"></span><span class="mcc"></span>
-          <span class="mcc m"></span><span class="mcc"></span><span class="mcc fr"></span><span class="mcc"></span><span class="mcc m"></span>
-          <span class="mcc"></span><span class="mcc m"></span><span class="mcc"></span><span class="mcc"></span><span class="mcc"></span>
-          <span class="mcc"></span><span class="mcc"></span><span class="mcc m"></span><span class="mcc m"></span><span class="mcc"></span>
+      <div class="mock-check"><svg class="ic" style="width:14px;height:14px"><use href="#i-shield"/></svg> BINGO! Kaart 1 wint: horizontale rij</div>
+      <div class="mock-card" style="background:none;border-radius:0;box-shadow:none;overflow:visible">
+        <div class="rc rc-pinkfree">
+          <div class="rc-hd">
+            <div><div class="rc-logo">Melingo</div><div class="rc-tagline">Where melody meets bingo</div></div>
+            <div class="rc-badge">Kaart 1</div>
+          </div>
+          <div class="rc-bingo"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
+          <div class="rc-grid" data-rc="1"></div>
+          <div class="rc-ft">melingo.app — Where melody meets bingo</div>
         </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ 2. SPEELOPTIES ══════════════════════════════════════════════════════ -->
+<section class="modi" id="speelopties">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="label">Drie speelopties</p>
+      <h2>Kies wat bij jouw avond past.</h2>
+    </div>
+    <div class="modi-grid swipe">
+
+      <div class="modi-card featured">
+        <span class="modi-tag best">Meest gekozen</span>
+        <h3>Eigen Spotify-bingo</h3>
+        <p>Gebruik je eigen playlist en speel met het slimme hostscherm en automatische bingocontrole.</p>
+        <span class="modi-sp">Spotify Premium vereist</span>
+        <div class="modi-price"><em>Vanaf</em> €14,95</div>
+        <a href="/app?mode=spotify" class="btn btn-primary stretch">Start met mijn playlist</a>
+      </div>
+
+      <div class="modi-card">
+        <span class="modi-tag quick">Snelste optie</span>
+        <h3>Kant-en-klaar thema</h3>
+        <p>Kies een compleet muziekthema met 40 nummers en speel direct — inclusief hostscherm.</p>
+        <span class="modi-sp">Spotify Premium vereist</span>
+        <div class="modi-price">€9,95</div>
+        <a href="/app?mode=theme" class="btn btn-ghost stretch">Bekijk de thema's</a>
+      </div>
+
+      <div class="modi-card">
+        <span class="modi-tag eco">Voordeligste optie</span>
+        <h3>Alleen bingokaarten</h3>
+        <p>Maak unieke printbare kaarten van je eigen nummers en speel de muziek zelf af.</p>
+        <span class="modi-sp" style="color:var(--mt)">Geen Spotify nodig</span>
+        <div class="modi-price"><em>Vanaf</em> €7,95</div>
+        <a href="/app?mode=cards" class="btn btn-ghost stretch">Maak alleen bingokaarten</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. WAAROM MELINGO ═══════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="label">Waarom Melingo</p>
+      <h2>Meer dan alleen bingokaarten.</h2>
+    </div>
+    <div class="usp-grid">
+      <div class="usp">
+        <div class="usp-ic"><svg class="ic" aria-hidden="true"><use href="#i-host"/></svg></div>
+        <h3>Slim hostscherm</h3>
+        <p>Begeleid het hele spel vanaf één scherm.</p>
+      </div>
+      <div class="usp">
+        <div class="usp-ic"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
+        <h3>Automatische bingocontrole</h3>
+        <p>Geen discussies meer over een winnende kaart.</p>
+      </div>
+      <div class="usp">
+        <div class="usp-ic"><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg></div>
+        <h3>Unieke kaarten</h3>
+        <p>Iedere speler een eigen kaart, automatisch verdeeld.</p>
+      </div>
+      <div class="usp">
+        <div class="usp-ic"><svg class="ic" aria-hidden="true"><use href="#i-players"/></svg></div>
+        <h3>Tot 200 spelers</h3>
+        <p>Van woonkamer tot evenement.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ 5. ZO WERKT MELINGO — walkthrough (10 stappen) ══════════════════════ -->
-<section class="how" id="zo-werkt-het">
+<!-- ══ 4. PRODUCTDEMO ══════════════════════════════════════════════════════ -->
+<section class="demo" id="demo">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="label">Bekijk wat je krijgt</p>
+      <h2>Ervaar het product.</h2>
+    </div>
+    <div class="demo-tabs" role="tablist" aria-label="Productonderdelen">
+      <button class="demo-tab active" role="tab" aria-selected="true" data-demo="0">Hostscherm</button>
+      <button class="demo-tab" role="tab" aria-selected="false" data-demo="1">Bingokaart</button>
+      <button class="demo-tab" role="tab" aria-selected="false" data-demo="2">Bingocontrole</button>
+    </div>
+    <div class="demo-track" id="demoTrack">
+
+      <div class="demo-slide">
+        <div class="demo-panel">
+          <div class="demo-info">
+            <h3>Het slimme hostscherm</h3>
+            <p>Speel nummers af, zie wat er al geweest is en houd het overzicht — alles vanaf één scherm op je laptop of tablet.</p>
+          </div>
+          <div class="demo-stage" aria-hidden="true" style="padding:.9rem">
+            <div class="rh" style="max-width:340px;font-size:8.5px">
+              <div class="rh-now">
+                <div class="rh-vinyl"></div>
+                <div class="rh-label">Nu speelt</div>
+                <div class="rh-title">Kabouterdans – Remix</div>
+                <div class="rh-artist">Kabouter Plop</div>
+                <div class="rh-count">20 van 40</div>
+              </div>
+              <div class="rh-row">
+                <div class="rh-next">Volgend nummer</div>
+                <div class="rh-pause"><i></i><i></i></div>
+              </div>
+              <div class="rh-panel">
+                <div class="rh-seg"><span>Handmatig</span><span class="on">Automatisch</span></div>
+                <div class="rh-lbl">Start nummer vanaf</div>
+                <div class="rh-chips"><span class="rh-chip">Begin</span><span class="rh-chip">15 sec</span><span class="rh-chip on">30 sec</span><span class="rh-chip">60 sec</span></div>
+                <div class="rh-lbl">Duur per nummer</div>
+                <div class="rh-chips"><span class="rh-chip">15 sec</span><span class="rh-chip on">30 sec</span><span class="rh-chip">45 sec</span><span class="rh-chip">60 sec</span></div>
+              </div>
+              <div class="rh-prog"><i></i></div>
+              <div class="rh-panel">
+                <div class="rh-played-hd"><b>Gespeeld</b><em>20</em></div>
+                <div class="rh-search">Zoek in gespeelde nummers...</div>
+                <div class="rh-item"><b>20</b><span><span class="rh-item-t">Kabouterdans – Remix</span><span class="rh-item-a">Kabouter Plop</span></span></div>
+                <div class="rh-item"><b>19</b><span><span class="rh-item-t">Dragostea din tei</span><span class="rh-item-a">O-Zone</span></span></div>
+                <div class="rh-item"><b>18</b><span><span class="rh-item-t">Ik Neem Je Mee</span><span class="rh-item-a">Gers Pardoel</span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-slide">
+        <div class="demo-panel">
+          <div class="demo-info">
+            <h3>Unieke printbare kaarten</h3>
+            <p>Iedere speler krijgt een eigen kaart als printklare PDF — in kleur voor het feest of eco om zuinig te printen.</p>
+          </div>
+          <div class="demo-stage" aria-hidden="true" style="padding:.9rem">
+            <div class="rc rc-md rc-pinkfree" style="font-size:7.5px">
+              <div class="rc-hd">
+                <div><div class="rc-logo">Melingo</div><div class="rc-tagline">Where melody meets bingo</div></div>
+                <div class="rc-badge">Kaart 1</div>
+              </div>
+              <div class="rc-bingo"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
+              <div class="rc-grid" data-rc="1"></div>
+              <div class="rc-ft">melingo.app — Where melody meets bingo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-slide">
+        <div class="demo-panel">
+          <div class="demo-info">
+            <h3>Automatische bingocontrole</h3>
+            <p>Iemand roept bingo? Voer het kaartnummer in en zie direct of de bingo geldig is. Geen discussie.</p>
+          </div>
+          <div class="demo-stage" aria-hidden="true" style="padding:.9rem">
+            <div class="rk" style="max-width:360px;font-size:7.5px">
+              <div class="rk-hd">Bingo controleren</div>
+              <div class="rk-row"><span class="rk-inp">1</span><span class="rk-btn">Controleer</span></div>
+              <div class="rk-ok">BINGO! Kaart 1 wint: horizontale rij &amp; verticale rij. Nog te winnen: diagonale rij</div>
+              <div class="rk-warn">Deze kaart had al bingo kunnen hebben na nummer 18 ("Ik Neem Je Mee"). Iemand heeft niet opgelet!</div>
+              <div class="rk-grid" data-rk="1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="demo-dots" id="demoDots" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ══ 5. HOE WERKT HET — horizontale tijdlijn ═════════════════════════════ -->
+<section id="zo-werkt-het">
   <div class="wrap">
     <div class="sec-hd">
       <p class="label">Stap voor stap</p>
       <h2>Van playlist naar speelklare muziekbingo.</h2>
-      <p>Jij kiest de muziek en het aantal spelers. Melingo maakt de kaarten en helpt je tijdens het spel.</p>
     </div>
     <div class="hw-body" id="hw-sec">
 
       <div class="hw-frame">
-        <div class="hw-top" aria-hidden="true">
+        <div class="mock-bar" aria-hidden="true">
           <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
           <span class="mock-url">melingo.vercel.app/app</span>
         </div>
-        <div class="hw-stage" id="hw-stage">
+        <div class="hw-stage">
 
           <!-- 1. Kies hoe je wilt spelen -->
           <div class="hw-slide active" data-hw="0" aria-hidden="false">
@@ -896,68 +812,96 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
             <div class="hwc" style="text-align:center"><div class="hwc-s">Pakket: Klein gezelschap &middot; t/m 25 spelers</div></div>
           </div>
 
-          <!-- 4. Bekijk de gegenereerde kaarten -->
+          <!-- 4. Bekijk de kaarten -->
           <div class="hw-slide" data-hw="3" aria-hidden="true">
             <div class="hw-cap">Unieke kaarten per speler</div>
-            <div class="hw-row" style="max-width:300px;width:100%;margin:0 auto">
-              <div class="hw-card"><div class="hw-card-hd">KAART 1</div><div class="hw-card-grid"><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc fr"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span></div></div>
-              <div class="hw-card"><div class="hw-card-hd">KAART 2</div><div class="hw-card-grid"><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc fr"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span></div></div>
+            <div class="hw-row" style="max-width:320px;width:100%;margin:0 auto">
+              <div class="rc rc-xs rc-pinkfree">
+                <div class="rc-hd"><div><div class="rc-logo">Melingo</div></div><div class="rc-badge">Kaart 1</div></div>
+                <div class="rc-bingo"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
+                <div class="rc-grid" data-rc="1"></div>
+              </div>
+              <div class="rc rc-xs rc-purple">
+                <div class="rc-hd"><div><div class="rc-logo">Melingo</div></div><div class="rc-badge">Kaart 2</div></div>
+                <div class="rc-bingo"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
+                <div class="rc-grid" data-rc="2"></div>
+              </div>
             </div>
-            <div class="hwc" style="text-align:center;max-width:280px;margin:0 auto;width:100%"><div class="hwc-s">Iedere speler een andere kaart, automatisch verdeeld</div></div>
+            <div class="hwc" style="text-align:center;max-width:260px;margin:0 auto;width:100%"><div class="hwc-s">Iedere speler een andere kaart, automatisch verdeeld</div></div>
           </div>
 
-          <!-- 5. Kies kleur of eco -->
+          <!-- 5. Kleur of eco -->
           <div class="hw-slide" data-hw="4" aria-hidden="true">
             <div class="hw-cap">Kleur of eco</div>
-            <div class="hw-row" style="max-width:300px;width:100%;margin:0 auto">
-              <div class="hw-card"><div class="hw-card-hd">KLEUR</div><div class="hw-card-grid"><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc fr"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span></div></div>
-              <div class="hw-card eco"><div class="hw-card-hd">ECO</div><div class="hw-card-grid"><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span></div></div>
+            <div class="hw-row" style="max-width:320px;width:100%;margin:0 auto">
+              <div class="rc rc-xs rc-pinkfree">
+                <div class="rc-hd"><div><div class="rc-logo">Melingo</div></div><div class="rc-badge">Kleur</div></div>
+                <div class="rc-bingo"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
+                <div class="rc-grid" data-rc="3"></div>
+              </div>
+              <div class="rc rc-xs rc-eco">
+                <div class="rc-hd"><div><div class="rc-logo">Melingo</div></div><div class="rc-badge">Eco</div></div>
+                <div class="rc-bingo"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
+                <div class="rc-grid" data-rc="3"></div>
+              </div>
             </div>
-            <div class="hwc" style="text-align:center;max-width:280px;margin:0 auto;width:100%"><div class="hwc-s">Vol kleur voor het feest of zuinig zwart-wit om te printen</div></div>
+            <div class="hwc" style="text-align:center;max-width:260px;margin:0 auto;width:100%"><div class="hwc-s">Vol kleur voor het feest of zuinig zwart-wit om te printen</div></div>
           </div>
 
           <!-- 6. Download en print -->
           <div class="hw-slide" data-hw="5" aria-hidden="true">
             <div class="hw-cap">Download en print</div>
-            <div class="hw-file" style="max-width:300px;width:100%;margin:0 auto">
-              <svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg>
+            <div class="hw-file" style="max-width:280px;width:100%;margin:0 auto">
+              <svg class="ic" aria-hidden="true"><use href="#i-printer"/></svg>
               <span><span class="hw-file-n">melingo-bingokaarten.pdf</span><br><span class="hw-file-m">18 unieke kaarten &middot; printklaar</span></span>
             </div>
-            <div class="hw-btnui" style="max-width:240px;width:100%;margin:.2rem auto 0">Download PDF</div>
+            <div class="hw-btnui" style="max-width:220px;width:100%;margin:.2rem auto 0">Download PDF</div>
           </div>
 
-          <!-- 7. Open het hostscherm -->
+          <!-- 7. Hostscherm -->
           <div class="hw-slide" data-hw="6" aria-hidden="true">
             <div class="hw-cap">Hostscherm</div>
-            <div class="hw-vinyl" aria-hidden="true"></div>
-            <div class="hw-track-t">Dancing Queen</div>
-            <div class="hw-track-a">ABBA &middot; nummer 12 van 40</div>
-            <div class="hw-btnui" style="max-width:220px;width:100%;margin:0 auto">Volgend nummer</div>
+            <div class="rh" style="max-width:280px;width:100%;margin:0 auto;font-size:7px">
+              <div class="rh-now">
+                <div class="rh-vinyl"></div>
+                <div class="rh-label">Nu speelt</div>
+                <div class="rh-title">Kabouterdans – Remix</div>
+                <div class="rh-artist">Kabouter Plop</div>
+                <div class="rh-count">20 van 40</div>
+              </div>
+              <div class="rh-row">
+                <div class="rh-next">Volgend nummer</div>
+                <div class="rh-pause"><i></i><i></i></div>
+              </div>
+            </div>
           </div>
 
-          <!-- 8. Speel de nummers af -->
+          <!-- 8. Nummers afspelen -->
           <div class="hw-slide" data-hw="7" aria-hidden="true">
             <div class="hw-cap">Nummers afspelen</div>
-            <div class="hw-pl on" style="max-width:300px;width:100%;margin:0 auto"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><span class="hw-pl-name">Mr. Brightside</span><br><span class="hw-pl-meta">The Killers</span></span></div>
-            <div class="hw-progbar" style="max-width:300px;width:100%;margin:0 auto" aria-hidden="true"><i></i></div>
-            <div class="hwc" style="text-align:center;max-width:280px;margin:0 auto;width:100%"><div class="hwc-s">Handmatig of automatisch, met instelbare fragmentduur</div></div>
+            <div class="hw-pl on" style="max-width:280px;width:100%;margin:0 auto"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><span class="hw-pl-name">Mr. Brightside</span><br><span class="hw-pl-meta">The Killers</span></span></div>
+            <div class="hw-progbar" style="max-width:280px;width:100%;margin:0 auto" aria-hidden="true"><i></i></div>
+            <div class="hwc" style="text-align:center;max-width:260px;margin:0 auto;width:100%"><div class="hwc-s">Handmatig of automatisch, met instelbare fragmentduur</div></div>
           </div>
 
-          <!-- 9. Houd gespeelde nummers bij -->
+          <!-- 9. Gespeelde nummers -->
           <div class="hw-slide" data-hw="8" aria-hidden="true">
             <div class="hw-cap">Gespeelde nummers</div>
-            <div class="hw-played" style="max-width:300px;width:100%;margin:0 auto"><span><strong>Take On Me</strong> &middot; a-ha</span><span class="ok">GESPEELD</span></div>
-            <div class="hw-played" style="max-width:300px;width:100%;margin:0 auto"><span><strong>Africa</strong> &middot; Toto</span><span class="ok">GESPEELD</span></div>
-            <div class="hw-played" style="max-width:300px;width:100%;margin:0 auto"><span><strong>Purple Rain</strong> &middot; Prince</span><span class="ok">GESPEELD</span></div>
-            <div class="hwc" style="text-align:center;max-width:280px;margin:0 auto;width:100%"><div class="hwc-s">12 van 40 gespeeld &mdash; alles automatisch bijgehouden</div></div>
+            <div class="hw-played" style="max-width:280px;width:100%;margin:0 auto"><span><strong>Take On Me</strong> &middot; a-ha</span><span class="ok">GESPEELD</span></div>
+            <div class="hw-played" style="max-width:280px;width:100%;margin:0 auto"><span><strong>Africa</strong> &middot; Toto</span><span class="ok">GESPEELD</span></div>
+            <div class="hw-played" style="max-width:280px;width:100%;margin:0 auto"><span><strong>Purple Rain</strong> &middot; Prince</span><span class="ok">GESPEELD</span></div>
+            <div class="hwc" style="text-align:center;max-width:260px;margin:0 auto;width:100%"><div class="hwc-s">12 van 40 gespeeld &mdash; automatisch bijgehouden</div></div>
           </div>
 
-          <!-- 10. Controleer bingo -->
+          <!-- 10. Bingo controleren -->
           <div class="hw-slide" data-hw="9" aria-hidden="true">
             <div class="hw-cap">Bingo controleren</div>
-            <div class="hw-inp" style="max-width:320px;width:100%;margin:0 auto"><span class="hw-inp-f">Kaartnummer&hellip;</span><span class="hw-inp-b">Controleer</span></div>
-            <div class="hw-ok" style="max-width:320px;width:100%;margin:0 auto">BINGO! Kaart 7 wint met een volle rij.</div>
-            <div class="hw-card" style="width:130px;margin:0 auto"><div class="hw-card-hd">KAART 7</div><div class="hw-card-grid"><span class="hw-cc g"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc g"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc g"></span><span class="hw-cc"></span><span class="hw-cc fr"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc g"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc g"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span></div></div>
+            <div class="rk" style="max-width:300px;width:100%;margin:0 auto;font-size:5px">
+              <div class="rk-hd">Bingo controleren</div>
+              <div class="rk-row"><span class="rk-inp">1</span><span class="rk-btn">Controleer</span></div>
+              <div class="rk-ok">BINGO! Kaart 1 wint: horizontale rij &amp; verticale rij. Nog te winnen: diagonale rij</div>
+              <div class="rk-grid" data-rk="1"></div>
+            </div>
           </div>
 
         </div>
@@ -969,269 +913,39 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
         <div class="hw-stitle" id="hw-stitle">Kies hoe je wilt spelen</div>
         <p class="hw-sdesc" id="hw-sdesc">Ga voor je eigen Spotify-bingo, een kant-en-klaar thema of alleen printbare bingokaarten.</p>
         <div class="hw-dots" id="hw-dots" role="tablist" aria-label="Stappen"></div>
-        <div class="hw-ctrl">
-          <button class="hw-nav" id="hw-prev" aria-label="Vorige stap"><svg class="ic" aria-hidden="true"><use href="#i-chev-l"/></svg></button>
-          <button class="hw-nav" id="hw-next" aria-label="Volgende stap"><svg class="ic" aria-hidden="true"><use href="#i-chev-r"/></svg></button>
+        <div class="hw-nav-row">
+          <button class="tl-btn" id="hw-prev" aria-label="Vorige stap"><svg class="ic" aria-hidden="true"><use href="#i-chev-l"/></svg></button>
+          <button class="tl-btn" id="hw-next" aria-label="Volgende stap"><svg class="ic" aria-hidden="true"><use href="#i-chev-r"/></svg></button>
         </div>
-      </div>
-
-    </div>
-    <div class="how-cta">
-      <a href="#speelopties" class="btn btn-primary btn-lg">Kies hoe je wilt spelen <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 6. SPEELOPTIES ═══════════════════════════════════════════════════════ -->
-<section class="modi" id="speelopties">
-  <div class="wrap">
-    <div class="sec-hd">
-      <p class="label">Drie speelopties</p>
-      <h2>Kies wat bij jouw avond past.</h2>
-      <p>Speel met je eigen playlist, kies een compleet thema of maak alleen de bingokaarten.</p>
-    </div>
-    <div class="modi-grid">
-
-      <div class="modi-card featured">
-        <div class="modi-tags">
-          <span class="modi-tag best">Meest gekozen</span>
-          <span class="modi-tag sp">Spotify Premium vereist</span>
-        </div>
-        <div class="modi-icon"><svg class="ic" aria-hidden="true"><use href="#i-note"/></svg></div>
-        <h3>Eigen Spotify-bingo</h3>
-        <p>Gebruik je eigen playlist en speel met het slimme hostscherm.</p>
-        <ul class="modi-ul">
-          <li>Eigen Spotify-playlist</li>
-          <li>Unieke bingokaarten</li>
-          <li>Hostscherm inbegrepen</li>
-          <li>Automatische bingocontrole</li>
-          <li>PDF-kaarten inbegrepen</li>
-          <li>Tot 200 spelers</li>
-        </ul>
-        <div class="modi-price"><em>Vanaf</em> €14,95</div>
-        <a href="/app?mode=spotify" class="btn btn-primary stretch">Start met mijn playlist</a>
-      </div>
-
-      <div class="modi-card">
-        <div class="modi-tags">
-          <span class="modi-tag quick">Snel starten</span>
-          <span class="modi-tag sp">Spotify Premium vereist</span>
-        </div>
-        <div class="modi-icon" style="background:rgba(242,64,106,.08);border-color:rgba(242,64,106,.16);color:var(--primary)"><svg class="ic" aria-hidden="true"><use href="#i-playlist"/></svg></div>
-        <h3>Kant-en-klaar thema</h3>
-        <p>Kies een compleet muziekthema en speel direct.</p>
-        <ul class="modi-ul">
-          <li>40 zorgvuldig gekozen nummers</li>
-          <li>Maximaal 20 spelers</li>
-          <li>Hostscherm inbegrepen</li>
-          <li>PDF-kaarten inbegrepen</li>
-          <li>Geen eigen playlist samenstellen</li>
-        </ul>
-        <div class="modi-price">€9,95</div>
-        <a href="/app?mode=theme" class="btn btn-ghost stretch">Bekijk de thema's</a>
-      </div>
-
-      <div class="modi-card">
-        <div class="modi-tags">
-          <span class="modi-tag eco">Voordeligst</span>
-          <span class="modi-tag eco">Geen Spotify nodig</span>
-        </div>
-        <div class="modi-icon" style="background:rgba(255,255,255,.04);border-color:var(--bd);color:var(--tx)"><svg class="ic" aria-hidden="true"><use href="#i-printer"/></svg></div>
-        <h3>Alleen bingokaarten</h3>
-        <p>Maak unieke printbare kaarten en speel de muziek zelf af.</p>
-        <ul class="modi-ul">
-          <li>Plak of voer zelf nummers in</li>
-          <li>Unieke PDF-kaarten</li>
-          <li>Kleur of eco</li>
-          <li>Geen hostscherm</li>
-          <li>Tot 200 spelers</li>
-        </ul>
-        <div class="modi-price"><em>Vanaf</em> €7,95</div>
-        <a href="/app?mode=cards" class="btn btn-ghost stretch">Maak alleen bingokaarten</a>
+        <a href="/app" class="btn btn-primary">Zelf proberen <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ══ 7. MOMENTEN — mozaïek ═══════════════════════════════════════════════ -->
-<section class="momenten" id="voor-wie">
+<!-- ══ 6. VOOR WIE ═════════════════════════════════════════════════════════ -->
+<section class="wie" id="voor-wie">
   <div class="wrap">
     <div class="sec-hd">
       <p class="label">Voor elk moment</p>
       <h2>Muziekbingo past overal.</h2>
-      <p>Van een avond thuis tot een volle feestzaal. Melingo groeit met je mee.</p>
     </div>
-    <div class="moz">
-      <div class="moz-card lg">
-        <div class="moz-ic"><svg class="ic" aria-hidden="true"><use href="#i-friends"/></svg></div>
-        <div class="moz-t">Vriendenavond</div>
-        <div class="moz-d">Herken nummers, zing mee en strijd om de eerste bingo.</div>
-      </div>
-      <div class="moz-card">
-        <div class="moz-ic"><svg class="ic" aria-hidden="true"><use href="#i-cake"/></svg></div>
-        <div class="moz-t">Verjaardagen</div>
-        <div class="moz-d">Een bingo vol favorieten van de jarige.</div>
-      </div>
-      <div class="moz-card">
-        <div class="moz-ic"><svg class="ic" aria-hidden="true"><use href="#i-family"/></svg></div>
-        <div class="moz-t">Familiefeesten</div>
-        <div class="moz-d">Van oma tot tiener: iedereen kent wel een nummer.</div>
-      </div>
-      <div class="moz-card">
-        <div class="moz-ic"><svg class="ic" aria-hidden="true"><use href="#i-team"/></svg></div>
-        <div class="moz-t">Teamuitjes</div>
-        <div class="moz-d">Een laagdrempelig spel waar iedereen direct aan mee kan doen.</div>
-      </div>
-      <div class="moz-card">
-        <div class="moz-ic"><svg class="ic" aria-hidden="true"><use href="#i-rings"/></svg></div>
-        <div class="moz-t">Bruiloften</div>
-        <div class="moz-d">Maak een persoonlijke bingo van nummers die bij het bruidspaar passen.</div>
-      </div>
-      <div class="moz-card lg alt">
-        <div class="moz-ic"><svg class="ic" aria-hidden="true"><use href="#i-glass"/></svg></div>
-        <div class="moz-t">Horeca en evenementen</div>
-        <div class="moz-d">Speel met grotere groepen en houd de controle via het hostscherm.</div>
-      </div>
-      <div class="moz-card">
-        <div class="moz-ic"><svg class="ic" aria-hidden="true"><use href="#i-party"/></svg></div>
-        <div class="moz-t">Bedrijfsfeesten</div>
-        <div class="moz-d">Muziek breekt het ijs sneller dan welke speech ook.</div>
-      </div>
-      <div class="moz-card">
-        <div class="moz-ic"><svg class="ic" aria-hidden="true"><use href="#i-event"/></svg></div>
-        <div class="moz-t">Evenementen</div>
-        <div class="moz-d">Tot 200 unieke kaarten voor een volle zaal.</div>
-      </div>
+    <div class="wie-grid swipe">
+      <div class="wie-card sw-sm"><div class="wie-ic"><svg class="ic" aria-hidden="true"><use href="#i-cake"/></svg></div>Verjaardagen</div>
+      <div class="wie-card sw-sm"><div class="wie-ic"><svg class="ic" aria-hidden="true"><use href="#i-friends"/></svg></div>Vriendenavonden</div>
+      <div class="wie-card sw-sm"><div class="wie-ic"><svg class="ic" aria-hidden="true"><use href="#i-team"/></svg></div>Teamuitjes</div>
+      <div class="wie-card sw-sm"><div class="wie-ic"><svg class="ic" aria-hidden="true"><use href="#i-rings"/></svg></div>Bruiloften</div>
+      <div class="wie-card sw-sm"><div class="wie-ic"><svg class="ic" aria-hidden="true"><use href="#i-glass"/></svg></div>Horeca</div>
+      <div class="wie-card sw-sm"><div class="wie-ic"><svg class="ic" aria-hidden="true"><use href="#i-event"/></svg></div>Evenementen</div>
     </div>
   </div>
 </section>
 
-<!-- ══ 8. LIFESTYLE-STATEMENT ══════════════════════════════════════════════ -->
-<!-- PLACEHOLDER-BEELD: "placeholder-lifestyle-feest.jpg" — vriendengroep rond een tafel
-     met Melingo-bingokaarten, iemand streept een vakje af, telefoon met playlist,
-     laptop met hostscherm, drankjes, warme avondverlichting. Zie .life-panel CSS. -->
-<section class="life" aria-label="Sfeerimpressie">
-  <div class="life-panel" data-placeholder="placeholder-lifestyle-feest.jpg">
-    <div class="life-grid" aria-hidden="true"></div>
-    <div class="life-inner">
-      <span class="label">Dit is hoe muziekbingo hoort te voelen</span>
-      <h2>Geen stille spelavond.</h2>
-      <p>De eerste seconden van een nummer, iemand die het direct herkent en de spanning wanneer er nog één vakje ontbreekt. Melingo maakt van luisteren een spel waar iedereen in meegaat.</p>
-      <div class="life-np" aria-hidden="true">
-        <span class="eq"><i></i><i></i><i></i><i></i></span>
-        Nu te horen: het nummer dat iedereen meezingt
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 9. WAAROM MELINGO ═══════════════════════════════════════════════════ -->
-<section class="voordelen">
-  <div class="wrap">
-    <div class="sec-hd">
-      <p class="label">Waarom Melingo</p>
-      <h2>Slim geregeld, fijn gespeeld.</h2>
-    </div>
-    <div class="voordelen-grid">
-      <div class="voordeel">
-        <div class="voordeel-ic"><svg class="ic" aria-hidden="true"><use href="#i-note"/></svg></div>
-        <div class="voordeel-body"><h3>Eigen muziek of compleet thema</h3><p>Maak de avond persoonlijk of kies voor direct gemak.</p></div>
-      </div>
-      <div class="voordeel">
-        <div class="voordeel-ic"><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg></div>
-        <div class="voordeel-body"><h3>Unieke kaart voor iedere speler</h3><p>Geen identieke kaarten en minder kans op meerdere gelijke bingo's.</p></div>
-      </div>
-      <div class="voordeel">
-        <div class="voordeel-ic"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
-        <div class="voordeel-body"><h3>Automatische bingocontrole</h3><p>Controleer een kaartnummer direct via het hostscherm.</p></div>
-      </div>
-      <div class="voordeel">
-        <div class="voordeel-ic"><svg class="ic" aria-hidden="true"><use href="#i-players"/></svg></div>
-        <div class="voordeel-body"><h3>Werkt voor kleine én grote groepen</h3><p>Van een avond thuis tot een evenement met maximaal 200 spelers.</p></div>
-      </div>
-      <div class="voordeel">
-        <div class="voordeel-ic"><svg class="ic" aria-hidden="true"><use href="#i-speed"/></svg></div>
-        <div class="voordeel-body"><h3>Geen handmatig knip- en plakwerk</h3><p>Melingo verdeelt de nummers en maakt de PDF-kaarten automatisch.</p></div>
-      </div>
-      <div class="voordeel">
-        <div class="voordeel-ic"><svg class="ic" aria-hidden="true"><use href="#i-host"/></svg></div>
-        <div class="voordeel-body"><h3>Eén duidelijke hostomgeving</h3><p>Begeleid het spel, zie gespeelde nummers en houd overzicht.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 10. PRODUCTBEWIJS ═══════════════════════════════════════════════════ -->
-<section class="bewijs">
-  <div class="wrap">
-    <div class="sec-hd">
-      <p class="label">Productbewijs</p>
-      <h2>Bekijk wat je krijgt.</h2>
-      <p>Geen beloftes maar het echte product: kaarten, hostscherm en bingocontrole.</p>
-    </div>
-    <div class="bewijs-grid">
-
-      <div class="bewijs-card">
-        <h3>Printklare bingokaarten</h3>
-        <p>Kleur voor het feest, eco om zuinig te printen — allebei inbegrepen.</p>
-        <div class="bewijs-stage" aria-hidden="true">
-          <div class="hw-card" style="width:120px"><div class="hw-card-hd">KLEUR</div><div class="hw-card-grid"><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc fr"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span></div></div>
-          <div class="hw-card eco" style="width:120px"><div class="hw-card-hd">ECO</div><div class="hw-card-grid"><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span><span class="hw-cc"></span><span class="hw-cc e"></span></div></div>
-        </div>
-      </div>
-
-      <div class="bewijs-card">
-        <h3>Het hostscherm</h3>
-        <p>Speel nummers af, zie de voortgang en houd het overzicht tijdens de avond.</p>
-        <div class="bewijs-stage" aria-hidden="true">
-          <div style="display:flex;flex-direction:column;gap:.6rem;width:100%;max-width:220px">
-            <div class="hw-vinyl" style="width:46px;height:46px;margin:0 auto"></div>
-            <div class="hw-track-t" style="font-size:.68rem">Take On Me</div>
-            <div class="hw-track-a" style="margin-bottom:0">a-ha &middot; 12 van 40</div>
-            <div class="hw-btnui" style="font-size:.58rem;padding:.45rem">Volgend nummer</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bewijs-card">
-        <h3>Automatische bingocontrole</h3>
-        <p>Kaartnummer invoeren en direct zien of de bingo geldig is. Geen discussie.</p>
-        <div class="bewijs-stage" aria-hidden="true">
-          <div style="display:flex;flex-direction:column;gap:.6rem;width:100%;max-width:240px">
-            <div class="hw-inp"><span class="hw-inp-f">Kaart 7</span><span class="hw-inp-b">Controleer</span></div>
-            <div class="hw-ok">BINGO! Kaart 7 wint met een volle rij.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="bewijs-trust">
-      <span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> Eenmalige betaling</span>
-      <span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> Geen abonnement</span>
-      <span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> Directe toegang na betaling</span>
-      <span><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg> Veilige betaling via Stripe</span>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 12. URGENTIE-BAND ═══════════════════════════════════════════════════ -->
-<section class="urgent">
-  <div class="wrap">
-    <div class="urgent-band">
-      <div>
-        <h2>Vanavond spelen?</h2>
-        <p>Geen tijd om zelf veertig nummers en kaarten te verdelen? Melingo doet het voorbereidende werk, zodat jij je met de avond kunt bezighouden.</p>
-      </div>
-      <a href="/app" class="btn btn-primary btn-lg">Maak mijn muziekbingo <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 11. PRIJZEN ═════════════════════════════════════════════════════════ -->
+<!-- ══ 7. PRIJZEN ══════════════════════════════════════════════════════════ -->
 <section class="pakketten" id="pakketten">
   <div class="wrap">
-    <div class="pakketten-intro">
+    <div class="sec-hd">
       <p class="label">Eerlijke prijzen</p>
       <h2>Kies het pakket dat bij je groep past.</h2>
       <p>Eenmalig betalen, direct spelen en geen abonnement.</p>
@@ -1243,16 +957,14 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
     </div>
 
     <div class="pakket-panel active" id="panel-spotify">
-      <div class="pakket-grid">
+      <div class="pakket-grid swipe">
         <div class="pakket-card">
           <div class="pakket-name">Klein gezelschap</div>
           <div class="pakket-players">t/m 25 spelers</div>
-          <div class="pakket-sep"></div>
-          <ul class="pakket-features">
+          <ul class="pakket-feats">
             <li>Eigen Spotify-playlist</li>
-            <li>Unieke bingokaarten (PDF)</li>
-            <li>Hostscherm inbegrepen</li>
-            <li>Automatische bingocontrole</li>
+            <li>Hostscherm + bingocontrole</li>
+            <li>Unieke PDF-kaarten</li>
           </ul>
           <div class="pakket-price">€14,95 <em>eenmalig</em></div>
           <a href="/app?mode=spotify&package=small" class="btn btn-ghost">Kies Klein gezelschap</a>
@@ -1261,12 +973,10 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
           <div class="pakket-badge">Meest gekozen</div>
           <div class="pakket-name">Feest</div>
           <div class="pakket-players">t/m 75 spelers</div>
-          <div class="pakket-sep"></div>
-          <ul class="pakket-features">
+          <ul class="pakket-feats">
             <li>Eigen Spotify-playlist</li>
-            <li>Unieke bingokaarten (PDF)</li>
-            <li>Hostscherm inbegrepen</li>
-            <li>Automatische bingocontrole</li>
+            <li>Hostscherm + bingocontrole</li>
+            <li>Unieke PDF-kaarten</li>
           </ul>
           <div class="pakket-price">€19,95 <em>eenmalig</em></div>
           <p class="pakket-pp">Bij 75 spelers minder dan €0,27 per speler.</p>
@@ -1275,12 +985,10 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
         <div class="pakket-card">
           <div class="pakket-name">Evenement</div>
           <div class="pakket-players">t/m 200 spelers</div>
-          <div class="pakket-sep"></div>
-          <ul class="pakket-features">
+          <ul class="pakket-feats">
             <li>Eigen Spotify-playlist</li>
-            <li>Unieke bingokaarten (PDF)</li>
-            <li>Hostscherm inbegrepen</li>
-            <li>Automatische bingocontrole</li>
+            <li>Hostscherm + bingocontrole</li>
+            <li>Unieke PDF-kaarten</li>
           </ul>
           <div class="pakket-price">€29,95 <em>eenmalig</em></div>
           <p class="pakket-pp">Bij 200 spelers minder dan €0,15 per speler.</p>
@@ -1290,17 +998,15 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
     </div>
 
     <div class="pakket-panel" id="panel-thema">
-      <div style="max-width:400px;margin:0 auto">
+      <div style="max-width:380px;margin:0 auto">
         <div class="pakket-card best-pakket">
-          <div class="pakket-badge">Snel starten</div>
+          <div class="pakket-badge">Snelste optie</div>
           <div class="pakket-name">Kant-en-klaar thema</div>
           <div class="pakket-players">t/m 20 spelers</div>
-          <div class="pakket-sep"></div>
-          <ul class="pakket-features">
-            <li>10 thema's beschikbaar</li>
-            <li>40 nummers per thema</li>
-            <li>Unieke bingokaarten (PDF)</li>
+          <ul class="pakket-feats">
+            <li>10 thema's · 40 nummers per thema</li>
             <li>Hostscherm + bingocontrole</li>
+            <li>Unieke PDF-kaarten</li>
           </ul>
           <div class="pakket-price">€9,95 <em>eenmalig</em></div>
           <a href="/app?mode=theme" class="btn btn-primary">Thema kiezen</a>
@@ -1309,15 +1015,13 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
     </div>
 
     <div class="pakket-panel" id="panel-kaarten">
-      <div class="pakket-grid">
+      <div class="pakket-grid swipe">
         <div class="pakket-card">
           <div class="pakket-name">Klein gezelschap</div>
           <div class="pakket-players">t/m 25 spelers</div>
-          <div class="pakket-sep"></div>
-          <ul class="pakket-features">
+          <ul class="pakket-feats">
             <li>Eigen nummers invoeren</li>
-            <li>Unieke bingokaarten (PDF)</li>
-            <li>Eco of kleur kaarten</li>
+            <li>Unieke PDF-kaarten, kleur of eco</li>
             <li>Geen Spotify nodig</li>
           </ul>
           <div class="pakket-price">€7,95 <em>eenmalig</em></div>
@@ -1327,11 +1031,9 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
           <div class="pakket-badge">Meest gekozen</div>
           <div class="pakket-name">Feest</div>
           <div class="pakket-players">t/m 75 spelers</div>
-          <div class="pakket-sep"></div>
-          <ul class="pakket-features">
+          <ul class="pakket-feats">
             <li>Eigen nummers invoeren</li>
-            <li>Unieke bingokaarten (PDF)</li>
-            <li>Eco of kleur kaarten</li>
+            <li>Unieke PDF-kaarten, kleur of eco</li>
             <li>Geen Spotify nodig</li>
           </ul>
           <div class="pakket-price">€12,95 <em>eenmalig</em></div>
@@ -1340,11 +1042,9 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
         <div class="pakket-card">
           <div class="pakket-name">Evenement</div>
           <div class="pakket-players">t/m 200 spelers</div>
-          <div class="pakket-sep"></div>
-          <ul class="pakket-features">
+          <ul class="pakket-feats">
             <li>Eigen nummers invoeren</li>
-            <li>Unieke bingokaarten (PDF)</li>
-            <li>Eco of kleur kaarten</li>
+            <li>Unieke PDF-kaarten, kleur of eco</li>
             <li>Geen Spotify nodig</li>
           </ul>
           <div class="pakket-price">€19,95 <em>eenmalig</em></div>
@@ -1356,7 +1056,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
   </div>
 </section>
 
-<!-- ══ 13. FAQ ═════════════════════════════════════════════════════════════ -->
+<!-- ══ 8. FAQ — 5 vragen ═══════════════════════════════════════════════════ -->
 <section class="faq-lp" id="faq-lp">
   <div class="wrap">
     <div class="sec-hd">
@@ -1364,64 +1064,26 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
       <h2>Veelgestelde vragen</h2>
     </div>
     <div class="faq-list">
-
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Heb ik Spotify Premium nodig?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Voor 'Eigen Spotify-bingo' en 'Kant-en-klaar thema' wel, omdat de muziek via Spotify wordt afgespeeld. Met 'Alleen bingokaarten' heb je geen Spotify nodig: je voert zelf nummers in en speelt de muziek zelf af.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Kan ik de kaarten zelf printen?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Ja. Melingo genereert een printklare PDF die je thuis of bij een printshop kunt afdrukken. Je kiest zelf voor kleur of een zuinige eco-uitvoering.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Hoeveel spelers kunnen meedoen?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Van 1 tot 200 spelers. Er zijn drie pakketgroottes: Klein gezelschap (t/m 25), Feest (t/m 75) en Evenement (t/m 200). Voor kant-en-klare thema's geldt een maximum van 20 spelers.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Wat krijg ik na betaling?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Direct toegang tot je muziekbingo: unieke bingokaarten als PDF-download en, afhankelijk van je speeloptie, het hostscherm met automatische bingocontrole.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Voor 'Eigen Spotify-bingo' en 'Kant-en-klaar thema' wel, omdat de muziek via Spotify wordt afgespeeld. Met 'Alleen bingokaarten' heb je geen Spotify nodig.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Krijg ik een abonnement?<span class="faq-icon" aria-hidden="true">+</span></button>
         <div class="faq-a"><div class="faq-a-inner">Nee. Je betaalt eenmalig per muziekbingo. Er loopt daarna niets door.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Kan ik mijn eigen nummers gebruiken?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Ja. Bij 'Eigen Spotify-bingo' gebruik je je eigen playlist. Bij 'Alleen bingokaarten' plak of typ je zelf een lijst nummers (minimaal 25).</div></div>
+        <button class="faq-q" aria-expanded="false">Hoeveel spelers kunnen meedoen?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Van 1 tot 200 spelers, in drie pakketgroottes: Klein gezelschap (t/m 25), Feest (t/m 75) en Evenement (t/m 200). Voor kant-en-klare thema's geldt een maximum van 20 spelers.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Zijn alle bingokaarten uniek?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Ja. Melingo verdeelt de nummers automatisch zodat iedere speler een andere kaart krijgt.</div></div>
+        <button class="faq-q" aria-expanded="false">Kan ik de kaarten zelf printen?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Ja. Melingo genereert een printklare PDF die je thuis of bij een printshop kunt afdrukken — in kleur of een zuinige eco-uitvoering.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Wat gebeurt er als iemand bingo roept?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Elke kaart heeft een uniek kaartnummer. Je voert dat nummer in op het hostscherm en Melingo laat direct zien of de bingo geldig is — inclusief welke rij of kolom wint.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Elke kaart heeft een uniek kaartnummer. Je voert dat nummer in op het hostscherm en Melingo laat direct zien of de bingo geldig is.</div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Kan ik alleen kaarten maken zonder Spotify?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Ja. Met de optie 'Alleen bingokaarten' maak je printbare kaarten van je eigen nummers, zonder Spotify-account. Jij speelt de muziek zelf af.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Kan ik een kant-en-klaar thema kiezen?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Ja, er zijn tien thema's — van 80s Classics en 90s Hits tot Nederlandstalig, Foute Muziek en Kerstmuziek. Elk thema bevat 40 zorgvuldig gekozen nummers.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Werkt het hostscherm op mobiel en tablet?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Ja, het hostscherm werkt in de browser op laptop, tablet en telefoon. Een laptop of tablet is tijdens het hosten het prettigst vanwege het overzicht.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Kan ik mijn bingo later opnieuw openen?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Ja. Melingo bewaart je sessie in de browser waarin je de bingo maakte: je ziet bij terugkomst een knop 'Verdergaan' en kunt sessies ook onder een eigen naam opslaan.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Hoe lang duurt een muziekbingo?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Dat bepaal je zelf. Met fragmenten van ongeveer 30 seconden duurt een ronde van 40 nummers zo'n 20 tot 30 minuten, afhankelijk van hoe vaak er bingo wordt geroepen.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Hoe werkt de betaling?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Je rekent eenmalig af via Stripe, een beveiligde betaalomgeving. Direct na de betaling kun je je kaarten downloaden en aan de slag.</div></div>
-      </div>
-
     </div>
     <div class="faq-meer">
       <a href="/faq" class="arrow-link">Alle vragen bekijken <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -1429,28 +1091,21 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
   </div>
 </section>
 
-<!-- ══ 14. EIND-CTA ════════════════════════════════════════════════════════ -->
+<!-- ══ 9. SLOT-CTA ═════════════════════════════════════════════════════════ -->
 <section class="einde">
   <div class="einde-grid" aria-hidden="true"></div>
-  <div class="einde-card l" aria-hidden="true">
-    <div class="hw-card"><div class="hw-card-hd">KAART 3</div><div class="hw-card-grid"><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc fr"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span></div></div>
-  </div>
-  <div class="einde-card r" aria-hidden="true">
-    <div class="hw-card"><div class="hw-card-hd">KAART 9</div><div class="hw-card-grid"><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc fr"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc m"></span><span class="hw-cc"></span><span class="hw-cc"></span><span class="hw-cc m"></span><span class="hw-cc"></span></div></div>
-  </div>
   <div class="wrap">
     <p class="label">Klaar om te spelen?</p>
-    <h2>Jij kiest de muziek.<br>Melingo regelt het spel.</h2>
-    <p>Maak unieke bingokaarten, open het hostscherm en verander je volgende avond in een spel waar iedereen aan mee kan doen.</p>
+    <h2>Maak vandaag nog jouw muziekbingo.</h2>
+    <p>Jij kiest de muziek. Melingo regelt de kaarten, het hostscherm en de bingocontrole.</p>
     <div class="einde-acts">
       <a href="/app" class="btn btn-primary btn-lg">Maak mijn muziekbingo <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      <a href="#zo-werkt-het" class="arrow-link">Bekijk eerst hoe het werkt</a>
-      <p class="micro" style="margin-top:0">Vanaf €7,95 · geen abonnement</p>
+      <p class="micro">Vanaf €7,95 · geen abonnement · direct toegang</p>
     </div>
   </div>
 </section>
 
-<!-- ══ 15. FOOTER ══════════════════════════════════════════════════════════ -->
+<!-- ══ FOOTER ══════════════════════════════════════════════════════════════ -->
 <footer>
   <div class="wrap">
     <div class="footer-grid">
@@ -1490,7 +1145,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
   </div>
 </footer>
 
-<!-- ══ JS — nav, FAQ, tabs, walkthrough (vanilla, geen libraries) ═══════════ -->
+<!-- ══ JS — nav, FAQ, tabs, demo, tijdlijn (vanilla, geen libraries) ════════ -->
 <script>
 (function(){
   'use strict';
@@ -1515,7 +1170,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
     });
   }
 
-  /* — FAQ accordion (aria-expanded) — */
+  /* — FAQ accordion — */
   document.querySelectorAll('.faq-q').forEach(function(btn){
     btn.addEventListener('click', function(){
       var item = btn.closest('.faq-item');
@@ -1528,7 +1183,106 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
     });
   });
 
-  /* — Zo werkt Melingo: walkthrough (10 stappen) —
+  /* — Pakket tabs — */
+  document.querySelectorAll('.pakket-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.pakket-tab').forEach(function(t){
+        t.classList.remove('active'); t.setAttribute('aria-selected','false');
+      });
+      document.querySelectorAll('.pakket-panel').forEach(function(p){ p.classList.remove('active'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      var panel = document.getElementById('panel-' + tab.dataset.panel);
+      if(panel) panel.classList.add('active');
+    });
+  });
+
+  /* — Productdemo: tabs + swipe in sync — */
+  (function(){
+    var track = document.getElementById('demoTrack');
+    if(!track) return;
+    var slides = track.querySelectorAll('.demo-slide');
+    var tabs = document.querySelectorAll('.demo-tab');
+    var dotsEl = document.getElementById('demoDots');
+    var dots = [];
+    slides.forEach(function(_, i){
+      var d = document.createElement('button');
+      d.className = 'demo-dot' + (i===0?' on':'');
+      d.setAttribute('aria-label','Demo '+(i+1));
+      d.addEventListener('click', function(){ goTo(i); });
+      dotsEl.appendChild(d); dots.push(d);
+    });
+    function setActive(i){
+      tabs.forEach(function(t, j){
+        t.classList.toggle('active', j===i);
+        t.setAttribute('aria-selected', j===i ? 'true' : 'false');
+      });
+      dots.forEach(function(d, j){ d.classList.toggle('on', j===i); });
+    }
+    function goTo(i){
+      track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+      setActive(i);
+    }
+    tabs.forEach(function(t, i){ t.addEventListener('click', function(){ goTo(i); }); });
+    var st;
+    track.addEventListener('scroll', function(){
+      clearTimeout(st);
+      st = setTimeout(function(){
+        var i = Math.round(track.scrollLeft / track.clientWidth);
+        setActive(Math.max(0, Math.min(slides.length-1, i)));
+      }, 80);
+    }, { passive: true });
+  })();
+
+  /* — Echte product-UI: kaart- en controle-grids vullen met echte songdata — */
+  (function(){
+    /* Kaart 1 exact zoals in de app (rijvolgorde, midden = VRIJ) */
+    var K1 = [
+      ['Heb Je Even Voor Mij','Frans Bauer'],['Laat De Zon In Je Hart','Rene Schuurmans'],['Links Rechts','Snollebollekes'],['Alle Kleuren','K3'],['Naar Voren, Naar Achter (Tu Tu Song)','De Alpenzusjes'],
+      ['Cotton Eye Joe','Rednex'],['Wonderful Days Reloaded','Charly Lownoise & Mental Theo'],['Have You Ever Been Mellow','Party Animals'],['Vrouwkes','Snollebollekes'],['No Limit','2 Unlimited'],
+      ['Met Romana op de scooter','Zanger Rinus'],['Oya Lélé','K3'],['Dragostea din tei','O-Zone'],['Sex Met Die Kale','Lawineboys'],
+      ['Axel F','Crazy Frog'],['Engelbewaarder','Marco Schuitmaker'],['Boten Anna','Gebroeders Ko'],['Country Roads','Hermes House Band'],['Mambo No. 5','Lou Bega'],
+      ['Ik Neem Je Mee','Gers Pardoel'],['Viben','K-Liber'],['Schudden','Def Rhymz'],['The Grease Megamix','John Travolta, Olivia Newton-John'],['Als De Morgen Is Gekomen','Jan Smit']
+    ];
+    var POOL = K1.concat([
+      ['Y.M.C.A.','Village People'],['Barbie Girl','Aqua'],['We Like To Party!','Vengaboys'],['Viva Hollandia','Wolter Kroes'],
+      ['Rasputin','Boney M.'],['Wasmasjien','Trafassi'],['Kabouterdans – Remix','Kabouter Plop'],['Leef','André Hazes Jr.'],
+      ['Macarena','Los Del Rio'],['Rainbow in the Sky','Paul Elstak'],['The Ketchup Song','Las Ketchup'],['Boom, Boom, Boom, Boom!!','Vengaboys'],
+      ['Everybody','Backstreet Boys'],['Que Si, Que No','Jody Bernal'],['Watskeburt?!','De Jeugd van Tegenwoordig'],['Boten Anna','Gebroeders Ko']
+    ]);
+    function seededPick(seed){
+      var list = POOL.slice(), out = [], s = seed * 9301 + 49297;
+      while(out.length < 24 && list.length){
+        s = (s * 233280 + 49297) % 2147483647;
+        out.push(list.splice(s % list.length, 1)[0]);
+      }
+      return out;
+    }
+    document.querySelectorAll('[data-rc]').forEach(function(el){
+      var seed = parseInt(el.dataset.rc, 10) || 1;
+      var songs = seed === 1 ? K1 : seededPick(seed);
+      var html = '', si = 0;
+      for(var i = 0; i < 25; i++){
+        if(i === 12){ html += '<div class="rc-cell rc-free"><span class="rc-vinyl"></span></div>'; continue; }
+        var s = songs[si++] || ['', ''];
+        var tint = ['', ' a', ' b'][(i * 7 + seed) % 3];
+        html += '<div class="rc-cell' + tint + '"><span class="rc-t">' + s[0] + '</span><span class="rc-a">' + s[1] + '</span></div>';
+      }
+      el.innerHTML = html;
+    });
+    /* Bingocontrole-grid: kolom B + middelste rij winnen (zoals in de app) */
+    document.querySelectorAll('[data-rk]').forEach(function(el){
+      var html = '', si = 0;
+      for(var i = 0; i < 25; i++){
+        if(i === 12){ html += '<div class="rk-cell vrij">VRIJ</div>'; continue; }
+        var s = K1[si++];
+        var win = (i % 5 === 0) || (i >= 10 && i <= 14);
+        html += '<div class="rk-cell' + (win ? ' win' : '') + '">' + s[0] + '</div>';
+      }
+      el.innerHTML = html;
+    });
+  })();
+
+  /* — Zo werkt het: geanimeerde walkthrough —
      Autoplay 5.5s; pauzeert bij hover, verborgen tab en buiten beeld
      (IntersectionObserver); handmatige interactie pauzeert autoplay tijdelijk;
      prefers-reduced-motion schakelt autoplay volledig uit. */
@@ -1545,7 +1299,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
       ['Kies hoe je wilt spelen','Ga voor je eigen Spotify-bingo, een kant-en-klaar thema of alleen printbare bingokaarten.'],
       ['Koppel Spotify of kies een thema','Verbind je account en kies een playlist, of start direct met een van de tien thema’s.'],
       ['Kies het aantal spelers','Geef aan met hoeveel mensen je speelt. Melingo toont meteen het pakket dat erbij past.'],
-      ['Bekijk de gegenereerde kaarten','Elke speler krijgt een unieke kaart. De nummers worden automatisch verdeeld.'],
+      ['Bekijk de gegenereerde kaarten','Elke speler krijgt een andere kaart. De nummers worden automatisch verdeeld.'],
       ['Kies kleur of eco','Een kleurige kaart voor het feest of een zuinige zwart-witversie om te printen.'],
       ['Download en print de kaarten','Eén printklare PDF met alle kaarten. Printen, uitdelen en klaar.'],
       ['Open het hostscherm','Het hostscherm is je controlekamer: muziek, voortgang en bingo op één plek.'],
@@ -1561,13 +1315,13 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
     for(var i=0;i<N;i++){
       (function(idx){
         var b = document.createElement('button');
-        b.className = 'hw-d' + (idx===0?' on':'');
+        b.className = 'demo-dot' + (idx===0?' on':'');
         b.setAttribute('aria-label','Stap '+(idx+1)+' van '+N);
         b.addEventListener('click', function(){ userGo(idx); });
         dotsEl.appendChild(b);
       })(i);
     }
-    var dots = dotsEl.querySelectorAll('.hw-d');
+    var dots = dotsEl.querySelectorAll('.demo-dot');
 
     function render(){
       slides.forEach(function(s,i){
@@ -1617,21 +1371,6 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3.25rem 0 2r
     } else { inView = true; start(); }
     render();
   })();
-
-  /* — Pakket tabs — */
-  document.querySelectorAll('.pakket-tab').forEach(function(tab){
-    tab.addEventListener('click', function(){
-      document.querySelectorAll('.pakket-tab').forEach(function(t){
-        t.classList.remove('active');
-        t.setAttribute('aria-selected','false');
-      });
-      document.querySelectorAll('.pakket-panel').forEach(function(p){ p.classList.remove('active'); });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected','true');
-      var panel = document.getElementById('panel-' + tab.dataset.panel);
-      if(panel) panel.classList.add('active');
-    });
-  });
 
 })();
 </script>

@@ -93,12 +93,8 @@ section{padding:4.5rem 0}
 /* hero-compositie rechts */
 .bhero-vis{position:relative;display:flex;justify-content:center;padding:1rem 0}
 .bhero-stack{position:relative;width:100%;max-width:380px}
-.bv-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.5);transform:rotate(-3deg)}
-.bv-card-hd{background:var(--grad);color:#fff;font-size:.62rem;font-weight:800;text-align:center;padding:.4rem}
-.bv-card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:8px}
-.bv-cc{aspect-ratio:1;background:#f0eef6;border-radius:3px}
-.bv-cc.m{background:rgba(155,109,255,.35)}
-.bv-cc.fr{background:linear-gradient(135deg,#F2406A,#9B6DFF)}
+.bv-card{transform:rotate(-3deg)}
+.bv-card .rc{font-size:6px}
 .bv-chip{position:absolute;display:flex;align-items:center;gap:.55rem;background:rgba(18,18,34,.97);border:1px solid var(--bd-m);border-radius:12px;padding:.55rem .85rem;box-shadow:0 12px 36px rgba(0,0,0,.5);animation:chipFloat 7s ease-in-out infinite}
 .bv-chip.tl{top:-1rem;left:-1.5rem}
 .bv-chip.br{bottom:-.75rem;right:-1.25rem;animation-delay:-3.5s}
@@ -113,6 +109,26 @@ section{padding:4.5rem 0}
 .eq i:nth-child(3){height:45%;animation-delay:.4s}.eq i:nth-child(4){height:80%;animation-delay:.1s}
 @keyframes eqB{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1)}}
 
+/* ── Echte Melingo-bingokaart (replica van de app-PDF, schaal via font-size) ── */
+.rc{--rc:#F2406A;--ca:#fdeaf1;--cb:#f1ecfe;--cc2:#fdf7ff;background:#fff;border:3px solid var(--rc);border-radius:14px;padding:.8em .85em .6em;width:100%;box-shadow:0 14px 44px rgba(0,0,0,.5);font-size:6px}
+.rc-purple{--rc:#9B6DFF}
+.rc-blue{--rc:#6AABF7}
+.rc-hd{display:flex;justify-content:space-between;align-items:flex-start}
+.rc-logo{font-weight:800;font-size:1.7em;line-height:1.1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.rc-tagline{font-size:.74em;font-style:italic;color:#a39cc0;margin-top:.1em}
+.rc-badge{background:var(--rc);color:#fff;font-size:.78em;font-weight:800;border-radius:99px;padding:.3em .9em;white-space:nowrap}
+.rc-bingo{display:grid;grid-template-columns:repeat(5,1fr);gap:.4em;margin:.7em 0 .4em}
+.rc-bingo span{background:var(--rc);color:#fff;text-align:center;font-weight:800;font-size:1.05em;border-radius:.5em;padding:.28em 0}
+.rc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.4em}
+.rc-cell{border-radius:.55em;min-height:5.6em;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.4em .3em;background:var(--cc2)}
+.rc-cell.a{background:var(--ca)}
+.rc-cell.b{background:var(--cb)}
+.rc-t{font-size:.74em;font-weight:800;color:#241d3a;line-height:1.18;word-break:break-word}
+.rc-a{font-size:.58em;font-style:italic;color:var(--rc);margin-top:.18em;line-height:1.1}
+.rc-free{background:#a78bfa!important}
+.rc-vinyl{width:3em;height:3em;border-radius:50%;background:radial-gradient(circle,#F2406A 0 16%,#fff 17% 26%,#171221 27% 100%)}
+.rc-ft{margin-top:.6em;text-align:center;font-size:.6em;font-style:italic;color:var(--rc);opacity:.85}
+
 /* ── Placeholder-covers (per categorie een eigen compositie) ──
    Vervangbaar: zet een <img> in .ph of een background-image; zie data-placeholder. */
 .ph{position:relative;overflow:hidden;border-radius:12px;min-height:100%;display:flex;align-items:center;justify-content:center}
@@ -123,9 +139,8 @@ section{padding:4.5rem 0}
 .ph-business{background:linear-gradient(150deg,#101a2e,#100f1e)}
 .ph-season{background:linear-gradient(150deg,#27130f,#15101e)}
 .ph-inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:.9rem;padding:1.4rem}
-.ph-mini{width:92px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.45);transform:rotate(-3deg)}
-.ph-mini .bv-card-hd{font-size:.46rem;padding:.22rem}
-.ph-mini .bv-card-grid{gap:2px;padding:4px}
+.ph-mini{width:116px;transform:rotate(-3deg)}
+.ph-mini .rc{font-size:3px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .ph-tracks{display:flex;flex-direction:column;gap:.45rem;min-width:130px}
 .ph-track{display:flex;align-items:center;gap:.5rem;background:rgba(18,18,34,.9);border:1px solid var(--bd);border-radius:9px;padding:.4rem .6rem}
 .ph-art{width:18px;height:18px;border-radius:4px;background:var(--grad);flex-shrink:0}
