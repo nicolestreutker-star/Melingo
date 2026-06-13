@@ -195,40 +195,57 @@ section{padding:4.5rem 0}
 /* ═══════════════════════════════════════════════════════════════════════════
    MELINGO IN ACTIE — social proof grid (placeholders voor echte foto's)
 ═══════════════════════════════════════════════════════════════════════════ */
-.actie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-@media(max-width:768px){.actie-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}}
+.actie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+@media(max-width:860px){.actie-grid{grid-template-columns:repeat(2,1fr);gap:.8rem}}
+@media(max-width:560px){.actie-grid{grid-template-columns:1fr}}
 .actie-tile{
-  position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;
-  border:1px solid var(--bd);background:var(--sf2);
-  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+  position:relative;display:flex;flex-direction:column;isolation:isolate;
+  border-radius:18px;overflow:hidden;text-decoration:none;
+  border:1px solid var(--bd);
+  background:linear-gradient(180deg,#17172b,#101020);
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease,box-shadow .3s ease;
 }
 .actie-tile:hover{
-  transform:translateY(-3px);
-  border-color:rgba(155,109,255,.45);
-  box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 28px rgba(155,109,255,.14);
+  transform:translateY(-6px);
+  border-color:var(--acc);
+  box-shadow:0 22px 52px rgba(0,0,0,.5),0 0 38px var(--g);
 }
-.actie-tile:focus-visible{outline:2.5px solid var(--secondary);outline-offset:3px}
-/* placeholder-vlak — vervang door <img loading="lazy" width="800" height="600"> */
-.actie-ph{
-  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;
-  transition:transform .35s ease;
+.actie-tile:focus-visible{outline:2.5px solid var(--acc);outline-offset:3px}
+/* illustratie-zone — een feestelijke mini-scene per gelegenheid */
+.actie-scene{
+  position:relative;aspect-ratio:16/10;overflow:hidden;color:var(--acc);
+  background:
+    radial-gradient(85% 70% at 50% 6%, var(--g), transparent 62%),
+    radial-gradient(55% 45% at 84% 98%, var(--g), transparent 70%),
+    linear-gradient(165deg,#1b1331,#0f0f1d);
 }
-.actie-tile:hover .actie-ph{transform:scale(1.05)}
-.actie-ph::before{content:'';position:absolute;inset:0;opacity:.05;background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);background-size:28px 28px}
-.actie-ph.v1{background:linear-gradient(150deg,#221331,#131020)}
-.actie-ph.v2{background:linear-gradient(150deg,#2a1126,#140e1e)}
-.actie-ph.v3{background:linear-gradient(150deg,#101a2e,#100f1e)}
-.actie-ic{
-  width:42px;height:42px;border-radius:12px;position:relative;z-index:1;
-  background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.2);
-  display:flex;align-items:center;justify-content:center;color:var(--secondary);
-}
-.actie-ic .ic{width:20px;height:20px}
-.actie-lbl{position:relative;z-index:1;font-size:.74rem;font-weight:700;color:var(--mt)}
-@media(max-width:768px){
-  .actie-ic{width:34px;height:34px}
-  .actie-ic .ic{width:16px;height:16px}
-  .actie-lbl{font-size:.66rem}
+.actie-scene::before{content:'';position:absolute;inset:0;z-index:1;opacity:.06;
+  background-image:linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);
+  background-size:24px 24px}
+/* equalizer-baseline als terugkerend muziekmotief */
+.actie-scene::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34%;z-index:1;opacity:.55;
+  background:linear-gradient(transparent,var(--g));
+  -webkit-mask:repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 11px);
+  mask:repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 11px)}
+.actie-num{position:absolute;top:.8rem;left:.85rem;z-index:3;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;letter-spacing:.04em;color:var(--acc);font-variant-numeric:tabular-nums;border:1px solid var(--acc);background:rgba(13,13,24,.5);backdrop-filter:blur(4px)}
+.actie-illu{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.actie-illu svg{width:86%;height:86%;overflow:visible}
+.actie-tile:hover .actie-illu{transform:scale(1.07)}
+/* echte foto's (zodra aangeleverd in /actie/) vervangen de SVG-fallback */
+.actie-illu.has-photo{background-position:center;background-size:cover;background-repeat:no-repeat}
+.actie-illu.has-photo svg{display:none}
+/* tekst */
+.actie-body{position:relative;z-index:2;padding:1rem 1.1rem 1.15rem;display:flex;flex-direction:column;gap:.32rem;flex:1}
+.actie-body h3{font-size:1.05rem;font-weight:800;color:#fff;letter-spacing:-.01em}
+.actie-body p{font-size:.8rem;line-height:1.5;color:var(--mt)}
+.actie-cta{margin-top:auto;padding-top:.65rem;display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700;color:var(--acc);transition:gap .25s ease}
+.actie-tile:hover .actie-cta{gap:.65rem}
+.actie-cta .ic{width:15px;height:15px;transition:transform .25s ease;stroke:var(--acc)}
+.actie-tile:hover .actie-cta .ic{transform:translateX(3px)}
+@media(max-width:860px){
+  .actie-body{padding:.85rem .9rem 1rem}
+  .actie-body h3{font-size:.95rem}
+  .actie-body p{font-size:.75rem}
 }
 .mock-card-hd{background:var(--grad);color:#fff;font-size:.52rem;font-weight:800;text-align:center;padding:.26rem}
 .mock-card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:5px}
@@ -889,7 +906,7 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
   </div>
 </section>
 
-<!-- ══ MELINGO IN ACTIE — social proof (placeholders voor echte foto's) ═════ -->
+<!-- ══ MELINGO IN ACTIE — feestelijke illustratiekaarten per gelegenheid ════ -->
 <section class="actie">
   <div class="wrap">
     <div class="sec-hd">
@@ -898,18 +915,201 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
       <p>Van woonkamer tot volle feestzaal.</p>
     </div>
     <div class="actie-grid">
-      <!-- Vervang per tegel de .actie-ph door:
-           <img src="/actie/<naam>.jpg" alt="..." loading="lazy" width="800" height="600"
-                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"> -->
-      <div class="actie-tile" data-placeholder="actie-verjaardag.jpg"><div class="actie-ph v1"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-cake"/></svg></span><span class="actie-lbl">Verjaardag</span></div></div>
-      <div class="actie-tile" data-placeholder="actie-vriendenavond.jpg"><div class="actie-ph v2"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-friends"/></svg></span><span class="actie-lbl">Vriendenavond</span></div></div>
-      <div class="actie-tile" data-placeholder="actie-teamuitje.jpg"><div class="actie-ph v3"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-team"/></svg></span><span class="actie-lbl">Teamuitje</span></div></div>
-      <div class="actie-tile" data-placeholder="actie-bruiloft.jpg"><div class="actie-ph v2"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-rings"/></svg></span><span class="actie-lbl">Bruiloft</span></div></div>
-      <div class="actie-tile" data-placeholder="actie-familiefeest.jpg"><div class="actie-ph v3"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-players"/></svg></span><span class="actie-lbl">Familiefeest</span></div></div>
-      <div class="actie-tile" data-placeholder="actie-horeca.jpg"><div class="actie-ph v1"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-glass"/></svg></span><span class="actie-lbl">Horeca</span></div></div>
-      <div class="actie-tile" data-placeholder="actie-bedrijfsfeest.jpg"><div class="actie-ph v3"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-host"/></svg></span><span class="actie-lbl">Bedrijfsfeest</span></div></div>
-      <div class="actie-tile" data-placeholder="actie-kerstborrel.jpg"><div class="actie-ph v1"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-note"/></svg></span><span class="actie-lbl">Kerstborrel</span></div></div>
-      <div class="actie-tile" data-placeholder="actie-evenement.jpg"><div class="actie-ph v2"><span class="actie-ic"><svg class="ic" aria-hidden="true"><use href="#i-event"/></svg></span><span class="actie-lbl">Evenement</span></div></div>
+
+      <!-- 1. Verjaardag -->
+      <a href="/app" class="actie-tile" style="--acc:#F2406A;--acc2:#9B6DFF;--g:rgba(242,64,106,.16)">
+        <div class="actie-scene">
+          <span class="actie-num">01</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <circle cx="34" cy="30" r="13" style="fill:var(--acc2);opacity:.9"/><circle cx="58" cy="22" r="9" fill="currentColor"/>
+            <path d="M34 43c-2 6 4 7 0 13M58 31c-2 5 3 6 0 11" stroke="#fff" stroke-width="1" opacity=".4"/>
+            <rect x="150" y="18" width="6" height="6" rx="1.5" style="fill:#FFC857"/><circle cx="172" cy="38" r="3.5" fill="currentColor"/><circle cx="140" cy="44" r="2.5" style="fill:#FFC857"/><rect x="124" y="12" width="5" height="5" rx="1.5" style="fill:var(--acc2)"/>
+            <g transform="translate(74,42)">
+              <path d="M16 8v12M28 4v16M40 8v12" stroke="#fff" stroke-width="2.2" opacity=".75"/>
+              <ellipse cx="16" cy="6" rx="2.6" ry="4" style="fill:#FFC857"/><ellipse cx="28" cy="2" rx="2.6" ry="4" style="fill:#FFC857"/><ellipse cx="40" cy="6" rx="2.6" ry="4" style="fill:#FFC857"/>
+              <path d="M4 22h48v15a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z" fill="currentColor"/>
+              <path d="M-6 42h72v22a6 6 0 0 1-6 6H0a6 6 0 0 1-6-6Z" style="fill:var(--acc2);opacity:.9"/>
+              <path d="M-6 48c8 5 14-2 20 2s14-2 20 2 14-2 20 2 12-1 18 1" stroke="#fff" stroke-width="1.3" opacity=".35"/>
+            </g>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Verjaardag</h3>
+          <p>Vier het leven, zing mee en scoor!</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 2. Vriendenavond -->
+      <a href="/app" class="actie-tile" style="--acc:#9B6DFF;--acc2:#F2406A;--g:rgba(155,109,255,.16)">
+        <div class="actie-scene">
+          <span class="actie-num">02</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <g style="fill:var(--acc2)"><circle cx="150" cy="34" r="5"/><rect x="153.5" y="14" width="2.4" height="22"/></g><circle cx="172" cy="26" r="3.5" fill="currentColor"/>
+            <rect x="18" y="40" width="22" height="48" rx="4" fill="currentColor" opacity=".85"/>
+            <circle cx="29" cy="58" r="6.5" style="fill:#0f0f1d;stroke:#fff;stroke-width:1;opacity:.6"/><circle cx="29" cy="76" r="4" style="fill:#0f0f1d;stroke:#fff;stroke-width:1;opacity:.5"/>
+            <g transform="translate(58,50)">
+              <path d="M0 18a8 8 0 0 1 8-8h62a8 8 0 0 1 8 8v18H0Z" style="fill:var(--acc2);opacity:.9"/>
+              <path d="M-4 30h86v8a4 4 0 0 1-4 4H0a4 4 0 0 1-4-4Z" fill="currentColor"/>
+              <path d="M6 36v8M72 36v8" stroke="#0f0f1d" stroke-width="3" opacity=".5"/>
+              <rect x="14" y="16" width="22" height="16" rx="4" style="fill:#fff;opacity:.18"/><rect x="44" y="16" width="22" height="16" rx="4" style="fill:#fff;opacity:.12"/>
+            </g>
+            <g stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M150 72 162 72 156 90Z" style="fill:var(--g)"/><path d="M156 90v8"/></g>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Vriendenavond</h3>
+          <p>Jouw hits, jouw mensen, topavond.</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 3. Teamuitje -->
+      <a href="/app" class="actie-tile" style="--acc:#6AABF7;--acc2:#9B6DFF;--g:rgba(106,171,247,.16)">
+        <div class="actie-scene">
+          <span class="actie-num">03</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <path d="M44 0 22 84h44Z" style="fill:var(--g)"/><path d="M156 0 134 84h44Z" style="fill:var(--g)"/>
+            <g fill="currentColor"><circle cx="72" cy="46" r="11"/><path d="M54 96c0-12 8-20 18-20s18 8 18 20Z"/></g>
+            <g style="fill:var(--acc2)"><circle cx="120" cy="42" r="11"/><path d="M102 96c0-13 8-22 18-22s18 9 18 22Z"/></g>
+            <path d="M84 62l12-12M108 58l-12-8" stroke="#fff" stroke-width="3" opacity=".8"/>
+            <g style="stroke:#FFC857" stroke-width="2" stroke-linecap="round"><path d="M97 40v-9M97 40 89 33M97 40l8-7"/></g>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Teamuitje</h3>
+          <p>Samen lachen, samen winnen.</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 4. Bruiloft -->
+      <a href="/app" class="actie-tile" style="--acc:#FFC857;--acc2:#F2406A;--g:rgba(255,200,87,.14)">
+        <div class="actie-scene">
+          <span class="actie-num">04</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <path d="M6 14C50 40 150 40 194 14" stroke="#fff" stroke-width="1" opacity=".3"/>
+            <circle cx="40" cy="30" r="3" style="fill:#FFC857"/><circle cx="80" cy="38" r="3" style="fill:var(--acc2)"/><circle cx="120" cy="38" r="3" style="fill:#FFC857"/><circle cx="160" cy="30" r="3" style="fill:var(--acc2)"/>
+            <circle cx="150" cy="80" r="13" style="stroke:#FFC857" stroke-width="3"/><circle cx="166" cy="86" r="13" style="stroke:var(--acc2)" stroke-width="3"/>
+            <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <path d="M58 50 70 50 64 72Z" style="fill:var(--g)"/><path d="M64 72v12M58 84h12"/>
+              <path d="M86 50 98 50 92 72Z" style="fill:var(--g)"/><path d="M92 72v12M86 84h12"/>
+            </g>
+            <g style="fill:#FFC857"><circle cx="64" cy="42" r="1.6"/><circle cx="70" cy="36" r="1.4"/><circle cx="92" cy="42" r="1.6"/><circle cx="86" cy="36" r="1.4"/></g>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Bruiloft</h3>
+          <p>Love, music &amp; unforgettable moments.</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 5. Familiefeest -->
+      <a href="/app" class="actie-tile" style="--acc:#FF8A5B;--acc2:#F2406A;--g:rgba(255,138,91,.15)">
+        <div class="actie-scene">
+          <span class="actie-num">05</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <path d="M6 16C60 36 140 36 194 16" stroke="#fff" stroke-width="1" opacity=".3"/>
+            <circle cx="46" cy="30" r="3.2" style="fill:#FFC857"/><circle cx="100" cy="36" r="3.2" fill="currentColor"/><circle cx="154" cy="30" r="3.2" style="fill:#FFC857"/>
+            <g fill="currentColor"><circle cx="48" cy="56" r="10"/><path d="M34 98c0-11 6-20 14-20s14 9 14 20Z"/></g>
+            <g style="fill:var(--acc2)"><circle cx="100" cy="50" r="12"/><path d="M82 98c0-13 8-22 18-22s18 9 18 22Z"/></g>
+            <g fill="currentColor" opacity=".9"><circle cx="150" cy="62" r="8"/><path d="M139 98c0-9 5-15 11-15s11 6 11 15Z"/></g>
+            <g style="fill:#FFC857;opacity:.95"><circle cx="126" cy="76" r="6"/><path d="M118 98c0-7 4-12 8-12s8 5 8 12Z"/></g>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Familiefeest</h3>
+          <p>Generaties samen, één groot feest.</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 6. Horeca -->
+      <a href="/app" class="actie-tile" style="--acc:#2DD4BF;--acc2:#6AABF7;--g:rgba(45,212,191,.15)">
+        <div class="actie-scene">
+          <span class="actie-num">06</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <rect x="58" y="12" width="84" height="34" rx="7" style="fill:var(--g);stroke:var(--acc)" stroke-width="2"/>
+            <text x="100" y="36" text-anchor="middle" style="fill:var(--acc);font:800 22px 'Plus Jakarta Sans',sans-serif;letter-spacing:4px">BAR</text>
+            <g style="stroke:#fff;opacity:.3" stroke-width="1"><path d="M34 0v14M166 0v14"/></g><circle cx="34" cy="16" r="3" style="fill:#FFC857"/><circle cx="166" cy="16" r="3" style="fill:#FFC857"/>
+            <g stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M72 62 108 62 90 82Z" style="fill:var(--g)"/><path d="M90 82v18M78 100h24"/><path d="M98 58 104 50" style="stroke:var(--acc2)"/>
+            </g>
+            <circle cx="84" cy="70" r="2.6" style="fill:#FFC857"/>
+            <g style="fill:var(--acc2)"><circle cx="126" cy="70" r="2"/><circle cx="132" cy="80" r="2.6"/><circle cx="122" cy="88" r="1.6"/></g>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Horeca</h3>
+          <p>Meer beleving, meer sfeer, meer gasten.</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 7. Bedrijfsfeest -->
+      <a href="/app" class="actie-tile" style="--acc:#9B6DFF;--acc2:#6AABF7;--g:rgba(155,109,255,.16)">
+        <div class="actie-scene">
+          <span class="actie-num">07</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <rect x="40" y="14" width="6" height="6" rx="1.5" style="fill:var(--acc2)"/><rect x="150" y="18" width="5" height="5" rx="1.5" style="fill:#FFC857"/><circle cx="70" cy="12" r="3" fill="currentColor"/><circle cx="128" cy="14" r="2.6" style="fill:#FFC857"/>
+            <g stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="92" y="22" width="16" height="30" rx="8" style="fill:var(--g)"/><path d="M84 46a16 16 0 0 0 32 0M100 62v10M90 78h20"/></g>
+            <g style="stroke:#fff;opacity:.35" stroke-width="1"><path d="M96 30h8M96 36h8M96 42h8"/></g>
+            <path d="M16 102h168" stroke="#fff" stroke-width="1" opacity=".25"/>
+            <g fill="currentColor" opacity=".8"><circle cx="40" cy="92" r="6"/><circle cx="60" cy="94" r="6"/><circle cx="140" cy="94" r="6"/><circle cx="160" cy="92" r="6"/></g>
+            <path d="M30 102c0-7 5-11 10-11s10 4 10 11M50 102c0-7 5-11 10-11s10 4 10 11M130 102c0-7 5-11 10-11s10 4 10 11M150 102c0-7 5-11 10-11s10 4 10 11" style="fill:var(--acc2);opacity:.7"/>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Bedrijfsfeest</h3>
+          <p>Bedank, verbind en vier successen.</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 8. Kerstborrel -->
+      <a href="/app?mode=theme&theme=kerstmuziek" class="actie-tile" style="--acc:#1DB954;--acc2:#FFC857;--g:rgba(29,185,84,.15)">
+        <div class="actie-scene">
+          <span class="actie-num">08</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <g style="fill:#fff;opacity:.5"><circle cx="40" cy="24" r="1.6"/><circle cx="165" cy="30" r="1.6"/><circle cx="150" cy="16" r="1.3"/><circle cx="55" cy="42" r="1.3"/></g>
+            <g style="fill:var(--acc2)"><circle cx="158" cy="66" r="5"/><rect x="161.5" y="48" width="2.2" height="20"/></g>
+            <g transform="translate(100,18)">
+              <path d="M0 0-22 32h44Z" style="fill:var(--acc);opacity:.92"/><path d="M0 20-28 56h56Z" style="fill:var(--acc);opacity:.92"/><path d="M0 42-34 82h68Z" style="fill:var(--acc);opacity:.92"/>
+              <rect x="-5" y="80" width="10" height="12" style="fill:#7a4a25"/>
+              <path d="M0-12c1 6 3 8 8 9-5 1-7 3-8 9-1-6-3-8-8-9 5-1 7-3 8-9Z" style="fill:#FFC857"/>
+              <circle cx="-8" cy="28" r="2.6" style="fill:#FFC857"/><circle cx="10" cy="38" r="2.6" style="fill:#fff;opacity:.85"/><circle cx="-12" cy="58" r="2.6" style="fill:#FFC857"/><circle cx="12" cy="66" r="2.6" style="fill:#fff;opacity:.85"/><circle cx="0" cy="50" r="2.6" style="fill:var(--acc2)"/>
+            </g>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Kerstborrel</h3>
+          <p>Foute kersttruien, goede vibes.</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 9. Evenement -->
+      <a href="/app" class="actie-tile" style="--acc:#F2406A;--acc2:#9B6DFF;--g:rgba(242,64,106,.18)">
+        <div class="actie-scene">
+          <span class="actie-num">09</span>
+          <div class="actie-illu"><svg viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <path d="M60 8 20 72h18Z" style="fill:var(--g)"/><path d="M100 4 86 72h28Z" style="fill:var(--g)"/><path d="M140 8 180 72h-18Z" style="fill:var(--g)"/>
+            <path d="M24 18h152M30 18v52M170 18v52" style="stroke:currentColor" stroke-width="2.4"/>
+            <g style="fill:var(--acc2)"><circle cx="50" cy="18" r="3"/><circle cx="100" cy="18" r="3"/><circle cx="150" cy="18" r="3"/></g>
+            <rect x="80" y="50" width="40" height="20" rx="3" style="fill:var(--g);stroke:currentColor" stroke-width="2"/><path d="M88 60h24" style="stroke:var(--acc)" stroke-width="2"/>
+            <g style="stroke:#fff;opacity:.6" stroke-width="2" stroke-linecap="round"><path d="M30 104v-12M38 104v-14M30 92l-5-8M30 92l6-7M38 90l-5-9M38 90l6-8"/><path d="M162 104v-12M170 104v-14M162 92l-5-8M162 92l6-7M170 90l-5-9M170 90l6-8"/></g>
+            <g fill="currentColor" opacity=".85"><circle cx="60" cy="96" r="6"/><circle cx="100" cy="98" r="6"/><circle cx="140" cy="96" r="6"/></g>
+            <path d="M50 110c0-7 4-12 10-12s10 5 10 12M90 110c0-7 4-12 10-12s10 5 10 12M130 110c0-7 4-12 10-12s10 5 10 12" style="fill:var(--acc2);opacity:.7"/>
+          </svg></div>
+        </div>
+        <div class="actie-body">
+          <h3>Evenement</h3>
+          <p>Grootse beleving, onvergetelijke impact.</p>
+          <span class="actie-cta">Bekijk thema <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -1479,6 +1679,26 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
         html += '<div class="rk-cell' + (win ? ' win' : '') + '">' + s[0] + '</div>';
       }
       el.innerHTML = html;
+    });
+  })();
+
+  /* — Melingo in actie: echte foto's laden zodra ze in /actie/ staan —
+     Probeert webp/jpg/jpeg/png; tot die tijd blijft de SVG-illustratie zichtbaar
+     (nooit een kapotte afbeelding). Bestandsnamen = de slug per kaart. */
+  (function(){
+    var SLUGS = ['verjaardag','vriendenavond','teamuitje','bruiloft','familiefeest','horeca','bedrijfsfeest','kerstborrel','evenement'];
+    var EXTS = ['.webp','.jpg','.jpeg','.png'];
+    document.querySelectorAll('.actie-illu').forEach(function(el, idx){
+      var slug = SLUGS[idx]; if(!slug) return;
+      var i = 0;
+      (function tryNext(){
+        if(i >= EXTS.length) return;
+        var src = '/actie/' + slug + EXTS[i];
+        var img = new Image();
+        img.onload = function(){ el.style.backgroundImage = 'url("' + src + '")'; el.classList.add('has-photo'); };
+        img.onerror = function(){ i++; tryNext(); };
+        img.src = src;
+      })();
     });
   })();
 
