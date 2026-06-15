@@ -585,6 +585,93 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
 .footer-bottom{border-top:1px solid var(--bd);padding-top:1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .footer-copy{font-size:.72rem;color:var(--mt2)}
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   LICHT FEEST-THEMA — overschrijflaag (wint van eerdere regels)
+   Apparaat-mockups (hostscherm/walkthrough) houden hun donkere tokens via scope.
+═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#FFFFFF;--sf1:#F8F7FC;--sf2:#FFFFFF;--sf3:#FFF8FB;
+  --bd:rgba(139,92,246,.15);--bd-m:rgba(139,92,246,.28);
+  --tx:#111827;--mt:#6B7280;--mt2:rgba(107,114,128,.7);
+}
+/* donkere apparaat-mockups: lokale dark tokens zodat interne tekst leesbaar blijft */
+.mock-host,.hw-frame{
+  --sf1:#121222;--sf2:#18182A;--sf3:#1E1E35;
+  --bd:rgba(255,255,255,.08);--bd-m:rgba(255,255,255,.14);
+  --tx:#F0EEF8;--mt:rgba(240,238,248,.66);--mt2:rgba(240,238,248,.34);
+}
+body{background:#fff;color:var(--tx)}
+/* feestlaag ligt achter de content */
+section,footer{position:relative;z-index:1}
+
+/* navigatie: lichte glas-balk */
+.nav{background:rgba(255,255,255,.82);border-bottom:1px solid var(--bd)}
+@media(max-width:768px){.nav-links{background:rgba(255,255,255,.97)}}
+
+/* witte kaarten: zachte paarse schaduw + roze/paarse hover-glow */
+.modi-card,.usp,.pakket-card,.wie-card,.faq-item,.demo-panel,.mcar-slide{box-shadow:0 16px 44px rgba(139,92,246,.08)}
+.modi-card:hover,.usp:hover,.pakket-card:hover,.wie-card:hover{box-shadow:0 22px 60px rgba(155,109,255,.16),0 0 30px rgba(242,64,106,.08)}
+.faq-item:hover{background:#FFF8FB}
+
+/* knoppen op licht */
+.btn-ghost{background:#fff;border:1.5px solid var(--bd-m);color:var(--tx)}
+.btn-ghost:hover{background:rgba(155,109,255,.06);border-color:rgba(155,109,255,.5)}
+.btn-primary:hover{transform:translateY(-2px) scale(1.01)}
+
+/* chips, tags, tabs, dots, nav-knoppen op licht */
+.chip{background:rgba(155,109,255,.06);border:1px solid var(--bd);color:var(--mt)}
+.modi-tag.eco{background:rgba(17,24,39,.05);color:var(--mt);border:1px solid var(--bd)}
+.demo-tab.active,.pakket-tab.active{background:rgba(155,109,255,.1);border-color:rgba(155,109,255,.35);color:var(--tx)}
+.demo-dot{background:rgba(17,24,39,.16)}
+.tl-btn{background:#fff;border:1.5px solid var(--bd-m);color:var(--tx);box-shadow:0 6px 18px rgba(139,92,246,.1)}
+.tl-btn:hover{background:rgba(155,109,255,.06);border-color:rgba(155,109,255,.5)}
+
+/* slot-CTA transparant zodat de feestlaag doorschijnt */
+.einde{background:transparent}
+.einde-grid{opacity:.5;background-image:linear-gradient(rgba(155,109,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(155,109,255,.1) 1px,transparent 1px)}
+
+/* ── Vaste feestlaag (CSS + SVG, geen afbeeldingen) ── */
+.party{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.party-glow{position:absolute;border-radius:50%;filter:blur(72px);will-change:transform}
+.pg1{width:520px;height:520px;left:-120px;top:-80px;background:radial-gradient(circle,rgba(255,77,141,.18),transparent 70%);animation:drift1 46s ease-in-out infinite}
+.pg2{width:560px;height:560px;right:-150px;top:120px;background:radial-gradient(circle,rgba(139,92,246,.16),transparent 70%);animation:drift2 54s ease-in-out infinite}
+.pg3{width:480px;height:480px;left:18%;bottom:-170px;background:radial-gradient(circle,rgba(56,189,248,.12),transparent 70%);animation:drift3 60s ease-in-out infinite}
+.pg4{width:360px;height:360px;right:22%;top:46%;background:radial-gradient(circle,rgba(255,184,77,.1),transparent 70%);animation:drift1 50s ease-in-out infinite reverse}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(55px,38px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-48px,30px)}}
+@keyframes drift3{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-40px)}}
+.party-bunting{position:absolute;top:52px;left:0;width:100%;height:auto;opacity:.55}
+.party-light{animation:lightPulse 3s ease-in-out infinite}
+.party-light:nth-child(2n){animation-delay:.9s}
+.party-light:nth-child(3n){animation-delay:.5s}
+@keyframes lightPulse{0%,100%{opacity:.45}50%{opacity:1}}
+.party-disco{position:absolute;top:68px;right:6%;width:78px;height:78px;border-radius:50%;opacity:.26;
+  background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.9),transparent 42%),conic-gradient(from 0deg,#ff4d8d,#9b6df6,#38bdf8,#ffd166,#ff4d8d);
+  box-shadow:0 0 42px rgba(155,109,255,.35);animation:discoShimmer 7s linear infinite}
+.party-disco::after{content:'';position:absolute;inset:0;border-radius:50%;mix-blend-mode:overlay;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0 7px,transparent 7px 14px),repeating-linear-gradient(90deg,rgba(0,0,0,.12) 0 7px,transparent 7px 14px)}
+@keyframes discoShimmer{to{filter:hue-rotate(360deg)}}
+.pnote{position:absolute;opacity:.1;animation:noteFloat 12s ease-in-out infinite}
+.pnote svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.6}
+.pn1{width:34px;height:34px;left:8%;top:30%;color:#ff4d8d;animation-duration:13s}
+.pn2{width:26px;height:26px;left:43%;top:17%;color:#9b6df6;animation-duration:15s;animation-delay:-3s}
+.pn3{width:30px;height:30px;right:13%;top:40%;color:#38bdf8;animation-duration:11s;animation-delay:-6s}
+.pn4{width:22px;height:22px;left:24%;bottom:16%;color:#ffb84d;animation-duration:14s;animation-delay:-2s}
+@keyframes noteFloat{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-22px) rotate(6deg)}}
+.pconf{position:absolute;width:10px;height:10px;border-radius:3px;opacity:.45;animation:confFloat 15s ease-in-out infinite}
+.pc1{left:16%;top:24%;background:#ff4d8d;animation-delay:-1s}
+.pc2{left:62%;top:30%;background:#9b6df6;border-radius:50%;animation-delay:-5s}
+.pc3{left:80%;top:15%;background:#ffd166;animation-delay:-3s}
+.pc4{left:34%;top:58%;background:#38bdf8;border-radius:50%;animation-delay:-7s}
+.pc5{left:72%;top:62%;background:#ff4d8d;animation-delay:-2s}
+.pc6{left:50%;bottom:12%;background:#9b6df6;border-radius:50%;animation-delay:-9s}
+@keyframes confFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-26px) rotate(120deg)}}
+@media(max-width:768px){
+  .party-glow{filter:blur(56px)}
+  .pg4,.pnote,.pc3,.pc5{display:none}
+  .party-disco{width:52px;height:52px;top:74px;animation:none}
+}
+
 /* ── Reduced motion ── */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}
@@ -594,6 +681,36 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
 </style>
 </head>
 <body>
+
+<!-- ══ FEESTLAAG — vaste decoratieve achtergrond (CSS/SVG, geen afbeeldingen) ══ -->
+<div class="party" aria-hidden="true">
+  <div class="party-glow pg1"></div>
+  <div class="party-glow pg2"></div>
+  <div class="party-glow pg3"></div>
+  <div class="party-glow pg4"></div>
+  <div class="party-disco"></div>
+  <svg class="party-bunting" viewBox="0 0 1440 80" preserveAspectRatio="xMidYMin meet">
+    <path d="M0 20 Q720 58 1440 20" fill="none" stroke="#c9b6ff" stroke-width="2"/>
+    <polygon points="27,22 53,22 40,47" fill="#ffb3cf"/><circle class="party-light" cx="40" cy="22" r="2.6" fill="#fff3c4"/>
+    <polygon points="147,30 173,30 160,55" fill="#c9b6ff"/><circle class="party-light" cx="160" cy="30" r="2.6" fill="#fff3c4"/>
+    <polygon points="267,37 293,37 280,62" fill="#ffe6a3"/><circle class="party-light" cx="280" cy="37" r="2.6" fill="#fff3c4"/>
+    <polygon points="387,43 413,43 400,68" fill="#b3e0ff"/><circle class="party-light" cx="400" cy="43" r="2.6" fill="#fff3c4"/>
+    <polygon points="507,47 533,47 520,72" fill="#a8f0e6"/><circle class="party-light" cx="520" cy="47" r="2.6" fill="#fff3c4"/>
+    <polygon points="627,50 653,50 640,75" fill="#ffb3cf"/><circle class="party-light" cx="640" cy="50" r="2.6" fill="#fff3c4"/>
+    <polygon points="747,50 773,50 760,75" fill="#c9b6ff"/><circle class="party-light" cx="760" cy="50" r="2.6" fill="#fff3c4"/>
+    <polygon points="867,48 893,48 880,73" fill="#ffe6a3"/><circle class="party-light" cx="880" cy="48" r="2.6" fill="#fff3c4"/>
+    <polygon points="987,45 1013,45 1000,70" fill="#b3e0ff"/><circle class="party-light" cx="1000" cy="45" r="2.6" fill="#fff3c4"/>
+    <polygon points="1107,39 1133,39 1120,64" fill="#a8f0e6"/><circle class="party-light" cx="1120" cy="39" r="2.6" fill="#fff3c4"/>
+    <polygon points="1227,33 1253,33 1240,58" fill="#ffb3cf"/><circle class="party-light" cx="1240" cy="33" r="2.6" fill="#fff3c4"/>
+    <polygon points="1347,25 1373,25 1360,50" fill="#c9b6ff"/><circle class="party-light" cx="1360" cy="25" r="2.6" fill="#fff3c4"/>
+  </svg>
+  <svg class="pnote pn1" viewBox="0 0 24 24"><use href="#i-note"/></svg>
+  <svg class="pnote pn2" viewBox="0 0 24 24"><use href="#i-note"/></svg>
+  <svg class="pnote pn3" viewBox="0 0 24 24"><use href="#i-note"/></svg>
+  <svg class="pnote pn4" viewBox="0 0 24 24"><use href="#i-note"/></svg>
+  <span class="pconf pc1"></span><span class="pconf pc2"></span><span class="pconf pc3"></span>
+  <span class="pconf pc4"></span><span class="pconf pc5"></span><span class="pconf pc6"></span>
+</div>
 
 <!-- ══ ICONENSET ═══════════════════════════════════════════════════════════ -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
