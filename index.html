@@ -564,46 +564,31 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
 .footer-copy{font-size:.72rem;color:var(--mt2)}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   LICHT FEEST-THEMA — overschrijflaag (wint van eerdere regels)
-   Apparaat-mockups (hostscherm/walkthrough) houden hun donkere tokens via scope.
+   DONKER FESTIVAL-THEMA — premium entertainment brand
+   Spotify Wrapped × Tomorrowland × Netflix
 ═══════════════════════════════════════════════════════════════════════════ */
-:root{
-  --bg:#FFFFFF;--sf1:#F8F7FC;--sf2:#FFFFFF;--sf3:#FFF8FB;
-  --bd:rgba(139,92,246,.15);--bd-m:rgba(139,92,246,.28);
-  --tx:#111827;--mt:#6B7280;--mt2:rgba(107,114,128,.7);
-}
-/* donkere apparaat-mockups: lokale dark tokens zodat interne tekst leesbaar blijft */
-.mock-host,.hw-frame{
-  --sf1:#121222;--sf2:#18182A;--sf3:#1E1E35;
-  --bd:rgba(255,255,255,.08);--bd-m:rgba(255,255,255,.14);
-  --tx:#F0EEF8;--mt:rgba(240,238,248,.66);--mt2:rgba(240,238,248,.34);
-}
-body{background:#fff;color:var(--tx)}
+/* donkere tokens blijven actief — geen lichte override */
+body{background:var(--bg);color:var(--tx)}
 /* feestlaag ligt achter de content */
 section,footer{position:relative;z-index:1}
 
-/* navigatie: lichte glas-balk */
-.nav{background:rgba(255,255,255,.82);border-bottom:1px solid var(--bd)}
-@media(max-width:768px){.nav-links{background:rgba(255,255,255,.97)}}
+/* navigatie: donkere glas-balk */
+.nav{background:rgba(13,13,24,.92);border-bottom:1px solid var(--bd)}
+@media(max-width:768px){.nav-links{background:rgba(13,13,24,.98)}}
 
-/* witte kaarten: zachte paarse schaduw + roze/paarse hover-glow */
-.modi-card,.usp,.pakket-card,.wie-card,.faq-item,.demo-panel,.mcar-slide{box-shadow:0 16px 44px rgba(139,92,246,.08)}
-.modi-card:hover,.usp:hover,.pakket-card:hover,.wie-card:hover{box-shadow:0 22px 60px rgba(155,109,255,.16),0 0 30px rgba(242,64,106,.08)}
-.faq-item:hover{background:#FFF8FB}
+/* donkere kaarten: neon glow hover */
+.modi-card:hover{box-shadow:0 24px 60px rgba(242,64,106,.3),0 0 40px rgba(155,109,255,.15)}
+.usp:hover{box-shadow:0 16px 40px rgba(155,109,255,.2)}
+.pakket-card:hover{box-shadow:0 22px 60px rgba(155,109,255,.2),0 0 30px rgba(242,64,106,.1)}
+.wie-card:hover{box-shadow:0 14px 40px rgba(155,109,255,.25)}
+.faq-item:hover{background:var(--sf3)}
 
-/* knoppen op licht */
-.btn-ghost{background:#fff;border:1.5px solid var(--bd-m);color:var(--tx)}
-.btn-ghost:hover{background:rgba(155,109,255,.06);border-color:rgba(155,109,255,.5)}
+/* knoppen op donker */
+.btn-ghost{background:rgba(255,255,255,.06);border:1.5px solid var(--bd-m);color:var(--tx)}
+.btn-ghost:hover{background:rgba(155,109,255,.1);border-color:rgba(155,109,255,.5)}
 .btn-primary:hover{transform:translateY(-2px) scale(1.01)}
 
-/* chips, tags, tabs, dots, nav-knoppen op licht */
-.chip{background:rgba(155,109,255,.06);border:1px solid var(--bd);color:var(--mt)}
-.modi-tag.eco{background:rgba(17,24,39,.05);color:var(--mt);border:1px solid var(--bd)}
-.demo-tab.active,.pakket-tab.active{background:rgba(155,109,255,.1);border-color:rgba(155,109,255,.35);color:var(--tx)}
-.demo-dot{background:rgba(17,24,39,.16)}
-.tl-btn{background:#fff;border:1.5px solid var(--bd-m);color:var(--tx);box-shadow:0 6px 18px rgba(139,92,246,.1)}
-.tl-btn:hover{background:rgba(155,109,255,.06);border-color:rgba(155,109,255,.5)}
-
+/* chips, tags, tabs, dots, nav-knoppen op donker */
 /* slot-CTA transparant zodat de feestlaag doorschijnt */
 .einde{background:transparent}
 .einde-grid{opacity:.5;background-image:linear-gradient(rgba(155,109,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(155,109,255,.1) 1px,transparent 1px)}
@@ -655,6 +640,304 @@ section,footer{position:relative;z-index:1}
   *,*::before,*::after{transition:none!important;animation:none!important}
   html{scroll-behavior:auto}
   .tl,.demo-track{scroll-behavior:auto}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PREMIUM FESTIVAL TRANSFORM — Spotify Wrapped × Tomorrowland × Netflix
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Neon utility klassen ── */
+.neon-text{
+  text-shadow:0 0 20px rgba(242,64,106,.6),0 0 60px rgba(155,109,255,.4),0 0 100px rgba(242,64,106,.2);
+}
+.glow-pink{
+  position:absolute;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle,rgba(242,64,106,.18) 0%,transparent 65%);
+  filter:blur(40px);
+}
+.glow-purple{
+  position:absolute;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle,rgba(155,109,255,.16) 0%,transparent 65%);
+  filter:blur(40px);
+}
+
+/* ── Animaties ── */
+@keyframes pulseGlow{
+  0%,100%{box-shadow:0 0 20px rgba(242,64,106,.3),0 0 40px rgba(155,109,255,.15)}
+  50%{box-shadow:0 0 40px rgba(242,64,106,.6),0 0 80px rgba(155,109,255,.3),0 0 120px rgba(242,64,106,.1)}
+}
+@keyframes shimmer{
+  0%{background-position:-200% center}
+  100%{background-position:200% center}
+}
+@keyframes discoFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-12px) rotate(5deg)}
+}
+@keyframes noteFloat2{
+  0%,100%{transform:translateY(0) rotate(-8deg)}
+  50%{transform:translateY(-16px) rotate(8deg)}
+}
+@keyframes spotBeam{
+  0%,100%{opacity:.12;transform:rotate(-15deg) scaleY(1)}
+  50%{opacity:.22;transform:rotate(-15deg) scaleY(1.08)}
+}
+@keyframes spotBeam2{
+  0%,100%{opacity:.1;transform:rotate(12deg) scaleY(1)}
+  50%{opacity:.18;transform:rotate(12deg) scaleY(1.1)}
+}
+
+/* ── Decoratieve elementen ── */
+.deco-disco{
+  position:absolute;
+  width:110px;height:110px;
+  top:4rem;right:8%;
+  opacity:.65;
+  animation:discoFloat 6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
+}
+@media(max-width:900px){.deco-disco{display:none}}
+
+.deco-note{
+  position:absolute;
+  opacity:.16;
+  color:var(--secondary);
+  pointer-events:none;
+  animation:noteFloat2 8s ease-in-out infinite;
+}
+.deco-note:nth-child(2){animation-delay:-2s;animation-duration:10s;color:var(--primary)}
+.deco-note:nth-child(3){animation-delay:-5s;animation-duration:12s}
+.deco-note:nth-child(4){animation-delay:-3s;animation-duration:9s;color:var(--primary)}
+
+/* ── Hero upgrade ── */
+.hero{
+  background:linear-gradient(135deg,#0D0D18 0%,#1a0a2e 50%,#0D0D18 100%);
+  padding:5rem 0 4rem;
+}
+.hero::before{
+  content:'';position:absolute;
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(242,64,106,.14) 0%,transparent 60%);
+  top:-200px;left:-200px;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(155,109,255,.14) 0%,transparent 60%);
+  top:-100px;right:-150px;pointer-events:none;
+}
+/* Podiumlicht-stralen op hero */
+.hero-beam{
+  position:absolute;pointer-events:none;z-index:0;
+  width:280px;height:600px;
+  background:linear-gradient(180deg,rgba(242,64,106,.09) 0%,transparent 80%);
+  top:0;left:12%;
+  clip-path:polygon(20% 0%,80% 0%,100% 100%,0% 100%);
+  animation:spotBeam 7s ease-in-out infinite;
+}
+.hero-beam-2{
+  position:absolute;pointer-events:none;z-index:0;
+  width:240px;height:500px;
+  background:linear-gradient(180deg,rgba(155,109,255,.09) 0%,transparent 80%);
+  top:0;right:18%;
+  clip-path:polygon(15% 0%,85% 0%,100% 100%,0% 100%);
+  animation:spotBeam2 9s ease-in-out infinite;
+}
+/* Lichtslinger bovenaan hero */
+.hero-lights{
+  position:absolute;
+  top:0;left:0;right:0;
+  height:28px;
+  pointer-events:none;
+  z-index:3;
+}
+.hero-lights::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent 0%,rgba(155,109,255,.5) 25%,rgba(242,64,106,.5) 50%,rgba(155,109,255,.5) 75%,transparent 100%);
+}
+/* Hero tekst glow */
+.hero h1{
+  text-shadow:0 2px 40px rgba(155,109,255,.15);
+}
+.hero .label{
+  font-size:.75rem;
+  letter-spacing:.18em;
+  text-shadow:0 0 20px rgba(155,109,255,.4);
+}
+
+/* ── Speelopties (modi) — donkere sectie, grotere cards ── */
+.modi{background:var(--bg)}
+.modi-card{
+  padding:1.75rem;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.modi-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(155,109,255,.5);
+  box-shadow:0 24px 60px rgba(242,64,106,.3),0 0 40px rgba(155,109,255,.2);
+}
+.modi-card.featured{
+  background-image:linear-gradient(var(--sf2),var(--sf2)),var(--grad);
+  animation:pulseGlow 4s ease-in-out infinite;
+}
+.modi-card.featured:hover{
+  animation:none;
+  box-shadow:0 28px 70px rgba(242,64,106,.4),0 0 60px rgba(155,109,255,.3);
+}
+
+/* ── Waarom Melingo (USP) — lichte sectie ── */
+section.usp-sec{background:#F7F5FF}
+.usp-sec .sec-hd h2,.usp-sec .sec-hd .label{color:#111827}
+.usp-sec .sec-hd p{color:#6B7280}
+.usp-sec .usp{
+  background:#ffffff;
+  border:1px solid rgba(155,109,255,.18);
+  box-shadow:0 8px 30px rgba(139,92,246,.08);
+  color:#111827;
+}
+.usp-sec .usp h3{color:#111827}
+.usp-sec .usp p{color:#6B7280}
+.usp-sec .usp:hover{
+  box-shadow:0 18px 50px rgba(155,109,255,.18),0 0 30px rgba(242,64,106,.06);
+  transform:translateY(-5px);
+}
+/* Neon-stijl USP iconen met gradient achtergrond */
+.usp-ic{
+  width:48px;height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(242,64,106,.15),rgba(155,109,255,.2));
+  border:1px solid rgba(155,109,255,.3);
+  box-shadow:0 4px 16px rgba(155,109,255,.15);
+}
+.usp-ic .ic{
+  width:22px;height:22px;
+  color:var(--secondary);
+  filter:drop-shadow(0 0 4px rgba(155,109,255,.5));
+}
+
+/* ── Productdemo — donkere sectie ── */
+.demo{background:var(--sf1)}
+.demo-tab{
+  padding:.6rem 1.35rem;
+  font-size:.85rem;
+  font-weight:700;
+  transition:all .22s;
+}
+.demo-tab.active{
+  background:linear-gradient(135deg,rgba(242,64,106,.15),rgba(155,109,255,.15));
+  border-color:transparent;
+  position:relative;
+  color:var(--tx);
+}
+.demo-tab.active::after{
+  content:'';
+  position:absolute;
+  bottom:-2px;left:50%;
+  transform:translateX(-50%);
+  width:60%;height:2px;
+  background:var(--grad);
+  border-radius:2px;
+}
+
+/* ── Playlists — meer ruimte ── */
+.actie{background:#F7F5FF}
+.actie .sec-hd h2,.actie .sec-hd .label{color:#111827}
+.actie .sec-hd p{color:#6B7280}
+.pl-grid{gap:28px}
+.actie .sec-hd h2{font-size:clamp(1.6rem,3.5vw,2.3rem)}
+
+/* ── Hoe werkt het — donkere sectie ── */
+section#zo-werkt-het{background:var(--bg)}
+
+/* ── Voor wie (wie) — donkere sectie ── */
+.wie{background:var(--sf1)}
+.wie-card{
+  padding:1.25rem 1rem;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,color .25s ease;
+}
+.wie-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(242,64,106,.4);
+  box-shadow:0 16px 44px rgba(155,109,255,.2),0 0 24px rgba(242,64,106,.1);
+  color:var(--tx);
+}
+.wie-ic{
+  width:40px;height:40px;
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(242,64,106,.12),rgba(155,109,255,.18));
+  border:1px solid rgba(155,109,255,.25);
+}
+
+/* ── Prijzen — lichte sectie ── */
+section.pakketten{background:#F7F5FF}
+.pakketten .sec-hd h2,.pakketten .sec-hd .label{color:#111827}
+.pakketten .sec-hd p{color:#6B7280}
+.pakket-card{
+  background:#ffffff;
+  border:1.5px solid rgba(155,109,255,.15);
+  color:#111827;
+  box-shadow:0 8px 30px rgba(139,92,246,.08);
+}
+.pakket-card:hover{
+  box-shadow:0 22px 60px rgba(155,109,255,.18),0 0 30px rgba(242,64,106,.08);
+  transform:translateY(-5px);
+}
+.pakket-card.best-pakket{
+  border:2px solid transparent;
+  background-image:linear-gradient(#ffffff,#ffffff),var(--grad);
+  background-origin:border-box;
+  -webkit-background-clip:padding-box,border-box;
+  background-clip:padding-box,border-box;
+  box-shadow:0 12px 44px rgba(155,109,255,.2),0 0 40px rgba(242,64,106,.1);
+}
+.pakket-name{color:#6B7280}
+.pakket-players{color:#111827}
+.pakket-price{color:#111827}
+.pakket-feats li{color:#6B7280}
+.pakket-tab{color:#6B7280;border-color:rgba(155,109,255,.2);background:#fff}
+.pakket-tab.active{background:rgba(155,109,255,.1);border-color:rgba(155,109,255,.4);color:#111827}
+.pakket-tab:hover{color:#111827;border-color:rgba(155,109,255,.45)}
+
+/* ── FAQ — lichte sectie ── */
+.faq-lp{background:#F7F5FF}
+.faq-lp .sec-hd h2,.faq-lp .sec-hd .label{color:#111827}
+.faq-item{background:#ffffff;border:1px solid rgba(155,109,255,.15);box-shadow:0 4px 16px rgba(139,92,246,.06)}
+.faq-item:hover{background:#FFF8FB;border-color:rgba(155,109,255,.3)}
+.faq-q{color:#111827}
+.faq-a-inner{color:#6B7280}
+
+/* ── Slot CTA — donkere sfeer via ::before overlay ── */
+.einde{
+  background:linear-gradient(135deg,#0D0D18 0%,#1a0a2e 60%,#0D0D18 100%);
+}
+.einde::before{
+  content:'';position:absolute;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(155,109,255,.14) 0%,transparent 65%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.einde h2{text-shadow:0 0 40px rgba(155,109,255,.2)}
+.einde .label{text-shadow:0 0 20px rgba(155,109,255,.5)}
+
+/* ── Feestlaag versterking op donker thema ── */
+.pg1{background:radial-gradient(circle,rgba(242,64,106,.25),transparent 70%)}
+.pg2{background:radial-gradient(circle,rgba(155,109,255,.22),transparent 70%)}
+.party-disco{opacity:.5;width:90px;height:90px;top:72px;right:5%}
+.pnote{opacity:.15}
+
+/* ── Party bunting: kleurrijker op donker ── */
+.party-bunting{opacity:.75}
+
+@media(max-width:768px){
+  .hero{padding:2.5rem 0 2rem}
+  .modi-card{padding:1.3rem}
+  .wie-card{padding:1rem .85rem}
 }
 </style>
 </head>
@@ -735,6 +1018,40 @@ section,footer{position:relative;z-index:1}
 
 <!-- ══ 1. HERO ═════════════════════════════════════════════════════════════ -->
 <section class="hero">
+  <!-- Lichtslinger -->
+  <div class="hero-lights" aria-hidden="true"></div>
+  <!-- Podiumlicht-stralen -->
+  <div class="hero-beam" aria-hidden="true"></div>
+  <div class="hero-beam-2" aria-hidden="true"></div>
+  <!-- Discobal -->
+  <svg class="deco-disco" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="dg" cx="35%" cy="35%"><stop offset="0%" stop-color="#fff" stop-opacity=".9"/><stop offset="100%" stop-color="#9B6DFF" stop-opacity=".6"/></radialGradient>
+    </defs>
+    <circle cx="40" cy="40" r="38" fill="#1a1a3e" stroke="rgba(155,109,255,.3)" stroke-width="1"/>
+    <line x1="2" y1="40" x2="78" y2="40" stroke="rgba(255,255,255,.15)" stroke-width=".8"/>
+    <line x1="40" y1="2" x2="40" y2="78" stroke="rgba(255,255,255,.15)" stroke-width=".8"/>
+    <line x1="12" y1="15" x2="68" y2="65" stroke="rgba(255,255,255,.1)" stroke-width=".8"/>
+    <line x1="68" y1="15" x2="12" y2="65" stroke="rgba(255,255,255,.1)" stroke-width=".8"/>
+    <rect x="22" y="18" width="8" height="6" rx="1" fill="url(#dg)" opacity=".8"/>
+    <rect x="34" y="14" width="8" height="6" rx="1" fill="url(#dg)" opacity=".9"/>
+    <rect x="46" y="18" width="8" height="6" rx="1" fill="url(#dg)" opacity=".7"/>
+    <rect x="18" y="28" width="8" height="6" rx="1" fill="url(#dg)" opacity=".6"/>
+    <rect x="30" y="24" width="8" height="6" rx="1" fill="#F2406A" opacity=".7"/>
+    <rect x="42" y="24" width="8" height="6" rx="1" fill="url(#dg)" opacity=".8"/>
+    <rect x="54" y="28" width="8" height="6" rx="1" fill="#9B6DFF" opacity=".7"/>
+    <rect x="22" y="38" width="8" height="6" rx="1" fill="#F2406A" opacity=".5"/>
+    <rect x="34" y="34" width="8" height="6" rx="1" fill="url(#dg)" opacity=".9"/>
+    <rect x="46" y="38" width="8" height="6" rx="1" fill="#9B6DFF" opacity=".6"/>
+    <rect x="30" y="48" width="8" height="6" rx="1" fill="url(#dg)" opacity=".7"/>
+    <rect x="42" y="44" width="8" height="6" rx="1" fill="#F2406A" opacity=".8"/>
+    <line x1="40" y1="2" x2="10" y2="0" stroke="#F2406A" stroke-width="1.5" opacity=".4"/>
+    <line x1="40" y1="2" x2="70" y2="0" stroke="#9B6DFF" stroke-width="1.5" opacity=".4"/>
+  </svg>
+  <!-- Muzieknoten decoratie -->
+  <svg class="deco-note" style="width:32px;height:32px;top:22%;left:5%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 18V6l12-2v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="6" cy="18" r="3" fill="currentColor" opacity=".8"/><circle cx="18" cy="16" r="3" fill="currentColor" opacity=".8"/></svg>
+  <svg class="deco-note" style="width:22px;height:22px;top:60%;left:3%;animation-delay:-3s" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 18V6l12-2v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="6" cy="18" r="3" fill="currentColor" opacity=".8"/><circle cx="18" cy="16" r="3" fill="currentColor" opacity=".8"/></svg>
+  <svg class="deco-note" style="width:26px;height:26px;top:35%;right:4%;animation-delay:-6s" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 18V6l12-2v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="6" cy="18" r="3" fill="currentColor" opacity=".8"/><circle cx="18" cy="16" r="3" fill="currentColor" opacity=".8"/></svg>
   <div class="wrap hero-inner">
 
     <div>
@@ -874,7 +1191,7 @@ section,footer{position:relative;z-index:1}
 </section>
 
 <!-- ══ 3. WAAROM MELINGO ═══════════════════════════════════════════════════ -->
-<section>
+<section class="usp-sec">
   <div class="wrap">
     <div class="sec-hd">
       <p class="label">Waarom Melingo</p>
