@@ -1016,6 +1016,139 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .lp-mode,.lp-cta,.app-nav-btn,.app-resume-go{transition:none}
   .lp-mode:hover{transform:none}
 }
+
+/* ══════════════════════════════════════════
+   DESKTOP HOST SCREEN — min-width: 1024px
+   Mobiele layout blijft ONAANGEROERD.
+   Alle wijzigingen uitsluitend via deze query.
+══════════════════════════════════════════ */
+@media(min-width:1024px){
+
+  /* Subtiele achtergrondglows */
+  #screen-host{position:relative;overflow:hidden}
+  #screen-host::before{
+    content:'';position:absolute;
+    width:700px;height:700px;
+    background:radial-gradient(circle,rgba(242,64,106,.055) 0%,transparent 65%);
+    top:-150px;left:-200px;
+    pointer-events:none;z-index:0
+  }
+  #screen-host::after{
+    content:'';position:absolute;
+    width:550px;height:550px;
+    background:radial-gradient(circle,rgba(155,109,255,.055) 0%,transparent 65%);
+    top:200px;right:-150px;
+    pointer-events:none;z-index:0
+  }
+  .bar,.scroll{position:relative;z-index:1}
+
+  /* Host body: breed, 2-kolom grid */
+  .host-body{
+    max-width:min(1400px,92vw);
+    display:grid;
+    grid-template-columns:420px 1fr;
+    column-gap:1.75rem;
+    align-items:start;
+    padding:2rem 2rem 3rem;
+  }
+
+  /* ── ROW 1: Nu speelt — volle breedte ── */
+  .now-card{
+    grid-column:1 / -1;
+    grid-row:1;
+    text-align:left;
+    padding:2.5rem 3rem;
+    margin-bottom:1.5rem;
+    border-radius:28px;
+  }
+  .now-vinyl{display:none}
+  .now-lbl{font-size:.7rem;margin-bottom:.9rem}
+  .now-title{font-size:clamp(3rem,5vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em}
+  .now-artist{font-size:clamp(1.25rem,2vw,1.75rem);margin-top:.5rem}
+  .now-count{font-size:.95rem;margin-top:.9rem}
+
+  /* ── ROW 2: Volgend nummer — volle breedte ── */
+  .host-ctrl{
+    grid-column:1 / -1;
+    grid-row:2;
+    gap:1rem;
+    margin-bottom:1.5rem;
+  }
+  .btn-next{
+    min-height:72px;
+    font-size:1.5rem;
+    border-radius:18px;
+  }
+  .btn-pause{
+    width:72px;
+    min-height:72px;
+    border-radius:18px;
+    font-size:1.5rem;
+  }
+
+  /* ── LINKERKOLOM (420px): handmatig/auto, progress, gespeeld ── */
+  /* child 4 = handmatig/auto + startpos block */
+  .host-body > div:nth-child(4){
+    grid-column:1;
+    grid-row:3;
+    margin-bottom:1.1rem;
+  }
+  /* .prog */
+  .prog{
+    grid-column:1;
+    grid-row:4;
+    height:6px;
+    border-radius:3px;
+    margin-bottom:1.1rem;
+  }
+  /* child 6 = eerste .panel = Gespeeld */
+  .host-body > div:nth-child(6){
+    grid-column:1;
+    grid-row:5;
+    margin-bottom:0;
+  }
+  .plist{max-height:420px}
+  .psrch{font-size:.9rem;padding:.7rem 1.1rem}
+  .prow{padding:.6rem 1.1rem}
+  .ptit{font-size:.88rem}
+  .part{font-size:.75rem}
+
+  /* ── RECHTERKOLOM (1fr): bingo controleren + inklapbare panels ── */
+  /* child 7 = tweede .panel = Bingo controleren */
+  .host-body > div:nth-child(7){
+    grid-column:2;
+    grid-row:3;
+    margin-bottom:1.1rem;
+  }
+  /* child 8 = #bingo-history-panel */
+  #bingo-history-panel{
+    grid-column:2;
+    grid-row:4;
+    margin-bottom:1.1rem;
+  }
+  /* child 9 = #won-status */
+  #won-status{
+    grid-column:2;
+    grid-row:5;
+    margin-bottom:1.1rem;
+  }
+  /* child 10 = verborgen spotify divs */
+  .host-body > div:nth-child(10){
+    grid-column:2;
+    grid-row:6;
+  }
+  /* Inklapbare panels rechts */
+  #col-settings{grid-column:2;grid-row:7;margin-bottom:.75rem}
+  #col-manual  {grid-column:2;grid-row:8;margin-bottom:.75rem}
+  #col-session {grid-column:2;grid-row:9;margin-bottom:.75rem}
+
+  /* Checker input iets ruimer */
+  .ci{font-size:.95rem;min-height:50px}
+  .crow{padding:1rem}
+  .cres{margin:.25rem 1rem .85rem;font-size:.88rem}
+  .cgrid{margin:.25rem 1rem .85rem}
+
+}
 </style>
 </head>
 <body>
