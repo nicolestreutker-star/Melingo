@@ -177,7 +177,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .host-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:1.25rem 1rem;max-width:620px;margin:0 auto;width:100%}
 .now-card{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:22px;padding:1.75rem 1.5rem;text-align:center;margin-bottom:1.1rem;position:relative;overflow:hidden}
 .now-glow{position:absolute;width:220px;height:220px;border-radius:50%;background:var(--a);filter:blur(70px);opacity:.1;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
-.now-vinyl{width:68px;height:68px;margin:0 auto .9rem}
+.now-vinyl{width:68px;height:68px;margin:0 auto .9rem;position:relative;z-index:2}
+.now-arm{display:none}
 .now-vinyl.spin{animation:vspin 8s linear infinite}
 @keyframes vspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .now-lbl{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--s);margin-bottom:.35rem}
@@ -1060,8 +1061,28 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     padding:2.5rem 3rem;
     margin-bottom:1.5rem;
     border-radius:28px;
+    padding-right:clamp(230px,24vw,340px);
   }
-  .now-vinyl{display:none}
+  /* Vinyl-platenspeler rechts in het hero-blok */
+  .now-vinyl{
+    display:block;margin:0;
+    position:absolute;right:3rem;z-index:2;
+    width:clamp(170px,17vw,240px);height:clamp(170px,17vw,240px);
+    top:calc(50% - clamp(85px,8.5vw,120px));
+    filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
+    transform-origin:center
+  }
+  .now-arm{
+    display:block;position:absolute;z-index:3;
+    right:calc(3rem + clamp(10px,1vw,16px));
+    top:calc(50% - clamp(58px,5.8vw,82px));
+    width:clamp(92px,9vw,126px);height:9px;border-radius:6px;
+    background:linear-gradient(90deg,#e7e1f2,#8f82b5);
+    transform-origin:right center;transform:rotate(34deg);
+    box-shadow:0 4px 12px rgba(0,0,0,.45);pointer-events:none
+  }
+  .now-arm::before{content:'';position:absolute;right:-10px;top:-6px;width:22px;height:22px;border-radius:50%;background:#cdc4e2;box-shadow:0 2px 7px rgba(0,0,0,.45)}
+  .now-arm::after{content:'';position:absolute;left:-5px;top:-2px;width:15px;height:13px;border-radius:3px;background:#FF4D8D}
   .now-lbl{font-size:.7rem;margin-bottom:.9rem}
   .now-title{font-size:clamp(3rem,5vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em}
   .now-artist{font-size:clamp(1.25rem,2vw,1.75rem);margin-top:.5rem}
@@ -1149,6 +1170,79 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .cgrid{margin:.25rem 1rem .85rem}
 
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOSTSCHERM — feest-sfeer polish (kleur/diepte/glow; layout & DOM onaangeroerd)
+═══════════════════════════════════════════════════════════════════════════ */
+#screen-host{
+  /* lichte lavendel basis + subtiele glow blobs */
+  background:
+    radial-gradient(55% 40% at 6% -4%, rgba(242,64,106,.10), transparent 60%),
+    radial-gradient(50% 42% at 96% 0%, rgba(155,109,255,.13), transparent 60%),
+    radial-gradient(70% 50% at 50% 118%, rgba(120,90,255,.07), transparent 65%),
+    linear-gradient(180deg,#faf7ff 0%,#f3edfc 100%);
+  /* lichte tokens binnen het hostscherm — tekst donkerpaars op lichte kaarten */
+  --tx:#241544;--mt:#6f6390;--mt2:#ada3c4;--bd:rgba(124,92,200,.16);
+}
+/* Topbar past zich aan op de lichte basis */
+#screen-host .bar{background:rgba(255,255,255,.74);backdrop-filter:blur(14px);border-bottom:1px solid rgba(124,92,200,.14)}
+#screen-host .btn.bs{background:#fff;border:1px solid rgba(124,92,200,.22);color:#3a2a63;box-shadow:0 2px 8px rgba(124,92,200,.1)}
+#screen-host .btn.bs:hover{background:#faf6ff;border-color:rgba(155,109,255,.4)}
+
+/* ── NU SPEELT — donkerpaars hero met vinyl, witte tekst ── */
+.now-card{
+  background:
+    radial-gradient(120% 150% at 0% 0%, rgba(242,64,106,.22), transparent 55%),
+    radial-gradient(120% 150% at 100% 0%, rgba(155,109,255,.30), transparent 58%),
+    linear-gradient(165deg,#3d246c 0%,#2a1850 100%);
+  border:1.5px solid rgba(155,109,255,.35);
+  box-shadow:0 24px 60px rgba(61,36,108,.34),0 0 60px rgba(155,109,255,.18),inset 0 1px 0 rgba(255,255,255,.12);
+  --tx:#fff;--mt:rgba(255,255,255,.66);--mt2:rgba(255,255,255,.4);
+}
+.now-glow{width:300px;height:300px;opacity:.5;background:radial-gradient(circle,rgba(155,109,255,.55),rgba(242,64,106,.3) 55%,transparent 72%);top:-40px;left:4%;transform:none}
+.now-card::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(70% 55% at 50% -10%,rgba(255,255,255,.10),transparent 60%)}
+/* subtiele waveform onderaan, links */
+.now-card::after{content:'';position:absolute;z-index:1;left:1.5rem;bottom:1.1rem;width:min(42%,240px);height:30px;pointer-events:none;opacity:.34;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cg fill='%23FF7AB0'%3E%3Crect x='4' y='38' width='7' height='22' rx='3'/%3E%3Crect x='20' y='20' width='7' height='40' rx='3'/%3E%3Crect x='36' y='44' width='7' height='16' rx='3'/%3E%3Crect x='52' y='10' width='7' height='50' rx='3'/%3E%3Crect x='68' y='30' width='7' height='30' rx='3'/%3E%3Crect x='84' y='4' width='7' height='56' rx='3'/%3E%3Crect x='100' y='40' width='7' height='20' rx='3'/%3E%3Crect x='116' y='16' width='7' height='44' rx='3'/%3E%3Crect x='132' y='32' width='7' height='28' rx='3'/%3E%3Crect x='148' y='8' width='7' height='52' rx='3'/%3E%3Crect x='164' y='42' width='7' height='18' rx='3'/%3E%3Crect x='180' y='24' width='7' height='36' rx='3'/%3E%3C/g%3E%3C/svg%3E") left bottom/contain no-repeat;
+}
+.now-lbl,.now-title,.now-artist,.now-count,.twrap{position:relative;z-index:2}
+.now-lbl{color:#FF7AB0}
+.now-title{color:#fff}
+.now-artist{color:rgba(255,255,255,.72)}
+/* VOLGEND NUMMER — primaire actie, dominant */
+.btn-next{background:linear-gradient(135deg,#FF4D8D,#9B6DFF);box-shadow:0 12px 34px rgba(155,109,255,.42)}
+.btn-next:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 18px 46px rgba(155,109,255,.55),0 0 30px rgba(255,77,141,.25)}
+.btn-next:active{transform:scale(.98)}
+.btn-next:focus-visible{outline:3px solid rgba(255,255,255,.9);outline-offset:3px}
+.btn-pause{background:#fff;border:1px solid rgba(124,92,200,.22);color:#3a2a63;box-shadow:0 6px 18px rgba(91,60,160,.12)}
+.btn-pause:hover{background:#f6f0ff;border-color:rgba(155,109,255,.45)}
+/* lichtpaarse kaarten — één consistent systeem */
+.panel,.collapsible-panel{background:linear-gradient(180deg,#fdfbff,#f7f1ff);border:1px solid rgba(124,92,200,.16);border-radius:20px;box-shadow:0 14px 36px rgba(91,60,160,.10),0 2px 6px rgba(91,60,160,.05)}
+.ph{border-bottom:1px solid rgba(124,92,200,.14)}
+.seg{background:#f1ebfb;border:1px solid rgba(124,92,200,.16)}
+.seg-btn.on{box-shadow:0 6px 18px rgba(155,109,255,.3)}
+.spd{background:#fff;border:1px solid rgba(124,92,200,.18);color:#6f6390}
+.spd.on{background:rgba(155,109,255,.14);border-color:rgba(155,109,255,.45);color:#7c4dd6;box-shadow:0 0 0 1px rgba(155,109,255,.25),0 4px 12px rgba(155,109,255,.18)}
+.prog{background:rgba(124,92,200,.14)}
+/* GESPEELD — leesbaarheid, spacing, actieve (bovenste) rij opvallend */
+.psrch{background:#fff;color:#241544;border-bottom:1px solid rgba(124,92,200,.14)}
+.prow{transition:background .15s ease;border-bottom:1px solid rgba(124,92,200,.08)}
+.prow:hover{background:rgba(124,92,200,.06)}
+.plist .prow:first-child{background:linear-gradient(90deg,rgba(242,64,106,.14),rgba(155,109,255,.06));box-shadow:inset 3px 0 0 0 #FF4D8D}
+.plist .prow:first-child .pidx{color:#d11f6a}
+.plist .prow:first-child .ptit{color:#c01f63}
+/* BINGO CONTROLEREN — meer contrast, sneller scanbaar */
+.ci{background:#fff;border:1.5px solid rgba(124,92,200,.28);color:#241544}
+.ci:focus{border-color:var(--a);box-shadow:0 0 0 3px rgba(155,109,255,.2)}
+.cc{background:#f0eafb;color:#241544}
+/* ACCORDIONS — icoon links, meer padding, betere hover */
+.col-toggle{justify-content:flex-start;gap:.7rem;padding:.95rem 1.1rem}
+.col-toggle:hover{background:rgba(155,109,255,.07)}
+.col-arrow{margin-left:auto}
+.col-toggle::before{content:'';width:20px;height:20px;flex-shrink:0;background:var(--a);-webkit-mask:no-repeat center/contain;mask:no-repeat center/contain}
+#col-settings .col-toggle::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3.2'/%3E%3Cpath d='M12 3v2.5M12 18.5V21M21 12h-2.5M5.5 12H3M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3.2'/%3E%3Cpath d='M12 3v2.5M12 18.5V21M21 12h-2.5M5.5 12H3M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6'/%3E%3C/svg%3E")}
+#col-manual .col-toggle::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v8M8 12h8'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v8M8 12h8'/%3E%3C/svg%3E")}
+#col-session .col-toggle::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18V5l11-2v13'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='17' cy='16' r='3'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18V5l11-2v13'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='17' cy='16' r='3'/%3E%3C/svg%3E")}
 </style>
 </head>
 <body>
@@ -1903,6 +1997,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <div class="now-card">
       <div class="now-glow"></div>
       <svg class="now-vinyl" id="hvinyl" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1a1a2e"/><circle cx="50" cy="50" r="38" fill="#16162a"/><circle cx="50" cy="50" r="28" fill="#1a1a2e"/><circle cx="50" cy="50" r="20" fill="#F2406A"/><circle cx="50" cy="50" r="11" fill="#9B6DFF"/><circle cx="50" cy="50" r="4" fill="#0D0D18"/></svg>
+      <div class="now-arm" aria-hidden="true"></div>
       <div class="now-lbl">Nu speelt</div>
       <div class="now-title" id="htitle">Druk op volgend nummer</div>
       <div class="now-artist" id="hartist"></div>
@@ -1923,7 +2018,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
 
     <!-- Handmatig/Automatisch + instellingen compact -->
-    <div style="width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:16px;padding:.85rem 1rem;margin-bottom:1.1rem">
+    <div style="width:100%;background:linear-gradient(180deg,#fdfbff,#f7f1ff);border:1px solid rgba(124,92,200,.16);border-radius:20px;padding:.85rem 1rem;margin-bottom:1.1rem;box-shadow:0 14px 36px rgba(91,60,160,.10),0 2px 6px rgba(91,60,160,.05)">
       <div class="seg" style="margin-bottom:.85rem">
         <button class="seg-btn on" id="sm" onclick="setHM('manual')">Handmatig</button>
         <button class="seg-btn" id="sa" onclick="setHM('auto')">Automatisch</button>
@@ -1981,7 +2076,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
 
     <!-- Won status chips -->
-    <div id="won-status" style="display:none;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:14px;padding:.75rem 1rem;margin-bottom:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem"></div>
+    <div id="won-status" style="display:none;width:100%;background:linear-gradient(180deg,#fdfbff,#f7f1ff);border:1px solid rgba(124,92,200,.16);border-radius:18px;padding:.75rem 1rem;margin-bottom:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem;box-shadow:0 14px 36px rgba(91,60,160,.10)"></div>
 
     <!-- Verborgen Spotify-elementen — geen zichtbare UI, alleen voor JS-compatibiliteit -->
     <div style="display:none" aria-hidden="true">
@@ -2025,7 +2120,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </button>
       <div class="col-body" id="col-body-settings" style="display:none;padding:.85rem 1rem">
         <!-- Gemiste bingo toggle -->
-        <label style="display:flex;align-items:center;gap:.6rem;width:100%;margin-bottom:.85rem;cursor:pointer;padding:.65rem .9rem;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:12px">
+        <label style="display:flex;align-items:center;gap:.6rem;width:100%;margin-bottom:.85rem;cursor:pointer;padding:.65rem .9rem;background:#fff;border:1px solid rgba(124,92,200,.16);border-radius:12px">
           <input type="checkbox" id="missed-toggle" style="accent-color:var(--a);width:17px;height:17px" onchange="ST.missedBingoAlert=this.checked"/>
           <div>
             <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Gemiste bingo detectie</div>
@@ -3399,6 +3494,7 @@ function renderSpTrackList(){
 function togglePause(){
   ST.paused=!ST.paused;
   document.getElementById('bpause').textContent=ST.paused?'▶':'⏸';
+  var v=document.getElementById('hvinyl');if(v){if(ST.paused)v.classList.remove('spin');else if(ST.pidx>=0)v.classList.add('spin');}
   if(ST.paused){
     clearInterval(ST.tint);ST.tint=null;
     // Pauzeer Spotify
