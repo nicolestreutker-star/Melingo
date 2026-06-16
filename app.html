@@ -1072,7 +1072,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     display:grid;
     grid-template-columns:420px 1fr;
     column-gap:1.75rem;
-    align-items:stretch;
+    align-items:start;
     padding:2rem 2rem 3rem;
     gap:1.25rem 1.75rem;
   }
@@ -1139,16 +1139,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     min-height:0;
   }
 
-  /* Gespeeld vult alle beschikbare hoogte */
+  /* Gespeeld: max 12 rijen zichtbaar, daarna scrollen */
   .host-left-col .panel{
-    flex:1;
     display:flex;
     flex-direction:column;
-    min-height:0;
   }
   .host-left-col .plist{
-    flex:1;
-    max-height:none;
+    max-height:684px; /* 12 × 57px per rij */
     overflow-y:auto;
   }
 
