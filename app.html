@@ -1072,135 +1072,108 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     display:grid;
     grid-template-columns:420px 1fr;
     column-gap:1.75rem;
-    align-items:start;
+    align-items:stretch;
     padding:2rem 2rem 3rem;
+    gap:1.25rem 1.75rem;
   }
 
-  /* ── ROW 1: Nu speelt — pronkstuk, volle breedte ── */
+  /* ── ROW 1: Nu speelt — vaste hoogte, geen vinyl ── */
   .now-card{
-    grid-column:1 / -1;
+    grid-column:1/-1;
     grid-row:1;
     text-align:left;
-    padding:2.75rem 3.25rem;
-    margin-bottom:1.1rem;
+    padding:2rem 3rem;
+    margin-bottom:0;
     border-radius:30px;
-    padding-right:clamp(280px,28vw,400px);
-    overflow:visible;            /* platenspeler mag deels buiten de kaart */
+    height:220px;
+    box-sizing:border-box;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
   }
-  /* Vinyl-platenspeler — groot, deels buiten de hero, met glow */
-  .now-vinyl{
-    display:block;margin:0;
-    position:absolute;right:1.5rem;z-index:3;
-    width:clamp(210px,22vw,300px);height:clamp(210px,22vw,300px);
-    top:calc(50% - clamp(118px,12.2vw,168px));
-    filter:drop-shadow(0 22px 52px rgba(40,16,90,.55));
-    transform-origin:center
-  }
-  /* glow achter de plaat */
-  .now-vinyl::after{content:''}
-  .now-arm{
-    display:block;position:absolute;z-index:4;
-    right:calc(1.5rem + clamp(16px,1.6vw,24px));
-    top:calc(50% - clamp(74px,7.6vw,106px));
-    width:clamp(112px,11.5vw,156px);height:10px;border-radius:6px;
-    background:linear-gradient(90deg,#efeaf7,#8f82b5);
-    transform-origin:right center;transform:rotate(34deg);
-    box-shadow:0 4px 14px rgba(0,0,0,.45);pointer-events:none
-  }
-  .now-arm::before{content:'';position:absolute;right:-11px;top:-7px;width:24px;height:24px;border-radius:50%;background:#d6cee8;box-shadow:0 2px 8px rgba(0,0,0,.45)}
-  .now-arm::after{content:'';position:absolute;left:-6px;top:-2px;width:16px;height:14px;border-radius:3px;background:#FF4D8D}
-  .now-lbl{font-size:.74rem;margin-bottom:1rem;letter-spacing:.22em}
-  .now-title{font-size:clamp(3.4rem,5.6vw,5.2rem);font-weight:800;line-height:1.02;letter-spacing:-.035em}
-  .now-artist{font-size:clamp(1.4rem,2.3vw,2rem);margin-top:.6rem}
-  .now-count{font-size:.95rem;margin-top:1rem}
+  /* Vinyl en arm volledig verbergen op desktop */
+  .now-vinyl,.now-arm{display:none!important}
+  .now-glow{display:none}
 
-  /* ── ROW 2: Volgend nummer — duidelijke actieknop ── */
-  .host-ctrl{
-    grid-column:1 / -1;
-    grid-row:2;
-    gap:1rem;
-    margin-bottom:1.4rem;
-  }
-  .btn-next{
-    min-height:64px;
-    font-size:1.4rem;
-    border-radius:16px;
-  }
-  .btn-pause{
-    width:64px;
-    min-height:64px;
-    border-radius:16px;
-    font-size:1.4rem;
-  }
-
-  /* ── LINKERKOLOM (420px): handmatig/auto, progress, gespeeld ── */
-  /* child 4 = handmatig/auto + startpos block */
-  .host-body > div:nth-child(4){
-    grid-column:1;
-    grid-row:3;
-    margin-bottom:1.1rem;
-  }
-  /* .prog */
-  .prog{
-    grid-column:1;
-    grid-row:4;
-    height:6px;
-    border-radius:3px;
-    margin-bottom:1.1rem;
-  }
-  /* child 6 = eerste .panel = Gespeeld */
-  .host-body > div:nth-child(6){
-    grid-column:1;
-    grid-row:5;
+  .now-lbl{font-size:.74rem;margin-bottom:.6rem;letter-spacing:.22em}
+  .now-title{
+    font-size:4.5rem;
+    font-weight:800;
+    line-height:1.0;
+    letter-spacing:-.035em;
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
     margin-bottom:0;
   }
-  .plist{max-height:560px}
+  .now-artist{font-size:clamp(1.1rem,1.8vw,1.5rem);margin-top:.35rem}
+  .now-count{font-size:.82rem;margin-top:.3rem}
+
+  /* ── ROW 2: Volgend nummer ── */
+  .host-ctrl{
+    grid-column:1/-1;
+    grid-row:2;
+    gap:1rem;
+    margin-bottom:0;
+  }
+  .btn-next{min-height:64px;font-size:1.4rem;border-radius:16px}
+  .btn-pause{width:64px;min-height:64px;border-radius:16px;font-size:1.4rem}
+
+  /* ── ROW 3: Linker- en rechterkolom via wrapper-divs ── */
+  .host-left-col{
+    grid-column:1;
+    grid-row:3;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    min-height:0;
+  }
+  .host-right-col{
+    grid-column:2;
+    grid-row:3;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    min-height:0;
+  }
+
+  /* Gespeeld vult alle beschikbare hoogte */
+  .host-left-col .panel{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+  }
+  .host-left-col .plist{
+    flex:1;
+    max-height:none;
+    overflow-y:auto;
+  }
+
+  /* Voortgangsbalk */
+  .prog{height:6px;border-radius:3px;margin-bottom:0}
+
+  /* Lijst typografie */
   .psrch{font-size:.9rem;padding:.8rem 1.1rem}
   .prow{padding:.7rem 1.1rem}
   .ptit{font-size:.9rem}
   .part{font-size:.76rem}
 
-  /* ── RECHTERKOLOM (1fr): bingo controleren + inklapbare panels ── */
-  /* child 7 = tweede .panel = Bingo controleren */
-  .host-body > div:nth-child(7){
-    grid-column:2;
-    grid-row:3;
-    margin-bottom:1.1rem;
+  /* Bingo controleren — eerste .panel in rechterkolom */
+  .host-right-col>.panel:first-child{
+    border:1.5px solid rgba(155,109,255,.28);
+    box-shadow:0 16px 42px rgba(91,60,160,.16),0 0 0 1px rgba(255,255,255,.4) inset;
   }
-  /* child 8 = #bingo-history-panel */
-  #bingo-history-panel{
-    grid-column:2;
-    grid-row:4;
-    margin-bottom:1.1rem;
-  }
-  /* child 9 = #won-status */
-  #won-status{
-    grid-column:2;
-    grid-row:5;
-    margin-bottom:1.1rem;
-  }
-  /* child 10 = verborgen spotify divs */
-  .host-body > div:nth-child(10){
-    grid-column:2;
-    grid-row:6;
-  }
-  /* Inklapbare panels rechts */
-  #col-settings{grid-column:2;grid-row:7;margin-bottom:.75rem}
-  #col-manual  {grid-column:2;grid-row:8;margin-bottom:.75rem}
-  #col-session {grid-column:2;grid-row:9;margin-bottom:.75rem}
+  .host-right-col>.panel:first-child .ph{font-size:.72rem}
 
-  /* Checker — belangrijke actie, sterker & ruimer */
+  /* Checker */
   .ci{font-size:1rem;min-height:56px}
   .crow{padding:1.25rem}
   .crow .btn.bp{min-height:56px;padding:0 1.6rem;font-size:.95rem}
   .cres{margin:.25rem 1.25rem .85rem;font-size:.88rem}
   .cgrid{margin:.25rem 1.25rem .85rem}
-  /* Bingo controleren-kaart krijgt nadruk */
-  .host-body > div:nth-child(7){
-    border:1.5px solid rgba(155,109,255,.28);
-    box-shadow:0 16px 42px rgba(91,60,160,.16),0 0 0 1px rgba(255,255,255,.4) inset;
-  }
-  .host-body > div:nth-child(7) .ph{font-size:.72rem}
 
 }
 
@@ -2058,8 +2031,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <button class="btn-pause" id="bpause" onclick="togglePause()">⏸</button>
     </div>
 
+    <!-- ══ LINKERKOLOM WRAPPER ══ -->
+    <div class="host-left-col">
+
     <!-- Handmatig/Automatisch + instellingen compact -->
-    <div style="width:100%;background:linear-gradient(180deg,rgba(116,68,188,.06),rgba(167,97,255,.12)),#fff;border:1px solid rgba(124,92,200,.18);border-radius:20px;padding:.85rem 1rem;margin-bottom:1.1rem;box-shadow:0 14px 36px rgba(91,60,160,.12),0 2px 6px rgba(91,60,160,.06)">
+    <div style="width:100%;background:linear-gradient(180deg,rgba(116,68,188,.06),rgba(167,97,255,.12)),#fff;border:1px solid rgba(124,92,200,.18);border-radius:20px;padding:.85rem 1rem;margin-bottom:0;box-shadow:0 14px 36px rgba(91,60,160,.12),0 2px 6px rgba(91,60,160,.06)">
       <div class="seg" style="margin-bottom:.85rem">
         <button class="seg-btn on" id="sm" onclick="setHM('manual')">Handmatig</button>
         <button class="seg-btn" id="sa" onclick="setHM('auto')">Automatisch</button>
@@ -2087,7 +2063,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
 
     <!-- Voortgangsbalk -->
-    <div class="prog" style="margin-bottom:1.1rem"><div class="prog-f" id="pf" style="width:0%"></div></div>
+    <div class="prog" style="margin-bottom:0"><div class="prog-f" id="pf" style="width:0%"></div></div>
 
     <!-- ══ BLOK 2: GESPEELD ══ -->
     <div class="panel">
@@ -2095,6 +2071,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <input type="text" class="psrch" id="psrch" placeholder="Zoek in gespeelde nummers..." oninput="filterPlayed()"/>
       <div class="plist" id="plist"><div class="pempty">Nog geen nummers gespeeld</div></div>
     </div>
+
+    </div><!-- /.host-left-col -->
+
+    <!-- ══ RECHTERKOLOM WRAPPER ══ -->
+    <div class="host-right-col">
 
     <!-- ══ BLOK 3: BINGO CONTROLEREN ══ -->
     <div class="panel">
@@ -2224,7 +2205,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
     </div>
 
-  </div>
+    </div><!-- /.host-right-col -->
+
+  </div><!-- /.host-body -->
   </div>
 </div>
 
@@ -3277,13 +3260,14 @@ function initHost(){
   updWonStatus();
   if(ST.pidx===-1){
     document.getElementById('htitle').textContent='Druk op volgend nummer';
+    scaleHTitle();
     document.getElementById('hartist').textContent='';
     document.getElementById('plist').innerHTML='<div class="pempty">Nog geen nummers gespeeld</div>';
     document.getElementById('pbadge').textContent='0';
     document.getElementById('pf').style.width='0%';
   } else {
     var cur=ST.shuffled[ST.pidx];
-    document.getElementById('htitle').textContent=cur?cur.t:'—';
+    document.getElementById('htitle').textContent=cur?cur.t:'—';scaleHTitle();
     document.getElementById('hartist').textContent=cur?cur.a:'';
     document.getElementById('hcount').textContent=(ST.pidx+1)+' van '+ST.songs.length;
     document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
@@ -3322,6 +3306,22 @@ function setStartPos(p){
   ST.startPos=p;
   document.querySelectorAll('[data-p]').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.p)===p);});
 }
+function updActiveModesDisplay(){
+  var el=document.getElementById('active-modes-display');if(!el)return;
+  var modes=[];
+  if(ST.bmodes.row)modes.push('Horizontale rij');
+  if(ST.bmodes.col)modes.push('Verticale rij');
+  if(ST.bmodes.diag)modes.push('Diagonale rij');
+  if(ST.bmodes.full)modes.push('Volle kaart');
+  el.textContent=modes.length?'Actieve modes: '+modes.join(', '):'';
+}
+function scaleHTitle(){
+  if(window.innerWidth<1024)return;
+  var el=document.getElementById('htitle');if(!el)return;
+  var len=el.textContent.length;
+  var fs=len<15?'4.5rem':len<25?'3.75rem':len<40?'3.1rem':'2.5rem';
+  el.style.fontSize=fs;
+}
 function setHM(m){ST.hmode=m;document.getElementById('sm').classList.toggle('on',m==='manual');document.getElementById('sa').classList.toggle('on',m==='auto');var srow=document.getElementById('srow');if(srow)srow.style.display=m==='auto'?'block':'none';document.getElementById('twrap').style.display='none';clearInterval(ST.tint);ST.tint=null;}
 function nextSong(){
   if(ST.paused)return;
@@ -3338,9 +3338,9 @@ function nextSong(){
   }
 
   clearInterval(ST.tint);ST.tint=null;ST.pidx++;
-  if(ST.pidx>=ST.shuffled.length){document.getElementById('htitle').textContent='Alle nummers gespeeld!';document.getElementById('hartist').textContent='Einde van de ronde';document.getElementById('twrap').style.display='none';var v=document.getElementById('hvinyl');if(v)v.classList.remove('spin');return;}
+  if(ST.pidx>=ST.shuffled.length){document.getElementById('htitle').textContent='Alle nummers gespeeld!';document.getElementById('hartist').textContent='Einde van de ronde';scaleHTitle();document.getElementById('twrap').style.display='none';var v=document.getElementById('hvinyl');if(v)v.classList.remove('spin');return;}
   var s=ST.shuffled[ST.pidx];
-  document.getElementById('htitle').textContent=s.t;document.getElementById('hartist').textContent=s.a;
+  document.getElementById('htitle').textContent=s.t;document.getElementById('hartist').textContent=s.a;scaleHTitle();
   document.getElementById('hcount').textContent=(ST.pidx+1)+' van '+ST.songs.length;
   document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
   document.getElementById('pbadge').textContent=ST.pidx+1;
@@ -3605,7 +3605,7 @@ function confirmManualSong(idx){
   ST.pidx++;
   ST.shuffled.splice(ST.pidx,0,s);
   // Update UI
-  document.getElementById('htitle').textContent=s.t;
+  document.getElementById('htitle').textContent=s.t;scaleHTitle();
   document.getElementById('hartist').textContent=s.a;
   document.getElementById('hcount').textContent=(ST.pidx+1)+' van '+ST.songs.length;
   document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
