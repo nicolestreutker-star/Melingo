@@ -881,6 +881,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 #screen-start .app-intro-h1{color:#1a0a3e}
 #screen-start .app-intro-sub{color:rgba(26,10,62,.78)}
 #screen-start .lp-cfg-label{color:rgba(26,10,62,.72)}
+#screen-start .lp-saved-link{color:rgba(26,10,62,.66)}
+#screen-start .lp-saved-link:hover{color:#1a0a3e}
 #screen-start .lp-sec-label{color:rgba(26,10,62,.72)}
 #screen-start .app-top-in{background:rgba(255,255,255,.7);border:1px solid rgba(155,109,255,.18);backdrop-filter:blur(12px)}
 #screen-start .app-logo{color:#1a0a3e}
@@ -1194,6 +1196,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 }
 /* Topbar past zich aan op de lichte basis */
 #screen-host .bar{background:rgba(255,255,255,.74);backdrop-filter:blur(14px);border-bottom:1px solid rgba(124,92,200,.14)}
+#screen-host .bar-logo{background:linear-gradient(130deg,#1a0a3e,#9B6DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 #screen-host .btn.bs{background:#fff;border:1px solid rgba(124,92,200,.22);color:#3a2a63;box-shadow:0 2px 8px rgba(124,92,200,.1)}
 #screen-host .btn.bs:hover{background:#faf6ff;border-color:rgba(155,109,255,.4)}
 
@@ -2010,7 +2013,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <button class="btn bs" onclick="go('cards')">← Kaarten</button>
     <div class="bar-logo" style="display:flex;align-items:center;gap:.5rem">
       Host
-      <button onclick="openHostHelp()" title="Klik voor uitleg over het host-scherm" style="background:rgba(155,109,255,.18);border:1.5px solid rgba(155,109,255,.5);border-radius:50%;width:26px;height:26px;color:#c4a8ff;font-size:.8rem;font-style:italic;font-weight:700;font-family:Georgia,serif;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s">i</button>
+      <button onclick="openHostHelp()" title="Klik voor uitleg over het host-scherm" style="background:rgba(155,109,255,.18);border:1.5px solid rgba(155,109,255,.5);border-radius:50%;width:26px;height:26px;color:#6d3fd6;font-size:.8rem;font-style:italic;font-weight:700;font-family:Georgia,serif;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s">i</button>
     </div>
     <div style="display:flex;align-items:center;gap:.75rem">
       <div id="host-status-bar" style="font-size:.72rem;color:var(--mt);text-align:right;display:none">
