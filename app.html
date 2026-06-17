@@ -32,9 +32,14 @@
 :root{
   --bg:#0D0D18;--sf:#16162A;--sf2:#1E1E35;
   --bd:rgba(255,255,255,0.08);
-  --s:#F2406A;--a:#9B6DFF;--m:#6AABF7;--r:#EF3B55;
+  /* ── Melingo design-system: merk = 2 kleuren (canoniek) ── */
+  --mel-pink:#F2406A;--mel-purple:#9B6DFF;
+  --grad-brand:linear-gradient(135deg,var(--mel-pink),var(--mel-purple));
+  --success:#1DB954;--warning:#F59E0B;--error:#EF3B55;--info:#6AABF7;
+  /* aliassen op de canonieke kleuren (geen visuele wijziging) */
+  --s:var(--mel-pink);--a:var(--mel-purple);--m:var(--info);--r:var(--error);
+  --green:var(--success);
   --tx:#F0EEF8;--mt:rgba(240,238,248,0.75);--mt2:rgba(240,238,248,0.42);
-  --green:#1db954;
 }
 html,body{height:100%;background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(--tx);overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 .screen{display:none;min-height:100vh;flex-direction:column}
@@ -1212,8 +1217,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .now-title{color:#fff}
 .now-artist{color:rgba(255,255,255,.88)}
 /* VOLGEND NUMMER — primaire actie, dominant */
-.btn-next{background:linear-gradient(135deg,#FF4D8D,#9B6DFF);box-shadow:0 12px 34px rgba(155,109,255,.42)}
-.btn-next:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 18px 46px rgba(155,109,255,.55),0 0 30px rgba(255,77,141,.25)}
+.btn-next{background:var(--grad-brand);box-shadow:0 12px 34px rgba(155,109,255,.42)}
+.btn-next:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 18px 46px rgba(155,109,255,.55),0 0 30px rgba(242,64,106,.25)}
 .btn-next:active{transform:scale(.98)}
 .btn-next:focus-visible{outline:3px solid rgba(255,255,255,.9);outline-offset:3px}
 .btn-pause{background:#fff;border:1px solid rgba(124,92,200,.22);color:#3a2a63;box-shadow:0 6px 18px rgba(91,60,160,.12)}
@@ -1230,7 +1235,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .psrch{background:#fff;color:#241544;border-bottom:1px solid rgba(124,92,200,.14)}
 .prow{transition:background .15s ease;border-bottom:1px solid rgba(124,92,200,.08)}
 .prow:hover{background:rgba(124,92,200,.06)}
-.plist .prow:first-child{background:linear-gradient(90deg,rgba(242,64,106,.14),rgba(155,109,255,.06));box-shadow:inset 3px 0 0 0 #FF4D8D}
+.plist .prow:first-child{background:linear-gradient(90deg,rgba(242,64,106,.14),rgba(155,109,255,.06));box-shadow:inset 3px 0 0 0 var(--mel-pink)}
 .plist .prow:first-child .pidx{color:#d11f6a}
 .plist .prow:first-child .ptit{color:#c01f63}
 /* BINGO CONTROLEREN — meer contrast, sneller scanbaar */

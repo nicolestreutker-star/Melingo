@@ -42,9 +42,14 @@
 :root{
   --bg:#0D0D18;--sf1:#121222;--sf2:#18182A;--sf3:#1E1E35;
   --bd:rgba(255,255,255,.08);--bd-m:rgba(255,255,255,.14);
-  --primary:#F2406A;--secondary:#9B6DFF;
-  --grad:linear-gradient(135deg,#F2406A,#9B6DFF);
-  --spotify:#1DB954;
+  /* ── Melingo design-system: merk = 2 kleuren (canoniek) ── */
+  --mel-pink:#F2406A;--mel-purple:#9B6DFF;
+  --grad-brand:linear-gradient(135deg,var(--mel-pink),var(--mel-purple));
+  --success:#1DB954;--warning:#F59E0B;--error:#EF3B55;--info:#6AABF7;
+  /* aliassen op de canonieke kleuren (geen visuele wijziging) */
+  --primary:var(--mel-pink);--secondary:var(--mel-purple);
+  --grad:var(--grad-brand);
+  --spotify:var(--success);
   --tx:#F0EEF8;--mt:rgba(240,238,248,.66);--mt2:rgba(240,238,248,.34);
   --nav-h:64px;--r:16px;--r-sm:10px;--r-xs:8px;
 }
