@@ -3021,10 +3021,16 @@ async function selLpPlaylist(el){
     var ownerId=SP.selectedPlaylist.owner&&SP.selectedPlaylist.owner.id;
     var isOwner=me.id&&ownerId&&me.id===ownerId;
     var isCollab=!!SP.selectedPlaylist.collaborative;
-    console.log('[Melingo] selLpPlaylist | id:'+plId+' | owner:'+ownerId+' | me:'+me.id+' | eigenaar:'+isOwner+' | collab:'+isCollab);
+    // Alleen vooraf blokkeren als we ZEKER weten dat de playlist niet van de
+    // gebruiker is (beide id's bekend én verschillend). Ontbreekt me.id of
+    // owner.id, dan niet blokkeren — gewoon proberen op te halen; voor eigen
+    // playlists werkt dat. Voorkomt dat een gefaalde /me-call alle eigen
+    // playlists ten onrechte blokkeert.
+    var definitelyNotOwned=!!me.id&&!!ownerId&&me.id!==ownerId;
+    console.log('[Melingo] selLpPlaylist | id:'+plId+' | owner:'+ownerId+' | me:'+me.id+' | eigenaar:'+isOwner+' | collab:'+isCollab+' | zekerNietEigen:'+definitelyNotOwned);
 
-    if(!isOwner&&!isCollab){
-      setFbWarn('Deze playlist is openbaar, maar Spotify geeft alleen nummers vrij van playlists die van jouw account zijn of waar je collaborator van bent. Maak een kopie van de playlist in je eigen Spotify-account en probeer opnieuw.');
+    if(definitelyNotOwned&&!isCollab){
+      setFbWarn('Deze playlist is van iemand anders. Spotify geeft alleen nummers vrij van playlists die van jouw account zijn of waar je collaborator van bent. Maak een kopie van de playlist in je eigen Spotify-account en probeer opnieuw.');
       updLpPlayers();updLpCTA();return;
     }
 
@@ -3034,7 +3040,7 @@ async function selLpPlaylist(el){
     SP.selectedPlaylist._count=cnt;
 
     if(cnt===0){
-      setFbWarn('Geen nummers gevonden. Controleer of de playlist nummers bevat.');
+      setFbWarn('Geen afspeelbare nummers gevonden. Bevat de playlist wél nummers? Dan is het waarschijnlijk een playlist van iemand anders — maak er een kopie van in je eigen Spotify-account en probeer opnieuw.');
       updLpPlayers();updLpCTA();return;
     }
 
