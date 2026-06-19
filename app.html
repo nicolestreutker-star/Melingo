@@ -877,7 +877,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 #screen-start .start-blob-pink{position:absolute;width:500px;height:500px;background:rgba(242,64,106,1);border-radius:50%;filter:blur(120px);opacity:.12;pointer-events:none;top:-150px;right:-100px;z-index:0}
 #screen-start .start-blob-purple{position:absolute;width:600px;height:600px;background:rgba(155,109,255,1);border-radius:50%;filter:blur(120px);opacity:.12;pointer-events:none;bottom:-200px;left:-150px;z-index:0}
 #screen-start .scroll{position:relative;z-index:1}
-/* Tekst op lichte achtergrond */
+/* Tekst op lichte achtergrond — alle dynamische tekst donker; donkere
+   keuzekaarten (.lp-mode) en device-previews houden hun witte tekst */
+#screen-start{--tx:#1a0a3e;--mt:rgba(26,10,62,.66);--mt2:rgba(26,10,62,.42)}
+#screen-start .lp-mode{--tx:#F0EEF8;--mt:rgba(240,238,248,.66);--mt2:rgba(240,238,248,.38)}
+#screen-start .app-resume-meta{color:rgba(26,10,62,.78)}
+#screen-start .app-resume-x{color:rgba(26,10,62,.5)}
+#screen-start .sp-playlist-item:hover{background:rgba(124,92,200,.1)}
 #screen-start .app-intro-h1{color:#1a0a3e}
 #screen-start .app-intro-sub{color:rgba(26,10,62,.78)}
 #screen-start .lp-cfg-label{color:rgba(26,10,62,.72)}
