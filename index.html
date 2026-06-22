@@ -577,11 +577,11 @@ footer{background:var(--sf1);border-top:1px solid var(--bd);padding:3rem 0 1.75r
   --bd:rgba(139,92,246,.15);--bd-m:rgba(139,92,246,.28);
   --tx:#111827;--mt:#6B7280;--mt2:rgba(107,114,128,.7);
 }
-/* donkere apparaat-mockups: lokale dark tokens zodat interne tekst leesbaar blijft */
+/* lichte apparaat-mockups: lokale lichte tokens zodat interne tekst donker en leesbaar is */
 .mock-host,.hw-frame{
-  --sf1:#121222;--sf2:#18182A;--sf3:#1E1E35;
-  --bd:rgba(255,255,255,.08);--bd-m:rgba(255,255,255,.14);
-  --tx:#F0EEF8;--mt:rgba(240,238,248,.66);--mt2:rgba(240,238,248,.34);
+  --sf1:#f3edfc;--sf2:#ffffff;--sf3:#faf7ff;
+  --bd:rgba(124,92,200,.16);--bd-m:rgba(124,92,200,.28);
+  --tx:#241544;--mt:#6f6390;--mt2:#7d6fa3;
 }
 body{background:#fff;color:var(--tx)}
 /* feestlaag ligt achter de content */
@@ -686,6 +686,64 @@ section,footer{position:relative;z-index:1}
 .hero::after{content:'';position:absolute;z-index:0;right:-4%;top:4%;width:56%;height:90%;pointer-events:none;opacity:.7;filter:blur(14px);
   background:conic-gradient(from 210deg at 70% 28%, rgba(255,77,141,.1), rgba(155,109,255,.1), rgba(56,189,248,.06), transparent 62%)}
 .hero-inner{position:relative;z-index:1}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LICHTE PRODUCT-MOCKUPS — productvoorbeelden consistent met de lichte stijl
+   (donkere panelen → wit/off-white met paarse accenten; .rc-kaart blijft wit).
+   Het "Nu speelt"-blok houdt bewust de paarse hero-look van de échte app.
+═══════════════════════════════════════════════════════════════════════════ */
+/* Stages & containers */
+.mock-body{background:linear-gradient(160deg,#ffffff,#f5f0ff)}
+.mock-bar{background:#f3edfc;border-bottom:1px solid rgba(124,92,200,.14)}
+.mock-dot{background:rgba(124,92,200,.22)}
+.mock-url{background:#fff;border:1px solid rgba(124,92,200,.16);color:#6f6390}
+.mock-track strong{color:#241544}.mock-track span,.mock-np{color:#6f6390}
+.mock-host{box-shadow:0 22px 60px rgba(91,60,160,.18)}
+.mock-check{background:#fff;border:1px solid rgba(29,185,84,.4);color:#0d8a3e;box-shadow:0 12px 32px rgba(91,60,160,.2)}
+.demo-stage{background:linear-gradient(160deg,#faf7ff,#f1ebfb);border:1px solid rgba(124,92,200,.16);box-shadow:0 0 0 1px rgba(155,109,255,.12),0 18px 50px rgba(91,60,160,.12),0 0 60px rgba(155,109,255,.1)}
+.hw-stage{background:linear-gradient(160deg,#faf7ff,#f1ebfb)}
+.hw-frame{box-shadow:0 22px 60px rgba(91,60,160,.16),0 0 54px rgba(155,109,255,.12)}
+.demo-dot{background:rgba(124,92,200,.22)}
+/* Hostscherm-replica (.rh) → licht; NU SPEELT-blok houdt paarse hero-look */
+.rh{background:linear-gradient(180deg,#fff,#faf7ff);border:1px solid rgba(124,92,200,.18);box-shadow:0 10px 30px rgba(91,60,160,.1)}
+.rh-now{background:linear-gradient(165deg,#3d246c,#2a1850);border:1px solid rgba(155,109,255,.3)}
+.rh-label{color:#ff7ab0}.rh-title{color:#fff}.rh-artist{color:rgba(255,255,255,.7)}.rh-count{color:rgba(255,255,255,.5)}
+.rh-pause{background:#fff;border:1px solid rgba(124,92,200,.2)}.rh-pause i{background:#3a2a63}
+.rh-panel{background:#fff;border:1px solid rgba(124,92,200,.16)}
+.rh-seg{background:#f1ebfb;border:1px solid rgba(124,92,200,.16)}.rh-seg span{color:#6f6390}
+.rh-lbl{color:#6f6390}
+.rh-chip{background:#fff;border:1px solid rgba(124,92,200,.18);color:#6f6390}
+.rh-chip.on{border-color:rgba(155,109,255,.6);background:rgba(155,109,255,.14);color:#7c4dd6}
+.rh-prog{background:rgba(124,92,200,.16)}
+.rh-played-hd b{color:#6f6390}.rh-played-hd em{color:#7c4dd6;background:rgba(155,109,255,.16)}
+.rh-search{background:#fff;border:1px solid rgba(124,92,200,.14);color:#8678a3}
+.rh-item{border-bottom:1px solid rgba(124,92,200,.1)}
+.rh-item-t{color:#241544}.rh-item-a{color:#6f6390}.rh-item b{color:#7c4dd6}
+/* Bingocontrole-replica (.rk) → licht */
+.rk{background:linear-gradient(180deg,#fff,#faf7ff);border:1px solid rgba(124,92,200,.18);box-shadow:0 10px 30px rgba(91,60,160,.1)}
+.rk-hd{color:#6f6390}
+.rk-inp{background:#fff;border:1px solid rgba(124,92,200,.2);color:#241544}
+.rk-ok{color:#0d8a3e}.rk-warn{color:#9a6200}
+.rk-cell{background:#fdeef3;color:#c01f63}
+.rk-cell.win{background:rgba(29,185,84,.14);border-color:#1db954;color:#0d8a3e}
+.rk-cell.vrij{background:#9b6dff;color:#fff}
+/* Walkthrough (.hw) → lichte kaartjes */
+.hwc{background:#fff;border:1px solid rgba(124,92,200,.16)}
+.hwc.sel{background-image:linear-gradient(#fff,#fff),var(--grad)}
+.hw-pl,.hw-file,.hw-played{background:#fff;border:1px solid rgba(124,92,200,.14)}
+.hw-pl.on{border-color:rgba(155,109,255,.5);background:rgba(155,109,255,.08)}
+.hw-inp-f{background:#fff;border:1px solid rgba(124,92,200,.18);color:#6f6390}
+.hw-step-btn{background:#fff;border:1px solid rgba(124,92,200,.2);color:#3a2a63}
+.hw-progbar{background:rgba(124,92,200,.14)}.hw-prog{background:rgba(124,92,200,.12)}
+.hw-card{box-shadow:0 8px 24px rgba(91,60,160,.16)}
+.hw-cc{background:#f0eafb}.hw-cc.e{background:#ece6f5}
+/* Mobiel: alle drie de demo-kaarten exact even groot (gelijke hoogte) */
+@media(max-width:768px){
+  .demo-track{align-items:stretch}
+  .demo-slide{display:flex;flex-direction:column}
+  .demo-panel{flex:1}
+  .mcar-track{align-items:stretch}
+}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}
