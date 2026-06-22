@@ -189,6 +189,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 /* HOST */
 #screen-host{background:var(--bg)}
 .host-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:1.25rem 1rem;max-width:620px;margin:0 auto;width:100%}
+/* Mobiel/tablet: kolom-wrappers benutten de volle breedte (op desktop neemt de grid het over) */
+.host-left-col,.host-right-col{width:100%}
 .now-card{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:22px;padding:1.75rem 1.5rem;text-align:center;margin-bottom:1.1rem;position:relative;overflow:hidden}
 .now-glow{position:absolute;width:220px;height:220px;border-radius:50%;background:var(--a);filter:blur(70px);opacity:.1;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
 .now-vinyl{width:68px;height:68px;margin:0 auto .9rem;position:relative;z-index:2}
@@ -3341,8 +3343,7 @@ function initHost(){
   syncSpotifyHostPanel();
   // Mobiel: toon audio-activatie banner als nodig
   updMobileAudioBanner();
-  document.getElementById('hcount').textContent=(ST.pidx<0?0:ST.pidx+1)+' van '+ST.songs.length;
-  document.getElementById('hs-count').textContent=(ST.pidx<0?0:ST.pidx+1)+' van '+ST.songs.length+' gespeeld';
+  updPlayedCount();
   var v=document.getElementById('hvinyl');if(v&&ST.pidx===-1)v.classList.remove('spin');
   setHM(ST.hmode);setSpd(ST.speed);
 }
@@ -3371,6 +3372,16 @@ function scaleHTitle(){
   el.style.fontSize=fs;
 }
 function setHM(m){ST.hmode=m;document.getElementById('sm').classList.toggle('on',m==='manual');document.getElementById('sa').classList.toggle('on',m==='auto');var srow=document.getElementById('srow');if(srow)srow.style.display=m==='auto'?'block':'none';document.getElementById('twrap').style.display='none';clearInterval(ST.tint);ST.tint=null;}
+/* Eén bron van waarheid voor het aantal gespeelde nummers: ST.pidx (0-based index
+   van het huidige nummer) + ST.songs.length. Werkt de bovenbalk-teller, de
+   now-card-teller én de Gespeeld-badge in één keer bij. */
+function updPlayedCount(){
+  var total=ST.songs?ST.songs.length:0;
+  var played=ST.pidx<0?0:Math.min(ST.pidx+1,total);
+  var pb=document.getElementById('pbadge');if(pb)pb.textContent=played;
+  var hc=document.getElementById('hcount');if(hc)hc.textContent=played+' van '+total;
+  var hs=document.getElementById('hs-count');if(hs)hs.textContent=played+' van '+total+' gespeeld';
+}
 function nextSong(){
   if(ST.paused)return;
 
@@ -3389,9 +3400,8 @@ function nextSong(){
   if(ST.pidx>=ST.shuffled.length){document.getElementById('htitle').textContent='Alle nummers gespeeld!';document.getElementById('hartist').textContent='Einde van de ronde';scaleHTitle();document.getElementById('twrap').style.display='none';var v=document.getElementById('hvinyl');if(v)v.classList.remove('spin');return;}
   var s=ST.shuffled[ST.pidx];
   document.getElementById('htitle').textContent=s.t;document.getElementById('hartist').textContent=s.a;scaleHTitle();
-  document.getElementById('hcount').textContent=(ST.pidx+1)+' van '+ST.songs.length;
   document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
-  document.getElementById('pbadge').textContent=ST.pidx+1;
+  updPlayedCount();
   var pl=document.getElementById('plist');
   if(ST.pidx===0)pl.innerHTML='';
   var r=document.createElement('div');r.className='prow';
@@ -3655,9 +3665,8 @@ function confirmManualSong(idx){
   // Update UI
   document.getElementById('htitle').textContent=s.t;scaleHTitle();
   document.getElementById('hartist').textContent=s.a;
-  document.getElementById('hcount').textContent=(ST.pidx+1)+' van '+ST.songs.length;
   document.getElementById('pf').style.width=Math.round((ST.pidx+1)/ST.songs.length*100)+'%';
-  document.getElementById('pbadge').textContent=ST.pidx+1;
+  updPlayedCount();
   var pl=document.getElementById('plist');
   var r=document.createElement('div');r.className='prow';
   r.innerHTML='<div class="pidx">'+(ST.pidx+1)+'</div><div><div class="ptit">'+esc(s.t)+'</div><div class="part">'+esc(s.a)+' <span style="color:var(--a);font-size:.6rem">(handmatig)</span></div></div>';
